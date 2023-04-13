@@ -170,11 +170,6 @@ export class AppMenuComponent implements OnInit {
                         icon: 'pi pi-fw pi-exclamation-circle',
                         routerLink: ['/notfound'],
                     },
-                    {
-                        label: 'Empty',
-                        icon: 'pi pi-fw pi-circle-off',
-                        routerLink: ['/pages/empty'],
-                    },
                 ],
             },
             {
