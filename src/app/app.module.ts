@@ -13,10 +13,16 @@ import { NodeService } from './demo/service/node.service';
 import { PhotoService } from './demo/service/photo.service';
 import { ButtonModule } from 'primeng/button';
 import { AuthService } from './demo/service/auth.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
     declarations: [AppComponent, NotfoundComponent],
-    imports: [AppRoutingModule, AppLayoutModule, ButtonModule],
+    imports: [
+        AppRoutingModule,
+        AppLayoutModule,
+        ButtonModule,
+        HttpClientModule,
+    ],
     providers: [
         { provide: LocationStrategy, useClass: HashLocationStrategy },
         CountryService,

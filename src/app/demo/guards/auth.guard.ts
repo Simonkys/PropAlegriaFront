@@ -7,7 +7,7 @@ export function authGuard() {
     const authService = inject(AuthService);
 
     if (!authService.isAuthenticated()) {
-        router.navigate(['login'], { replaceUrl: true });
+        router.navigate(['auth/login'], { replaceUrl: true });
         return false;
     }
 

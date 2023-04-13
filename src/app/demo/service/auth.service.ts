@@ -1,31 +1,58 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { delay, of, tap } from 'rxjs';
+import { BehaviorSubject, tap } from 'rxjs';
+import { environment } from 'src/environments/environment';
+import { Auth } from '../api/usuario';
 
 @Injectable({
     providedIn: 'root',
 })
 export class AuthService {
-    private tokenAccessKey = 'access_token';
+    private userKey = 'access_token';
+    private http = inject(HttpClient);
     private router = inject(Router);
 
+    private userSubject = new BehaviorSubject<Auth | null>(null);
+
+    getCurrentUser() {
+        return this.userSubject.value;
+    }
+
     login(username: string, password: string) {
-        return of(true).pipe(
-            delay(2000),
-            tap((response) => {})
-        );
+        return this.http
+            .post<Auth>(`${environment.apiUrl}/login/`, {
+                username: username,
+                password: password,
+            })
+            .pipe(
+                tap((auth) => {
+                    this.setUser(auth);
+                })
+            );
+    }
+
+    setUser(auth: Auth) {
+        localStorage.setItem(this.userKey, JSON.stringify(auth));
+        this.userSubject.next(auth);
+    }
+
+    loadUserFromStorage() {
+        const data = localStorage.getItem(this.userKey);
+        if (data) {
+            this.userSubject.next(JSON.parse(data) as Auth);
+        } else {
+            this.userSubject.next(null);
+        }
     }
 
     logout() {
-        localStorage.removeItem(this.tokenAccessKey);
+        localStorage.removeItem(this.userKey);
+        this.userSubject.next(null);
         this.router.navigate(['auth/login'], { replaceUrl: true });
     }
 
     isAuthenticated(): boolean {
-        return true;
-    }
-
-    getAccessToken() {
-        return localStorage.getItem(this.tokenAccessKey);
+        return this.getCurrentUser() ? true : false;
     }
 }

@@ -25,8 +25,8 @@ export class LoginComponent {
     loading = false;
 
     form = this.fb.nonNullable.group({
-        username: ['', [Validators.required]],
-        password: ['', [Validators.required]],
+        username: ['testlogin001', [Validators.required]],
+        password: ['ageofempires2de', [Validators.required]],
     });
     constructor(
         public layoutService: LayoutService,
