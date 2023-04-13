@@ -9,16 +9,19 @@ export function TokenInterceptor(
 ) {
     const authService = inject(AuthService);
 
-    const token = authService.getAccessToken();
+    const token = authService.getCurrentUser()?.Token;
     request = request.clone({
         setHeaders: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Token ${token}`,
         },
     });
 
     return next(request).pipe(
         catchError((error) => {
-            return throwError(() => error);
+            return throwError(() => {
+                authService.logout();
+                return new Error(error);
+            });
         })
     );
 }

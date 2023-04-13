@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { NotfoundComponent } from './demo/components/notfound/notfound.component';
 import { AppLayoutComponent } from './layout/app.layout.component';
 import { authGuard } from './demo/guards/auth.guard';
+import { NotFoundComponent } from './propiedades-alegria/pages/not-found/not-found.component';
 
 @NgModule({
     imports: [
@@ -21,25 +22,18 @@ import { authGuard } from './demo/guards/auth.guard';
                                 ).then((m) => m.DashboardModule),
                         },
                         {
+                            path: 'empleados',
+                            loadComponent: () =>
+                                import(
+                                    './propiedades-alegria/pages/empleados/empleados.component'
+                                ).then((m) => m.EmpleadosComponent),
+                        },
+                        {
                             path: 'uikit',
                             loadChildren: () =>
                                 import(
                                     './demo/components/uikit/uikit.module'
                                 ).then((m) => m.UIkitModule),
-                        },
-                        {
-                            path: 'utilities',
-                            loadChildren: () =>
-                                import(
-                                    './demo/components/utilities/utilities.module'
-                                ).then((m) => m.UtilitiesModule),
-                        },
-                        {
-                            path: 'documentation',
-                            loadChildren: () =>
-                                import(
-                                    './demo/components/documentation/documentation.module'
-                                ).then((m) => m.DocumentationModule),
                         },
                         {
                             path: 'blocks',
@@ -55,23 +49,28 @@ import { authGuard } from './demo/guards/auth.guard';
                                     './demo/components/pages/pages.module'
                                 ).then((m) => m.PagesModule),
                         },
+                        {
+                            path: 'perfil',
+                            loadComponent: () =>
+                                import(
+                                    './propiedades-alegria/pages/perfil/perfil.component'
+                                ).then((m) => m.PerfilComponent),
+                        },
                     ],
                 },
                 {
                     path: 'auth',
-                    loadChildren: () =>
-                        import('./demo/components/auth/auth.module').then(
-                            (m) => m.AuthModule
-                        ),
+                    children: [
+                        {
+                            path: 'login',
+                            loadComponent: () =>
+                                import(
+                                    './propiedades-alegria/pages/login/login.component'
+                                ).then((m) => m.LoginComponent),
+                        },
+                    ],
                 },
-                {
-                    path: 'landing',
-                    loadChildren: () =>
-                        import('./demo/components/landing/landing.module').then(
-                            (m) => m.LandingModule
-                        ),
-                },
-                { path: 'notfound', component: NotfoundComponent },
+                { path: 'notfound', component: NotFoundComponent },
                 { path: '**', redirectTo: '/notfound' },
             ],
             {

@@ -1,13 +1,28 @@
 import { Component, inject } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+
+import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
+import { MessagesModule } from 'primeng/messages';
+import { PasswordModule } from 'primeng/password';
 import { Router } from '@angular/router';
-import { Message } from 'primeng/api';
-import { finalize } from 'rxjs';
 import { AuthService } from 'src/app/demo/service/auth.service';
 import { LayoutService } from 'src/app/layout/service/app.layout.service';
+import { Message } from 'primeng/api';
+import { finalize } from 'rxjs';
 
 @Component({
     selector: 'app-login',
+    standalone: true,
+    imports: [
+        CommonModule,
+        ReactiveFormsModule,
+        ButtonModule,
+        InputTextModule,
+        MessagesModule,
+        PasswordModule,
+    ],
     templateUrl: './login.component.html',
     styles: [
         `
@@ -21,7 +36,6 @@ import { LayoutService } from 'src/app/layout/service/app.layout.service';
     ],
 })
 export class LoginComponent {
-    layoutService = inject(LayoutService);
     authService = inject(AuthService);
     fb = inject(FormBuilder);
     router = inject(Router);
@@ -33,7 +47,6 @@ export class LoginComponent {
         username: ['admin', [Validators.required]],
         password: ['admin', [Validators.required]],
     });
-
     login() {
         if (this.form.invalid) return;
         this.loading = true;

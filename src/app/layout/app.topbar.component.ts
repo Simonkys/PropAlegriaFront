@@ -22,6 +22,6 @@ export class AppTopBarComponent {
     ) {}
 
     logout() {
-        this.authService.logout();
+        this.authService.logout().subscribe();
     }
 }

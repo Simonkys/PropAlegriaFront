@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, tap } from 'rxjs';
+import { BehaviorSubject, finalize, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Auth } from '../api/usuario';
+import { Auth } from '../api/auth';
 
 @Injectable({
     providedIn: 'root',
@@ -47,9 +47,20 @@ export class AuthService {
     }
 
     logout() {
-        localStorage.removeItem(this.userKey);
-        this.userSubject.next(null);
-        this.router.navigate(['auth/login'], { replaceUrl: true });
+        return this.http
+            .post(
+                `${environment.apiUrl}/logout/?token=${
+                    this.getCurrentUser()?.Token
+                }`,
+                {}
+            )
+            .pipe(
+                finalize(() => {
+                    localStorage.removeItem(this.userKey);
+                    this.userSubject.next(null);
+                    this.router.navigate(['auth/login'], { replaceUrl: true });
+                })
+            );
     }
 
     isAuthenticated(): boolean {

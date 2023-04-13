@@ -1,10 +1,11 @@
-export interface Usuario {
+export interface User {
     username: string;
     email: string;
+    tipo_usuario: string;
 }
 
 export interface Auth {
     Token: string;
-    Usuario: Usuario;
+    Usuario: User;
     Mensaje: string;
 }
