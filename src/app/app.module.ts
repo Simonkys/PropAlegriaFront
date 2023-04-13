@@ -12,7 +12,7 @@ import { IconService } from './demo/service/icon.service';
 import { NodeService } from './demo/service/node.service';
 import { PhotoService } from './demo/service/photo.service';
 import { ButtonModule } from 'primeng/button';
-import { AuthService } from './demo/service/auth.service';
+import { AuthService } from './propiedades-alegria/services/auth.service';
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({

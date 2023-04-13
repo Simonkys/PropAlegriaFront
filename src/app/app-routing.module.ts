@@ -1,8 +1,7 @@
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { NotfoundComponent } from './demo/components/notfound/notfound.component';
 import { AppLayoutComponent } from './layout/app.layout.component';
-import { authGuard } from './demo/guards/auth.guard';
+import { authGuard } from './propiedades-alegria/guards/auth.guard';
 import { NotFoundComponent } from './propiedades-alegria/pages/not-found/not-found.component';
 
 @NgModule({

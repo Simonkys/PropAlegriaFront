@@ -1,16 +1,16 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { finalize } from 'rxjs';
 
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { MessagesModule } from 'primeng/messages';
 import { PasswordModule } from 'primeng/password';
-import { Router } from '@angular/router';
-import { AuthService } from 'src/app/demo/service/auth.service';
-import { LayoutService } from 'src/app/layout/service/app.layout.service';
 import { Message } from 'primeng/api';
-import { finalize } from 'rxjs';
+
+import { AuthService } from '../../services/auth.service';
 
 @Component({
     selector: 'app-login',

@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { InputTextModule } from 'primeng/inputtext';
-import { UserService } from 'src/app/demo/service/user.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
     selector: 'app-perfil',
