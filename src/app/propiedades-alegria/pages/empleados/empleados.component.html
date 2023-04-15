@@ -1,1 +1,51 @@
-<div class="card"></div>
+<div class="card">
+    <p-toolbar styleClass="mb-4">
+        <div class="p-toolbar-group-start">
+            <p-button
+                class="mr-2"
+                label="Registrar"
+                icon="pi pi-plus"
+                styleClass="p-button-success"
+            ></p-button>
+            <p-button
+                class="mr-2"
+                icon="pi pi-pencil"
+                styleClass="p-button-warning"
+                [disabled]="true"
+            ></p-button>
+            <p-button
+                icon="pi pi-times"
+                styleClass="p-button-danger"
+                [disabled]="true"
+            ></p-button>
+        </div>
+    </p-toolbar>
+
+    <p-table>
+        <ng-template pTemplate="caption">
+            <div
+                class="flex flex-column md:flex-row md:justify-content-between md:align-items-center"
+            >
+                <h5 class="m-0">Empleados</h5>
+                <span class="block mt-2 md:mt-0 p-input-icon-left">
+                    <i class="pi pi-search"></i>
+                    <input
+                        pInputText
+                        type="text"
+                        placeholder="Juan, Carla ..."
+                        class="w-full sm:w-auto"
+                    />
+                </span>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Rut</th>
+                <th>Nombre</th>
+                <th>Email</th>
+                <th>Celular</th>
+                <th>Rol</th>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
