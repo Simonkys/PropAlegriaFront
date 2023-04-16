@@ -1,0 +1,156 @@
+<form [formGroup]="trabajadorForm">
+    <div class="card">
+        <h5>Registro Empleado</h5>
+
+        <div class="p-formgrid grid">
+            <div class="col flex flex-column gap-2">
+                <label for="rut">Rut</label>
+                <input
+                    type="text"
+                    pInputText
+                    id="rut"
+                    required
+                    autofocus
+                    placeholder="9999999-k"
+                />
+            </div>
+            <div class="col flex flex-column gap-2">
+                <label for="email">Email</label>
+                <input
+                    type="email"
+                    pInputText
+                    id="email"
+                    required
+                    placeholder="carolina@email.cl"
+                />
+            </div>
+        </div>
+
+        <div class="p-formgrid grid">
+            <div class="col flex flex-column gap-2">
+                <label for="pri_nom_trab">Primer nombre</label>
+                <input
+                    type="text"
+                    pInputText
+                    id="pri_nom_trab"
+                    required
+                    placeholder="Carolina"
+                />
+            </div>
+            <div class="col flex flex-column gap-2">
+                <label for="seg_nom_trab">Segundo nombre</label>
+                <input
+                    type="text"
+                    pInputText
+                    id="seg_nom_trab"
+                    placeholder="Andrea"
+                />
+            </div>
+        </div>
+
+        <div class="p-formgrid grid">
+            <div class="col flex flex-column gap-2">
+                <label for="pri_ape_trab">Primer apellido</label>
+                <input
+                    type="text"
+                    pInputText
+                    id="pri_ape_trab"
+                    placeholder="Carrasco"
+                />
+            </div>
+            <div class="col flex flex-column gap-2">
+                <label for="seg_ape_trab">Segundo apellido</label>
+                <input
+                    type="text"
+                    pInputText
+                    id="seg_ape_trab"
+                    placeholder="Carrasco"
+                />
+            </div>
+        </div>
+
+        <div class="p-formgrid grid">
+            <div class="col flex flex-column gap-2">
+                <label for="tipo_trab">Tipo de trabajador</label>
+                <p-dropdown
+                    formControlName="tipo_trab"
+                    [options]="opcionesTipoTrabajador"
+                    optionLabel="name"
+                    [style]="{'width':'100%'}"
+                ></p-dropdown>
+            </div>
+            <div class="col flex flex-column gap-2">
+                <label for="celular">Celular</label>
+                <input
+                    type="text"
+                    pInputText
+                    id="celular"
+                    placeholder="982312455"
+                />
+            </div>
+        </div>
+        
+        <div class="p-formgrid grid">
+            <div class="col flex flex-column gap-2">
+                <label for="comuna">Comuna</label>
+                <p-dropdown id="comuna" [options]="opcionesComuna" optionLabel="name" [style]="{'width':'100%'}"></p-dropdown>
+            </div>
+            <div class="col flex flex-column gap-2">
+                <label for="direccion">Dirección</label>
+                <input
+                    type="text"
+                    pInputText
+                    id="direccion"
+                    placeholder="Av. Paicaví 254 depto 1209"
+                />
+            </div>
+        </div>
+
+        <div class="card">
+            <div formArrayName="cuentas">
+                <p-button icon="pi pi-wallet" styleClass="p-button-rounded p-button-outlined mb-3" label="Agregar cuenta" (click)="agregarCuenta()"></p-button>
+
+                <div *ngFor="let c of cuentas.controls; let i = index">
+                    <div [formGroupName]="i">
+                        
+                        <div class="p-formgrid grid">
+
+                            <div class="col flex flex-column gap-2">
+                                <label>N° de cuenta</label>
+                                <input
+                                type="text"
+                                pInputText
+                                required
+                                placeholder="xxxx xxxx xxxx xxxx"
+                                />
+                            </div>
+                        </div>
+                            
+                        <div class="p-formgrid grid">
+                            <div class="col flex flex-column gap-2">
+                                <label >Banco</label>
+                                <p-dropdown [options]="opcionesBanco" optionLabel="name" [style]="{'width':'100%'}"></p-dropdown>
+                            </div>
+                            <div class="col flex flex-column gap-2">
+                                <label >Tipo de cuenta</label>
+                                <p-dropdown [options]="opcionesTipoCuenta" optionLabel="name" [style]="{'width':'100%'}"></p-dropdown>
+                            </div>
+                        </div>
+                        
+                        <p-button pTooltip="Eliminar cuenta" icon="pi pi-times" styleClass="p-button-danger p-button-outline p-button-text" (click)="removerCuenta(i)"></p-button>
+                    </div>
+                    <hr>
+                </div>
+            </div>
+            
+        </div>
+            
+        <p-button label="Guardar" (click)="guardarTrabajador()"></p-button>
+    </div>
+</form>
+
+
+
+
+
+

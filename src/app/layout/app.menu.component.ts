@@ -22,9 +22,20 @@ export class AppMenuComponent implements OnInit {
                         routerLink: ['/'],
                     },
                     {
-                        label: 'Empleados',
+                        label: 'Trabajadores',
                         icon: 'pi pi-fw pi-user',
-                        routerLink: ['/empleados'],
+                        items: [
+                            {
+                                label: 'Listado',
+                                icon: 'pi pi-fw pi-list',
+                                routerLink: ['/trabajadores/listado'],
+                            },
+                            {
+                                label: 'Registro',
+                                icon: 'pi pi-fw pi-plus',
+                                routerLink: ['/trabajadores/registro'],
+                            }
+                        ]
                     },
                 ],
             },

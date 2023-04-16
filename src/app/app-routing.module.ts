@@ -1,7 +1,6 @@
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { AppLayoutComponent } from './layout/app.layout.component';
-import { authGuard } from './propiedades-alegria/guards/auth.guard';
 import { NotFoundComponent } from './propiedades-alegria/pages/not-found/not-found.component';
 
 @NgModule({
@@ -11,7 +10,7 @@ import { NotFoundComponent } from './propiedades-alegria/pages/not-found/not-fou
                 {
                     path: '',
                     component: AppLayoutComponent,
-                    canActivate: [authGuard],
+                    canActivate: [],
                     children: [
                         {
                             path: '',
@@ -21,11 +20,8 @@ import { NotFoundComponent } from './propiedades-alegria/pages/not-found/not-fou
                                 ).then((m) => m.DashboardModule),
                         },
                         {
-                            path: 'empleados',
-                            loadComponent: () =>
-                                import(
-                                    './propiedades-alegria/pages/empleados/empleados.component'
-                                ).then((m) => m.EmpleadosComponent),
+                            path: 'trabajadores',
+                            loadChildren: () => import('./propiedades-alegria/pages/trabajadores/trabajadores.routes').then(m => m.TRABAJADORES_ROUTES)
                         },
                         {
                             path: 'uikit',
