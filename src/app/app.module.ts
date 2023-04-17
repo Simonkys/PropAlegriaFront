@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppLayoutModule } from './layout/app.layout.module';
@@ -13,7 +12,8 @@ import { NodeService } from './demo/service/node.service';
 import { PhotoService } from './demo/service/photo.service';
 import { ButtonModule } from 'primeng/button';
 import { AuthService } from './propiedades-alegria/services/auth.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { TokenInterceptor } from './propiedades-alegria/interceptors/token.interceptor';
 
 @NgModule({
     declarations: [AppComponent, NotfoundComponent],
@@ -32,6 +32,11 @@ import { HttpClientModule } from '@angular/common/http';
         PhotoService,
         ProductService,
         AuthService,
+        {
+            provide: HTTP_INTERCEPTORS,
+            useFactory: TokenInterceptor,
+            multi: true,
+        },
     ],
     bootstrap: [AppComponent],
 })
