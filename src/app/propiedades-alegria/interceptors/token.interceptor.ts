@@ -4,7 +4,7 @@ import {
     HttpRequest,
 } from '@angular/common/http';
 import { inject } from '@angular/core';
-import { catchError, throwError } from 'rxjs';
+import { catchError, tap, throwError } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 
 export function TokenInterceptor(
@@ -23,17 +23,10 @@ export function TokenInterceptor(
     }
 
     return next(request).pipe(
-        catchError((error) => {
-            if (error instanceof HttpErrorResponse && error.status === 401) {
-                authService.logout();
-                return throwError(() => {
-                    return error;
-                });
-            } else {
-                return throwError(() => {
-                    return new Error(error);
-                });
-            }
+        tap((res) => console.log(res)),
+        catchError((err) => {
+            console.log(err);
+            return throwError(() => err);
         })
     );
 }

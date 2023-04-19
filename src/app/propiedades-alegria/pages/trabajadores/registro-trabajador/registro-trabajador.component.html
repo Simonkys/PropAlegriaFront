@@ -6,7 +6,7 @@
 
         <div class="p-formgrid grid">
             <div class="col flex flex-column gap-2">
-                <label>Rut</label>
+                <label>Rut *</label>
                 <input
                     type="text"
                     pInputText
@@ -17,7 +17,7 @@
                 <small>Rut sin puntos y con guión, Ej: 11625443-8</small>
             </div>
             <div class="col flex flex-column gap-2">
-                <label>Email</label>
+                <label>Email *</label>
                 <input
                     type="email"
                     pInputText
@@ -29,7 +29,7 @@
 
         <div class="p-formgrid grid">
             <div class="col flex flex-column gap-2">
-                <label>Primer nombre</label>
+                <label>Primer nombre *</label>
                 <input
                     type="text"
                     pInputText
@@ -50,7 +50,7 @@
 
         <div class="p-formgrid grid">
             <div class="col flex flex-column gap-2">
-                <label>Primer apellido</label>
+                <label>Primer apellido *</label>
                 <input
                     type="text"
                     pInputText
@@ -71,39 +71,54 @@
 
         <div class="p-formgrid grid">
             <div class="col flex flex-column gap-2">
-                <label>Tipo de trabajador</label>
+                <label>Tipo de trabajador *</label>
                 <p-dropdown
                     formControlName="tipo_trab"
-                    [options]="opcionesTipoTrabajador"
-                    optionLabel="name"
+                    [options]="(tipoTrabajador$ | async)!"
+                    optionLabel="tipo"
                     [style]="{ width: '100%' }"
                     placeholder="Tipo de trabajador"
                 ></p-dropdown>
             </div>
             <div class="col flex flex-column gap-2">
-                <label>Celular</label>
+                <label>Celular *</label>
                 <input
-                    type="text"
+                    pKeyFilter="int"
                     pInputText
                     formControlName="celular"
                     placeholder="982312455"
                 />
+                <small>Solo números son permitidos</small>
             </div>
         </div>
 
         <div class="p-formgrid grid">
             <div class="col flex flex-column gap-2">
-                <label>Comuna</label>
+                <label>Region *</label>
                 <p-dropdown
-                    formControlName="comuna_id"
-                    [options]="opcionesComuna"
-                    optionLabel="name"
+                    [options]="(regiones$ | async)!"
+                    [formControl]="regionControl"
+                    optionLabel="nom_reg"
                     [style]="{ width: '100%' }"
-                    placeholder="Seleccion comuna"
+                    placeholder="Seleccion región"
                 ></p-dropdown>
             </div>
             <div class="col flex flex-column gap-2">
-                <label>Dirección</label>
+                <label>Comuna *</label>
+                <p-dropdown
+                    *ngIf="comunas$ | async as comunas"
+                    [options]="comunas"
+                    optionLabel="nom_com"
+                    [style]="{ width: '100%' }"
+                    (onChange)="updateFormData('comuna', $event)"
+                    placeholder="Seleccion comuna"
+                ></p-dropdown>
+                <small>Debes seleccionar una región</small>
+            </div>
+        </div>
+        <div class="p-formgrid grid">
+            <div class="col flex flex-column gap-2">
+                <label>Dirección *</label>
                 <input
                     type="text"
                     pInputText
@@ -125,7 +140,7 @@
                     <div [formGroupName]="i">
                         <div class="p-formgrid grid">
                             <div class="col flex flex-column gap-2">
-                                <label>N° de cuenta</label>
+                                <label>N° de cuenta *</label>
                                 <input
                                     type="text"
                                     pInputText
@@ -137,20 +152,20 @@
 
                         <div class="p-formgrid grid">
                             <div class="col flex flex-column gap-2">
-                                <label>Banco</label>
+                                <label>Banco *</label>
                                 <p-dropdown
-                                    [options]="opcionesBanco"
-                                    optionLabel="name"
+                                    [options]="(bancos$ | async)!"
+                                    optionLabel="nombre_banco"
                                     formControlName="banco"
                                     [style]="{ width: '100%' }"
                                     placeholder="Seleccion banco"
                                 ></p-dropdown>
                             </div>
                             <div class="col flex flex-column gap-2">
-                                <label>Tipo de cuenta</label>
+                                <label>Tipo de cuenta *</label>
                                 <p-dropdown
-                                    [options]="opcionesTipoCuenta"
-                                    optionLabel="name"
+                                    [options]="(tipoCuentas$ | async)!"
+                                    optionLabel="nom_cuenta"
                                     formControlName="tipo_cuenta"
                                     [style]="{ width: '100%' }"
                                     placeholder="Seleccion tipo de cuenta"
@@ -171,7 +186,7 @@
         </div>
 
         <p-button
-            [disabled]="trabajadorForm.invalid"
+            [disabled]="trabajadorForm.invalid || loading"
             label="Guardar"
             (click)="guardarTrabajador()"
         ></p-button>

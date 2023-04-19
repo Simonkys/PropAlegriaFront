@@ -12,17 +12,16 @@ import { NodeService } from './demo/service/node.service';
 import { PhotoService } from './demo/service/photo.service';
 import { ButtonModule } from 'primeng/button';
 import { AuthService } from './propiedades-alegria/services/auth.service';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import {
+    HTTP_INTERCEPTORS,
+    provideHttpClient,
+    withInterceptors,
+} from '@angular/common/http';
 import { TokenInterceptor } from './propiedades-alegria/interceptors/token.interceptor';
 
 @NgModule({
     declarations: [AppComponent, NotfoundComponent],
-    imports: [
-        AppRoutingModule,
-        AppLayoutModule,
-        ButtonModule,
-        HttpClientModule,
-    ],
+    imports: [AppRoutingModule, AppLayoutModule, ButtonModule],
     providers: [
         CountryService,
         CustomerService,
@@ -32,11 +31,7 @@ import { TokenInterceptor } from './propiedades-alegria/interceptors/token.inter
         PhotoService,
         ProductService,
         AuthService,
-        {
-            provide: HTTP_INTERCEPTORS,
-            useFactory: TokenInterceptor,
-            multi: true,
-        },
+        provideHttpClient(withInterceptors([TokenInterceptor])),
     ],
     bootstrap: [AppComponent],
 })

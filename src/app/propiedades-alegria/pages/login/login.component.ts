@@ -63,7 +63,7 @@ export class LoginComponent {
                 next: () => {
                     this.router.navigate(['/'], { replaceUrl: true });
                 },
-                error: () => {
+                error: (err) => {
                     this.messages = [
                         {
                             severity: 'error',
