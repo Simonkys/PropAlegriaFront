@@ -73,9 +73,9 @@ export class RegistroTrabajadorComponent {
         ],
         email: ['', [Validators.required, Validators.email]],
         pri_nom_trab: ['', [Validators.required]],
-        seg_nom_trab: [''],
+        seg_nom_trab: ['', [Validators.required]],
         pri_ape_trab: ['', [Validators.required]],
-        seg_ape_trab: [''],
+        seg_ape_trab: ['', [Validators.required]],
         celular: [
             '',
             [
@@ -110,17 +110,18 @@ export class RegistroTrabajadorComponent {
         this.trabajadorService
             .crearTrabajador({
                 celular: Number(values.celular),
-                comuna_id: values.comuna?.id!,
-                tipo_trab: values.tipo_trab?.id!,
+                comuna_id: values.comuna!.id,
+                tipo_trab: values.tipo_trab!.id,
                 direccion: values.direccion!,
                 rut_trab: values.rut_trab!,
                 pri_nom_trab: values.pri_nom_trab!,
                 pri_ape_trab: values.pri_ape_trab!,
-                seg_nom_trab: values.seg_nom_trab ?? undefined,
-                seg_ape_trab: undefined,
+                seg_nom_trab: values.seg_nom_trab!,
+                seg_ape_trab: values.seg_ape_trab!,
             })
             .pipe(
                 finalize(() => {
+                    window.scrollTo(0, 0);
                     this.loading = false;
                 })
             )
