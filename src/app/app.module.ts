@@ -12,11 +12,7 @@ import { NodeService } from './demo/service/node.service';
 import { PhotoService } from './demo/service/photo.service';
 import { ButtonModule } from 'primeng/button';
 import { AuthService } from './propiedades-alegria/services/auth.service';
-import {
-    HTTP_INTERCEPTORS,
-    provideHttpClient,
-    withInterceptors,
-} from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { TokenInterceptor } from './propiedades-alegria/interceptors/token.interceptor';
 
 @NgModule({

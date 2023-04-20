@@ -14,19 +14,17 @@ import { AppMenuitemComponent } from './app.menuitem.component';
 import { RouterModule } from '@angular/router';
 import { TooltipModule } from 'primeng/tooltip';
 import { AppTopBarComponent } from './app.topbar.component';
-import { AppFooterComponent } from './app.footer.component';
-import { AppConfigModule } from './config/config.module';
 import { AppSidebarComponent } from './app.sidebar.component';
 import { AppLayoutComponent } from './app.layout.component';
+import { AppFooterComponent } from './app.footer.component';
 
 @NgModule({
     declarations: [
         AppMenuitemComponent,
-        AppTopBarComponent,
-        AppFooterComponent,
         AppMenuComponent,
         AppSidebarComponent,
         AppLayoutComponent,
+        AppTopBarComponent,
     ],
     imports: [
         BrowserModule,
@@ -40,8 +38,8 @@ import { AppLayoutComponent } from './app.layout.component';
         InputSwitchModule,
         RippleModule,
         RouterModule,
-        AppConfigModule,
         TooltipModule,
+        AppFooterComponent,
     ],
     exports: [AppLayoutComponent],
 })
