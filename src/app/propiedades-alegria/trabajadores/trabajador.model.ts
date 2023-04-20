@@ -11,3 +11,7 @@ export interface Trabajador {
     tipo_trab: number;
     usuario_id?: number;
 }
+
+export class TrabajadorModel {
+    constructor() {}
+}

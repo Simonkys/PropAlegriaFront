@@ -22,7 +22,7 @@ import {
     Comuna,
     Region,
 } from 'src/app/propiedades-alegria/interfaces/locaciones.models';
-import { TrabajadorService } from 'src/app/propiedades-alegria/services/trabajador.service';
+import { TrabajadorService } from 'src/app/propiedades-alegria/trabajadores/trabajador.service';
 import { TipoTrabajador } from 'src/app/propiedades-alegria/interfaces/tipo-trabajador.models';
 import { Router } from '@angular/router';
 

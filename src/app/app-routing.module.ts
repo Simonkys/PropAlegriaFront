@@ -24,7 +24,7 @@ import { authGuard } from './propiedades-alegria/guards/auth.guard';
                             path: 'trabajadores',
                             loadChildren: () =>
                                 import(
-                                    './propiedades-alegria/pages/trabajadores/trabajadores.routes'
+                                    './propiedades-alegria/trabajadores/trabajadores.routes'
                                 ).then((m) => m.TRABAJADORES_ROUTES),
                         },
                         {
