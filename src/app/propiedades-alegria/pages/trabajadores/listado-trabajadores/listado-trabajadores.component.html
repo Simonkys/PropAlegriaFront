@@ -8,21 +8,11 @@
                 styleClass="p-button-success"
                 (click)="goToRegistroTrabajador()"
             ></p-button>
-            <p-button
-                class="mr-2"
-                icon="pi pi-pencil"
-                styleClass="p-button-warning"
-                [disabled]="true"
-            ></p-button>
-            <p-button
-                icon="pi pi-times"
-                styleClass="p-button-danger"
-                [disabled]="true"
-            ></p-button>
         </div>
     </p-toolbar>
+    <p-messages [(value)]="messages" [enableService]="false"></p-messages>
 
-    <p-table>
+    <p-table [columns]="cols" [value]="trabajadores">
         <ng-template pTemplate="caption">
             <div
                 class="flex flex-column md:flex-row md:justify-content-between md:align-items-center"
@@ -39,13 +29,47 @@
                 </span>
             </div>
         </ng-template>
-        <ng-template pTemplate="header">
+        <ng-template pTemplate="header" let-columns>
             <tr>
-                <th>Rut</th>
-                <th>Nombre</th>
-                <th>Email</th>
-                <th>Celular</th>
-                <th>Rol</th>
+                <th *ngFor="let col of columns">
+                    {{ col.header }}
+                </th>
+                <th>Acciones</th>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-rowData let-columns="columns">
+            <tr>
+                <td *ngFor="let col of columns">
+                    {{ rowData[col.field] }}
+                </td>
+                <td class="flex">
+                    <div>
+                        <button
+                            pButton
+                            pRipple
+                            icon="pi pi-eye"
+                            class="p-button-rounded p-button-primary mr-2"
+                            (click)="verTrabajador(rowData)"
+                        ></button>
+                        <button
+                            pButton
+                            pRipple
+                            icon="pi pi-pencil"
+                            class="p-button-rounded p-button-warning mr-2"
+                            (click)="editarTrabajador(rowData)"
+                        ></button>
+
+                        <p-confirmPopup></p-confirmPopup>
+                        <button
+                            pButton
+                            pRipple
+                            icon="pi pi-trash"
+                            class="p-button-rounded p-button-danger"
+                            (click)="eliminarTrabajador($event, rowData)"
+                        ></button>
+                    </div>
+                </td>
             </tr>
         </ng-template>
     </p-table>

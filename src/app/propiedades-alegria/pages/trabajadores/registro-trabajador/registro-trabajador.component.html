@@ -185,10 +185,18 @@
             </div>
         </div>
 
-        <p-button
-            [disabled]="trabajadorForm.invalid || loading"
-            label="Guardar"
-            (click)="guardarTrabajador()"
-        ></p-button>
+        <div class="flex">
+            <p-button
+                styleClass="mr-3"
+                [disabled]="trabajadorForm.invalid || loading"
+                label="Guardar"
+                (click)="guardarTrabajador()"
+            ></p-button>
+            <p-button
+                label="Cancelar"
+                styleClass="p-button-danger"
+                (click)="cancelar()"
+            ></p-button>
+        </div>
     </div>
 </form>

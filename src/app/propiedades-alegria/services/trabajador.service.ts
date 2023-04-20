@@ -3,6 +3,7 @@ import { Trabajador } from '../models/trabajador.models';
 import { HttpClient } from '@angular/common/http';
 import { TipoTrabajador } from '../models/tipo-trabajador.models';
 import { environment } from 'src/environments/environment';
+import { of } from 'rxjs';
 
 @Injectable({
     providedIn: 'root',
@@ -22,11 +23,15 @@ export class TrabajadorService {
         );
     }
 
-    createTrabajador(trabajador: Trabajador) {
+    crearTrabajador(trabajador: Trabajador) {
         return this.http.post<Trabajador>(
             `${environment.apiUrl}/api/trabajador/`,
             trabajador
         );
+    }
+
+    eliminarTrabajador(trabajador: Trabajador) {
+        return of(trabajador);
     }
 
     getTipoDeTrabajadores() {

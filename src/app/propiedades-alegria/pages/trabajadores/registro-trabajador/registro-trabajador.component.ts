@@ -23,6 +23,7 @@ import {
 } from 'src/app/propiedades-alegria/models/locaciones.models';
 import { TrabajadorService } from 'src/app/propiedades-alegria/services/trabajador.service';
 import { TipoTrabajador } from 'src/app/propiedades-alegria/models/tipo-trabajador.models';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-registro-trabajador',
@@ -45,6 +46,7 @@ export class RegistroTrabajadorComponent {
     fb = inject(FormBuilder);
     dataService = inject(DataService);
     trabajadorService = inject(TrabajadorService);
+    router = inject(Router);
 
     messages: Message[] = [];
     loading = false;
@@ -95,6 +97,10 @@ export class RegistroTrabajadorComponent {
         return this.trabajadorForm.get('cuentas') as FormArray;
     }
 
+    cancelar() {
+        this.router.navigate(['trabajadores/listado']);
+    }
+
     updateFormData(key: string, event: any) {
         this.trabajadorForm.patchValue({
             [key]: event.value,
@@ -127,7 +133,7 @@ export class RegistroTrabajadorComponent {
         const values = this.trabajadorForm.getRawValue();
 
         this.trabajadorService
-            .createTrabajador({
+            .crearTrabajador({
                 celular: Number(values.celular),
                 comuna_id: values.comuna?.id!,
                 tipo_trab: values.tipo_trab?.id!,

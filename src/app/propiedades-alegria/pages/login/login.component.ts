@@ -32,6 +32,25 @@ import { AuthService } from '../../services/auth.service';
                 margin-right: 1rem;
                 color: var(--primary-color) !important;
             }
+
+            .page {
+                display: grid;
+                place-items: center;
+                height: 100vh;
+                background-color: grey;
+            }
+
+            .form {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+                gap: 8px;
+                border-radius: 8px;
+                padding: 32px;
+                max-width: 400px;
+                box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+                background-color: white;
+            }
         `,
     ],
 })
