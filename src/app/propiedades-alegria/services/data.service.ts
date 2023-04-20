@@ -3,27 +3,26 @@ import { Injectable, inject } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Comuna, Region } from '../interfaces/locaciones.models';
 import { Banco, TipoCuenta } from '../interfaces/banco.models';
-import { HttpApiService } from './http-api.service';
 
 @Injectable({
     providedIn: 'root',
 })
 export class DataService {
-    private httpApi = inject(HttpApiService);
+    private http = inject(HttpClient);
 
     getRegiones() {
-        return this.httpApi.get<Region[]>('regiones');
+        return this.http.get<Region[]>(`${environment.apiUrl}/api/regiones/`);
     }
 
     getComunasByRegion(regionId: number) {
-        return this.httpApi.getById<Comuna[]>('comunas', regionId);
+        return this.http.get<Comuna[]>(`${environment.apiUrl}/api/comunas/${regionId}`);
     }
 
     getBancos() {
-        return this.httpApi.get<Banco[]>('bancos');
+        return this.http.get<Banco[]>(`${environment.apiUrl}/api/bancos/`);
     }
 
     getTipoCuentasBanco() {
-        return this.httpApi.get<TipoCuenta[]>(`tipo_cuentas_bancos`);
+        return this.http.get<TipoCuenta[]>(`${environment.apiUrl}/api/tipo_cuentas_banco/`);
     }
 }
