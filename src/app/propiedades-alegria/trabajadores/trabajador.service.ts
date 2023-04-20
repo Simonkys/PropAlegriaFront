@@ -31,7 +31,7 @@ export class TrabajadorService {
     }
 
     eliminarTrabajador(trabajador: Trabajador) {
-        return of(trabajador);
+        return this.http.delete( `${environment.apiUrl}/api/trabajador/${trabajador.rut_trab}`)
     }
 
     getTipoDeTrabajadores() {

@@ -63,6 +63,7 @@ export class ListadoTrabajadoresComponent implements OnInit {
                     .pipe(finalize(() => {}))
                     .subscribe({
                         next: () => {
+                            this.trabajadores = this.trabajadores.filter(t => t.id === trabajador.id)
                             this.messages = [
                                 {
                                     severity: 'success',
