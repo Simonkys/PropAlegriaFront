@@ -4,6 +4,7 @@ import {
     FormArray,
     FormBuilder,
     FormControl,
+    FormGroup,
     ReactiveFormsModule,
     Validators,
 } from '@angular/forms';
@@ -20,9 +21,9 @@ import { filter, finalize, map, switchMap, tap } from 'rxjs';
 import {
     Comuna,
     Region,
-} from 'src/app/propiedades-alegria/models/locaciones.models';
+} from 'src/app/propiedades-alegria/interfaces/locaciones.models';
 import { TrabajadorService } from 'src/app/propiedades-alegria/services/trabajador.service';
-import { TipoTrabajador } from 'src/app/propiedades-alegria/models/tipo-trabajador.models';
+import { TipoTrabajador } from 'src/app/propiedades-alegria/interfaces/tipo-trabajador.models';
 import { Router } from '@angular/router';
 
 @Component({
@@ -52,8 +53,6 @@ export class RegistroTrabajadorComponent {
     loading = false;
 
     tipoTrabajador$ = this.trabajadorService.getTipoDeTrabajadores();
-    bancos$ = this.dataService.getBancos();
-    tipoCuentas$ = this.dataService.getTipoCuentasBanco();
 
     regiones$ = this.dataService.getRegiones();
     regionControl = new FormControl<Region | null>(null);
@@ -90,12 +89,7 @@ export class RegistroTrabajadorComponent {
         tipo_trab: new FormControl<TipoTrabajador | null>(null, [
             Validators.required,
         ]),
-        cuentas: new FormArray([]),
     });
-
-    get cuentas(): FormArray {
-        return this.trabajadorForm.get('cuentas') as FormArray;
-    }
 
     cancelar() {
         this.router.navigate(['trabajadores/listado']);
@@ -105,25 +99,6 @@ export class RegistroTrabajadorComponent {
         this.trabajadorForm.patchValue({
             [key]: event.value,
         });
-    }
-
-    nuevaCuentaBancaria() {
-        return this.fb.group({
-            nro_cuenta: ['', [Validators.required]],
-            tipo_cuenta: ['', [Validators.required]],
-            banco: ['', [Validators.required]],
-        });
-    }
-
-    agregarCuenta() {
-        if (this.cuentas.length >= 3) {
-            return;
-        }
-        this.cuentas.push(this.nuevaCuentaBancaria());
-    }
-
-    removerCuenta(idx: number) {
-        this.cuentas.removeAt(idx);
     }
 
     guardarTrabajador() {
@@ -162,4 +137,27 @@ export class RegistroTrabajadorComponent {
                 },
             });
     }
+
+    /*
+    cuentas = new FormArray<FormGroup>([]);
+
+    nuevaCuentaBancaria() {
+        return this.fb.group({
+            nro_cuenta: ['', [Validators.required]],
+            tipo_cuenta: ['', [Validators.required]],
+            banco: ['', [Validators.required]],
+        });
+    }
+
+    agregarCuenta() {
+        if (this.cuentas.length >= 3) {
+            return;
+        }
+        this.cuentas.push(this.nuevaCuentaBancaria());
+    }
+
+    removerCuenta(idx: number) {
+        this.cuentas.removeAt(idx);
+    }
+    */
 }

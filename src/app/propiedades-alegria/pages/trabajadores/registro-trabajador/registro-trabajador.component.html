@@ -1,10 +1,12 @@
 <form [formGroup]="trabajadorForm">
     <div class="card">
-        <h5>Registro Empleado</h5>
+        <div class="mb-4">
+            <h5>Registro Empleado</h5>
+        </div>
 
         <p-messages [(value)]="messages" [enableService]="false"></p-messages>
 
-        <div class="p-formgrid grid">
+        <div class="p-formgrid grid mb-3">
             <div class="col flex flex-column gap-2">
                 <label>Rut *</label>
                 <input
@@ -21,7 +23,7 @@
             </div>
         </div>
 
-        <div class="p-formgrid grid">
+        <div class="p-formgrid grid mb-3">
             <div class="col flex flex-column gap-2">
                 <label>Primer nombre *</label>
                 <input type="text" pInputText formControlName="pri_nom_trab" />
@@ -32,7 +34,7 @@
             </div>
         </div>
 
-        <div class="p-formgrid grid">
+        <div class="p-formgrid grid mb-3">
             <div class="col flex flex-column gap-2">
                 <label>Primer apellido *</label>
                 <input type="text" pInputText formControlName="pri_ape_trab" />
@@ -43,7 +45,7 @@
             </div>
         </div>
 
-        <div class="p-formgrid grid">
+        <div class="p-formgrid grid mb-3">
             <div class="col flex flex-column gap-2">
                 <label>Tipo de trabajador *</label>
                 <p-dropdown
@@ -61,7 +63,7 @@
             </div>
         </div>
 
-        <div class="p-formgrid grid">
+        <div class="p-formgrid grid mb-3">
             <div class="col flex flex-column gap-2">
                 <label>Region *</label>
                 <p-dropdown
@@ -85,13 +87,15 @@
                 <small>Debes seleccionar una región</small>
             </div>
         </div>
-        <div class="p-formgrid grid">
+
+        <div class="p-formgrid grid mb-3">
             <div class="col flex flex-column gap-2">
                 <label>Dirección *</label>
                 <input type="text" pInputText formControlName="direccion" />
             </div>
         </div>
 
+        <!-- 
         <div class="card">
             <p-button
                 icon="pi pi-wallet"
@@ -148,7 +152,7 @@
                 </div>
             </div>
         </div>
-
+        -->
         <div class="flex">
             <p-button
                 styleClass="mr-3"
