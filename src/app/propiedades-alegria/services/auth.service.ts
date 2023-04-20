@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { BehaviorSubject, finalize, tap } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
-import { Auth } from '../models/auth';
+import { Auth } from '../interfaces/auth';
 
 @Injectable({
     providedIn: 'root',

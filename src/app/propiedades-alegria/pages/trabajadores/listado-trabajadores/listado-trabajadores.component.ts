@@ -7,7 +7,7 @@ import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { TableModule } from 'primeng/table';
 import { TrabajadorService } from 'src/app/propiedades-alegria/services/trabajador.service';
-import { Trabajador } from 'src/app/propiedades-alegria/models/trabajador.models';
+import { Trabajador } from 'src/app/propiedades-alegria/interfaces/trabajador.models';
 import { ConfirmationService, Message } from 'primeng/api';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { MessagesModule } from 'primeng/messages';

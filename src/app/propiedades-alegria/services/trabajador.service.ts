@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
-import { Trabajador } from '../models/trabajador.models';
+import { Trabajador } from '../interfaces/trabajador.models';
 import { HttpClient } from '@angular/common/http';
-import { TipoTrabajador } from '../models/tipo-trabajador.models';
+import { TipoTrabajador } from '../interfaces/tipo-trabajador.models';
 import { environment } from 'src/environments/environment';
 import { of } from 'rxjs';
 

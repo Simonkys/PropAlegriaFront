@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { Comuna, Region } from '../models/locaciones.models';
-import { Banco, TipoCuenta } from '../models/banco.models';
+import { Comuna, Region } from '../interfaces/locaciones.models';
+import { Banco, TipoCuenta } from '../interfaces/banco.models';
 
 @Injectable({
     providedIn: 'root',
