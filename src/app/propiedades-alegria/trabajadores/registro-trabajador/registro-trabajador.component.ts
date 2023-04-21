@@ -1,10 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
-    FormArray,
     FormBuilder,
     FormControl,
-    FormGroup,
     ReactiveFormsModule,
     Validators,
 } from '@angular/forms';
@@ -16,15 +14,11 @@ import { DropdownModule } from 'primeng/dropdown';
 import { TooltipModule } from 'primeng/tooltip';
 import { KeyFilterModule } from 'primeng/keyfilter';
 import { Message } from 'primeng/api';
-import { DataService } from 'src/app/propiedades-alegria/services/data.service';
-import { filter, finalize, map, switchMap, tap } from 'rxjs';
-import {
-    Comuna,
-    Region,
-} from 'src/app/propiedades-alegria/interfaces/locaciones.models';
+import { finalize } from 'rxjs';
 import { TrabajadorService } from 'src/app/propiedades-alegria/trabajadores/trabajador.service';
 import { TipoTrabajador } from 'src/app/propiedades-alegria/interfaces/tipo-trabajador.models';
 import { Router } from '@angular/router';
+import { UbicacionFormComponent } from '../../ubicaciones/ubicacion-form/ubicacion-form.component';
 
 @Component({
     selector: 'app-registro-trabajador',
@@ -39,13 +33,13 @@ import { Router } from '@angular/router';
         TooltipModule,
         MessagesModule,
         KeyFilterModule,
+        UbicacionFormComponent
     ],
     templateUrl: './registro-trabajador.component.html',
     styleUrls: ['./registro-trabajador.component.scss'],
 })
 export class RegistroTrabajadorComponent {
     fb = inject(FormBuilder);
-    dataService = inject(DataService);
     trabajadorService = inject(TrabajadorService);
     router = inject(Router);
 
@@ -54,14 +48,6 @@ export class RegistroTrabajadorComponent {
 
     tipoTrabajador$ = this.trabajadorService.getTipoDeTrabajadores();
 
-    regiones$ = this.dataService.getRegiones();
-    regionControl = new FormControl<Region | null>(null);
-    comunas$ = this.regionControl.valueChanges.pipe(
-        filter((reg) => reg != null),
-        map((reg) => reg as Region),
-        switchMap((reg) => this.dataService.getComunasByRegion(reg.id)),
-        tap(() => this.trabajadorForm.patchValue({ comuna: null }))
-    );
 
     trabajadorForm = this.fb.group({
         rut_trab: [
@@ -76,6 +62,7 @@ export class RegistroTrabajadorComponent {
         seg_nom_trab: ['', [Validators.required]],
         pri_ape_trab: ['', [Validators.required]],
         seg_ape_trab: ['', [Validators.required]],
+        comuna_id: new FormControl<number | null>(null, [Validators.required]),
         celular: [
             '',
             [
@@ -85,7 +72,6 @@ export class RegistroTrabajadorComponent {
             ],
         ],
         direccion: ['', [Validators.required]],
-        comuna: new FormControl<Comuna | null>(null, [Validators.required]),
         tipo_trab: new FormControl<TipoTrabajador | null>(null, [
             Validators.required,
         ]),
@@ -95,10 +81,8 @@ export class RegistroTrabajadorComponent {
         this.router.navigate(['trabajadores/listado']);
     }
 
-    updateFormData(key: string, event: any) {
-        this.trabajadorForm.patchValue({
-            [key]: event.value,
-        });
+    handleSelectedComuna(comunaId: number | null){
+        this.trabajadorForm.patchValue({comuna_id: comunaId})
     }
 
     guardarTrabajador() {
@@ -110,7 +94,7 @@ export class RegistroTrabajadorComponent {
         this.trabajadorService
             .crearTrabajador({
                 celular: Number(values.celular),
-                comuna_id: values.comuna!.id,
+                comuna_id: Number(values.comuna_id),
                 tipo_trab: values.tipo_trab!.id,
                 direccion: values.direccion!,
                 rut_trab: values.rut_trab!,

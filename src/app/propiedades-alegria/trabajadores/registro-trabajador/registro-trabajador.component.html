@@ -63,30 +63,8 @@
             </div>
         </div>
 
-        <div class="p-formgrid grid mb-3">
-            <div class="col flex flex-column gap-2">
-                <label>Region *</label>
-                <p-dropdown
-                    [options]="(regiones$ | async)!"
-                    [formControl]="regionControl"
-                    optionLabel="nom_reg"
-                    [style]="{ width: '100%' }"
-                    placeholder="Seleccion región"
-                ></p-dropdown>
-            </div>
-            <div class="col flex flex-column gap-2">
-                <label>Comuna *</label>
-                <p-dropdown
-                    *ngIf="comunas$ | async as comunas"
-                    [options]="comunas"
-                    optionLabel="nom_com"
-                    [style]="{ width: '100%' }"
-                    (onChange)="updateFormData('comuna', $event)"
-                    placeholder="Seleccion comuna"
-                ></p-dropdown>
-                <small>Debes seleccionar una región</small>
-            </div>
-        </div>
+       
+        <app-ubicacion-form (selectedComunaIdEvent)="handleSelectedComuna($event)"></app-ubicacion-form>
 
         <div class="p-formgrid grid mb-3">
             <div class="col flex flex-column gap-2">

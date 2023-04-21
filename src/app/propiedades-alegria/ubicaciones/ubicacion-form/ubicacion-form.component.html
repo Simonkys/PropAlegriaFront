@@ -1,0 +1,24 @@
+<div class="p-formgrid grid mb-3">
+<div class="col flex flex-column gap-2">
+    <label>Region *</label>
+    <p-dropdown
+        [options]="regiones"
+        optionLabel="nom_reg"
+        [(ngModel)]="regionActual"
+        [style]="{ width: '100%' }"
+        placeholder="Seleccion región"
+        (onChange)="handleRegionChanges($event)"
+    ></p-dropdown>
+</div>
+<div class="col flex flex-column gap-2">
+    <label>Comuna *</label>
+    <p-dropdown
+        [options]="comunas"
+        optionLabel="nom_com"
+        [(ngModel)]="comunaActual"
+        [style]="{ width: '100%' }"
+        placeholder="Seleccion comuna"
+        (onChange)="handleComunaChanges($event)"
+    ></p-dropdown>
+</div>
+</div>
