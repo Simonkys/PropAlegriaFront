@@ -3,7 +3,6 @@ import { Trabajador } from './trabajador.model';
 import { HttpClient } from '@angular/common/http';
 import { TipoTrabajador } from '../interfaces/tipo-trabajador.models';
 import { environment } from 'src/environments/environment';
-import { of } from 'rxjs';
 
 @Injectable({
     providedIn: 'root',
