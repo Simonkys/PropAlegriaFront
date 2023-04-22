@@ -16,9 +16,9 @@ import { KeyFilterModule } from 'primeng/keyfilter';
 import { Message } from 'primeng/api';
 import { finalize } from 'rxjs';
 import { TrabajadorService } from 'src/app/propiedades-alegria/trabajadores/trabajador.service';
-import { TipoTrabajador } from 'src/app/propiedades-alegria/interfaces/tipo-trabajador.models';
 import { Router } from '@angular/router';
 import { UbicacionFormComponent } from '../../ubicaciones/ubicacion-form/ubicacion-form.component';
+import { TipoTrabajador } from '../trabajador.model';
 
 @Component({
     selector: 'app-registro-trabajador',

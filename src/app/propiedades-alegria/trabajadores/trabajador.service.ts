@@ -1,7 +1,6 @@
 import { Injectable, inject } from '@angular/core';
-import { Trabajador } from './trabajador.model';
+import { TipoTrabajador, Trabajador } from './trabajador.model';
 import { HttpClient } from '@angular/common/http';
-import { TipoTrabajador } from '../interfaces/tipo-trabajador.models';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
