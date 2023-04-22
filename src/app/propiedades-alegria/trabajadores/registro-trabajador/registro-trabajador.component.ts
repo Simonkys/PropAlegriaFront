@@ -13,12 +13,14 @@ import { MessagesModule } from 'primeng/messages';
 import { DropdownModule } from 'primeng/dropdown';
 import { TooltipModule } from 'primeng/tooltip';
 import { KeyFilterModule } from 'primeng/keyfilter';
-import { Message } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
+import { Message, MessageService } from 'primeng/api';
 import { finalize } from 'rxjs';
 import { TrabajadorService } from 'src/app/propiedades-alegria/trabajadores/trabajador.service';
 import { Router } from '@angular/router';
 import { UbicacionFormComponent } from '../../ubicaciones/ubicacion-form/ubicacion-form.component';
 import { TipoTrabajador } from '../trabajador.model';
+import { Utils } from '../../utils/utils';
 
 @Component({
     selector: 'app-registro-trabajador',
@@ -54,7 +56,7 @@ export class RegistroTrabajadorComponent {
             '',
             [
                 Validators.required,
-                Validators.pattern(/^[1-9][0-9]{6,8}-[0-9kK]$/),
+                Validators.pattern(/^[1-9][0-9]{6,7}-[0-9kK]$/),
             ],
         ],
         email: ['', [Validators.required, Validators.email]],
@@ -97,7 +99,7 @@ export class RegistroTrabajadorComponent {
                 comuna_id: Number(values.comuna_id),
                 tipo_trab: values.tipo_trab!.id,
                 direccion: values.direccion!,
-                rut_trab: values.rut_trab!,
+                rut_trab: Utils.rutFormatter(values.rut_trab!),
                 pri_nom_trab: values.pri_nom_trab!,
                 pri_ape_trab: values.pri_ape_trab!,
                 seg_nom_trab: values.seg_nom_trab!,
@@ -110,7 +112,9 @@ export class RegistroTrabajadorComponent {
                 })
             )
             .subscribe({
-                next: (res) => {},
+                next: (res) => {
+                    this.router.navigate(['trabajadores/listado'])
+                },
                 error: (err) => {
                     this.messages = [
                         {
