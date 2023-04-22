@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, Input, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
     FormBuilder,
@@ -13,13 +13,12 @@ import { MessagesModule } from 'primeng/messages';
 import { DropdownModule } from 'primeng/dropdown';
 import { TooltipModule } from 'primeng/tooltip';
 import { KeyFilterModule } from 'primeng/keyfilter';
-import { ToastModule } from 'primeng/toast';
-import { Message, MessageService } from 'primeng/api';
+import { Message } from 'primeng/api';
 import { finalize } from 'rxjs';
 import { TrabajadorService } from 'src/app/propiedades-alegria/trabajadores/trabajador.service';
 import { Router } from '@angular/router';
 import { UbicacionFormComponent } from '../../ubicaciones/ubicacion-form/ubicacion-form.component';
-import { TipoTrabajador } from '../trabajador.model';
+import { TipoTrabajador, Trabajador } from '../trabajador.model';
 import { Utils } from '../../utils/utils';
 
 @Component({
@@ -40,10 +39,14 @@ import { Utils } from '../../utils/utils';
     templateUrl: './registro-trabajador.component.html',
     styleUrls: ['./registro-trabajador.component.scss'],
 })
-export class RegistroTrabajadorComponent {
+export class RegistroTrabajadorComponent implements OnInit {
+    
     fb = inject(FormBuilder);
     trabajadorService = inject(TrabajadorService);
     router = inject(Router);
+
+
+    @Input() trabajador?: Trabajador
 
     messages: Message[] = [];
     loading = false;
@@ -59,7 +62,6 @@ export class RegistroTrabajadorComponent {
                 Validators.pattern(/^[1-9][0-9]{6,7}-[0-9kK]$/),
             ],
         ],
-        email: ['', [Validators.required, Validators.email]],
         pri_nom_trab: ['', [Validators.required]],
         seg_nom_trab: ['', [Validators.required]],
         pri_ape_trab: ['', [Validators.required]],
@@ -78,6 +80,20 @@ export class RegistroTrabajadorComponent {
             Validators.required,
         ]),
     });
+
+    ngOnInit(): void {
+        if(this.trabajador) {
+            this.trabajadorForm.patchValue({
+                rut_trab: this.trabajador.rut_trab,
+                pri_nom_trab: this.trabajador.pri_nom_trab,
+                seg_nom_trab: this.trabajador.seg_nom_trab,
+                pri_ape_trab: this.trabajador.pri_ape_trab,
+                seg_ape_trab: this.trabajador.seg_ape_trab,
+                comuna_id: this.trabajador.comuna_id,
+                celular: String(this.trabajador.celular),
+            })
+        }
+    }
 
     cancelar() {
         this.router.navigate(['trabajadores/listado']);
