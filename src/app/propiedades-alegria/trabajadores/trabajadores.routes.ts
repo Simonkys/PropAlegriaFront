@@ -18,6 +18,13 @@ export const TRABAJADORES_ROUTES: Route[] = [
                         './registro-trabajador/registro-trabajador.component'
                     ).then((m) => m.RegistroTrabajadorComponent),
             },
+            {
+                path: ':id/actualizar',
+                loadComponent: () =>
+                    import(
+                        './actualizar-trabajador/actualizar-trabajador.component'
+                    ).then((m) => m.ActualizarTrabajadorComponent),
+            },
         ],
     },
 ];

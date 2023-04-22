@@ -50,7 +50,9 @@ export class ListadoTrabajadoresComponent implements OnInit {
         ];
     }
 
-    editarTrabajador(trabajador: Trabajador) {}
+    editarTrabajador(trabajador: Trabajador) {
+        this.router.navigate(['trabajadores', trabajador.id, 'actualizar'])
+    }
 
     eliminarTrabajador(event: Event, trabajador: Trabajador) {
         this.confimService.confirm({

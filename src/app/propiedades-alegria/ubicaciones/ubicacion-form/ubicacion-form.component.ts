@@ -16,7 +16,7 @@ import { switchMap } from 'rxjs';
 })
 export class UbicacionFormComponent implements OnInit {
 
-  @Input() initialComunaId: number | null = null;
+  @Input() initialComunaId?: number;
   @Output() selectedComunaIdEvent = new EventEmitter<number | null>();
   
 

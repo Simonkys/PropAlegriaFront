@@ -1,0 +1,141 @@
+<form [formGroup]="trabajadorForm">
+        <div class="p-formgrid grid mb-3">
+            <div class="col flex flex-column gap-2">
+                <label>Rut *</label>
+                <input
+                    type="text"
+                    pInputText
+                    formControlName="rut_trab"
+                    autofocus
+                />
+                <small>Rut con puntos y con guión, Ej: 11.625.443-8</small>
+            </div>
+            <div class="col flex flex-column gap-2">
+                
+            </div>
+        </div>
+
+        <div class="p-formgrid grid mb-3">
+            <div class="col flex flex-column gap-2">
+                <label>Primer nombre *</label>
+                <input type="text" pInputText formControlName="pri_nom_trab" />
+            </div>
+            <div class="col flex flex-column gap-2">
+                <label>Segundo nombre *</label>
+                <input type="text" pInputText formControlName="seg_nom_trab" />
+            </div>
+        </div>
+
+        <div class="p-formgrid grid mb-3">
+            <div class="col flex flex-column gap-2">
+                <label>Primer apellido *</label>
+                <input type="text" pInputText formControlName="pri_ape_trab" />
+            </div>
+            <div class="col flex flex-column gap-2">
+                <label>Segundo apellido *</label>
+                <input type="text" pInputText formControlName="seg_ape_trab" />
+            </div>
+        </div>
+
+        <div class="p-formgrid grid mb-3">
+            <div class="col flex flex-column gap-2">
+                <label>Tipo de trabajador *</label>
+                <p-dropdown
+                    formControlName="tipo_trab"
+                    [options]="(tipoTrabajador$ | async)!"
+                    optionLabel="tipo"
+                    optionValue="id"
+                    [style]="{ width: '100%' }"
+                    placeholder="Tipo de trabajador"
+                ></p-dropdown>
+            </div>
+            <div class="col flex flex-column gap-2">
+                <label>Celular *</label>
+                <input pKeyFilter="int" pInputText formControlName="celular" />
+                <small>Solo números son permitidos, Ej: 93526734</small>
+            </div>
+        </div>
+
+       
+        <app-ubicacion-form [initialComunaId]="this.trabajador?.comuna_id" (selectedComunaIdEvent)="handleSelectedComuna($event)"></app-ubicacion-form>
+
+        <div class="p-formgrid grid mb-3">
+            <div class="col flex flex-column gap-2">
+                <label>Dirección *</label>
+                <input type="text" pInputText formControlName="direccion" />
+            </div>
+        </div>
+
+        <div class="flex">
+            <p-button
+                styleClass="mr-3"
+                [disabled]="trabajadorForm.invalid"
+                label="Guardar"
+                (click)="guardarTrabajador()"
+            ></p-button>
+            <p-button
+                label="Cancelar"
+                styleClass="p-button-danger"
+                (click)="cancelar()"
+            ></p-button>
+        </div>
+
+        <!-- 
+        <div class="card">
+            <p-button
+                icon="pi pi-wallet"
+                styleClass="p-button-rounded p-button-outlined mb-3"
+                label="Agregar cuenta"
+                (click)="agregarCuenta()"
+            ></p-button>
+            <div formArrayName="cuentas">
+                <div *ngFor="let c of cuentas.controls; let i = index">
+                    <div [formGroupName]="i">
+                        <div class="p-formgrid grid">
+                            <div class="col flex flex-column gap-2">
+                                <label>N° de cuenta *</label>
+                                <input
+                                    type="text"
+                                    pInputText
+                                    formControlName="nro_cuenta"
+                                    placeholder="xxxx xxxx xxxx xxxx"
+                                />
+                            </div>
+                        </div>
+
+                        <div class="p-formgrid grid">
+                            <div class="col flex flex-column gap-2">
+                                <label>Banco *</label>
+                                <p-dropdown
+                                    [options]="(bancos$ | async)!"
+                                    optionLabel="nombre_banco"
+                                    formControlName="banco"
+                                    [style]="{ width: '100%' }"
+                                    placeholder="Seleccion banco"
+                                ></p-dropdown>
+                            </div>
+                            <div class="col flex flex-column gap-2">
+                                <label>Tipo de cuenta *</label>
+                                <p-dropdown
+                                    [options]="(tipoCuentas$ | async)!"
+                                    optionLabel="nom_cuenta"
+                                    formControlName="tipo_cuenta"
+                                    [style]="{ width: '100%' }"
+                                    placeholder="Seleccion tipo de cuenta"
+                                ></p-dropdown>
+                            </div>
+                        </div>
+
+                        <p-button
+                            pTooltip="Eliminar cuenta"
+                            icon="pi pi-times"
+                            styleClass="p-button-danger p-button-outline p-button-text"
+                            (click)="removerCuenta(i)"
+                        ></p-button>
+                    </div>
+                    <hr />
+                </div>
+            </div>
+        </div>
+        -->
+</form>

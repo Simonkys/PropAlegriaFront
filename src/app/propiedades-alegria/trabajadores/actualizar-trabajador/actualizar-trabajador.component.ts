@@ -2,35 +2,37 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MessagesModule } from 'primeng/messages';
 import { Message } from 'primeng/api';
-import { finalize } from 'rxjs';
+import { finalize, map, switchMap } from 'rxjs';
 import { TrabajadorService } from 'src/app/propiedades-alegria/trabajadores/trabajador.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TrabajadorFormComponent } from '../trabajador-form/trabajador-form.component';
 import { Trabajador } from '../trabajador.model';
 
 
 @Component({
-    selector: 'app-registro-trabajador',
+    selector: 'app-actualizar-trabajador',
     standalone: true,
     imports: [
         CommonModule,
         MessagesModule,
         TrabajadorFormComponent
     ],
-    templateUrl: './registro-trabajador.component.html',
-    styleUrls: ['./registro-trabajador.component.scss'],
+    templateUrl: './actualizar-trabajador.component.html',
+    styleUrls: ['./actualizar-trabajador.component.scss'],
 })
-export class RegistroTrabajadorComponent {
+export class ActualizarTrabajadorComponent {
 
     trabajadorService = inject(TrabajadorService);
     router = inject(Router);
+    route = inject(ActivatedRoute)
 
     messages: Message[] = [];
     loading = false;
 
-    ngOnInit(): void {
-        
-    }
+    trabajador$ = this.route.paramMap.pipe(
+      map(params => Number(params.get('id'))),
+      switchMap(id => this.trabajadorService.getTrabajadorById(id))
+    )
 
     cancelar() {
         this.router.navigate(['trabajadores/listado']);
@@ -39,7 +41,7 @@ export class RegistroTrabajadorComponent {
     guardarTrabajador(trabajador: Trabajador) {
         this.loading = true;
         this.trabajadorService
-            .crearTrabajador(trabajador)
+            .actualizar(trabajador)
             .pipe(
                 finalize(() => {
                     window.scrollTo(0, 0);

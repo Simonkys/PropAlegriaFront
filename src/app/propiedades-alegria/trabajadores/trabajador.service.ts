@@ -17,7 +17,7 @@ export class TrabajadorService {
 
     getTrabajadorById(id: number) {
         return this.http.get<Trabajador>(
-            `${environment.apiUrl}/api/trabajador/${id}`
+            `${environment.apiUrl}/api/trabajador/${id}/`
         );
     }
 
@@ -26,6 +26,10 @@ export class TrabajadorService {
             `${environment.apiUrl}/api/trabajador/`,
             trabajador
         );
+    }
+
+    actualizar(trabajador: Trabajador) {
+        return this.http.put( `${environment.apiUrl}/api/trabajador/${trabajador.id}/`, trabajador)
     }
 
     eliminarTrabajador(trabajador: Trabajador) {
