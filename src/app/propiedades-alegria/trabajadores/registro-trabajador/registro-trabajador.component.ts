@@ -19,7 +19,7 @@ import { TrabajadorService } from 'src/app/propiedades-alegria/trabajadores/trab
 import { Router } from '@angular/router';
 import { UbicacionFormComponent } from '../../ubicaciones/ubicacion-form/ubicacion-form.component';
 import { TipoTrabajador, Trabajador } from '../trabajador.model';
-import { Utils } from '../../utils/utils';
+
 
 @Component({
     selector: 'app-registro-trabajador',
@@ -59,7 +59,7 @@ export class RegistroTrabajadorComponent implements OnInit {
             '',
             [
                 Validators.required,
-                Validators.pattern(/^[1-9][0-9]{6,7}-[0-9kK]$/),
+                Validators.pattern(/^(\d{1,2}(?:\.\d{1,3}){2}-[\dkK])$/),
             ],
         ],
         pri_nom_trab: ['', [Validators.required]],
@@ -115,7 +115,7 @@ export class RegistroTrabajadorComponent implements OnInit {
                 comuna_id: Number(values.comuna_id),
                 tipo_trab: values.tipo_trab!.id,
                 direccion: values.direccion!,
-                rut_trab: Utils.rutFormatter(values.rut_trab!),
+                rut_trab: values.rut_trab!,
                 pri_nom_trab: values.pri_nom_trab!,
                 pri_ape_trab: values.pri_ape_trab!,
                 seg_nom_trab: values.seg_nom_trab!,
