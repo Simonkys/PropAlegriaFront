@@ -1,45 +1,83 @@
 <form [formGroup]="trabajadorForm">
-        <div class="p-formgrid grid mb-3">
-            <div class="col flex flex-column gap-2">
-                <label>Rut *</label>
+    <div class="p-formgrid grid mb-3">
+        <div class="col flex flex-column gap-2">
+            <span class="p-float-label">
                 <input
                     type="text"
                     pInputText
                     formControlName="rut_trab"
                     autofocus
+                    placeholder="19.109.516-2"
+                    [style]="{ width: '100%' }"
                 />
-                <small>Rut con puntos y con guión, Ej: 11.625.443-8</small>
-            </div>
-            <div class="col flex flex-column gap-2">
-                
-            </div>
+                <label>Rut *</label>
+            </span>
+            <small
+                >Rut con puntos y con guión,
+                <strong> Ej: 11.625.443-8</strong></small
+            >
         </div>
+        <div class="col flex flex-column gap-2"></div>
+    </div>
 
-        <div class="p-formgrid grid mb-3">
-            <div class="col flex flex-column gap-2">
+    <div class="p-formgrid grid mb-3">
+        <div class="col flex flex-column gap-2">
+            <span class="p-float-label">
+                <input
+                    type="text"
+                    pInputText
+                    formControlName="pri_nom_trab"
+                    placeholder="Carlos"
+                    [style]="{ width: '100%' }"
+                />
                 <label>Primer nombre *</label>
-                <input type="text" pInputText formControlName="pri_nom_trab" />
-            </div>
-            <div class="col flex flex-column gap-2">
+            </span>
+        </div>
+        <div class="col flex flex-column gap-2">
+            <span class="p-float-label">
+                <input
+                    type="text"
+                    pInputText
+                    formControlName="seg_nom_trab"
+                    placeholder="Gomez"
+                    [style]="{ width: '100%' }"
+                />
                 <label>Segundo nombre *</label>
-                <input type="text" pInputText formControlName="seg_nom_trab" />
-            </div>
+            </span>
         </div>
+    </div>
 
-        <div class="p-formgrid grid mb-3">
-            <div class="col flex flex-column gap-2">
+    <div class="p-formgrid grid mb-3">
+        <div class="col flex flex-column gap-2">
+            <span class="p-float-label">
+                <input
+                    type="text"
+                    pInputText
+                    formControlName="pri_ape_trab"
+                    placeholder="Contreras"
+                    [style]="{ width: '100%' }"
+                />
                 <label>Primer apellido *</label>
-                <input type="text" pInputText formControlName="pri_ape_trab" />
-            </div>
-            <div class="col flex flex-column gap-2">
-                <label>Segundo apellido *</label>
-                <input type="text" pInputText formControlName="seg_ape_trab" />
-            </div>
+            </span>
         </div>
+        <div class="col flex flex-column gap-2">
+            <span class="p-float-label">
+                <input
+                    type="text"
+                    pInputText
+                    formControlName="seg_ape_trab"
+                    class="Gonzales"
+                    placeholder="Aguirre"
+                    [style]="{ width: '100%' }"
+                />
+                <label>Segundo apellido *</label>
+            </span>
+        </div>
+    </div>
 
-        <div class="p-formgrid grid mb-3">
-            <div class="col flex flex-column gap-2">
-                <label>Tipo de trabajador *</label>
+    <div class="p-formgrid grid mb-3">
+        <div class="col flex flex-column gap-2">
+            <span class="p-float-label">
                 <p-dropdown
                     formControlName="tipo_trab"
                     [options]="(tipoTrabajador$ | async)!"
@@ -47,40 +85,58 @@
                     optionValue="id"
                     [style]="{ width: '100%' }"
                     placeholder="Tipo de trabajador"
+                    inputId="float-label"
                 ></p-dropdown>
-            </div>
-            <div class="col flex flex-column gap-2">
+                <label for="float-label">Tipo de trabajador *</label>
+            </span>
+        </div>
+        <div class="col flex flex-column gap-2">
+            <span class="p-float-label">
+                <input
+                    pKeyFilter="int"
+                    pInputText
+                    formControlName="celular"
+                    placeholder="92312456"
+                    [style]="{ width: '100%' }"
+                />
                 <label>Celular *</label>
-                <input pKeyFilter="int" pInputText formControlName="celular" />
-                <small>Solo números son permitidos, Ej: 93526734</small>
-            </div>
+            </span>
+            <small
+                >Solo números son permitidos,
+                <strong>Ej: 93526734</strong></small
+            >
         </div>
+    </div>
 
-       
-        <app-ubicacion-form [initialComunaId]="this.trabajador?.comuna_id" (selectedComunaIdEvent)="handleSelectedComuna($event)"></app-ubicacion-form>
+    <app-ubicacion-form
+        [initialComunaId]="this.trabajador?.comuna_id"
+        (selectedComunaIdEvent)="handleSelectedComuna($event)"
+    ></app-ubicacion-form>
 
-        <div class="p-formgrid grid mb-3">
-            <div class="col flex flex-column gap-2">
+    <div class="p-formgrid grid mb-3">
+        <div class="col flex flex-column gap-2">
+            <span class="p-float-label">
+                <input type="text" pInputText formControlName="direccion" [style]="{ width: '100%' }" placeholder="Av. caupolican 254 depto 23"/>
                 <label>Dirección *</label>
-                <input type="text" pInputText formControlName="direccion" />
-            </div>
+            </span>
         </div>
+    </div>
 
-        <div class="flex">
-            <p-button
-                styleClass="mr-3"
-                [disabled]="trabajadorForm.invalid"
-                label="Guardar"
-                (click)="guardarTrabajador()"
-            ></p-button>
-            <p-button
-                label="Cancelar"
-                styleClass="p-button-danger"
-                (click)="cancelar()"
-            ></p-button>
-        </div>
+    <div class="flex">
+        <p-button
+            styleClass="mr-3"
+            [disabled]="trabajadorForm.invalid"
+            label="Guardar"
+            (click)="guardarTrabajador()"
+        ></p-button>
+        <p-button
+            label="Cancelar"
+            styleClass="p-button-danger"
+            (click)="cancelar()"
+        ></p-button>
+    </div>
 
-        <!-- 
+    <!-- 
         <div class="card">
             <p-button
                 icon="pi pi-wallet"
