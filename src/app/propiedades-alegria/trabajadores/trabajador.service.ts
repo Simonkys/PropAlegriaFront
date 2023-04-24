@@ -1,24 +1,38 @@
 import { Injectable, inject } from '@angular/core';
-import { TipoTrabajador, Trabajador, TrabajadorConTipo } from './trabajador.model';
-import { HttpClient } from '@angular/common/http';
+import {
+    TipoTrabajador,
+    Trabajador,
+    TrabajadorConTipo,
+} from './trabajador.model';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { BehaviorSubject, combineLatestAll, forkJoin, map, mergeMap, switchMap, tap } from 'rxjs';
+import {
+    BehaviorSubject,
+    catchError,
+    map,
+    mergeMap,
+    switchMap,
+    tap,
+    throwError,
+} from 'rxjs';
+import { MessageService } from '../services/message.service';
 
 @Injectable({
     providedIn: 'root',
 })
 export class TrabajadorService {
     private http = inject(HttpClient);
+    private messageService = inject(MessageService);
 
-    private trabajadorSubject = new BehaviorSubject<Trabajador[]>([])
+    private trabajadorSubject = new BehaviorSubject<Trabajador[]>([]);
     private trabajadorLoaded = false;
 
-    private tipoTrabajadorSubject = new BehaviorSubject<TipoTrabajador[]>([])
+    private tipoTrabajadorSubject = new BehaviorSubject<TipoTrabajador[]>([]);
     private tipoTrabajadorLoaded = false;
 
     getTrabajadores() {
         if (this.trabajadorLoaded) {
-            return this.trabajadorSubject.asObservable()
+            return this.trabajadorSubject.asObservable();
         }
 
         return this.http
@@ -46,9 +60,17 @@ export class TrabajadorService {
             )
             .pipe(
                 tap((data) => {
-                    this.trabajadorSubject.next([data, ...this.trabajadorSubject.value]);
+                    this.trabajadorSubject.next([
+                        data,
+                        ...this.trabajadorSubject.value,
+                    ]);
+                    this.messageService.addMessage({
+                        details: ['Trabajador registrado'],
+                        role: 'success'
+                    })
                     return data;
-                })
+                }),
+                catchError((error: HttpErrorResponse) => this.handleError(error))
             );
     }
 
@@ -60,12 +82,17 @@ export class TrabajadorService {
             )
             .pipe(
                 tap((data) => {
-                    const filterData = this.trabajadorSubject.value.map(d => {
-                        return d.id === data.id ? data : d
-                    })
+                    const filterData = this.trabajadorSubject.value.map((d) => {
+                        return d.id === data.id ? data : d;
+                    });
                     this.trabajadorSubject.next([...filterData]);
+                    this.messageService.addMessage({
+                        details: ['Trabajador actualizado'],
+                        role: 'success'
+                    })
                     return data;
-                })
+                }),
+                catchError((error: HttpErrorResponse) => this.handleError(error))
             );
     }
 
@@ -78,13 +105,17 @@ export class TrabajadorService {
                         (d) => d.id !== trabajadorId
                     );
                     this.trabajadorSubject.next([...filterData]);
+                    this.messageService.addMessage({
+                        details: ['Trabajador eliminado'],
+                        role: 'info'
+                    })
                 })
             );
     }
 
     getTipoDeTrabajadores() {
         if (this.tipoTrabajadorLoaded) {
-            return this.tipoTrabajadorSubject.asObservable()
+            return this.tipoTrabajadorSubject.asObservable();
         }
 
         return this.http
@@ -100,18 +131,35 @@ export class TrabajadorService {
 
     getTrabajadoresConTipo() {
         return this.getTrabajadores().pipe(
-        mergeMap((trabajadores) => this.getTipoDeTrabajadores()
-        .pipe(
-            map(tipoTrabajadores => {
-                return trabajadores.map<TrabajadorConTipo>(trabajador => {
-                    const {tipo_trab, ...data} = trabajador
-                    const tipo = tipoTrabajadores.find(t => t.id === tipo_trab)!
-                    return {...data, tipo_trabajador: tipo.tipo}
-                })
-            })
-        )
-        ),
-    )
+            mergeMap((trabajadores) =>
+                this.getTipoDeTrabajadores().pipe(
+                    map((tipoTrabajadores) => {
+                        return trabajadores.map<TrabajadorConTipo>(
+                            (trabajador) => {
+                                const { tipo_trab, ...data } = trabajador;
+                                const tipo = tipoTrabajadores.find(
+                                    (t) => t.id === tipo_trab
+                                )!;
+                                return { ...data, tipo_trabajador: tipo.tipo };
+                            }
+                        );
+                    })
+                )
+            )
+        );
     }
-    
+
+    private handleError(error: HttpErrorResponse) {
+        const msg = JSON.stringify(error.error);
+        if (error.status == 400) {
+            const errores = Object.values(error.error).map((msg) =>
+                String(msg)
+            );
+            this.messageService.addMessage({
+                details: errores,
+                role: 'error',
+            });
+        }
+        return throwError(() => new Error(msg));
+    }
 }

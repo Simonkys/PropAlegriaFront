@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import {Subject, filter} from 'rxjs'
 
 interface Message {
-    details: string;
+    details: string[];
     role: 'success' | 'error' | 'info'
 }
 

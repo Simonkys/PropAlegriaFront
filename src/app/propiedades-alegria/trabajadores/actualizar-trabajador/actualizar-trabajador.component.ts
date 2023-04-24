@@ -1,12 +1,11 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MessagesModule } from 'primeng/messages';
-import { Message } from 'primeng/api';
 import { finalize, map, switchMap } from 'rxjs';
 import { TrabajadorService } from 'src/app/propiedades-alegria/trabajadores/trabajador.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TrabajadorFormComponent } from '../trabajador-form/trabajador-form.component';
 import { Trabajador } from '../trabajador.model';
+import { MessageService } from '../../services/message.service';
 
 
 @Component({
@@ -14,7 +13,6 @@ import { Trabajador } from '../trabajador.model';
     standalone: true,
     imports: [
         CommonModule,
-        MessagesModule,
         TrabajadorFormComponent
     ],
     templateUrl: './actualizar-trabajador.component.html',
@@ -23,10 +21,10 @@ import { Trabajador } from '../trabajador.model';
 export class ActualizarTrabajadorComponent {
 
     trabajadorService = inject(TrabajadorService);
+    messageService = inject(MessageService)
     router = inject(Router);
     route = inject(ActivatedRoute)
 
-    messages: Message[] = [];
     loading = false;
 
     trabajador$ = this.route.paramMap.pipe(
@@ -52,15 +50,7 @@ export class ActualizarTrabajadorComponent {
                 next: (res) => {
                     this.router.navigate(['trabajadores/listado'])
                 },
-                error: (err) => {
-                    this.messages = [
-                        {
-                            severity: 'error',
-                            summary: 'Error',
-                            detail: JSON.stringify(err.error),
-                        },
-                    ];
-                },
+                error: (err) => {},
             });
     }
 }

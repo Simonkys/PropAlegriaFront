@@ -8,12 +8,12 @@ import { InputTextModule } from 'primeng/inputtext';
 import { Table, TableModule } from 'primeng/table';
 import { TrabajadorService } from 'src/app/propiedades-alegria/trabajadores/trabajador.service';
 import { Trabajador, TrabajadorConTipo } from 'src/app/propiedades-alegria/trabajadores/trabajador.model';
-import { ConfirmationService, Message } from 'primeng/api';
+import { ConfirmationService } from 'primeng/api';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { MessagesModule } from 'primeng/messages';
 import { finalize  } from 'rxjs';
 import { MultiSelectModule } from 'primeng/multiselect';
-import { MessageService } from '../../services/message.service';
+
 
 @Component({
     selector: 'app-listado-trabajadores',
@@ -36,9 +36,8 @@ export class ListadoTrabajadoresComponent implements OnInit {
     router = inject(Router);
     trabajadorService = inject(TrabajadorService);
     confimService = inject(ConfirmationService);
-    messageService = inject(MessageService)
+    
 
-    messages: Message[] = [];
     trabajadores$ =  this.trabajadorService.getTrabajadoresConTipo()
     tipoTrabajadores$ = this.trabajadorService.getTipoDeTrabajadores()
     cols: { field: string; header: string }[] = [];
@@ -67,33 +66,12 @@ export class ListadoTrabajadoresComponent implements OnInit {
                 this.trabajadorService
                     .eliminarTrabajador(trabajador.id!)
                     .pipe(finalize(() => {}))
-                    .subscribe({
-                        next: () => {
-                            this.messages = [
-                                {
-                                    severity: 'success',
-                                    summary: 'Operación exitosa',
-                                    detail: 'Trabajador eliminado',
-                                },
-                            ];
-                        },
-                        error: () => {
-                            this.messages = [
-                                {
-                                    severity: 'error',
-                                    summary: 'Error',
-                                    detail: 'La operación no puedo concretarse',
-                                },
-                            ];
-                        },
-                    });
+                    .subscribe();
             },
         });
     }
 
-    verTrabajador(trabajador: Trabajador) {
-        this.messageService.addMessage({details: 'Exito', 'role': 'success'})
-    }
+    verTrabajador(trabajador: Trabajador) {}
 
     goToRegistroTrabajador() {
         this.router.navigate(['trabajadores/registro']);

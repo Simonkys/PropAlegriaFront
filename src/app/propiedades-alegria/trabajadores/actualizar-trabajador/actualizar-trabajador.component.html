@@ -2,8 +2,5 @@
     <div class="mb-4">
         <h5>Actualizar Empleado</h5>
     </div>
-
-    <p-messages [(value)]="messages" [enableService]="false"></p-messages>
-
     <app-trabajador-form *ngIf="trabajador$ | async as trab" [trabajador]="trab" (cancelEvent)="cancelar()" (saveEvent)="guardarTrabajador($event)"></app-trabajador-form>
 </div>

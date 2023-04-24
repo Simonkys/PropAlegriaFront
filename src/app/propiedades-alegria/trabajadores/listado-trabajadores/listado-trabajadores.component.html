@@ -10,7 +10,6 @@
             ></p-button>
         </div>
     </p-toolbar>
-    <p-messages [(value)]="messages" [enableService]="false"></p-messages>
 
     <p-table
         #dt1
@@ -124,6 +123,7 @@
                             icon="pi pi-eye"
                             class="p-button-rounded p-button-primary mr-2"
                             (click)="verTrabajador(rowData)"
+                            [disabled]="true"
                         ></button>
                         <button
                             pButton

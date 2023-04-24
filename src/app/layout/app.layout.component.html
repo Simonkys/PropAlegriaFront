@@ -5,9 +5,12 @@
     </div>
     <div class="layout-main-container">
         <div class="layout-main"> 
-            <ng-container *ngIf="messageService.message$ | async">
-                <div class="message-container success">
-                    <span class="message">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nam, sunt. Dolores consequuntur possimus itaque culpa debitis, ducimus laborum consectetur maiores maxime animi similique nostrum fuga illum beatae adipisci molestias modi!</span>
+            <ng-container *ngIf="messageService.message$ | async as msg">
+                <div class="message-container {{msg.role}}">
+                    <div class="message">
+                        <p *ngFor="let m of msg.details"> {{m}}</p>
+                    </div>
+                    
                     <button type="button" (click)="close()">X</button>
                 </div>
             </ng-container>
