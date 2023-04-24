@@ -1,14 +1,17 @@
-export interface User {
+export interface BaseUser {
     username: string;
     email: string;
-    tipo_usuario: string;
 }
 
 export interface Auth {
     Token: string;
-    Usuario: User;
+    Usuario: BaseUser;
     Mensaje: string;
-    Tipo_usuario: number;
+    Tipo_trabajador: number;
+}
+
+export interface CreateUserForm extends BaseUser {
+    password: string;
 }
 
 

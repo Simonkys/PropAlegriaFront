@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { BehaviorSubject, finalize, tap } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
-import { Auth } from '../interfaces/auth';
+import { Auth, TipoUsuario } from './usuarios.model';
 
 @Injectable({
     providedIn: 'root',
@@ -66,5 +66,9 @@ export class AuthService {
 
     isAuthenticated(): boolean {
         return this.getCurrentUser() ? true : false;
+    }
+
+    hasRole(tipoUsuario: TipoUsuario) {
+        return this.getCurrentUser()?.Tipo_trabajador === tipoUsuario
     }
 }

@@ -4,7 +4,7 @@ import { filter, Subscription } from 'rxjs';
 import { LayoutService } from './service/app.layout.service';
 import { AppSidebarComponent } from './app.sidebar.component';
 import { AppTopBarComponent } from './app.topbar.component';
-import { MessageService } from '../propiedades-alegria/services/message.service';
+import { MessageService } from '../propiedades-alegria/mensajes/message.service';
 
 @Component({
     selector: 'app-layout',

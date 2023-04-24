@@ -1,12 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { Banco, TipoCuenta } from '../interfaces/banco.models';
+import { Banco, TipoCuenta } from './cuentas-bancarias.models';
 
 @Injectable({
     providedIn: 'root',
 })
-export class DataService {
+export class BancoService {
     private http = inject(HttpClient);
 
     getBancos() {

@@ -1,8 +1,10 @@
 import { RouterModule } from '@angular/router';
-import { NgModule } from '@angular/core';
+import { NgModule, inject } from '@angular/core';
 import { AppLayoutComponent } from './layout/app.layout.component';
 import { NotFoundComponent } from './propiedades-alegria/pages/not-found/not-found.component';
 import { authGuard } from './propiedades-alegria/guards/auth.guard';
+import { AuthService } from './propiedades-alegria/usuarios/auth.service';
+import { TipoUsuario } from './propiedades-alegria/usuarios/usuarios.model';
 
 @NgModule({
     imports: [
@@ -28,6 +30,14 @@ import { authGuard } from './propiedades-alegria/guards/auth.guard';
                                 ).then((m) => m.TRABAJADORES_ROUTES),
                         },
                         {
+                            path: 'usuarios',
+                            canActivate: [ () => inject(AuthService).hasRole(TipoUsuario.GERENTE)],
+                            loadChildren: () =>
+                                import(
+                                    './propiedades-alegria/usuarios/usuarios.routes'
+                                ).then((m) => m.USUARIO_ROUTES),
+                        },
+                        {
                             path: 'uikit',
                             loadChildren: () =>
                                 import(
@@ -47,13 +57,6 @@ import { authGuard } from './propiedades-alegria/guards/auth.guard';
                                 import(
                                     './demo/components/pages/pages.module'
                                 ).then((m) => m.PagesModule),
-                        },
-                        {
-                            path: 'perfil',
-                            loadComponent: () =>
-                                import(
-                                    './propiedades-alegria/pages/perfil/perfil.component'
-                                ).then((m) => m.PerfilComponent),
                         },
                     ],
                 },

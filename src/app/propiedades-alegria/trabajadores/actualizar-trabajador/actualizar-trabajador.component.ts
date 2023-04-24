@@ -5,7 +5,7 @@ import { TrabajadorService } from 'src/app/propiedades-alegria/trabajadores/trab
 import { ActivatedRoute, Router } from '@angular/router';
 import { TrabajadorFormComponent } from '../trabajador-form/trabajador-form.component';
 import { Trabajador } from '../trabajador.model';
-import { MessageService } from '../../services/message.service';
+import { MessageService } from '../../mensajes/message.service';
 
 
 @Component({
