@@ -63,8 +63,8 @@ export class LoginComponent {
     loading = false;
 
     form = this.fb.nonNullable.group({
-        username: ['testlogin', [Validators.required]],
-        password: ['ageofempires2de', [Validators.required]],
+        username: ['cristian02', [Validators.required]],
+        password: ['corsx1992', [Validators.required]],
     });
     login() {
         if (this.form.invalid) return;
