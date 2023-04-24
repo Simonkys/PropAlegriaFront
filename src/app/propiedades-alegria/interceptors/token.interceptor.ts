@@ -25,7 +25,13 @@ export function TokenInterceptor(
     return next(request).pipe(
         tap(),
         catchError((err) => {
-            return throwError(() => err);
+            console.log(err)
+            if(err instanceof HttpErrorResponse && err.status === 403 ) {
+                authService.logout().subscribe()
+                return next(request)
+            } else {
+                return throwError(() => err);
+            }
         })
     );
 }
