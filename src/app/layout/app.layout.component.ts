@@ -4,6 +4,7 @@ import { filter, Subscription } from 'rxjs';
 import { LayoutService } from './service/app.layout.service';
 import { AppSidebarComponent } from './app.sidebar.component';
 import { AppTopBarComponent } from './app.topbar.component';
+import { MessageService } from '../propiedades-alegria/services/message.service';
 
 @Component({
     selector: 'app-layout',
@@ -23,7 +24,8 @@ export class AppLayoutComponent implements OnDestroy {
     constructor(
         public layoutService: LayoutService,
         public renderer: Renderer2,
-        public router: Router
+        public router: Router,
+        public messageService: MessageService
     ) {
         this.overlayMenuOpenSubscription =
             this.layoutService.overlayOpen$.subscribe(() => {
@@ -103,6 +105,10 @@ export class AppLayoutComponent implements OnDestroy {
             this.menuOutsideClickListener = null;
         }
         this.unblockBodyScroll();
+    }
+
+    close() {
+        this.messageService.clearMessage()
     }
 
     hideProfileMenu() {

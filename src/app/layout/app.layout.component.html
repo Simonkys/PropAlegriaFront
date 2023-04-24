@@ -4,7 +4,13 @@
         <app-sidebar></app-sidebar>
     </div>
     <div class="layout-main-container">
-        <div class="layout-main">
+        <div class="layout-main"> 
+            <ng-container *ngIf="messageService.message$ | async">
+                <div class="message-container success">
+                    <span class="message">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nam, sunt. Dolores consequuntur possimus itaque culpa debitis, ducimus laborum consectetur maiores maxime animi similique nostrum fuga illum beatae adipisci molestias modi!</span>
+                    <button type="button" (click)="close()">X</button>
+                </div>
+            </ng-container>
             <router-outlet></router-outlet>
         </div>
         <app-footer></app-footer>

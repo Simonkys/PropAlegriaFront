@@ -12,3 +12,55 @@ $gutter: 1rem; //for primeflex grid system
 @import "assets/demo/styles/flags/flags.css";
 @import "assets/demo/styles/badges.scss";
 @import "assets/demo/styles/code.scss";
+
+
+ 
+.message-container {
+    width: 100%;
+    min-height: 75px;
+    padding: 32px;
+    border-radius: 12px;
+    margin-bottom: 8px;
+    display: grid;
+    grid-template-columns: auto 50px;
+    align-items: center;
+    gap: 8px;
+    place-items: center;
+
+    .message {
+
+    }
+
+    button {
+        width: 25px;
+        height: 25px;
+        border: 1px solid grey;
+        border-radius: 30%;
+    }
+
+    button:hover {
+        cursor: pointer;
+    }
+
+    button:active {
+        box-shadow: rgba(0, 0, 0, 0.06) 0px 2px 4px 0px inset;
+        cursor: pointer;
+    }
+}
+
+
+
+.success {
+    background-color: #e4f8f0;
+    color: #1ea97c;
+}
+
+.error {
+    background-color: #ffe7e6;
+    color: #ff5757;
+}
+
+.info {
+    background-color: #e9e9ff;
+    color: #696cff;
+}

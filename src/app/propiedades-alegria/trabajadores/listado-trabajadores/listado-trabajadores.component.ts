@@ -13,6 +13,7 @@ import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { MessagesModule } from 'primeng/messages';
 import { finalize  } from 'rxjs';
 import { MultiSelectModule } from 'primeng/multiselect';
+import { MessageService } from '../../services/message.service';
 
 @Component({
     selector: 'app-listado-trabajadores',
@@ -35,6 +36,7 @@ export class ListadoTrabajadoresComponent implements OnInit {
     router = inject(Router);
     trabajadorService = inject(TrabajadorService);
     confimService = inject(ConfirmationService);
+    messageService = inject(MessageService)
 
     messages: Message[] = [];
     trabajadores$ =  this.trabajadorService.getTrabajadoresConTipo()
@@ -89,7 +91,9 @@ export class ListadoTrabajadoresComponent implements OnInit {
         });
     }
 
-    verTrabajador(trabajador: Trabajador) {}
+    verTrabajador(trabajador: Trabajador) {
+        this.messageService.addMessage({details: 'Exito', 'role': 'success'})
+    }
 
     goToRegistroTrabajador() {
         this.router.navigate(['trabajadores/registro']);
