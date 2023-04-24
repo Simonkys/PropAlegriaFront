@@ -10,6 +10,7 @@ export interface Trabajador {
     comuna_id: number;
     tipo_trab: number;
     usuario_id?: number;
+    email?: string;
 }
 
 

@@ -14,7 +14,7 @@ import { TooltipModule } from 'primeng/tooltip';
 import { KeyFilterModule } from 'primeng/keyfilter';
 import { TrabajadorService } from 'src/app/propiedades-alegria/trabajadores/trabajador.service';
 import { UbicacionFormComponent } from '../../ubicaciones/ubicacion-form/ubicacion-form.component';
-import { TipoTrabajador, Trabajador } from '../trabajador.model';
+import { Trabajador } from '../trabajador.model';
 
 
 @Component({
@@ -58,6 +58,7 @@ export class TrabajadorFormComponent implements OnInit {
         seg_nom_trab: ['', [Validators.required]],
         pri_ape_trab: ['', [Validators.required]],
         seg_ape_trab: ['', [Validators.required]],
+        email: ['', [Validators.required, Validators.email]],
         comuna_id: new FormControl<number | null>(null, [Validators.required]),
         celular: [
             '',
@@ -82,6 +83,7 @@ export class TrabajadorFormComponent implements OnInit {
                 pri_ape_trab: this.trabajador.pri_ape_trab,
                 seg_ape_trab: this.trabajador.seg_ape_trab,
                 comuna_id: this.trabajador.comuna_id,
+                email: this.trabajador.email,
                 celular: String(this.trabajador.celular),
                 tipo_trab: this.trabajador.tipo_trab,
                 direccion: this.trabajador.direccion
@@ -112,6 +114,7 @@ export class TrabajadorFormComponent implements OnInit {
           pri_ape_trab: values.pri_ape_trab!,
           seg_nom_trab: values.seg_nom_trab!,
           seg_ape_trab: values.seg_ape_trab!,
+          email: values.email
       } as Trabajador
       this.saveEvent.emit({...trabajador, id: this.trabajador?.id})
     }

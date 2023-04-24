@@ -17,7 +17,18 @@
                 <strong> Ej: 11.625.443-8</strong></small
             >
         </div>
-        <div class="col flex flex-column gap-2"></div>
+        <div class="col flex flex-column gap-2">
+            <span class="p-float-label">
+                <input
+                    type="email"
+                    pInputText
+                    formControlName="email"
+                    placeholder="ejemplo@email.com"
+                    [style]="{ width: '100%' }"
+                />
+                <label>Email *</label>
+            </span>
+        </div>
     </div>
 
     <div class="p-formgrid grid mb-3">
