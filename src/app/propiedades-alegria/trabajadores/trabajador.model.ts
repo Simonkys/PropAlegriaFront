@@ -18,3 +18,9 @@ export interface TipoTrabajador {
     tipo: string;
     descripcion: string;
 }
+
+
+export interface TrabajadorConTipo extends Omit<Trabajador, 'tipo_trab'> {
+    tipo_trabajador: string;
+}
+

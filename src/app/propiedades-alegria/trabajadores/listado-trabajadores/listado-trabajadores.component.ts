@@ -5,13 +5,13 @@ import { Router } from '@angular/router';
 import { ToolbarModule } from 'primeng/toolbar';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
-import { TableModule } from 'primeng/table';
+import { Table, TableModule } from 'primeng/table';
 import { TrabajadorService } from 'src/app/propiedades-alegria/trabajadores/trabajador.service';
-import { Trabajador } from 'src/app/propiedades-alegria/trabajadores/trabajador.model';
+import { Trabajador, TrabajadorConTipo } from 'src/app/propiedades-alegria/trabajadores/trabajador.model';
 import { ConfirmationService, Message } from 'primeng/api';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { MessagesModule } from 'primeng/messages';
-import { finalize } from 'rxjs';
+import { finalize  } from 'rxjs';
 
 @Component({
     selector: 'app-listado-trabajadores',
@@ -35,37 +35,36 @@ export class ListadoTrabajadoresComponent implements OnInit {
     confimService = inject(ConfirmationService);
 
     messages: Message[] = [];
-    trabajadores: Trabajador[] = [];
+    trabajadores$ =  this.trabajadorService.getTrabajadoresConTipo()
     cols: { field: string; header: string }[] = [];
 
     ngOnInit(): void {
-        this.trabajadorService.getTrabajadores().subscribe((trabajadores) => {
-            this.trabajadores = trabajadores;
-        });
-
+        
+       
         this.cols = [
             { field: 'rut_trab', header: 'Rut' },
             { field: 'pri_nom_trab', header: 'Nombre' },
+            { field: 'pri_ape_trab', header: "Apellido"},
+            { field: 'tipo_trabajador', header: 'Tipo Trabajador' },
             { field: 'celular', header: 'Celular' },
         ];
     }
 
-    editarTrabajador(trabajador: Trabajador) {
+    editarTrabajador(trabajador: TrabajadorConTipo) {
         this.router.navigate(['trabajadores', trabajador.id, 'actualizar'])
     }
 
-    eliminarTrabajador(event: Event, trabajador: Trabajador) {
+    eliminarTrabajador(event: Event, trabajador: TrabajadorConTipo) {
         this.confimService.confirm({
             target: event.target || new EventTarget(),
             message: `¿Estas segur@ de eliminar a ${trabajador.pri_nom_trab}`,
             icon: 'pi pi-exclamation-triangle',
             accept: () => {
                 this.trabajadorService
-                    .eliminarTrabajador(trabajador)
+                    .eliminarTrabajador(trabajador.id!)
                     .pipe(finalize(() => {}))
                     .subscribe({
                         next: () => {
-                            this.trabajadores = this.trabajadores.filter(t => t.id !== trabajador.id)
                             this.messages = [
                                 {
                                     severity: 'success',
@@ -92,5 +91,9 @@ export class ListadoTrabajadoresComponent implements OnInit {
 
     goToRegistroTrabajador() {
         this.router.navigate(['trabajadores/registro']);
+    }
+
+    clear(table: Table) {
+        table.clear();
     }
 }

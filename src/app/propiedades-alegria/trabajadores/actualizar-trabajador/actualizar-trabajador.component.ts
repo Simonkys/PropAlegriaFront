@@ -41,7 +41,7 @@ export class ActualizarTrabajadorComponent {
     guardarTrabajador(trabajador: Trabajador) {
         this.loading = true;
         this.trabajadorService
-            .actualizar(trabajador)
+            .actualizarTrabajador(trabajador)
             .pipe(
                 finalize(() => {
                     window.scrollTo(0, 0);
