@@ -23,9 +23,8 @@ export function TokenInterceptor(
     }
 
     return next(request).pipe(
-        tap((res) => console.log(res)),
+        tap(),
         catchError((err) => {
-            console.log(err);
             return throwError(() => err);
         })
     );

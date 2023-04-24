@@ -55,7 +55,57 @@
         <ng-template pTemplate="header" let-columns>
             <tr>
                 <th *ngFor="let col of columns">
-                    {{ col.header }}
+                    <ng-container
+                        *ngIf="col.field === 'tipo_trabajador'; else Columns"
+                    >
+                        {{ col.header }}
+                        <p-columnFilter
+                            field="tipo_trabajador"
+                            matchMode="in"
+                            display="menu"
+                            [showMatchModes]="false"
+                            [showOperator]="false"
+                            [showAddButton]="false"
+                        >
+                            <ng-template pTemplate="header">
+                                <div class="px-3 pt-3 pb-0">
+                                    <span class="font-bold"
+                                        >Tipo Trabajador</span
+                                    >
+                                </div>
+                            </ng-template>
+                            <ng-template
+                                pTemplate="filter"
+                                let-value
+                                let-filter="filterCallback"
+                            >
+                                <p-multiSelect
+                                    *ngIf="
+                                        tipoTrabajadores$
+                                            | async as tipoTrabajadores
+                                    "
+                                    [options]="tipoTrabajadores"
+                                    placeholder="Any"
+                                    (onChange)="filter($event.value)"
+                                    optionLabel="tipo"
+                                    optionValue="tipo"
+                                >
+                                    <ng-template let-option pTemplate="item">
+                                        <div
+                                            class="inline-block vertical-align-middle"
+                                        >
+                                            <span class="ml-1 mt-1">{{
+                                                option.tipo
+                                            }}</span>
+                                        </div>
+                                    </ng-template>
+                                </p-multiSelect>
+                            </ng-template>
+                        </p-columnFilter>
+                    </ng-container>
+                    <ng-template #Columns>
+                        {{ col.header }}
+                    </ng-template>
                 </th>
                 <th>Acciones</th>
             </tr>

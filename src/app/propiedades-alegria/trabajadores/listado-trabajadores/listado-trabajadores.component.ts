@@ -12,6 +12,7 @@ import { ConfirmationService, Message } from 'primeng/api';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { MessagesModule } from 'primeng/messages';
 import { finalize  } from 'rxjs';
+import { MultiSelectModule } from 'primeng/multiselect';
 
 @Component({
     selector: 'app-listado-trabajadores',
@@ -24,6 +25,7 @@ import { finalize  } from 'rxjs';
         InputTextModule,
         ConfirmPopupModule,
         MessagesModule,
+        MultiSelectModule
     ],
     providers: [ConfirmationService],
     templateUrl: './listado-trabajadores.component.html',
@@ -36,11 +38,11 @@ export class ListadoTrabajadoresComponent implements OnInit {
 
     messages: Message[] = [];
     trabajadores$ =  this.trabajadorService.getTrabajadoresConTipo()
+    tipoTrabajadores$ = this.trabajadorService.getTipoDeTrabajadores()
     cols: { field: string; header: string }[] = [];
 
     ngOnInit(): void {
         
-       
         this.cols = [
             { field: 'rut_trab', header: 'Rut' },
             { field: 'pri_nom_trab', header: 'Nombre' },
