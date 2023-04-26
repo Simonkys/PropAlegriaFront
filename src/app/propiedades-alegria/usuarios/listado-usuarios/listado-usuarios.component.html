@@ -1,1 +1,54 @@
-<p>listado-usuarios works!</p>
+<div class="card">
+    <p-toolbar styleClass="mb-4">
+        <div class="p-toolbar-group-start">
+            <p-button
+                class="mr-2"
+                label="Nueva cuenta"
+                icon="pi pi-plus"
+                styleClass="p-button-success"
+                (click)="crearNuevaCuenta()"
+            ></p-button>
+        </div>
+    </p-toolbar>
+    <p-table
+        *ngIf="usuarios$ | async as usuarios"
+        [value]="usuarios"
+        [tableStyle]="{ 'min-width': '50rem' }"
+    >
+        <ng-template pTemplate="header">
+            <tr>
+                <th>COD</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-usuario>
+            <tr>
+                <td>{{ usuario.id }}</td>
+                <td>{{ usuario.username }}</td>
+                <td>{{ usuario.email }}</td>
+                <td><p-tag [value]="usuario.is_active? 'Activo': 'Inactivo'" [severity]="usuario.is_active ? 'success': 'danger'"></p-tag></td>
+                <td class="flex">
+                    <div>
+                        <button
+                            pButton
+                            pRipple
+                            icon="pi pi-pencil"
+                            class="p-button-rounded p-button-warning mr-2"
+                        ></button>
+
+                        <button
+                            pButton
+                            pRipple
+                            icon="pi pi-trash"
+                            class="p-button-rounded p-button-danger"
+                        ></button>
+                    </div>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+
+</div>

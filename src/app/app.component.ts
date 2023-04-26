@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PrimeNGConfig } from 'primeng/api';
-import { AuthService } from './propiedades-alegria/usuarios/auth.service';
+import { AuthService } from './propiedades-alegria/core/auth.service';
 
 @Component({
     selector: 'app-root',

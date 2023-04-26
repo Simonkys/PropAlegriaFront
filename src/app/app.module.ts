@@ -11,9 +11,9 @@ import { IconService } from './demo/service/icon.service';
 import { NodeService } from './demo/service/node.service';
 import { PhotoService } from './demo/service/photo.service';
 import { ButtonModule } from 'primeng/button';
-import { AuthService } from './propiedades-alegria/usuarios/auth.service';
+import { AuthService } from './propiedades-alegria/core/auth.service';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
-import { TokenInterceptor } from './propiedades-alegria/interceptors/token.interceptor';
+import { TokenInterceptor } from './propiedades-alegria/core/interceptors/token.interceptor';
 
 @NgModule({
     declarations: [AppComponent, NotfoundComponent],

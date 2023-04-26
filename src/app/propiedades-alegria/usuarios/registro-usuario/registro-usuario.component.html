@@ -1,0 +1,116 @@
+<div class="card">
+    <h4>Crear cuenta</h4>
+    <ng-container *ngIf="trabajadores$ | async as trabajadores">
+        <ng-container *ngIf="trabajadores.length > 0; else NotFound">
+            <div class="p-formgrid grid mb-3">
+                <div class="col flex flex-column gap-2">
+                    <span class="p-float-label">
+                        <p-dropdown
+                            #t
+                            [options]="trabajadores"
+                            optionLabel="pri_nom_trab"
+                            [style]="{ width: '100%' }"
+                            placeholder="Trabajador"
+                            inputId="float-label"
+                            (onChange)="seleccionTrabajador(t.value)"
+                        ></p-dropdown>
+                        <label for="float-label">Trabajador *</label>
+                    </span>
+                </div>
+                <div class="col flex flex-column gap-2"></div>
+            </div>
+            <ng-container *ngIf="trabajadorSeleccionado && tipoTrabajador">
+                <div class="p-formgrid grid mb-3">
+                    <div class="col flex flex-column gap-2">
+                        <span class="p-float-label">
+                            <input
+                                type="email"
+                                pInputText
+                                [value]="trabajadorSeleccionado.email"
+                                placeholder="propiedadesalegria@email.com"
+                                [disabled]="true"
+                                [style]="{ width: '100%' }"
+                            />
+                            <label>Email *</label>
+                        </span>
+                    </div>
+                    <div class="col flex flex-column gap-2">
+                        <span class="p-float-label">
+                            <input
+                                type="text"
+                                pInputText
+                                [value]="tipoTrabajador.tipo"
+                                [style]="{ width: '100%' }"
+                                [disabled]="true"
+                            />
+                            <label>Tipo de trabajador</label>
+                        </span>
+                    </div>
+                </div>
+                <form [formGroup]="form">
+                    <div class="p-formgrid grid mb-3">
+                        <div class="col flex flex-column gap-2">
+                            <span class="p-float-label">
+                                <input
+                                    type="text"
+                                    pInputText
+                                    formControlName="username"
+                                    placeholder="carolina123"
+                                    pKeyFilter="alphanum"
+                                    [style]="{ width: '100%' }"
+                                />
+                                <label>Username *</label>
+                            </span>
+                            <small
+                                >Solo caracteres alfanuméricos (4 - 15)</small
+                            >
+                        </div>
+                        <div class="col flex flex-column gap-2">
+                            <span class="p-float-label">
+                                <input
+                                    type="text"
+                                    pInputText
+                                    formControlName="password"
+                                    placeholder="asdf235cco"
+                                    [style]="{ width: '100%' }"
+                                />
+                                <label>Contraseña *</label>
+                            </span>
+                            <small
+                                >Mínimo un caracter numérico, un simbolo, una
+                                mayúscula, una minúscula y un largo entre 6 a 15
+                                caracteres</small
+                            >
+                        </div>
+                    </div>
+
+                    <div class="flex">
+                        <p-button
+                            styleClass="mr-3"
+                            type="button"
+                            [disabled]="form.invalid"
+                            label="Crear"
+                            (click)="crearCuenta()"
+                        ></p-button>
+                        <p-button
+                            label="Volver"
+                            type="button"
+                            styleClass="p-button-danger"
+                            (click)="cancelar()"
+                        ></p-button>
+                    </div>
+                </form>
+            </ng-container>
+        </ng-container>
+    </ng-container>
+    <ng-template #NotFound>
+        <p>No hay trabajadores disponibles para registrar una cuenta</p>
+    </ng-template>
+    <p-button
+        *ngIf="!trabajadorSeleccionado"
+        label="Volver"
+        type="button"
+        styleClass="p-button-danger"
+        (click)="cancelar()"
+    ></p-button>
+</div>

@@ -2,9 +2,9 @@ import { RouterModule } from '@angular/router';
 import { NgModule, inject } from '@angular/core';
 import { AppLayoutComponent } from './layout/app.layout.component';
 import { NotFoundComponent } from './propiedades-alegria/pages/not-found/not-found.component';
-import { authGuard } from './propiedades-alegria/guards/auth.guard';
-import { AuthService } from './propiedades-alegria/usuarios/auth.service';
-import { TipoUsuario } from './propiedades-alegria/usuarios/usuarios.model';
+import { authGuard } from './propiedades-alegria/core/guards/auth.guard';
+import { AuthService } from './propiedades-alegria/core/auth.service';
+import { TipoUsuario } from './propiedades-alegria/core/auth.model';
 
 @NgModule({
     imports: [

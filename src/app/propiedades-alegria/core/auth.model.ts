@@ -1,17 +1,11 @@
-export interface BaseUser {
-    username: string;
-    email: string;
-}
-
 export interface Auth {
     Token: string;
-    Usuario: BaseUser;
+    Usuario: {
+        username: string;
+        email: string;
+    };
     Mensaje: string;
     Tipo_trabajador: number;
-}
-
-export interface CreateUserForm extends BaseUser {
-    password: string;
 }
 
 
