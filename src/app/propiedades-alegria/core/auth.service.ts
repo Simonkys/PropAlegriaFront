@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, finalize, tap } from 'rxjs';
+import { BehaviorSubject, finalize, map, tap } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
 import { Auth, TipoUsuario } from './auth.model';
@@ -15,6 +15,7 @@ export class AuthService {
     private router = inject(Router);
 
     private userSubject = new BehaviorSubject<Auth | null>(null);
+    private user = this.userSubject.asObservable()
 
     getCurrentUser() {
         return this.userSubject.value;
@@ -65,10 +66,15 @@ export class AuthService {
     }
 
     isAuthenticated(): boolean {
+        console.log(this.getCurrentUser())
         return this.getCurrentUser() ? true : false;
     }
 
-    hasRole(tipoUsuario: TipoUsuario) {
-        return this.getCurrentUser()?.Tipo_trabajador === tipoUsuario
+    hasRole(tiposUsuario: TipoUsuario[]) {
+        return this.user.pipe(map(u => {
+            const tipo = tiposUsuario.find(t => u?.Tipo_trabajador === t)
+            return tipo ? true : false
+        }))
+        
     }
 }

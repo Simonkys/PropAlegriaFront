@@ -17,6 +17,7 @@ import { TipoUsuario } from './propiedades-alegria/core/auth.model';
                     children: [
                         {
                             path: '',
+                            canActivate: [ () => inject(AuthService).hasRole([TipoUsuario.GERENTE, TipoUsuario.SECRETARIA_ADMIN])],
                             loadChildren: () =>
                                 import(
                                     './demo/components/dashboard/dashboard.module'
@@ -24,6 +25,7 @@ import { TipoUsuario } from './propiedades-alegria/core/auth.model';
                         },
                         {
                             path: 'trabajadores',
+                            canActivate: [ () => inject(AuthService).hasRole([TipoUsuario.GERENTE, TipoUsuario.SECRETARIA_ADMIN])],
                             loadChildren: () =>
                                 import(
                                     './propiedades-alegria/trabajadores/trabajadores.routes'
@@ -31,7 +33,7 @@ import { TipoUsuario } from './propiedades-alegria/core/auth.model';
                         },
                         {
                             path: 'usuarios',
-                            canActivate: [ () => inject(AuthService).hasRole(TipoUsuario.GERENTE)],
+                            canActivate: [ () => inject(AuthService).hasRole([TipoUsuario.GERENTE])],
                             loadChildren: () =>
                                 import(
                                     './propiedades-alegria/usuarios/usuarios.routes'
