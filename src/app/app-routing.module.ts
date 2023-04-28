@@ -1,8 +1,9 @@
 import { RouterModule } from '@angular/router';
-import { NgModule } from '@angular/core';
+import { NgModule, inject } from '@angular/core';
 import { AppLayoutComponent } from './layout/app.layout.component';
 import { NotFoundComponent } from './propiedades-alegria/pages/not-found/not-found.component';
 import { authGuard } from './propiedades-alegria/core/guards/auth.guard';
+import { AuthService } from './propiedades-alegria/core/auth.service';
 
 
 
@@ -16,8 +17,10 @@ import { authGuard } from './propiedades-alegria/core/guards/auth.guard';
                     canActivate: [authGuard],
                     children: [
                         {
-                            path: '',
-                            canActivate: [],
+                            path: 'dashboard',
+                            canActivate: [
+                                () => inject(AuthService).isStaff()
+                            ],
                             loadChildren: () =>
                                 import(
                                     './demo/components/dashboard/dashboard.module'
@@ -25,7 +28,9 @@ import { authGuard } from './propiedades-alegria/core/guards/auth.guard';
                         },
                         {
                             path: 'trabajadores',
-                            canActivate: [ ],
+                            canActivate: [
+                                () => inject(AuthService).isStaff()
+                            ],
                             loadChildren: () =>
                                 import(
                                     './propiedades-alegria/trabajadores/trabajadores.routes'
@@ -33,7 +38,9 @@ import { authGuard } from './propiedades-alegria/core/guards/auth.guard';
                         },
                         {
                             path: 'usuarios',
-                            canActivate: [ ],
+                            canActivate: [ 
+                                () => inject(AuthService).isSuperuser()
+                            ],
                             loadChildren: () =>
                                 import(
                                     './propiedades-alegria/usuarios/usuarios.routes'

@@ -4,5 +4,4 @@ export interface Auth {
     Token: string;
     Usuario: Usuario;
     Mensaje: string;
-    Tipo_trabajador: number;
 }

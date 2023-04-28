@@ -7,25 +7,20 @@ import { PermisoEnum, PermisoOption, Usuario, PermisoDjango } from './usuario.mo
     providedIn: 'root'
 })
 export class PermisoService {
-    permisiosOption = new Map<PermisoEnum, PermisoOption>()
-    constructor(){
-        this.permisiosOption.set(PermisoEnum.SuperUsuario, { permName: 'Super usuario', permValue: PermisoEnum.SuperUsuario, permHelp: '* Usuario con acceso a todas las funcionalidades.'} )
-        this.permisiosOption.set(PermisoEnum.Staff, { permName: 'Staff', permValue: PermisoEnum.Staff, permHelp: '* Usuario con acceso a todas las funcionalidades con excepción de la gestión de cuentas de usuarios.'}),
-        this.permisiosOption.set(PermisoEnum.Simple, { permName: 'Simple', permValue: PermisoEnum.Simple, permHelp: '* Usuario con acceso solo a funciones de caja chica.'}, )
-    }
-
-    permisosOptionsArray() {
-        return Array.from(this.permisiosOption.values())
-    }
+    permisiosOption: PermisoOption[] = [
+        { permName: 'Super usuario', permValue: PermisoEnum.SuperUsuario, permHelp: '* Usuario con acceso a todas las funcionalidades.'},
+        { permName: 'Staff', permValue: PermisoEnum.Staff, permHelp: '* Usuario con acceso a todas las funcionalidades con excepción de la gestión de cuentas de usuarios.'},
+        { permName: 'Simple', permValue: PermisoEnum.Simple, permHelp: '* Usuario con acceso solo a funciones de caja chica.'},
+    ]
 
     mapfromUsuario(user: Usuario) {
         if (user.is_staff && user.is_superuser) {
-            return this.permisiosOption.get(PermisoEnum.SuperUsuario)
+            return this.permisiosOption[0]
         }
         if (user.is_staff){
-            return this.permisiosOption.get(PermisoEnum.Staff)
+            return this.permisiosOption[1]
         }
-        return this.permisiosOption.get(PermisoEnum.Simple)
+        return this.permisiosOption[2]
     }
 
     mapToDjango(permiso: PermisoEnum): PermisoDjango{

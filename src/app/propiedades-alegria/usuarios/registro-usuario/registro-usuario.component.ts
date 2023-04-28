@@ -65,7 +65,7 @@ export class RegistroUsuarioComponent {
     trabajadorSeleccionado: Trabajador | null = null;
     tipoTrabajador?: TipoTrabajador;
 
-    permisos = this.permisoService.permisosOptionsArray()
+    permisos = this.permisoService.permisiosOption
 
 
     form = new FormGroup({
@@ -92,7 +92,7 @@ export class RegistroUsuarioComponent {
     });
 
     permisosHelpText$ = this.form.get('permisos')?.valueChanges.pipe(startWith(PermisoEnum.Simple), map(val => {
-        return this.permisos.find(p => p.permValue === val)!.permHelp
+        return this.permisoService.permisiosOption.find(p => p.permValue === val)!.permHelp
     }))
     
 

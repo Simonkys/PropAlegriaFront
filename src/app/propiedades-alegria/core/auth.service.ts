@@ -15,7 +15,7 @@ export class AuthService {
     private router = inject(Router);
 
     private userSubject = new BehaviorSubject<Auth | null>(null);
-    private user = this.userSubject.asObservable()
+    user$ = this.userSubject.asObservable()
 
     getCurrentUser() {
         return this.userSubject.value;
@@ -65,26 +65,17 @@ export class AuthService {
             );
     }
 
-    isAuthenticated(): boolean {
-        console.log(this.getCurrentUser())
-        return this.getCurrentUser() ? true : false;
+    isAuthenticated() {
+        return this.user$.pipe(
+            map(user => !!user)
+        )
     }
 
     isSuperuser() {
-        return this.user.pipe(
-            map(user => {
-                if (!user) return false
-                return user.Usuario.is_superuser
-            } )
-        )
+        return this.user$.pipe(map(user => user?.Usuario.is_superuser))
     }
 
     isStaff() {
-        return this.user.pipe(
-            map(user => {
-                if (!user) return false
-                return user.Usuario.is_staff
-            } )
-        )
+        return this.user$.pipe(map(user => user?.Usuario.is_staff))
     }
 }
