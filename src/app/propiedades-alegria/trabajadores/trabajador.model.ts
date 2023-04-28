@@ -14,6 +14,12 @@ export interface Trabajador {
 }
 
 
+export enum TipoTrabajadorEnum {
+    GERENTE = 1,
+    SECRETARIA_ADMIN = 2,
+    EJECUTIVO_VENTAS = 3
+}
+
 export interface TipoTrabajador {
     id: number;
     tipo: string;

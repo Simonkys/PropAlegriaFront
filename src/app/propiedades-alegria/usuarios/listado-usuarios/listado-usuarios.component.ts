@@ -6,17 +6,21 @@ import { TagModule } from 'primeng/tag';
 import { ToolbarModule } from 'primeng/toolbar';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
+import { ConfirmPopupModule } from 'primeng/confirmpopup';
+import { ConfirmationService } from 'primeng/api';
+
 
 import { UsuarioService } from '../usuario.service';
 import { Router } from '@angular/router';
-import { TrabajadorService } from '../../trabajadores/trabajador.service';
-import { map } from 'rxjs';
 import { AuthService } from '../../core/auth.service';
+import { Usuario } from '../usuario.model';
+import { finalize, map } from 'rxjs';
 
 @Component({
   selector: 'app-listado-usuarios',
   standalone: true,
-  imports: [CommonModule, TableModule, TagModule, ToolbarModule, ButtonModule, InputTextModule],
+  providers: [ConfirmationService],
+  imports: [CommonModule, TableModule, TagModule, ToolbarModule, ButtonModule, InputTextModule, ConfirmPopupModule],
   templateUrl: './listado-usuarios.component.html',
   styleUrls: ['./listado-usuarios.component.scss']
 })
@@ -25,12 +29,26 @@ export class ListadoUsuariosComponent {
   usuarioService = inject(UsuarioService)
   authService = inject(AuthService)
   router = inject(Router)
+  confimService = inject(ConfirmationService);
 
   usuarios$ = this.usuarioService.getUsuarios().pipe()
+  usuarioActual = this.authService.getCurrentUser()?.Usuario
 
 
   crearNuevaCuenta() {
     this.router.navigate(['usuarios/registro'])
+  }
+
+  eliminarUsuario(event: Event, usuario: Usuario){
+    this.confimService.confirm({
+      target: event.target || new EventTarget(),
+      message: `¿Estas segur@ de eliminar a ${usuario.username}`,
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.usuarioService.eliminarUsuario(usuario).pipe(finalize(() => {})).subscribe();
+      },
+  });
+    
   }
 
 }

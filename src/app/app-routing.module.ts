@@ -1,10 +1,10 @@
 import { RouterModule } from '@angular/router';
-import { NgModule, inject } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { AppLayoutComponent } from './layout/app.layout.component';
 import { NotFoundComponent } from './propiedades-alegria/pages/not-found/not-found.component';
 import { authGuard } from './propiedades-alegria/core/guards/auth.guard';
-import { AuthService } from './propiedades-alegria/core/auth.service';
-import { TipoUsuario } from './propiedades-alegria/core/auth.model';
+
+
 
 @NgModule({
     imports: [
@@ -17,7 +17,7 @@ import { TipoUsuario } from './propiedades-alegria/core/auth.model';
                     children: [
                         {
                             path: '',
-                            canActivate: [ () => inject(AuthService).hasRole([TipoUsuario.GERENTE, TipoUsuario.SECRETARIA_ADMIN])],
+                            canActivate: [],
                             loadChildren: () =>
                                 import(
                                     './demo/components/dashboard/dashboard.module'
@@ -25,7 +25,7 @@ import { TipoUsuario } from './propiedades-alegria/core/auth.model';
                         },
                         {
                             path: 'trabajadores',
-                            canActivate: [ () => inject(AuthService).hasRole([TipoUsuario.GERENTE, TipoUsuario.SECRETARIA_ADMIN])],
+                            canActivate: [ ],
                             loadChildren: () =>
                                 import(
                                     './propiedades-alegria/trabajadores/trabajadores.routes'
@@ -33,7 +33,7 @@ import { TipoUsuario } from './propiedades-alegria/core/auth.model';
                         },
                         {
                             path: 'usuarios',
-                            canActivate: [ () => inject(AuthService).hasRole([TipoUsuario.GERENTE])],
+                            canActivate: [ ],
                             loadChildren: () =>
                                 import(
                                     './propiedades-alegria/usuarios/usuarios.routes'

@@ -20,7 +20,6 @@
                 <th>COD</th>
                 <th>Username</th>
                 <th>Email</th>
-                <th>Estado</th>
                 <th>Acciones</th>
             </tr>
         </ng-template>
@@ -29,21 +28,16 @@
                 <td>{{ usuario.id }}</td>
                 <td>{{ usuario.username }}</td>
                 <td>{{ usuario.email }}</td>
-                <td><p-tag [value]="usuario.is_active? 'Activo': 'Inactivo'" [severity]="usuario.is_active ? 'success': 'danger'"></p-tag></td>
                 <td class="flex">
                     <div>
+                        <p-confirmPopup></p-confirmPopup>
                         <button
-                            pButton
-                            pRipple
-                            icon="pi pi-pencil"
-                            class="p-button-rounded p-button-warning mr-2"
-                        ></button>
-
-                        <button
+                            [disabled]="usuarioActual?.id === usuario.id"
                             pButton
                             pRipple
                             icon="pi pi-trash"
                             class="p-button-rounded p-button-danger"
+                            (click)="eliminarUsuario($event, usuario)"
                         ></button>
                     </div>
                 </td>

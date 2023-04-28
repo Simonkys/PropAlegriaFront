@@ -1,4 +1,4 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable, Optional, inject } from '@angular/core';
 import {
     TipoTrabajador,
     Trabajador,
@@ -94,6 +94,21 @@ export class TrabajadorService {
                 }),
                 catchError((error: HttpErrorResponse) => this.handleError(error))
             );
+    }
+
+    pathValue(trabajador: Partial<Trabajador>) {
+        return this.http.patch<Trabajador>(
+            `${environment.apiUrl}/api/trabajador/${trabajador.id}/`,
+                trabajador
+        ).pipe(
+            tap((data) => {
+                const filterData = this.trabajadorSubject.value.map((d) => {
+                    return d.id === data.id ? data : d;
+                });
+                this.trabajadorSubject.next([...filterData]);
+            }),
+            catchError((error: HttpErrorResponse) => this.handleError(error))
+        );
     }
 
     eliminarTrabajador(trabajadorId: number) {

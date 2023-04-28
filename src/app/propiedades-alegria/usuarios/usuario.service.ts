@@ -31,7 +31,7 @@ export class UsuarioService {
     }
 
 
-    createUser(userForm: CreateUserForm) {
+    crearUsuario(userForm: CreateUserForm) {
         return this.http.post<Usuario>(`${environment.apiUrl}/api/usuario/`, userForm).pipe(
             tap((data) => {
                 this.usuarioSubject.next([data, ...this.usuarioSubject.value]);
@@ -39,6 +39,23 @@ export class UsuarioService {
             }),
             catchError((error: HttpErrorResponse) => this.handleError(error))
         )
+    }
+
+    eliminarUsuario(usuario: Usuario){
+        return this.http
+            .delete(`${environment.apiUrl}/api/usuario/${usuario.id}/`)
+            .pipe(
+                tap((_) => {
+                    const filterData = this.usuarioSubject.value.filter(
+                        (d) => d.id !== usuario.id
+                    );
+                    this.usuarioSubject.next([...filterData]);
+                    this.messageService.addMessage({
+                        details: ['Usuario eliminado'],
+                        role: 'info'
+                    })
+                })
+            );
     }
 
 

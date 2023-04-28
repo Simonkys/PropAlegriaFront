@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { BehaviorSubject, finalize, map, tap } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
-import { Auth, TipoUsuario } from './auth.model';
+import { Auth } from './auth.model';
 
 @Injectable({
     providedIn: 'root',
@@ -70,11 +70,21 @@ export class AuthService {
         return this.getCurrentUser() ? true : false;
     }
 
-    hasRole(tiposUsuario: TipoUsuario[]) {
-        return this.user.pipe(map(u => {
-            const tipo = tiposUsuario.find(t => u?.Tipo_trabajador === t)
-            return tipo ? true : false
-        }))
-        
+    isSuperuser() {
+        return this.user.pipe(
+            map(user => {
+                if (!user) return false
+                return user.Usuario.is_superuser
+            } )
+        )
+    }
+
+    isStaff() {
+        return this.user.pipe(
+            map(user => {
+                if (!user) return false
+                return user.Usuario.is_staff
+            } )
+        )
     }
 }
