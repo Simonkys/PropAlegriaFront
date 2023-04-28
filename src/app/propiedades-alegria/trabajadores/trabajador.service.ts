@@ -177,4 +177,8 @@ export class TrabajadorService {
         }
         return throwError(() => new Error(msg));
     }
+
+    reload() {
+        this.trabajadorLoaded = false
+    }
 }

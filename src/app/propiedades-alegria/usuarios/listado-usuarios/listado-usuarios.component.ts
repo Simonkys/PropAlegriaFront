@@ -13,8 +13,10 @@ import { ConfirmationService } from 'primeng/api';
 import { UsuarioService } from '../usuario.service';
 import { Router } from '@angular/router';
 import { AuthService } from '../../core/auth.service';
-import { Usuario } from '../usuario.model';
+import { Usuario, UsuarioConPermiso } from '../usuario.model';
 import { finalize, map } from 'rxjs';
+import { TrabajadorService } from '../../trabajadores/trabajador.service';
+import { PermisoService } from '../permiso.service';
 
 @Component({
   selector: 'app-listado-usuarios',
@@ -30,8 +32,15 @@ export class ListadoUsuariosComponent {
   authService = inject(AuthService)
   router = inject(Router)
   confimService = inject(ConfirmationService);
+  permisoService = inject(PermisoService)
+  trabajadorService = inject(TrabajadorService)
 
-  usuarios$ = this.usuarioService.getUsuarios().pipe()
+  usuarios$ = this.usuarioService.getUsuarios().pipe(
+    map(users => users.map<UsuarioConPermiso>(user => {
+      const permiso = this.permisoService.mapfromUsuario(user)!
+      return {...user, ...permiso}
+    }))
+  )
   usuarioActual = this.authService.getCurrentUser()?.Usuario
 
 
@@ -39,13 +48,13 @@ export class ListadoUsuariosComponent {
     this.router.navigate(['usuarios/registro'])
   }
 
-  eliminarUsuario(event: Event, usuario: Usuario){
+  eliminarUsuario(event: Event, usuario: UsuarioConPermiso){
     this.confimService.confirm({
       target: event.target || new EventTarget(),
       message: `¿Estas segur@ de eliminar a ${usuario.username}`,
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.usuarioService.eliminarUsuario(usuario).pipe(finalize(() => {})).subscribe();
+        this.usuarioService.eliminarUsuario(usuario).pipe(finalize(() => {})).subscribe(() => this.trabajadorService.reload());
       },
   });
     

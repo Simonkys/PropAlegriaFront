@@ -22,6 +22,8 @@ import { map, startWith, switchMap } from 'rxjs';
 import { TipoTrabajador, TipoTrabajadorEnum, Trabajador,
 } from '../../trabajadores/trabajador.model';
 import { UsuarioService } from '../usuario.service';
+import { PermisoEnum } from '../usuario.model';
+import { PermisoService } from '../permiso.service';
 
 @Component({
     selector: 'app-registro-usuario',
@@ -45,6 +47,7 @@ export class RegistroUsuarioComponent {
     usuarioService = inject(UsuarioService);
     router = inject(Router);
     confimService = inject(ConfirmationService);
+    permisoService = inject(PermisoService)
 
     trabajadores$ = this.trabajadorService
         .getTrabajadores()
@@ -62,11 +65,7 @@ export class RegistroUsuarioComponent {
     trabajadorSeleccionado: Trabajador | null = null;
     tipoTrabajador?: TipoTrabajador;
 
-    permisos: {name: string, value: number, help: string}[] = [
-        { name: 'Super usuario', value: 1, help: '* Usuario con acceso a todas las funcionalidades.'},
-        { name: 'Staff', value: 2, help: '* Usuario con acceso a todas las funcionalidades con excepción de la gestión de cuentas de usuarios.'},
-        { name: 'Simple', value: 3, help: '* Usuario con acceso solo a funciones de caja chica.'},
-    ]
+    permisos = this.permisoService.permisosOptionsArray()
 
 
     form = new FormGroup({
@@ -89,11 +88,11 @@ export class RegistroUsuarioComponent {
                 ),
             ]
         }),
-        permisos: new FormControl<number>(3, {nonNullable: true}),
+        permisos: new FormControl<PermisoEnum>(PermisoEnum.Simple, {nonNullable: true}),
     });
 
-    permisosHelpText$ = this.form.get('permisos')?.valueChanges.pipe(startWith(3), map(val => {
-        return this.permisos.find(p => p.value === val)!.help
+    permisosHelpText$ = this.form.get('permisos')?.valueChanges.pipe(startWith(PermisoEnum.Simple), map(val => {
+        return this.permisos.find(p => p.permValue === val)!.permHelp
     }))
     
 
@@ -142,7 +141,7 @@ export class RegistroUsuarioComponent {
                 const { username, password, permisos } = this.form.getRawValue()!;
 
                 this.usuarioService
-                .crearUsuario({ email: email!, password: password!, username: username!, ...this.permisosResolver(permisos)}).pipe(
+                .crearUsuario({ email: email!, password: password!, username: username!, ...this.permisoService.mapToDjango(permisos)}).pipe(
                     switchMap((user) => {
                         return this.trabajadorService.pathValue({
                             id: this.trabajadorSeleccionado?.id,
@@ -159,18 +158,6 @@ export class RegistroUsuarioComponent {
             },
         });
     }
-
-    permisosResolver(val: number): {is_staff: boolean, is_superuser: boolean} {
-        if(val === 1) {
-            return {is_staff: true, is_superuser: true}
-        }
-        if(val === 2){
-            return {is_staff: true, is_superuser: false}
-        } else {
-            return {is_staff: false, is_superuser: false}
-        }
-    }
-
     cancelar() {
         this.router.navigate(['usuarios/listado']);
     }
