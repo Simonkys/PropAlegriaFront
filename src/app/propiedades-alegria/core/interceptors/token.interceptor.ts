@@ -13,7 +13,7 @@ export function TokenInterceptor(
 ) {
     const authService = inject(AuthService);
 
-    const token = authService.getCurrentUser()?.Token;
+    const token = authService.getCurrentUser()?.token;
     if (token) {
         request = request.clone({
             setHeaders: {
@@ -25,8 +25,8 @@ export function TokenInterceptor(
     return next(request).pipe(
         tap(),
         catchError((err) => {
-            console.log(err)
             if(err instanceof HttpErrorResponse && err.status === 403 ) {
+                console.log('INTERCEPTOR',err)
                 authService.logout().subscribe()
                 return next(request)
             } else {

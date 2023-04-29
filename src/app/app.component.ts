@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { PrimeNGConfig } from 'primeng/api';
-import { AuthService } from './propiedades-alegria/core/auth.service';
 
 @Component({
     selector: 'app-root',
@@ -9,11 +8,9 @@ import { AuthService } from './propiedades-alegria/core/auth.service';
 export class AppComponent implements OnInit {
     constructor(
         private primengConfig: PrimeNGConfig,
-        private authService: AuthService
     ) {}
 
     ngOnInit() {
         this.primengConfig.ripple = true;
-        this.authService.loadUserFromStorage();
     }
 }

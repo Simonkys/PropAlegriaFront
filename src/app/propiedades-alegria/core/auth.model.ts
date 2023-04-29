@@ -1,7 +1,7 @@
 import { Usuario } from "../usuarios/usuario.model";
 
 export interface Auth {
-    Token: string;
-    Usuario: Usuario;
-    Mensaje: string;
+    token: string;
+    usuario: Usuario;
+    mensaje: string;
 }

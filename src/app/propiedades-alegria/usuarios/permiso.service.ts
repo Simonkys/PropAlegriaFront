@@ -17,17 +17,19 @@ export class PermisoService {
         if (user.is_staff && user.is_superuser) {
             return this.permisiosOption[0]
         }
-        if (user.is_staff){
+        else if (user.is_staff){
             return this.permisiosOption[1]
+        } else {
+
+            return this.permisiosOption[2]
         }
-        return this.permisiosOption[2]
     }
 
     mapToDjango(permiso: PermisoEnum): PermisoDjango{
         if(permiso === PermisoEnum.SuperUsuario) {
             return {is_staff: true, is_superuser: true}
         }
-        if(permiso === PermisoEnum.Staff){
+        else if(permiso === PermisoEnum.Staff){
             return {is_staff: true, is_superuser: false}
         } else {
             return {is_staff: false, is_superuser: false}

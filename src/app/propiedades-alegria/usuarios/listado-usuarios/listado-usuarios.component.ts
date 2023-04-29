@@ -13,7 +13,7 @@ import { ConfirmationService } from 'primeng/api';
 import { UsuarioService } from '../usuario.service';
 import { Router } from '@angular/router';
 import { AuthService } from '../../core/auth.service';
-import { Usuario, UsuarioConPermiso } from '../usuario.model';
+import { UsuarioConPermiso } from '../usuario.model';
 import { finalize, map } from 'rxjs';
 import { TrabajadorService } from '../../trabajadores/trabajador.service';
 import { PermisoService } from '../permiso.service';
@@ -41,7 +41,7 @@ export class ListadoUsuariosComponent {
       return {...user, ...permiso}
     }))
   )
-  usuarioActual = this.authService.getCurrentUser()?.Usuario
+  usuarioActual = this.authService.getCurrentUser()?.usuario
 
 
   crearNuevaCuenta() {

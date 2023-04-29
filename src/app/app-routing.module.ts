@@ -46,27 +46,6 @@ import { AuthService } from './propiedades-alegria/core/auth.service';
                                     './propiedades-alegria/usuarios/usuarios.routes'
                                 ).then((m) => m.USUARIO_ROUTES),
                         },
-                        {
-                            path: 'uikit',
-                            loadChildren: () =>
-                                import(
-                                    './demo/components/uikit/uikit.module'
-                                ).then((m) => m.UIkitModule),
-                        },
-                        {
-                            path: 'blocks',
-                            loadChildren: () =>
-                                import(
-                                    './demo/components/primeblocks/primeblocks.module'
-                                ).then((m) => m.PrimeBlocksModule),
-                        },
-                        {
-                            path: 'pages',
-                            loadChildren: () =>
-                                import(
-                                    './demo/components/pages/pages.module'
-                                ).then((m) => m.PagesModule),
-                        },
                     ],
                 },
                 {

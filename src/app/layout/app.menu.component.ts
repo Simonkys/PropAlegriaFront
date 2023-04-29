@@ -22,7 +22,7 @@ export class AppMenuComponent implements OnInit {
     ngOnInit(): void {
         this.authService.user$.pipe(
             filter(user => user ? true: false),
-            map(user => this.permisoService.mapfromUsuario(user?.Usuario!)),
+            map(user => this.permisoService.mapfromUsuario(user?.usuario!)),
             map(perm => this.getModelFor(perm))
         ).subscribe(items => {
             this.model = [
@@ -35,7 +35,6 @@ export class AppMenuComponent implements OnInit {
     }
 
     getModelFor(userPermOption: PermisoOption) {
-        console.log(userPermOption)
         const dashboard = {
             label: 'Dashboard',
             icon: 'pi pi-fw pi-home',

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, finalize, map, tap } from 'rxjs';
+import { BehaviorSubject, finalize, map, shareReplay, switchMap, tap } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
 import { Auth } from './auth.model';
@@ -15,7 +15,11 @@ export class AuthService {
     private router = inject(Router);
 
     private userSubject = new BehaviorSubject<Auth | null>(null);
-    user$ = this.userSubject.asObservable()
+    user$ = this.userSubject.asObservable().pipe(shareReplay(1))
+
+    constructor(){
+        this.loadUserFromStorage()
+    }
 
     getCurrentUser() {
         return this.userSubject.value;
@@ -35,8 +39,8 @@ export class AuthService {
     }
 
     setUser(auth: Auth) {
-        localStorage.setItem(this.userKey, JSON.stringify(auth));
         this.userSubject.next(auth);
+        localStorage.setItem(this.userKey, JSON.stringify(auth));
     }
 
     loadUserFromStorage() {
@@ -49,33 +53,26 @@ export class AuthService {
     }
 
     logout() {
-        return this.http
-            .post(
-                `${environment.apiUrl}/logout/?token=${
-                    this.getCurrentUser()?.Token
-                }`,
-                {}
-            )
-            .pipe(
-                finalize(() => {
-                    localStorage.removeItem(this.userKey);
-                    this.userSubject.next(null);
-                    this.router.navigate(['auth/login'], { replaceUrl: true });
-                })
-            );
+        return  this.http.post(`${environment.apiUrl}/logout/?token=${this.getCurrentUser()?.token}`,{}).pipe(
+            finalize(() => {
+                localStorage.removeItem(this.userKey);
+                this.userSubject.next(null);
+                this.router.navigate(['auth/login'], { replaceUrl: true });
+            })
+        )
     }
 
     isAuthenticated() {
         return this.user$.pipe(
-            map(user => !!user)
+            map(user => user ? true: false)
         )
     }
 
     isSuperuser() {
-        return this.user$.pipe(map(user => user?.Usuario.is_superuser))
+        return this.user$.pipe(map(user => user?.usuario.is_superuser))
     }
 
     isStaff() {
-        return this.user$.pipe(map(user => user?.Usuario.is_staff))
+        return this.user$.pipe(map(user => user?.usuario.is_staff))
     }
 }
