@@ -23,7 +23,7 @@ import { AuthService } from './propiedades-alegria/core/auth.service';
                             ],
                             loadChildren: () =>
                                 import(
-                                    './demo/components/dashboard/dashboard.module'
+                                    './propiedades-alegria/dashboard/dashboard.module'
                                 ).then((m) => m.DashboardModule),
                         },
                         {
