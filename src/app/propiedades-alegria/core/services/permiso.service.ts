@@ -1,6 +1,6 @@
 
 import {Injectable} from '@angular/core'
-import { PermisoEnum, PermisoOption, Usuario, PermisoDjango } from './usuario.model'
+import { PermisoEnum, PermisoOption, Usuario, PermisoDjango } from '../models/usuario.model'
 
 
 @Injectable({

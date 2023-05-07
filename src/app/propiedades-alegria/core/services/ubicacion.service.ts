@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { Comuna, Region } from './ubicaciones.model';
+import { Comuna, Region } from '../models/ubicaciones.model';
 import { map } from 'rxjs';
 
 @Injectable({

@@ -3,7 +3,7 @@ import {
     TipoTrabajador,
     Trabajador,
     TrabajadorConTipo,
-} from './trabajador.model';
+} from '../models/trabajador.model';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import {
@@ -15,7 +15,7 @@ import {
     tap,
     throwError,
 } from 'rxjs';
-import { MessageService } from '../mensajes/message.service';
+import { MessageService } from './message.service';
 
 @Injectable({
     providedIn: 'root',

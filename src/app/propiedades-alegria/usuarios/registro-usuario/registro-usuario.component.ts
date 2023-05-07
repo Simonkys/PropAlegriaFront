@@ -16,14 +16,14 @@ import { SelectButtonModule } from 'primeng/selectbutton';
 import { ConfirmationService } from 'primeng/api';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
 
-import { TrabajadorService } from '../../trabajadores/trabajador.service';
+import { TrabajadorService } from '../../core/services/trabajador.service';
 import { map, startWith, switchMap } from 'rxjs';
 
 import { TipoTrabajador, TipoTrabajadorEnum, Trabajador,
-} from '../../trabajadores/trabajador.model';
-import { UsuarioService } from '../usuario.service';
-import { PermisoEnum } from '../usuario.model';
-import { PermisoService } from '../permiso.service';
+} from '../../core/models/trabajador.model';
+import { UsuarioService } from '../../core/services/usuario.service';
+import { PermisoEnum } from '../../core/models/usuario.model';
+import { PermisoService } from '../../core/services/permiso.service';
 
 @Component({
     selector: 'app-registro-usuario',

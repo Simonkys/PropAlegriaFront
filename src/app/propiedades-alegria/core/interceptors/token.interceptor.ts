@@ -5,7 +5,7 @@ import {
 } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { catchError, tap, throwError } from 'rxjs';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../services/auth.service';
 
 export function TokenInterceptor(
     request: HttpRequest<unknown>,

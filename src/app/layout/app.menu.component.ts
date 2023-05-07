@@ -1,10 +1,10 @@
 import { OnInit, inject } from '@angular/core';
 import { Component } from '@angular/core';
 import { LayoutService } from './service/app.layout.service';
-import { AuthService } from '../propiedades-alegria/core/auth.service';
+import { AuthService } from '../propiedades-alegria/core/services/auth.service';
 import { filter, map } from 'rxjs';
-import { PermisoEnum, PermisoOption } from '../propiedades-alegria/usuarios/usuario.model';
-import { PermisoService } from '../propiedades-alegria/usuarios/permiso.service';
+import { PermisoEnum, PermisoOption } from '../propiedades-alegria/core/models/usuario.model';
+import { PermisoService } from '../propiedades-alegria/core/services/permiso.service';
 
 @Component({
     selector: 'app-menu',
@@ -55,9 +55,9 @@ export class AppMenuComponent implements OnInit {
             return [dashboard, trabajadores, usuarios]
         }
         if (userPermOption.permValue === PermisoEnum.Staff) {
-            return [dashboard, trabajadores]
+            return [dashboard, trabajadores, usuarios]
         } else {
-            return []
+            return [dashboard, trabajadores, usuarios]
         }
 
 

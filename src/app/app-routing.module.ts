@@ -3,7 +3,7 @@ import { NgModule, inject } from '@angular/core';
 import { AppLayoutComponent } from './layout/app.layout.component';
 import { NotFoundComponent } from './propiedades-alegria/pages/not-found/not-found.component';
 import { authGuard } from './propiedades-alegria/core/guards/auth.guard';
-import { AuthService } from './propiedades-alegria/core/auth.service';
+import { AuthService } from './propiedades-alegria/core/services/auth.service';
 
 
 

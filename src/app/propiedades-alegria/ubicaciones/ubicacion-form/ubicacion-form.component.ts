@@ -1,8 +1,8 @@
 import { Component, Input, OnInit, Output, inject, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { UbicacionService } from '../ubicacion.service';
+import { UbicacionService } from '../../core/services/ubicacion.service';
 import {  FormsModule } from '@angular/forms';
-import { Comuna, Region } from '../ubicaciones.model';
+import { Comuna, Region } from '../../core/models/ubicaciones.model';
 import { DropdownModule } from 'primeng/dropdown';
 import { switchMap } from 'rxjs';
 

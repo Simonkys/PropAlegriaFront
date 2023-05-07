@@ -12,9 +12,9 @@ import { ButtonModule } from 'primeng/button';
 import { DropdownModule } from 'primeng/dropdown';
 import { TooltipModule } from 'primeng/tooltip';
 import { KeyFilterModule } from 'primeng/keyfilter';
-import { TrabajadorService } from 'src/app/propiedades-alegria/trabajadores/trabajador.service';
+import { TrabajadorService } from 'src/app/propiedades-alegria/core/services/trabajador.service';
 import { UbicacionFormComponent } from '../../ubicaciones/ubicacion-form/ubicacion-form.component';
-import { Trabajador } from '../trabajador.model';
+import { Trabajador } from '../../core/models/trabajador.model';
 
 
 @Component({

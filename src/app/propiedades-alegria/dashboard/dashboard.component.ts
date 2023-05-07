@@ -4,6 +4,11 @@ import { Product } from './api/product';
 import { ProductService } from './service/product.service';
 import { Subscription } from 'rxjs';
 import { LayoutService } from 'src/app/layout/service/app.layout.service';
+import { PropiedadesService } from '../core/services/propiedades.service';
+import { PropietarioService } from '../core/services/propietario.service';
+import { PersonalidadJuridicaService } from '../core/services/personalidad-juridica.service';
+import { ArrendatarioService } from '../core/services/arrendatario.service';
+import { ArriendoService } from '../core/services/arriendo.service';
 
 @Component({
     templateUrl: './dashboard.component.html',
@@ -20,7 +25,15 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
     subscription!: Subscription;
 
-    constructor(private productService: ProductService, public layoutService: LayoutService) {
+    constructor(
+        private productService: ProductService, 
+        public layoutService: LayoutService, 
+        private propiedadService: PropiedadesService,
+        private propietarioService: PropietarioService,
+        private personalidadJuridicaService: PersonalidadJuridicaService,
+        private arrendatarioService: ArrendatarioService,
+        private arriendoService: ArriendoService,
+    ) {
         this.subscription = this.layoutService.configUpdate$.subscribe(() => {
             this.initChart();
         });
@@ -28,7 +41,19 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.initChart();
+
         this.productService.getProductsSmall().then(data => this.products = data);
+        
+        this.propiedadService.getPropiedades().subscribe(res => console.log(res))
+        this.propiedadService.getTipoPropiedades().subscribe(res => console.log(res))
+
+        this.propietarioService.getPropietarios().subscribe(res => console.log(res))
+        this.personalidadJuridicaService.getPersonalidadJuridica().subscribe(res => console.log(res))
+
+        this.arrendatarioService.getArrendatarios().subscribe(res => console.log(res))
+
+        this.arriendoService.getArriendos().subscribe(res => console.log(res))
+
 
         this.items = [
             { label: 'Add New', icon: 'pi pi-fw pi-plus' },

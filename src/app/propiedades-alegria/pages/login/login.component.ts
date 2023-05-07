@@ -10,7 +10,7 @@ import { MessagesModule } from 'primeng/messages';
 import { PasswordModule } from 'primeng/password';
 import { Message } from 'primeng/api';
 
-import { AuthService } from '../../core/auth.service';
+import { AuthService } from '../../core/services/auth.service';
 
 @Component({
     selector: 'app-login',

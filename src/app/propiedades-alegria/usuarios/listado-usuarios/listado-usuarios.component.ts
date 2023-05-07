@@ -10,13 +10,13 @@ import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { ConfirmationService } from 'primeng/api';
 
 
-import { UsuarioService } from '../usuario.service';
+import { UsuarioService } from '../../core/services/usuario.service';
 import { Router } from '@angular/router';
-import { AuthService } from '../../core/auth.service';
-import { UsuarioConPermiso } from '../usuario.model';
+import { AuthService } from '../../core/services/auth.service';
+import { UsuarioConPermiso } from '../../core/models/usuario.model';
 import { finalize, map } from 'rxjs';
-import { TrabajadorService } from '../../trabajadores/trabajador.service';
-import { PermisoService } from '../permiso.service';
+import { TrabajadorService } from '../../core/services/trabajador.service';
+import { PermisoService } from '../../core/services/permiso.service';
 
 @Component({
   selector: 'app-listado-usuarios',

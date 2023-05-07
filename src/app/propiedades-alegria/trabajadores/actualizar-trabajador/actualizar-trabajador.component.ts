@@ -1,11 +1,11 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { finalize, map, switchMap } from 'rxjs';
-import { TrabajadorService } from 'src/app/propiedades-alegria/trabajadores/trabajador.service';
+import { TrabajadorService } from 'src/app/propiedades-alegria/core/services/trabajador.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TrabajadorFormComponent } from '../trabajador-form/trabajador-form.component';
-import { Trabajador } from '../trabajador.model';
-import { MessageService } from '../../mensajes/message.service';
+import { Trabajador } from '../../core/models/trabajador.model';
+import { MessageService } from '../../core/services/message.service';
 
 
 @Component({

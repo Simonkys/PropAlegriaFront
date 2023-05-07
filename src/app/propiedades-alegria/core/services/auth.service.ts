@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { BehaviorSubject, finalize, map, shareReplay, switchMap, tap } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
-import { Auth } from './auth.model';
+import { Auth } from '../models/auth.model';
 
 @Injectable({
     providedIn: 'root',
