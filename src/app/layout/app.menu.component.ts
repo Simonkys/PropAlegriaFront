@@ -51,13 +51,20 @@ export class AppMenuComponent implements OnInit {
             routerLink: ['/usuarios/listado'],
         }
 
+        const propiedades = {
+            label: 'Propiedades',
+            icon: 'pi pi-fw pi-building',
+            routerLink: ['/propiedades/listado'],
+        }
+
+
         if(userPermOption.permValue === PermisoEnum.SuperUsuario) {
-            return [dashboard, trabajadores, usuarios]
+            return [dashboard, trabajadores, usuarios, propiedades]
         }
         if (userPermOption.permValue === PermisoEnum.Staff) {
-            return [dashboard, trabajadores, usuarios]
+            return [dashboard, trabajadores, usuarios, propiedades]
         } else {
-            return [dashboard, trabajadores, usuarios]
+            return [dashboard, trabajadores, usuarios, propiedades]
         }
 
 

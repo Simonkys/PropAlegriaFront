@@ -4,6 +4,7 @@ import { AppLayoutComponent } from './layout/app.layout.component';
 import { NotFoundComponent } from './propiedades-alegria/pages/not-found/not-found.component';
 import { authGuard } from './propiedades-alegria/core/guards/auth.guard';
 import { AuthService } from './propiedades-alegria/core/services/auth.service';
+import { PROPIEDADES_ROUTES } from './propiedades-alegria/propiedades/propiedades.routes';
 
 
 
@@ -19,7 +20,7 @@ import { AuthService } from './propiedades-alegria/core/services/auth.service';
                         {
                             path: 'dashboard',
                             canActivate: [
-                                () => inject(AuthService).isStaff()
+                                //() => inject(AuthService).isStaff()
                             ],
                             loadChildren: () =>
                                 import(
@@ -29,7 +30,7 @@ import { AuthService } from './propiedades-alegria/core/services/auth.service';
                         {
                             path: 'trabajadores',
                             canActivate: [
-                                () => inject(AuthService).isStaff()
+                                //() => inject(AuthService).isStaff()
                             ],
                             loadChildren: () =>
                                 import(
@@ -39,13 +40,17 @@ import { AuthService } from './propiedades-alegria/core/services/auth.service';
                         {
                             path: 'usuarios',
                             canActivate: [ 
-                                () => inject(AuthService).isSuperuser()
+                                //() => inject(AuthService).isSuperuser()
                             ],
                             loadChildren: () =>
                                 import(
                                     './propiedades-alegria/usuarios/usuarios.routes'
                                 ).then((m) => m.USUARIO_ROUTES),
                         },
+                        {
+                            path: 'propiedades',
+                            loadChildren: () => import('./propiedades-alegria/propiedades/propiedades.routes').then(m => PROPIEDADES_ROUTES)
+                        }
                     ],
                 },
                 {

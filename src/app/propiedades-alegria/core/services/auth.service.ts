@@ -69,10 +69,10 @@ export class AuthService {
     }
 
     isSuperuser() {
-        return this.user$.pipe(map(user => user?.usuario.is_superuser))
+        return this.user$.pipe(map(user => user?.usuario.is_superuser === true))
     }
 
     isStaff() {
-        return this.user$.pipe(map(user => user?.usuario.is_staff))
+        return this.user$.pipe(map(user => user?.usuario.is_staff === true))
     }
 }

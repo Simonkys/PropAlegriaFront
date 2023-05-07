@@ -8,10 +8,14 @@ import { Propiedad } from "../models/propiedad.model";
 )
 export class PropiedadesService {
     private http = inject(HttpClient);
-    private apiUrl = `${environment.apiUrl}/api/propiedad/`
+    private apiUrl = `${environment.apiUrl}/api/propiedad`
 
     getPropiedades() {
-        return this.http.get<Propiedad[]>(this.apiUrl);
+        return this.http.get<Propiedad[]>(`${this.apiUrl}/`);
+    }
+
+    getPropiedad(id: number) {
+        return this.http.get<Propiedad>(`${this.apiUrl}/${id}/`);
     }
 
 }

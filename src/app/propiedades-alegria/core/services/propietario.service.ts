@@ -9,10 +9,14 @@ import { environment } from "src/environments/environment";
 )
 export class PropietarioService {
     private http = inject(HttpClient)
-    private apiUrl = `${environment.apiUrl}/api/propietario/`
+    private apiUrl = `${environment.apiUrl}/api/propietario`
 
 
     getPropietarios() {
-        return this.http.get<Propietario[]>(this.apiUrl);
+        return this.http.get<Propietario[]>(`${this.apiUrl}/`);
+    }
+
+    getPropietario(id: number) {
+        return this.http.get<Propietario>(`${this.apiUrl}/${id}/`);
     }
 }

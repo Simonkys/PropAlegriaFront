@@ -1,0 +1,33 @@
+<div class="card" *ngIf="propiedad$ | async as propiedad">
+    <h4>Detalle Propiedad</h4>
+    <div class="grid">
+
+        <div class="col-4">
+            <div class="text-sm font-bold text-600 mb-1">Código</div>
+            <div class="font-medium">{{propiedad.numero_ppdd}}</div>
+        </div>
+
+        <div class="col-4" >
+            <div class="text-sm font-bold text-600 mb-1">Rol</div>
+            <div class="font-medium">{{propiedad.rol_ppdd ?? '---'}}</div>
+        </div>
+
+        <div class="col-4">
+            <div class="text-sm font-bold text-600 mb-1">Tipo Propiedad</div>
+            <div class="font-medium">{{propiedad.tipopropiedad_id}}</div>
+        </div>
+        
+        <div class="col-4">
+            <div class="text-sm font-bold text-600 mb-1">Dirección</div>
+            <div class="font-medium">{{propiedad.direccion_ppdd}}, {{propiedad.comuna_id}}</div>
+        </div>
+        
+        <div class="col-4">
+            <div class="text-sm font-bold text-600 mb-1">Propietario</div>
+            <div class="font-medium">{{propiedad.propietario_id}}</div>
+        </div>
+        
+        
+    </div>
+
+</div>
