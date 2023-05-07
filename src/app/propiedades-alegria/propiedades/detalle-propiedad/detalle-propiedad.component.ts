@@ -1,13 +1,13 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PropiedadesService } from '../../core/services/propiedades.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { map, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-detalle-propiedad',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './detalle-propiedad.component.html',
   styleUrls: ['./detalle-propiedad.component.scss']
 })

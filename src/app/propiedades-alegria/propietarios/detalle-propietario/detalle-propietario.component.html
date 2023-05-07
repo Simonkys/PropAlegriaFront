@@ -1,1 +1,60 @@
-<p>detalle-propietario works!</p>
+<ng-container *ngIf="pageData$ | async as pageData">
+    <div class="card">
+        <h4>Detalle Propietario</h4>
+        <div class="grid">
+            <div class="col-4">
+                <div class="text-sm font-bold text-600 mb-1">Rut</div>
+                <div class="font-medium">{{pageData.propietario.rut_prop}}</div>
+            </div>
+
+            <div class="col-4" >
+                <div class="text-sm font-bold text-600 mb-1">Nombres</div>
+                <div class="font-medium">{{pageData.propietario.pri_nom_prop}} {{pageData.propietario.seg_nom_prop}}</div>
+            </div>
+
+            <div class="col-4">
+                <div class="text-sm font-bold text-600 mb-1">Apellidos</div>
+                <div class="font-medium">{{pageData.propietario.pri_ape_prop}} {{pageData.propietario.seg_ape_prop}}</div>
+            </div>
+            
+            <div class="col-4">
+                <div class="text-sm font-bold text-600 mb-1">Dirección</div>
+                <div class="font-medium">{{pageData.propietario.direccion_prop}}, {{pageData.propietario.comuna_id}}</div>
+            </div>
+            
+            <div class="col-4">
+                <div class="text-sm font-bold text-600 mb-1">Email</div>
+                <div class="font-medium">{{pageData.propietario.email_prop}}</div>
+            </div>
+
+            <div class="col-4">
+                <div class="text-sm font-bold text-600 mb-1">Celular</div>
+                <div class="font-medium">{{pageData.propietario.contacto_prop}}</div>
+            </div>   
+        </div>
+    </div>
+
+    <div class="card">
+        <h4>Cuentas Bancarias</h4>
+        <div class="grid" *ngFor="let cuenta of pageData.cuentasBancarias">
+            <div class="col-3">
+                <div class="text-sm font-bold text-600 mb-1">N° Cuenta</div>
+                <div class="font-medium">{{cuenta.cuenta}}</div>
+            </div>
+            <div class="col-3">
+                <div class="text-sm font-bold text-600 mb-1">Estado</div>
+                <div class="font-medium">{{cuenta.estado_cuenta}}</div>
+            </div>
+            <div class="col-3">
+                <div class="text-sm font-bold text-600 mb-1">Banco</div>
+                <div class="font-medium">{{cuenta.banco_id}}</div>
+            </div>
+            <div class="col-3">
+                <div class="text-sm font-bold text-600 mb-1">Tipo de Cuenta</div>
+                <div class="font-medium">{{cuenta.tipocuenta_id}}</div>
+            </div>
+        </div>
+        <hr>
+    </div>
+
+</ng-container>

@@ -18,7 +18,11 @@
                 <td>{{propiedad.numero_ppdd}}</td>
                 <td>{{propiedad.comuna_id}}</td>
                 <td>{{propiedad.direccion_ppdd}}</td>
-                <td>{{propiedad.propietario_id}}</td>
+                <td>
+                    <a class="underline" [routerLink]="['/propietarios', propiedad.propietario_id, 'detalle']">
+                        {{propiedad.propietario_id}}
+                    </a>
+                </td>
                 <td class="flex">
                     <div>
                         <button

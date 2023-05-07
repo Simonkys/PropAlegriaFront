@@ -9,9 +9,14 @@ import { CuentaBancaria } from '../models/cuenta-bancaria.models';
 export class CuentaBancariaService {
     private http = inject(HttpClient);
 
-    private apiUrl = `${environment.apiUrl}/api/cuenta/`
+    private apiUrl = `${environment.apiUrl}/api/cuenta`
 
     getCuentasBancarias() {
-        return this.http.get<CuentaBancaria[]>(`${this.apiUrl}`);
+        return this.http.get<CuentaBancaria[]>(`${this.apiUrl}/`);
     }
+
+    getCuentasBancariasByRut(rut: string) {
+        return this.http.get<CuentaBancaria[]>(`${this.apiUrl}/?propietario_rut=${rut}`);
+    }
+
 }

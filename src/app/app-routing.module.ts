@@ -49,7 +49,11 @@ import { PROPIEDADES_ROUTES } from './propiedades-alegria/propiedades/propiedade
                         },
                         {
                             path: 'propiedades',
-                            loadChildren: () => import('./propiedades-alegria/propiedades/propiedades.routes').then(m => PROPIEDADES_ROUTES)
+                            loadChildren: () => import('./propiedades-alegria/propiedades/propiedades.routes').then(m => m.PROPIEDADES_ROUTES)
+                        },
+                        {
+                            path: 'propietarios',
+                            loadChildren: () => import('./propiedades-alegria/propietarios/propietario.routes').then(m => m.PROPIETARIO_ROUTES)
                         }
                     ],
                 },

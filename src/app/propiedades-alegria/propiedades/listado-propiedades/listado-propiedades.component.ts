@@ -4,12 +4,12 @@ import { Propiedad } from 'src/app/propiedades-alegria/core/models/propiedad.mod
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { PropiedadesService } from '../../core/services/propiedades.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-listado-propiedades',
   standalone: true,
-  imports: [CommonModule, TableModule, ButtonModule],
+  imports: [CommonModule, RouterLink, TableModule, ButtonModule],
   templateUrl: './listado-propiedades.component.html',
   styleUrls: ['./listado-propiedades.component.scss']
 })
