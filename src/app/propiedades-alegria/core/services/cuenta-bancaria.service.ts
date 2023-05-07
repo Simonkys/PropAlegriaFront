@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { Banco, CuentaBancaria, TipoCuenta } from '../models/cuenta-bancaria.models';
+import { CuentaBancaria } from '../models/cuenta-bancaria.models';
 
 @Injectable({
     providedIn: 'root',
@@ -9,15 +9,9 @@ import { Banco, CuentaBancaria, TipoCuenta } from '../models/cuenta-bancaria.mod
 export class CuentaBancariaService {
     private http = inject(HttpClient);
 
-    getBancos() {
-        return this.http.get<Banco[]>(`${environment.apiUrl}/api/bancos/`);
-    }
-
-    getTipoCuentasBanco() {
-        return this.http.get<TipoCuenta[]>(`${environment.apiUrl}/api/tipo_cuentas_banco/`);
-    }
+    private apiUrl = `${environment.apiUrl}/api/cuenta/`
 
     getCuentasBancarias() {
-        return this.http.get<CuentaBancaria[]>(`${environment.apiUrl}/api/cuenta/`);
+        return this.http.get<CuentaBancaria[]>(`${this.apiUrl}`);
     }
 }

@@ -8,8 +8,3 @@ export interface Propiedad {
     tipopropiedad_id: number;
 }
 
-export interface TipoPropiedad {
-    id:                   number;
-    nombre_tipoppdd:      string;
-    descripcion_tipoppdd: string;
-}

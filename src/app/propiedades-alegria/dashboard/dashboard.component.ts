@@ -4,11 +4,17 @@ import { Product } from './api/product';
 import { ProductService } from './service/product.service';
 import { Subscription } from 'rxjs';
 import { LayoutService } from 'src/app/layout/service/app.layout.service';
+
 import { PropiedadesService } from '../core/services/propiedades.service';
+import { TipoPropiedadesService } from '../core/services/tipo-propiedades.service';
 import { PropietarioService } from '../core/services/propietario.service';
 import { PersonalidadJuridicaService } from '../core/services/personalidad-juridica.service';
 import { ArrendatarioService } from '../core/services/arrendatario.service';
 import { ArriendoService } from '../core/services/arriendo.service';
+import { CuentaBancariaService } from '../core/services/cuenta-bancaria.service';
+import { DetalleArriendoService } from '../core/services/detalle-arriendo.service';
+import { GastoComunService } from '../core/services/gasto-comun.service';
+import { ServicioExtraService } from '../core/services/servicio-extra.service';
 
 @Component({
     templateUrl: './dashboard.component.html',
@@ -28,11 +34,17 @@ export class DashboardComponent implements OnInit, OnDestroy {
     constructor(
         private productService: ProductService, 
         public layoutService: LayoutService, 
+
         private propiedadService: PropiedadesService,
+        private tipoPropiedadService: TipoPropiedadesService,
         private propietarioService: PropietarioService,
         private personalidadJuridicaService: PersonalidadJuridicaService,
         private arrendatarioService: ArrendatarioService,
         private arriendoService: ArriendoService,
+        private cuentasBancariasService: CuentaBancariaService,
+        private detalleArriendoService: DetalleArriendoService,
+        private gastoComunService: GastoComunService,
+        private servicioExtraService: ServicioExtraService,
     ) {
         this.subscription = this.layoutService.configUpdate$.subscribe(() => {
             this.initChart();
@@ -44,15 +56,16 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
         this.productService.getProductsSmall().then(data => this.products = data);
         
-        this.propiedadService.getPropiedades().subscribe(res => console.log(res))
-        this.propiedadService.getTipoPropiedades().subscribe(res => console.log(res))
-
-        this.propietarioService.getPropietarios().subscribe(res => console.log(res))
-        this.personalidadJuridicaService.getPersonalidadJuridica().subscribe(res => console.log(res))
-
-        this.arrendatarioService.getArrendatarios().subscribe(res => console.log(res))
-
-        this.arriendoService.getArriendos().subscribe(res => console.log(res))
+        this.propiedadService.getPropiedades().subscribe(res => console.log('Propiedades', res))
+        this.tipoPropiedadService.getTipoPropiedades().subscribe(res => console.log('TipoPropiedades',res))
+        this.propietarioService.getPropietarios().subscribe(res => console.log('Propietarios',res))
+        this.personalidadJuridicaService.getPersonalidadJuridica().subscribe(res => console.log('PersonalidadJuridica',res))
+        this.arrendatarioService.getArrendatarios().subscribe(res => console.log('Arrendatarios',res))
+        this.arriendoService.getArriendos().subscribe(res => console.log('Arriendos',res))
+        this.cuentasBancariasService.getCuentasBancarias().subscribe(res => console.log('CuentaBancaria',res))
+        this.detalleArriendoService.getDetallesArriendo().subscribe(res => console.log('DetalleArriendo',res))
+        this.gastoComunService.getGastosComunes().subscribe(res => console.log('GastosComunes',res))
+        this.servicioExtraService.getServiciosExtras().subscribe(res => console.log('ServiciosExtras',res))
 
 
         this.items = [

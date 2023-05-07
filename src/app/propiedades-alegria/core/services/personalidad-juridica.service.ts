@@ -12,6 +12,6 @@ export class PersonalidadJuridicaService {
 
 
     getPersonalidadJuridica() {
-        return this.http.get<PersonalidadJuridica>(this.apiUrl);
+        return this.http.get<PersonalidadJuridica[]>(this.apiUrl);
     }
 }
