@@ -15,9 +15,11 @@
 
         <ng-template pTemplate="body" let-propiedad>
             <tr>
-                <td>{{propiedad.numero_ppdd}}</td>
+                <td>{{propiedad.id}}</td>
                 <td>{{propiedad.comuna_id}}</td>
-                <td>{{propiedad.direccion_ppdd}}</td>
+                <td>{{propiedad.direccion_ppdd}}
+                    <span *ngIf="propiedad.numero_ppdd">, Tipo propiedad: {{propiedad.numero_ppdd}}</span>
+                  </td>
                 <td>
                     <a class="underline" [routerLink]="['/propietarios', propiedad.propietario_id, 'detalle']">
                         {{propiedad.propietario_id}}
