@@ -12,19 +12,21 @@ import { CuentaBancariaService } from '../../core/services/cuenta-bancaria.servi
   templateUrl: './detalle-propietario.component.html',
   styleUrls: ['./detalle-propietario.component.scss']
 })
+
 export class DetallePropietarioComponent {
   propietarioService = inject(PropietarioService);
   cuentaBancariaService = inject(CuentaBancariaService);
   route = inject(ActivatedRoute);
 
+
+
+
   pageData$ = this.route.paramMap.pipe(
     map(params => Number(params.get('id'))),
     switchMap(id => this.propietarioService.getPropietario(id)),
-    switchMap(propietario => {
-      return this.cuentaBancariaService.getCuentasBancariasByRut(propietario.rut_prop).pipe(
+    switchMap(propietario => { return this.cuentaBancariaService.getCuentasBancariasByRut(propietario.rut_prop).pipe(
         map(cuentasBancarias => ({ propietario, cuentasBancarias}))
       )
     })
   )
-  
 }

@@ -1,8 +1,5 @@
 <div class="card" *ngIf="propiedades$ | async as propiedades">
-    <p-table
-        [value]="propiedades"
-        [tableStyle]="{ 'min-width': '50rem' }"
-    >
+    <p-table [value]="propiedades" [tableStyle]="{ 'min-width': '50rem' }">
         <ng-template pTemplate="header">
             <tr>
                 <th>Cod</th>
@@ -15,14 +12,26 @@
 
         <ng-template pTemplate="body" let-propiedad>
             <tr>
-                <td>{{propiedad.id}}</td>
-                <td>{{propiedad.comuna_id}}</td>
-                <td>{{propiedad.direccion_ppdd}}
-                    <span *ngIf="propiedad.numero_ppdd">, Tipo propiedad: {{propiedad.numero_ppdd}}</span>
-                  </td>
+                <td>{{ propiedad.id }}</td>
+                <td>{{ propiedad.comuna_id.nom_com }}</td>
                 <td>
-                    <a class="underline" [routerLink]="['/propietarios', propiedad.propietario_id, 'detalle']">
-                        {{propiedad.propietario_id}}
+                    {{ propiedad.direccion_ppdd }}
+                    <span *ngIf="propiedad.numero_ppdd"
+                        >,
+                        {{propiedad.tipopropiedad_id.nombre_tipoppdd}}:
+                        {{ propiedad.numero_ppdd }}</span
+                    >
+                </td>
+                <td>
+                    <a
+                        class="underline"
+                        [routerLink]="[
+                            '/propietarios',
+                            propiedad.propietario_id,
+                            'detalle'
+                        ]"
+                    >
+                        {{ propiedad.propietario_id }}
                     </a>
                 </td>
                 <td class="flex">
@@ -38,6 +47,5 @@
                 </td>
             </tr>
         </ng-template>
-
     </p-table>
 </div>
