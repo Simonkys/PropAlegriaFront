@@ -14,19 +14,19 @@
 
         <div class="col-4">
             <div class="text-sm font-bold text-600 mb-1">Tipo Propiedad</div>
-            <div class="font-medium">{{propiedad.tipopropiedad_id}}</div>
+            <div class="font-medium">{{propiedad.tipopropiedad_id.nombre_tipoppdd}}</div>
         </div>
         
         <div class="col-4">
             <div class="text-sm font-bold text-600 mb-1">Dirección</div>
-            <div class="font-medium">{{propiedad.direccion_ppdd}}, {{propiedad.comuna_id}}</div>
+            <div class="font-medium">{{propiedad.direccion_ppdd}}, <strong>{{propiedad.comuna_id.nom_com}}</strong></div>
         </div>
         
         <div class="col-4">
             <div class="text-sm font-bold text-600 mb-1">Propietario</div>
             <div class="font-medium ">
-                <a class="underline" [routerLink]="['/propietarios', propiedad.propietario_id, 'detalle']">
-                    {{propiedad.propietario_id}}
+                <a class="underline" [routerLink]="['/propietarios', propiedad.propietario_id.id, 'detalle']">
+                    {{propiedad.propietario_id.pri_ape_prop}} {{propiedad.propietario_id.pri_nom_prop}}
                 </a>
             </div>
         </div>

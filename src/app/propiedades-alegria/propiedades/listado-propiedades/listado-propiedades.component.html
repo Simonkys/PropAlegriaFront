@@ -8,6 +8,7 @@
                 <th>Cod</th>
                 <th>Comuna</th>
                 <th>Dirección</th>
+                <th>Tipo Propiedad</th>
                 <th>Propietario</th>
                 <th>Acciones</th>
             </tr>
@@ -16,11 +17,12 @@
         <ng-template pTemplate="body" let-propiedad>
             <tr>
                 <td>{{propiedad.numero_ppdd}}</td>
-                <td>{{propiedad.comuna_id}}</td>
+                <td>{{propiedad.comuna_id.nom_com}}</td>
                 <td>{{propiedad.direccion_ppdd}}</td>
+                <td>{{propiedad.tipopropiedad_id.nombre_tipoppdd}}</td>
                 <td>
-                    <a class="underline" [routerLink]="['/propietarios', propiedad.propietario_id, 'detalle']">
-                        {{propiedad.propietario_id}}
+                    <a class="underline" [routerLink]="['/propietarios', propiedad.propietario_id.id, 'detalle']">
+                        {{propiedad.propietario_id.pri_ape_prop}} {{propiedad.propietario_id.pri_nom_prop}}
                     </a>
                 </td>
                 <td class="flex">

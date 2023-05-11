@@ -36,24 +36,29 @@
 
     <div class="card">
         <h4>Cuentas Bancarias</h4>
-        <div class="grid" *ngFor="let cuenta of pageData.cuentasBancarias">
-            <div class="col-3">
-                <div class="text-sm font-bold text-600 mb-1">N° Cuenta</div>
-                <div class="font-medium">{{cuenta.cuenta}}</div>
+        <ng-container *ngIf="pageData.cuentasBancarias.length > 0; else CuentasNotFound" >
+            <div class="grid" *ngFor="let cuenta of pageData.cuentasBancarias">
+                <div class="col-3">
+                    <div class="text-sm font-bold text-600 mb-1">N° Cuenta</div>
+                    <div class="font-medium">{{cuenta.cuenta}}</div>
+                </div>
+                <div class="col-3">
+                    <div class="text-sm font-bold text-600 mb-1">Estado</div>
+                    <div class="font-medium">{{cuenta.estado_cuenta}}</div>
+                </div>
+                <div class="col-3">
+                    <div class="text-sm font-bold text-600 mb-1">Banco</div>
+                    <div class="font-medium">{{cuenta.banco_id.nombre_banco}}</div>
+                </div>
+                <div class="col-3">
+                    <div class="text-sm font-bold text-600 mb-1">Tipo de Cuenta</div>
+                    <div class="font-medium">{{cuenta.tipocuenta_id.nom_cuenta}}</div>
+                </div>
             </div>
-            <div class="col-3">
-                <div class="text-sm font-bold text-600 mb-1">Estado</div>
-                <div class="font-medium">{{cuenta.estado_cuenta}}</div>
-            </div>
-            <div class="col-3">
-                <div class="text-sm font-bold text-600 mb-1">Banco</div>
-                <div class="font-medium">{{cuenta.banco_id}}</div>
-            </div>
-            <div class="col-3">
-                <div class="text-sm font-bold text-600 mb-1">Tipo de Cuenta</div>
-                <div class="font-medium">{{cuenta.tipocuenta_id}}</div>
-            </div>
-        </div>
+        </ng-container>
+        <ng-template #CuentasNotFound>
+            <p >No se encontrar cuentas</p>
+        </ng-template>  
         <hr>
     </div>
 
