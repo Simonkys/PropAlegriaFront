@@ -16,4 +16,8 @@ export class TipoPropiedadesService {
         return this.http.get<TipoPropiedad[]>(this.apiUrl);
     }
 
+    getTipoPropiedad(id:number){
+        return this.http.get<TipoPropiedad>(`${this.apiUrl}${id}/`);
+    }
+
 }
