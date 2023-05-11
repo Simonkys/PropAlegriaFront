@@ -15,8 +15,8 @@ export interface CuentaBancaria {
     estado_cuenta: string;
     propietario_rut?: string;
 
-    banco_id: CuentaBancariaBanco;
-    tipocuenta_id: CuentaBancariaTipoCuenta;
+    banco: CuentaBancariaBanco;
+    tipocuenta: CuentaBancariaTipoCuenta;
 }
 
 
