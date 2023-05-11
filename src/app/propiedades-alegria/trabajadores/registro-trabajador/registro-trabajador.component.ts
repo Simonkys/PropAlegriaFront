@@ -4,7 +4,7 @@ import { finalize } from 'rxjs';
 import { TrabajadorService } from 'src/app/propiedades-alegria/core/services/trabajador.service';
 import { Router } from '@angular/router';
 import { TrabajadorFormComponent } from '../trabajador-form/trabajador-form.component';
-import { Trabajador, TrabajadorForm } from '../../core/models/trabajador.model';
+import { TrabajadorForm } from '../../core/models/trabajador.model';
 
 
 @Component({

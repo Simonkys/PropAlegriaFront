@@ -3,24 +3,31 @@
         [value]="propietarios"
         [tableStyle]="{ 'min-width': '50rem' }"
     >
+    <ng-template pTemplate="caption">
+        <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
+            <p-button class="mr-2" label="Registrar" icon="pi pi-plus" styleClass="p-button-success"
+                (click)="gotToRegistroPropietario()">
+            </p-button>
+        </div>
+    </ng-template>
         <ng-template pTemplate="header">
             <tr>
-                <th>Rut</th>
-                <th>Apellidos</th>
-                <th>Nombres</th>
+                <th>Cod</th>
+                <th>Nombre</th>
                 <th>Email</th>
                 <th>Celular</th>
+                <th>Rut</th>
                 <th>Acciones</th>
             </tr>
         </ng-template>
 
         <ng-template pTemplate="body" let-propietario>
             <tr>
-                <td>{{propietario.rut_prop}}</td>
-                <td>{{propietario.pri_ape_prop}} {{propietario.seg_ape_prop}}</td>
-                <td>{{propietario.pri_nom_prop}} {{propietario.seg_ape_prop}}</td>
+                <td>{{propietario.id}}</td>
+                <td>{{propietario.pri_nom_prop}} {{propietario.pri_ape_prop}}</td>
                 <td>{{propietario.email_prop}}</td>
                 <td>{{propietario.contacto_prop}}</td>
+                <td>{{propietario.rut_prop}}</td>
                 <td class="flex">
                     <div>
                         <button

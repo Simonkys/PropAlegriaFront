@@ -2,6 +2,7 @@ import { Route } from "@angular/router";
 import { PropietarioComponent } from "./propietario.component";
 import { DetallePropietarioComponent } from "./detalle-propietario/detalle-propietario.component";
 import { ListadoPropietariosComponent } from "./listado-propietarios/listado-propietarios.component";
+import { RegistroPropietarioComponent } from "./registro-propietario/registro-propietario.component";
 
 export const PROPIETARIO_ROUTES: Route[] = [
     {
@@ -13,9 +14,13 @@ export const PROPIETARIO_ROUTES: Route[] = [
                 component: ListadoPropietariosComponent
             },
             {
+                path: 'registro',
+                component: RegistroPropietarioComponent
+            },
+            {
                 path: ":id/detalle",
                 component: DetallePropietarioComponent
-            }
+            },         
         ]
     },
 ]
