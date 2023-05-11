@@ -4,7 +4,7 @@
 
         <div class="col-4">
             <div class="text-sm font-bold text-600 mb-1">Código</div>
-            <div class="font-medium">{{propiedad.numero_ppdd}}</div>
+            <div class="font-medium">{{propiedad.id}}</div>
         </div>
 
         <div class="col-4" >
@@ -17,9 +17,13 @@
             <div class="font-medium">{{propiedad.tipopropiedad_id.nombre_tipoppdd}}</div>
         </div>
         
-        <div class="col-4">
+        <div class="col-8">
             <div class="text-sm font-bold text-600 mb-1">Dirección</div>
             <div class="font-medium">{{propiedad.direccion_ppdd}}, <strong>{{propiedad.comuna_id.nom_com}}</strong></div>
+            <span *ngIf="propiedad.numero_ppdd">
+                {{propiedad.tipopropiedad_id.nombre_tipoppdd}}:
+                {{ propiedad.numero_ppdd }}
+            </span>
         </div>
         
         <div class="col-4">

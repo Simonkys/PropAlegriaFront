@@ -7,22 +7,20 @@ import { PropiedadesService } from '../../core/services/propiedades.service';
 import { Router, RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'app-listado-propiedades',
-  standalone: true,
-  imports: [CommonModule, RouterLink, TableModule, ButtonModule],
-  templateUrl: './listado-propiedades.component.html',
-  styleUrls: ['./listado-propiedades.component.scss']
+    selector: 'app-listado-propiedades',
+    standalone: true,
+    imports: [CommonModule, RouterLink, TableModule, ButtonModule],
+    templateUrl: './listado-propiedades.component.html',
+    styleUrls: ['./listado-propiedades.component.scss'],
 })
 export class ListadoPropiedadesComponent {
+    propiedadesService = inject(PropiedadesService);
+    router = inject(Router);
 
-  propiedadesService = inject(PropiedadesService);
-  router = inject(Router);
+    propiedades$ = this.propiedadesService.getPropiedades();
 
-  propiedades$ = this.propiedadesService.getPropiedades();
-  
 
-  detail(propiedad: Propiedad) {
-    this.router.navigate(['propiedades', propiedad.id, 'detalle']);
-  }
-
+    detail(propiedad: Propiedad) {
+        this.router.navigate(['propiedades', propiedad.id, 'detalle']);
+    }
 }

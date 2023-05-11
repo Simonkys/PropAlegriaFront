@@ -18,3 +18,6 @@ export interface CuentaBancaria {
     banco_id: CuentaBancariaBanco;
     tipocuenta_id: CuentaBancariaTipoCuenta;
 }
+
+
+

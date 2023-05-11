@@ -20,7 +20,7 @@ interface PropiedadPropietario {
 export interface Propiedad {
     id:               number;
     direccion_ppdd:   string;
-    numero_ppdd:      number;
+    numero_ppdd:      number | null;
     rol_ppdd:         string | null;
     comuna_id:        PropiedadComuna;
     propietario_id:   PropiedadPropietario;
