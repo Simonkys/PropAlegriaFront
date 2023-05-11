@@ -1,3 +1,13 @@
+interface ArriendoArrendatario {
+    id: string;
+    rut_arr: string;
+    pri_nom_arr: string;
+    seg_nom_arr: string | null;
+    pri_ape_arr: string;
+    seg_ape_arr: string | null;
+    correo_arr: string;
+}
+
 export interface Arriendo{
     id?: number;
     cod_arriendo: number;
@@ -9,5 +19,6 @@ export interface Arriendo{
     fecha_entrega: Date;
     estado_arriendo: string;
     porcentaje_multa: number;
-    arrendatario_id: number;
+
+    arrendatario_id: ArriendoArrendatario;
 }
