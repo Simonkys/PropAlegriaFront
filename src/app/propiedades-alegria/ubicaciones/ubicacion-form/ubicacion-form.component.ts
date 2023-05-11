@@ -34,8 +34,8 @@ export class UbicacionFormComponent implements OnInit {
       
       this.ubicacionService.getComunaById(this.initialComunaId).pipe(
         switchMap((comuna) => {
-          this.regionActual = this.regiones.find(r => r.id = comuna.reg_id)!
-          return this.ubicacionService.getComunasByRegion(comuna.reg_id)
+          this.regionActual = this.regiones.find(r => r.id === comuna.reg_id.id)!
+          return this.ubicacionService.getComunasByRegion(comuna.reg_id.id)
         })
       ).subscribe(comunas => {
         this.comunas = comunas;
@@ -46,12 +46,11 @@ export class UbicacionFormComponent implements OnInit {
 
 
   handleRegionChanges(event: any) {
-    console.log('handleRegionChanges')
     const region  = event.value as Region;
     this.regionActual = region;
     this.comunaActual = null;
     this.ubicacionService.getComunasByRegion(region.id).subscribe(comunas => this.comunas = comunas)
-    this.selectedComunaIdEvent.emit(this.comunaActual)
+    this.selectedComunaIdEvent.emit(null)
   }
 
   handleComunaChanges(event: any) {
