@@ -21,6 +21,11 @@ export interface TrabajadorComuna {
     nom_com: string;
 }
 
+export interface TrabajadorUsuario {
+    id: number;
+    username: string;
+}
+
 export interface Trabajador {
     id?: number;
 
@@ -34,10 +39,10 @@ export interface Trabajador {
 
     celular: number;
 
-    comuna_id: TrabajadorComuna;
+    comuna: TrabajadorComuna;
     tipo_trab: TrabajadorTipoTrabajador;
 
-    usuario_id: number | null;
+    usuario_id: TrabajadorUsuario | null;
     email: string | null;
 }
 

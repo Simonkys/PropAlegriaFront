@@ -77,12 +77,12 @@ export class TrabajadorFormComponent implements OnInit {
                 seg_nom_trab: this.trabajador.seg_nom_trab,
                 pri_ape_trab: this.trabajador.pri_ape_trab,
                 seg_ape_trab: this.trabajador.seg_ape_trab,
-                comuna_id: this.trabajador.comuna_id.id,
+                comuna_id: this.trabajador.comuna.id,
                 email: this.trabajador.email,
                 celular: this.trabajador.celular,
                 tipo_trab: this.trabajador.tipo_trab.id,
                 direccion: this.trabajador.direccion,
-                usuario_id: this.trabajador.usuario_id
+                usuario_id: this.trabajador.usuario_id?.id
             })
         }
     }
