@@ -1,0 +1,39 @@
+<div class="card" *ngIf="propietarios$ | async as propietarios">
+    <p-table
+        [value]="propietarios"
+        [tableStyle]="{ 'min-width': '50rem' }"
+    >
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Rut</th>
+                <th>Apellidos</th>
+                <th>Nombres</th>
+                <th>Email</th>
+                <th>Celular</th>
+                <th>Acciones</th>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-propietario>
+            <tr>
+                <td>{{propietario.rut_prop}}</td>
+                <td>{{propietario.pri_ape_prop}} {{propietario.seg_ape_prop}}</td>
+                <td>{{propietario.pri_nom_prop}} {{propietario.seg_ape_prop}}</td>
+                <td>{{propietario.email_prop}}</td>
+                <td>{{propietario.contacto_prop}}</td>
+                <td class="flex">
+                    <div>
+                        <button
+                            pButton
+                            pRipple
+                            icon="pi pi-eye"
+                            class="p-button-rounded p-button-primary mr-2"
+                            (click)="detail(propietario)"
+                        ></button>
+                    </div>
+                </td>
+            </tr>
+        </ng-template>
+
+    </p-table>
+</div>
