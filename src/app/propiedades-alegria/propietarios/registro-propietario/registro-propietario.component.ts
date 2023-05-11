@@ -9,6 +9,8 @@ import { KeyFilterModule } from 'primeng/keyfilter';
 import { TooltipModule } from 'primeng/tooltip';
 import { PropietarioService } from '../../core/services/propietario.service';
 import { PropietarioForm } from '../../core/models/propietario.model';
+import { finalize } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registro-propietario',
@@ -27,9 +29,10 @@ import { PropietarioForm } from '../../core/models/propietario.model';
   styleUrls: ['./registro-propietario.component.scss']
 })
 export class RegistroPropietarioComponent {
-
+  
   fb = inject(FormBuilder)
   propietarioService = inject(PropietarioService)
+  router = inject(Router)
 
   form = this.fb.group({
     rut_prop: this.fb.nonNullable.control<string>('',
@@ -72,11 +75,20 @@ export class RegistroPropietarioComponent {
       comuna_id: values.comuna_id!,
     }
 
-    this.propietarioService.createPropietario(propietario).subscribe()
+    this.propietarioService.createPropietario(propietario).pipe(
+      finalize(() => {})
+    ).subscribe({
+      next: (res) => {
+          this.router.navigate(['propietarios/listado']);
+      },
+      error: (err) => {},
+  })
     
   }
 
 
-  cancelar() {}
+  cancelar() {
+    this.router.navigate(['propietarios/listado']);
+  }
 
 }
