@@ -87,7 +87,7 @@ export class LoginComponent {
                         {
                             severity: 'error',
                             summary: 'Error',
-                            detail: 'Credenciales inválidas',
+                            detail: err.error.error,
                         },
                     ];
                 },
