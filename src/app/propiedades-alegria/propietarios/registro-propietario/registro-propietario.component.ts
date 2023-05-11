@@ -8,6 +8,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { KeyFilterModule } from 'primeng/keyfilter';
 import { TooltipModule } from 'primeng/tooltip';
 import { PropietarioService } from '../../core/services/propietario.service';
+import { PropietarioForm } from '../../core/models/propietario.model';
 
 @Component({
   selector: 'app-registro-propietario',
@@ -58,7 +59,20 @@ export class RegistroPropietarioComponent {
 
   guardar() {
     if(this.form.invalid) return;
+    const values = this.form.getRawValue();
+    const propietario: PropietarioForm = {
+      rut_prop: values.rut_prop,
+      pri_nom_prop: values.pri_nom_prop,
+      seg_nom_prop: values.seg_nom_prop,
+      pri_ape_prop: values.pri_ape_prop,
+      seg_ape_prop: values.seg_ape_prop,
+      direccion_prop: values.direccion_prop,
+      email_prop: values.email_prop!,
+      contacto_prop: values.contacto_prop!,
+      comuna_id: values.comuna_id!,
+    }
 
+    this.propietarioService.createPropietario(propietario).subscribe()
     
   }
 
