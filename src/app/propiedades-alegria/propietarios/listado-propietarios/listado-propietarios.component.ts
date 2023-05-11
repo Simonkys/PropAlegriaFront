@@ -25,4 +25,8 @@ export class ListadoPropietariosComponent {
     this.router.navigate(['propietarios', propiedad.id, 'detalle']);
   }
 
+  gotToRegistroPropietario() {
+    this.router.navigate(['propietarios/registro']);
+  }
+
 }
