@@ -4,7 +4,7 @@ import { finalize, map, switchMap } from 'rxjs';
 import { TrabajadorService } from 'src/app/propiedades-alegria/core/services/trabajador.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TrabajadorFormComponent } from '../trabajador-form/trabajador-form.component';
-import { Trabajador } from '../../core/models/trabajador.model';
+import { TrabajadorForm } from '../../core/models/trabajador.model';
 import { MessageService } from '../../core/services/message.service';
 
 
@@ -36,7 +36,7 @@ export class ActualizarTrabajadorComponent {
         this.router.navigate(['trabajadores/listado']);
     }
 
-    guardarTrabajador(trabajador: Trabajador) {
+    guardarTrabajador(trabajador: TrabajadorForm) {
         this.loading = true;
         this.trabajadorService
             .actualizarTrabajador(trabajador)

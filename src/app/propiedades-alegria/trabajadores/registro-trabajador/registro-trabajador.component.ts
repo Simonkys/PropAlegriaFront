@@ -4,7 +4,8 @@ import { finalize } from 'rxjs';
 import { TrabajadorService } from 'src/app/propiedades-alegria/core/services/trabajador.service';
 import { Router } from '@angular/router';
 import { TrabajadorFormComponent } from '../trabajador-form/trabajador-form.component';
-import { Trabajador } from '../../core/models/trabajador.model';
+import { Trabajador, TrabajadorForm } from '../../core/models/trabajador.model';
+
 
 @Component({
     selector: 'app-registro-trabajador',
@@ -24,7 +25,7 @@ export class RegistroTrabajadorComponent {
         this.router.navigate(['trabajadores/listado']);
     }
 
-    guardarTrabajador(trabajador: Trabajador) {
+    guardarTrabajador(trabajador: TrabajadorForm) {
         this.loading = true;
         this.trabajadorService
             .crearTrabajador(trabajador)

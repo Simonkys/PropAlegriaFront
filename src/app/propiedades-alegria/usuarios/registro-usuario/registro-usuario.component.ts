@@ -55,9 +55,9 @@ export class RegistroUsuarioComponent {
             map((trabajadores) =>
                 trabajadores.filter(
                     (t) =>
-                        ( t.tipo_trab === TipoTrabajadorEnum.EJECUTIVO_VENTAS ||
-                        t.tipo_trab === TipoTrabajadorEnum.GERENTE ||
-                        t.tipo_trab === TipoTrabajadorEnum.SECRETARIA_ADMIN ) && !t.usuario_id
+                        ( t.tipo_trab.id === TipoTrabajadorEnum.EJECUTIVO_VENTAS ||
+                        t.tipo_trab.id === TipoTrabajadorEnum.GERENTE ||
+                        t.tipo_trab.id === TipoTrabajadorEnum.SECRETARIA_ADMIN ) && !t.usuario_id
                 )
             )
         );
@@ -100,7 +100,7 @@ export class RegistroUsuarioComponent {
         this.trabajadorSeleccionado = trabajador;
         this.trabajadorService.getTipoDeTrabajadores().subscribe((tipos) => {
             this.tipoTrabajador = tipos.find(
-                (t) => t.id === trabajador.tipo_trab
+                (t) => t.id === trabajador.tipo_trab.id
             );
         });
         this.setDefaultFormValues(trabajador);

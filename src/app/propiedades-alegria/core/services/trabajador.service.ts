@@ -1,16 +1,14 @@
-import { Injectable, Optional, inject } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import {
     TipoTrabajador,
     Trabajador,
-    TrabajadorConTipo,
+    TrabajadorForm,
 } from '../models/trabajador.model';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import {
     BehaviorSubject,
     catchError,
-    map,
-    mergeMap,
     switchMap,
     tap,
     throwError,
@@ -52,7 +50,7 @@ export class TrabajadorService {
         );
     }
 
-    crearTrabajador(trabajador: Trabajador) {
+    crearTrabajador(trabajador: TrabajadorForm) {
         return this.http
             .post<Trabajador>(
                 `${environment.apiUrl}/api/trabajador/`,
@@ -74,7 +72,7 @@ export class TrabajadorService {
             );
     }
 
-    actualizarTrabajador(trabajador: Trabajador) {
+    actualizarTrabajador(trabajador: TrabajadorForm) {
         return this.http
             .put<Trabajador>(
                 `${environment.apiUrl}/api/trabajador/${trabajador.id}/`,
@@ -96,7 +94,7 @@ export class TrabajadorService {
             );
     }
 
-    pathValue(trabajador: Partial<Trabajador>) {
+    pathValue(trabajador: Partial<TrabajadorForm>) {
         return this.http.patch<Trabajador>(
             `${environment.apiUrl}/api/trabajador/${trabajador.id}/`,
                 trabajador
@@ -144,25 +142,6 @@ export class TrabajadorService {
             );
     }
 
-    getTrabajadoresConTipo() {
-        return this.getTrabajadores().pipe(
-            mergeMap((trabajadores) =>
-                this.getTipoDeTrabajadores().pipe(
-                    map((tipoTrabajadores) => {
-                        return trabajadores.map<TrabajadorConTipo>(
-                            (trabajador) => {
-                                const { tipo_trab, ...data } = trabajador;
-                                const tipo = tipoTrabajadores.find(
-                                    (t) => t.id === tipo_trab
-                                )!;
-                                return { ...data, tipo_trabajador: tipo.tipo };
-                            }
-                        );
-                    })
-                )
-            )
-        );
-    }
 
     private handleError(error: HttpErrorResponse) {
         const msg = JSON.stringify(error.error);

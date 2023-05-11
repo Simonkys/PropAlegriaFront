@@ -120,7 +120,7 @@
     </div>
 
     <app-ubicacion-form
-        [initialComunaId]="this.trabajador?.comuna_id"
+        [initialComunaId]="this.trabajador?.comuna_id?.id"
         (selectedComunaIdEvent)="handleSelectedComuna($event)"
     ></app-ubicacion-form>
 
