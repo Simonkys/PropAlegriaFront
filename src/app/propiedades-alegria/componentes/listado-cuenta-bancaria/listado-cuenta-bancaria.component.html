@@ -1,0 +1,30 @@
+<ng-container *ngIf="cuentasBancarias.length > 0; else CuentasNotFound" >
+    <table >
+        <tr>
+            <th>N° Cuenta</th>
+            <th>Estado</th>
+            <th>Banco</th>
+            <th>Tipo de Cuenta</th>
+            <th>Acciones</th>
+        </tr>
+        <tr *ngFor="let cuenta of cuentasBancarias">
+            <th > <div class="font-medium">{{cuenta.cuenta}}</div> </th>
+            <th><div class="font-medium">{{cuenta.estado_cuenta}}</div></th>
+            <th><div class="font-medium">{{cuenta.banco.nombre_banco}}</div></th>
+            <th><div class="font-medium">{{cuenta.tipocuenta.nom_cuenta}}</div></th>
+            <th><p-confirmPopup></p-confirmPopup>
+                <div class="col-3">
+                    <button
+                        pButton
+                        pRipple
+                        icon="pi pi-trash"
+                        class="p-button-rounded p-button-danger"
+                        (click)="eliminarCuentaBancaria($event, cuenta)"
+                    ></button>
+                </div></th>
+        </tr>
+    </table>
+</ng-container>
+<ng-template #CuentasNotFound>
+    <p >No se encontrar cuentas</p>
+</ng-template>  

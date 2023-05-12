@@ -1,0 +1,15 @@
+table {
+    width: 100%;
+}
+table tr {
+    text-align: start;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+td, th {
+    text-align: start;
+    flex: 1;
+}
