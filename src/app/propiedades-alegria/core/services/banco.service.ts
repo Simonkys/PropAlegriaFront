@@ -14,6 +14,6 @@ export class BancoService {
     }
 
     getTipoCuentasBanco() {
-        return this.http.get<TipoCuenta[]>(`${environment.apiUrl}/api/tipo_cuentas_banco/`);
+        return this.http.get<TipoCuenta[]>(`${environment.apiUrl}/api/tipo_cuentas_bancos/`);
     }
 }
