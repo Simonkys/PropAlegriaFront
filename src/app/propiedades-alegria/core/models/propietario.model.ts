@@ -1,6 +1,6 @@
 export interface PropietarioComuna {
     id: number;
-    nom_com: string;
+    nom_comuna: string;
 }
 
 export interface Propietario{

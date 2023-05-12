@@ -1,6 +1,6 @@
 interface PropiedadComuna {
     id: number;
-    nom_com: string;
+    nom_comuna: string;
 }
 
 interface PropiedadTipoPropiedad {
@@ -22,8 +22,8 @@ export interface Propiedad {
     direccion_ppdd:   string;
     numero_ppdd:      number | null;
     rol_ppdd:         string | null;
-    comuna_id:        PropiedadComuna;
-    propietario_id:   PropiedadPropietario;
-    tipopropiedad_id: PropiedadTipoPropiedad;
+    comuna:        PropiedadComuna;
+    propietario:   PropiedadPropietario;
+    tipopropiedad: PropiedadTipoPropiedad;
 }
 
