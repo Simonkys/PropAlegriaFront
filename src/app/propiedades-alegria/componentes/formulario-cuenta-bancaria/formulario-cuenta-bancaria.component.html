@@ -1,0 +1,80 @@
+<form [formGroup]="form">
+
+    <div class="grid mb-3">
+        <div class="col flex flex-column gap-2">
+            <span class="p-float-label">
+                <input
+                    pKeyFilter="int"
+                    pInputText
+                    formControlName="cuenta"
+                    placeholder="2345234525"
+                    [style]="{ width: '100%' }"
+                />
+                <label>N° de cuenta *</label>
+            </span>
+            <small
+                >Solo números son permitidos,
+                <strong>Ej: 2345234525</strong>
+            </small>
+        </div> 
+        
+        <div class="col flex flex-column gap-2">
+            <span class="p-float-label">
+                <input
+                    pInputText
+                    formControlName="estado_cuenta"
+                    placeholder="Primaria"
+                    [style]="{ width: '100%' }"
+                />
+                <label>Estado cuenta *</label>
+            </span>
+        </div>  
+    </div>
+
+    <div class="grid mb-3">
+        <div class="col flex flex-column gap-2">
+            <span class="p-float-label">
+                <p-dropdown
+                    formControlName="banco_id"
+                    [options]="(bancos$ | async)!"
+                    optionLabel="nombre_banco"
+                    optionValue="id"
+                    [style]="{ width: '100%' }"
+                    placeholder="Banco"
+                    inputId="float-label"
+                ></p-dropdown>
+                <label for="float-label">Banco *</label>
+            </span>
+        </div>
+        <div class="col flex flex-column gap-2">
+            <span class="p-float-label">
+                <p-dropdown
+                    formControlName="tipo_cuenta_id"
+                    [options]="(tipoCuentasBanco$ | async)!"
+                    optionLabel="nom_cuenta"
+                    optionValue="id"
+                    [style]="{ width: '100%' }"
+                    placeholder="Tipo de cuenta"
+                    inputId="float-label"
+                ></p-dropdown>
+                <label for="float-label">Tipo de cuenta *</label>
+            </span>
+        </div> 
+    </div>
+
+
+
+    <div class="flex">
+        <p-button
+            styleClass="mr-3"
+            [disabled]="form.invalid"
+            label="Guardar"
+            (click)="submit()"
+        ></p-button>
+        <p-button
+            label="Cancelar"
+            styleClass="p-button-danger"
+            (click)="cancel()"
+        ></p-button>
+    </div>
+</form>
