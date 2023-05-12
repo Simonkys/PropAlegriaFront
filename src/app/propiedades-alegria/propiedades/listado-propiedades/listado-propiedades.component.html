@@ -13,16 +13,16 @@
         <ng-template pTemplate="body" let-propiedad>
             <tr>
                 <td>{{ propiedad.id }}</td>
-                <td>{{ propiedad.comuna_id.nom_com }}</td>
+                <td>{{ propiedad.comuna.nom_comuna }}</td>
                 <td> {{ propiedad.direccion_ppdd }}
                     <span *ngIf="propiedad.numero_ppdd">
-                        {{propiedad.tipopropiedad_id.nombre_tipoppdd}}:
+                        {{propiedad.tipopropiedad.nombre_tipoppdd}}:
                         {{ propiedad.numero_ppdd }}
                     </span>
                 </td>
                 <td>
-                    <a class="underline" [routerLink]="['/propietarios', propiedad.propietario_id.id,'detalle']">
-                        {{propiedad.propietario_id.pri_ape_prop}} {{propiedad.propietario_id.pri_nom_prop}}
+                    <a class="underline" [routerLink]="['/propietarios', propiedad.propietario.id,'detalle']">
+                        {{propiedad.propietario.pri_ape_prop}} {{propiedad.propietario.pri_nom_prop}}
                     </a>
                 </td>
                 <td class="flex">
