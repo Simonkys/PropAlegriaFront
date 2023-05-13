@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { CuentaBancaria } from '../../core/models/cuenta-bancaria.models';
 import { ConfirmationService } from 'primeng/api';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
-import { CuentaBancariaService } from '../../core/services/cuenta-bancaria.service';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 
@@ -17,9 +16,10 @@ import { TableModule } from 'primeng/table';
 })
 export class ListadoCuentaBancariaComponent {
   @Input() cuentasBancarias: CuentaBancaria[] = [];
-  @Output() eliminarEvent = new EventEmitter<number>();
+
+  @Output() registroEvent = new EventEmitter<void>();
+  @Output() eliminarEvent = new EventEmitter<CuentaBancaria>();
   
-  cuentaBancariaService = inject(CuentaBancariaService);
   confimService = inject(ConfirmationService);
 
   eliminarCuentaBancaria(event: Event, cuenta: CuentaBancaria) {
@@ -28,15 +28,13 @@ export class ListadoCuentaBancariaComponent {
       message: `¿Estas segur@ de eliminar la cuenta`,
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.cuentaBancariaService.eliminarCuentaBancaria(cuenta)
-          .pipe()
-          .subscribe({
-            next: () => {
-              this.eliminarEvent.emit(cuenta.id);
-            },
-            error: (err) => {}
-          })
+        this.eliminarEvent.emit(cuenta);
       },
     });
+  }
+
+
+  registroCuentaBancariaEvent() {
+    this.registroEvent.emit();
   }
 }

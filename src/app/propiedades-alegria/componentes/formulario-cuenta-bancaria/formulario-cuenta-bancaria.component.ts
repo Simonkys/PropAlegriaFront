@@ -2,10 +2,8 @@ import { Component, EventEmitter, Input, OnInit, Output, inject } from '@angular
 import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { BancoService } from '../../core/services/banco.service';
-import { CuentaBancaria, CuentaBancariaForm } from '../../core/models/cuenta-bancaria.models';
+import {  CuentaBancariaForm } from '../../core/models/cuenta-bancaria.models';
 import { ButtonModule } from 'primeng/button';
-import { CuentaBancariaService } from '../../core/services/cuenta-bancaria.service';
-import { finalize } from 'rxjs';
 import { KeyFilterModule } from 'primeng/keyfilter';
 import { InputTextModule } from 'primeng/inputtext';
 import { DropdownModule } from 'primeng/dropdown';
@@ -20,12 +18,11 @@ import { DropdownModule } from 'primeng/dropdown';
 export class FormularioCuentaBancariaComponent implements OnInit {
 
   @Input() rut_propietario!: string;
-  @Output() submitEvent = new EventEmitter<CuentaBancaria>();
+  @Output() submitEvent = new EventEmitter<CuentaBancariaForm>();
   @Output() cancelEvent = new EventEmitter<void>();
 
   fb = inject(FormBuilder)
   bancoService = inject(BancoService)
-  cuentaBancariaService = inject(CuentaBancariaService);
 
   tipoCuentasBanco$ = this.bancoService.getTipoCuentasBanco();
   bancos$ = this.bancoService.getBancos()
@@ -57,17 +54,7 @@ export class FormularioCuentaBancariaComponent implements OnInit {
       tipocuenta_id: form.tipo_cuenta_id!
     }
 
-    this.cuentaBancariaService.createCuentaBancaria(cuentaBancariaForm)
-      .pipe(
-        finalize(() => { })
-      )
-      .subscribe({
-        next: (response) => {
-          this.form.reset();
-          this.submitEvent.emit(response);
-        },
-        error: (err) => { }
-      })
+    this.submitEvent.emit(cuentaBancariaForm)
   }
 
   cancel() {

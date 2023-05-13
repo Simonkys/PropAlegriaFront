@@ -5,7 +5,7 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { forkJoin, map, switchMap } from 'rxjs';
 import { CuentaBancariaService } from '../../core/services/cuenta-bancaria.service';
 import { FormularioCuentaBancariaComponent } from '../../componentes/formulario-cuenta-bancaria/formulario-cuenta-bancaria.component';
-import { CuentaBancaria } from '../../core/models/cuenta-bancaria.models';
+import { CuentaBancaria, CuentaBancariaForm } from '../../core/models/cuenta-bancaria.models';
 import { Propietario } from '../../core/models/propietario.model';
 import { ListadoCuentaBancariaComponent } from '../../componentes/listado-cuenta-bancaria/listado-cuenta-bancaria.component';
 import { ButtonModule } from 'primeng/button';
@@ -70,13 +70,19 @@ export class DetallePropietarioComponent implements OnInit {
     })
   }
 
-  guardarCuentaBancaria(cuenta: CuentaBancaria) {
-    this.cuentasBancarias = [cuenta, ...this.cuentasBancarias];
-    this.creacionCuentaActiva = false;
+  guardarCuentaBancaria(cuentaBancariaForm: CuentaBancariaForm) {
+    this.cuentaBancariaService.createCuentaBancaria(cuentaBancariaForm)
+      .subscribe((cuenta) => {
+        this.cuentasBancarias = [cuenta, ...this.cuentasBancarias];
+        this.creacionCuentaActiva = false;
+      })
   }
 
-  eliminarCuentaBancaria(cuentaId: number) {
-    this.cuentasBancarias = this.cuentasBancarias.filter(cuentaBancaria => cuentaBancaria.id !== cuentaId);
+  eliminarCuentaBancaria(cuenta: CuentaBancaria) {
+    this.cuentaBancariaService.eliminarCuentaBancaria(cuenta)
+      .subscribe(() => {
+        this.cuentasBancarias = this.cuentasBancarias.filter(cuentaBancaria => cuentaBancaria.id !== cuenta.id);
+      })
   }
   
   cancelarCreacionCuentaBancaria() {

@@ -1,8 +1,29 @@
-<div class="card">
-    <h4>Detalle arrendatario</h4>
-    <app-detalle-arrendatario
-        *ngIf="arrendatario$ | async as arrendatario"
-        [arrendatario]="arrendatario"
-        (eliminarEvent)="eliminar($event)"
-    />
-</div>
+<ng-container *ngIf="arrendatario">
+
+    <div class="card">
+        <h4>Detalle arrendatario</h4>
+        <app-detalle-arrendatario
+            [arrendatario]="arrendatario"
+            (eliminarEvent)="eliminar($event)"
+        />
+    </div>
+
+    <div class="card"  *ngIf="creacionCuentaActiva">
+        <h4>Registro cuenta</h4>
+        <app-formulario-cuenta-bancaria
+            [rut_propietario]="arrendatario.rut_arr"
+            (submitEvent)="guardarCuentaBancaria($event)"
+            (cancelEvent)="cancelarCreacionCuentaBancaria()"
+        />
+    </div>
+
+    <div class="card">
+        <h4>Cuentas Bancarias</h4>
+        <app-listado-cuenta-bancaria 
+            [cuentasBancarias]="cuentasBancarias"
+            (registroEvent)="activarCreacionCuentaBancaria()"
+            (eliminarEvent)="eliminarCuentaBancaria($event)"
+        />
+    </div>
+
+</ng-container>

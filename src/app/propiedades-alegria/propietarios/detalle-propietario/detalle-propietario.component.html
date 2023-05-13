@@ -71,18 +71,10 @@
     </div>
 
     <div class="card">
-        <div class="cuenta-bancarias-header">
-            <h4>Cuentas Bancarias</h4>
-            <p-button
-                class="mr-2"
-                label="Nueva cuenta"
-                icon="pi pi-plus"
-                styleClass="p-button-success"
-                (click)="activarCreacionCuentaBancaria()"
-            ></p-button>
-        </div>
+        <h4>Cuentas Bancarias</h4>
         <app-listado-cuenta-bancaria 
             [cuentasBancarias]="cuentasBancarias"
+            (registroEvent)="activarCreacionCuentaBancaria()"
             (eliminarEvent)="eliminarCuentaBancaria($event)"
         />
     </div>

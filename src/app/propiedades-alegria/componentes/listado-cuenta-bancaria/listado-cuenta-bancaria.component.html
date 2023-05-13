@@ -1,37 +1,41 @@
-<ng-container *ngIf="cuentasBancarias.length > 0; else NotFound" >
-    <p-table [value]="cuentasBancarias" [tableStyle]="{ 'min-width': '50rem' }">
-        <ng-template pTemplate="header">
-            <tr>
-                <th>N° Cuenta</th>
-                <th>Estado</th>
-                <th>Banco</th>
-                <th>Tipo de Cuenta</th>
-                <th>Acciones</th>
-            </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-cuenta>
-            <tr >
-                <td > {{cuenta.cuenta}}</td>
-                <td>{{cuenta.estado_cuenta}}</td>
-                <td>{{cuenta.banco.nombre_banco}}</td>
-                <td>{{cuenta.tipocuenta.nom_cuenta}}</td>
-                <td>
-                    <p-confirmPopup></p-confirmPopup>
-                    <div >
-                        <button
-                            pButton
-                            pRipple
-                            icon="pi pi-trash"
-                            class="p-button-rounded p-button-danger"
-                            (click)="eliminarCuentaBancaria($event, cuenta)"
-                        ></button>
-                    </div>
-                </td>
-            </tr>
-        </ng-template>
-    </p-table>
-</ng-container>
-
-<ng-template #NotFound>
-    <p >No se encontraron cuentas</p>
-</ng-template>  
+<p-table [value]="cuentasBancarias" [tableStyle]="{ 'min-width': '50rem' }">
+    <ng-template pTemplate="caption">
+        <p-button 
+            class="mr-2" 
+            label="Registrar" 
+            icon="pi pi-plus" 
+            styleClass="p-button-success"
+            (click)="registroCuentaBancariaEvent()"
+        >
+        </p-button>
+    </ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+            <th>N° Cuenta</th>
+            <th>Estado</th>
+            <th>Banco</th>
+            <th>Tipo de Cuenta</th>
+            <th>Acciones</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-cuenta>
+        <tr >
+            <td > {{cuenta.cuenta}}</td>
+            <td>{{cuenta.estado_cuenta}}</td>
+            <td>{{cuenta.banco.nombre_banco}}</td>
+            <td>{{cuenta.tipocuenta.nom_cuenta}}</td>
+            <td>
+                <p-confirmPopup></p-confirmPopup>
+                <div >
+                    <button
+                        pButton
+                        pRipple
+                        icon="pi pi-trash"
+                        class="p-button-rounded p-button-danger"
+                        (click)="eliminarCuentaBancaria($event, cuenta)"
+                    ></button>
+                </div>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
