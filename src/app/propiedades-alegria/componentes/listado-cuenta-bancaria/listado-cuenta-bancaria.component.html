@@ -1,30 +1,37 @@
-<ng-container *ngIf="cuentasBancarias.length > 0; else CuentasNotFound" >
-    <table >
-        <tr>
-            <th>N° Cuenta</th>
-            <th>Estado</th>
-            <th>Banco</th>
-            <th>Tipo de Cuenta</th>
-            <th>Acciones</th>
-        </tr>
-        <tr *ngFor="let cuenta of cuentasBancarias">
-            <th > <div class="font-medium">{{cuenta.cuenta}}</div> </th>
-            <th><div class="font-medium">{{cuenta.estado_cuenta}}</div></th>
-            <th><div class="font-medium">{{cuenta.banco.nombre_banco}}</div></th>
-            <th><div class="font-medium">{{cuenta.tipocuenta.nom_cuenta}}</div></th>
-            <th><p-confirmPopup></p-confirmPopup>
-                <div class="col-3">
-                    <button
-                        pButton
-                        pRipple
-                        icon="pi pi-trash"
-                        class="p-button-rounded p-button-danger"
-                        (click)="eliminarCuentaBancaria($event, cuenta)"
-                    ></button>
-                </div></th>
-        </tr>
-    </table>
+<ng-container *ngIf="cuentasBancarias.length > 0; else NotFound" >
+    <p-table [value]="cuentasBancarias" [tableStyle]="{ 'min-width': '50rem' }">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>N° Cuenta</th>
+                <th>Estado</th>
+                <th>Banco</th>
+                <th>Tipo de Cuenta</th>
+                <th>Acciones</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-cuenta>
+            <tr >
+                <td > {{cuenta.cuenta}}</td>
+                <td>{{cuenta.estado_cuenta}}</td>
+                <td>{{cuenta.banco.nombre_banco}}</td>
+                <td>{{cuenta.tipocuenta.nom_cuenta}}</td>
+                <td>
+                    <p-confirmPopup></p-confirmPopup>
+                    <div >
+                        <button
+                            pButton
+                            pRipple
+                            icon="pi pi-trash"
+                            class="p-button-rounded p-button-danger"
+                            (click)="eliminarCuentaBancaria($event, cuenta)"
+                        ></button>
+                    </div>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
 </ng-container>
-<ng-template #CuentasNotFound>
-    <p >No se encontrar cuentas</p>
+
+<ng-template #NotFound>
+    <p >No se encontraron cuentas</p>
 </ng-template>  

@@ -5,12 +5,13 @@ import { ConfirmationService } from 'primeng/api';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { CuentaBancariaService } from '../../core/services/cuenta-bancaria.service';
 import { ButtonModule } from 'primeng/button';
+import { TableModule } from 'primeng/table';
 
 @Component({
   selector: 'app-listado-cuenta-bancaria',
   standalone: true,
   providers: [ConfirmationService],
-  imports: [CommonModule, ConfirmPopupModule, ButtonModule],
+  imports: [CommonModule, ConfirmPopupModule, ButtonModule, TableModule],
   templateUrl: './listado-cuenta-bancaria.component.html',
   styleUrls: ['./listado-cuenta-bancaria.component.scss']
 })
