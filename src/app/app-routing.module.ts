@@ -4,7 +4,6 @@ import { AppLayoutComponent } from './layout/app.layout.component';
 import { NotFoundComponent } from './propiedades-alegria/pages/not-found/not-found.component';
 import { authGuard } from './propiedades-alegria/core/guards/auth.guard';
 import { AuthService } from './propiedades-alegria/core/services/auth.service';
-import { PROPIEDADES_ROUTES } from './propiedades-alegria/propiedades/propiedades.routes';
 
 
 
@@ -22,30 +21,21 @@ import { PROPIEDADES_ROUTES } from './propiedades-alegria/propiedades/propiedade
                             canActivate: [
                                 //() => inject(AuthService).isStaff()
                             ],
-                            loadChildren: () =>
-                                import(
-                                    './propiedades-alegria/dashboard/dashboard.module'
-                                ).then((m) => m.DashboardModule),
+                            loadChildren: () => import( './propiedades-alegria/dashboard/dashboard.module' ).then((m) => m.DashboardModule),
                         },
                         {
                             path: 'trabajadores',
                             canActivate: [
                                 //() => inject(AuthService).isStaff()
                             ],
-                            loadChildren: () =>
-                                import(
-                                    './propiedades-alegria/trabajadores/trabajadores.routes'
-                                ).then((m) => m.TRABAJADORES_ROUTES),
+                            loadChildren: () => import( './propiedades-alegria/trabajadores/trabajadores.routes' ).then((m) => m.TRABAJADORES_ROUTES),
                         },
                         {
                             path: 'usuarios',
-                            canActivate: [ 
+                            canActivate: [  
                                 //() => inject(AuthService).isSuperuser()
                             ],
-                            loadChildren: () =>
-                                import(
-                                    './propiedades-alegria/usuarios/usuarios.routes'
-                                ).then((m) => m.USUARIO_ROUTES),
+                            loadChildren: () => import( './propiedades-alegria/usuarios/usuarios.routes').then((m) => m.USUARIO_ROUTES),
                         },
                         {
                             path: 'propiedades',
@@ -62,10 +52,7 @@ import { PROPIEDADES_ROUTES } from './propiedades-alegria/propiedades/propiedade
                     children: [
                         {
                             path: 'login',
-                            loadComponent: () =>
-                                import(
-                                    './propiedades-alegria/pages/login/login.component'
-                                ).then((m) => m.LoginComponent),
+                            loadComponent: () => import( './propiedades-alegria/pages/login/login.component' ).then((m) => m.LoginComponent),
                         },
                     ],
                 },

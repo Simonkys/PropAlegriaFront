@@ -1,0 +1,10 @@
+<div class="card">
+    <h4>Actualizar propiedad</h4>
+    <ng-container *ngIf="propiedad$ | async as propiedad">
+        <app-formulario-propiedad
+            [propiedad]="propiedad"
+            (cancelEvent)="handleCancelEvent()"
+            (submitEvent)="handleSubmitEvent($event)"
+        />
+    </ng-container>
+</div>

@@ -1,13 +1,16 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable, inject } from "@angular/core";
 import { environment } from "src/environments/environment";
 import { Propiedad, PropiedadForm } from "../models/propiedad.model";
+import { MessageService } from "./message.service";
+import { catchError, tap, throwError } from "rxjs";
 
 @Injectable(
     { providedIn: 'root'}
 )
 export class PropiedadesService {
     private http = inject(HttpClient);
+    private messageService = inject(MessageService);
     private apiUrl = `${environment.apiUrl}/api/propiedad`
 
     getPropiedades() {
@@ -24,7 +27,42 @@ export class PropiedadesService {
     }
 
     crearPropiedad(propiedadForm: PropiedadForm) {
-        return this.http.post<Propiedad>(`${this.apiUrl}/`, propiedadForm)
+        return this.http.post<Propiedad>(`${this.apiUrl}/`, propiedadForm).pipe(
+            tap(() => {
+                this.messageService.addMessage({
+                    details: ['Propiedad registrada exitosamente!'],
+                    role: 'success'
+                })
+            }),
+            catchError((error: HttpErrorResponse) => this.handleError(error))
+        )
+    }
+
+    actualizarPropiedad(propiedadForm: PropiedadForm) {
+        return this.http.put<Propiedad>(`${this.apiUrl}/${propiedadForm.id}/`, propiedadForm).pipe(
+            tap(() => {
+                this.messageService.addMessage({
+                    details: ['Propiedad actualizada exitosamente!'],
+                    role: 'success'
+                })
+            }),
+            catchError((error: HttpErrorResponse) => this.handleError(error))
+        )
+    }
+
+
+    private handleError(error: HttpErrorResponse) {
+        const msg = JSON.stringify(error.error);
+        if (error.status == 400) {
+            const errores = Object.values(error.error).map((msg) =>
+                String(msg)
+            );
+            this.messageService.addMessage({
+                details: errores,
+                role: 'error',
+            });
+        }
+        return throwError(() => new Error(msg));
     }
 
 }

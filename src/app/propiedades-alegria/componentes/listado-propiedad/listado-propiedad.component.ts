@@ -29,9 +29,13 @@ export class ListadoPropiedadComponent {
   @Output() eliminarActionEvent = new EventEmitter<number>();
 
 
-  editarAction(propiedad: Propiedad) {}
+  editarAction(propiedad: Propiedad) {
+    this.editarActionEvent.emit(propiedad.id)
+  }
 
-  eliminarAction(propiedad: Propiedad) {}
+  eliminarAction(propiedad: Propiedad) {
+    this.eliminarActionEvent.emit(propiedad.id)
+  }
 
   crearAction() {
     this.crearActionEvent.emit();

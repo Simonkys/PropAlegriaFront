@@ -30,7 +30,7 @@ import { finalize } from 'rxjs';
 export class FormularioPropiedadComponent implements OnInit {
  
 
-  @Input() propiedadId?: number;
+  @Input() propiedad?: Propiedad;
   @Input() propietarioId?: number;
 
   @Output() submitEvent = new EventEmitter<Propiedad>();
@@ -55,7 +55,19 @@ export class FormularioPropiedadComponent implements OnInit {
   })
 
   ngOnInit() {
-    if(this.propietarioId) {
+
+    if(this.propiedad) {
+      this.form.patchValue({
+        direccion_ppdd: this.propiedad.direccion_ppdd,
+        comuna_id: this.propiedad.comuna.id,
+        numero_ppdd: this.propiedad.numero_ppdd,
+        propietario_id: this.propiedad.propietario.id,
+        rol_ppdd: this.propiedad.rol_ppdd,
+        tipopropiedad_id: this.propiedad.tipopropiedad.id
+      })
+      this.form.controls['propietario_id'].disable();
+    }
+    else if(this.propietarioId) {
       this.form.patchValue({propietario_id: this.propietarioId})
       this.form.controls['propietario_id'].disable();
     }
@@ -75,7 +87,32 @@ export class FormularioPropiedadComponent implements OnInit {
       tipopropiedad_id: formValues.tipopropiedad_id!
     }
 
+    if(this.propiedad) {
+      this.crearPropiedad(propiedadForm)
+    } else {
+
+    }
+
+    
+  }
+
+
+  crearPropiedad(propiedadForm: PropiedadForm) {
     this.propiedadService.crearPropiedad(propiedadForm)
+      .pipe(
+        finalize(() => { })
+      )
+      .subscribe({
+        next: (response) => {
+          this.form.reset();
+          this.submitEvent.emit(response);
+        },
+        error: (err) => {}
+      })
+  }
+
+  actualizarPropiedad(propiedadForm: PropiedadForm) {
+    this.propiedadService.actualizarPropiedad(propiedadForm)
       .pipe(
         finalize(() => { })
       )

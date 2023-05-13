@@ -62,7 +62,10 @@
         </div>
     </div>
 
-    <app-ubicacion-form (selectedComunaIdEvent)="handleSelectedComuna($event)"></app-ubicacion-form>
+    <app-ubicacion-form 
+        [initialComunaId]="propiedad?.comuna?.id"
+        (selectedComunaIdEvent)="handleSelectedComuna($event)">
+    </app-ubicacion-form>
     <div class="grid mb-3">
 
         <div class="col flex flex-column gap-2">

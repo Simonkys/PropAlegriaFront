@@ -3,6 +3,7 @@ import { ListadoPropiedadesComponent } from "./listado-propiedades/listado-propi
 import { DetallePropiedadComponent } from "./detalle-propiedad/detalle-propiedad.component";
 import { PropiedadComponent } from "./propiedades.component";
 import { RegistroPropiedadComponent } from "./registro-propiedad/registro-propiedad.component";
+import { ActualizarPropiedadComponent } from "./actualizar-propiedad/actualizar-propiedad.component";
 
 export const PROPIEDADES_ROUTES: Route[] = [
     {
@@ -20,6 +21,10 @@ export const PROPIEDADES_ROUTES: Route[] = [
             {
                 path: ":id/detalle",
                 component: DetallePropiedadComponent
+            },
+            {
+                path: ":id/actualizar",
+                component: ActualizarPropiedadComponent
             }
         ]
     },
