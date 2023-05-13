@@ -1,4 +1,5 @@
 <div class="card">
+    <h4>Trabajadores</h4>
     <p-table #dt1 *ngIf="trabajadores$ | async as trabajadores" [columns]="cols" [value]="trabajadores"
         [paginator]="true" [rows]="5" [globalFilterFields]="globalFilterFields">
         <ng-template pTemplate="caption">

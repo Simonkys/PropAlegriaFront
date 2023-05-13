@@ -2,7 +2,6 @@ import { Component, EventEmitter, Input, OnInit, Output, inject } from '@angular
 import { CommonModule } from '@angular/common';
 import {
     FormBuilder,
-    FormControl,
     ReactiveFormsModule,
     Validators,
 } from '@angular/forms';
@@ -114,27 +113,4 @@ export class TrabajadorFormComponent implements OnInit {
         }
       this.saveEvent.emit({...trabajador, id: this.trabajador?.id})
     }
-
-    /*
-    cuentas = new FormArray<FormGroup>([]);
-
-    nuevaCuentaBancaria() {
-        return this.fb.group({
-            nro_cuenta: ['', [Validators.required]],
-            tipo_cuenta: ['', [Validators.required]],
-            banco: ['', [Validators.required]],
-        });
-    }
-
-    agregarCuenta() {
-        if (this.cuentas.length >= 3) {
-            return;
-        }
-        this.cuentas.push(this.nuevaCuentaBancaria());
-    }
-
-    removerCuenta(idx: number) {
-        this.cuentas.removeAt(idx);
-    }
-    */
 }

@@ -5,7 +5,6 @@ import { RouterOutlet } from "@angular/router";
     standalone: true,
     imports: [RouterOutlet],
     template: ` 
-    <h4>Trabajadores</h4>
     <router-outlet></router-outlet>
 `
 })
