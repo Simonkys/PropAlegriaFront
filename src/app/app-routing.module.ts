@@ -19,32 +19,42 @@ import { AuthService } from './propiedades-alegria/core/services/auth.service';
                         {
                             path: 'dashboard',
                             canActivate: [
-                                //() => inject(AuthService).isStaff()
+                                () => inject(AuthService).isStaff()
                             ],
                             loadChildren: () => import( './propiedades-alegria/dashboard/dashboard.module' ).then((m) => m.DashboardModule),
                         },
                         {
                             path: 'trabajadores',
                             canActivate: [
-                                //() => inject(AuthService).isStaff()
+                                () => inject(AuthService).isStaff()
                             ],
                             loadChildren: () => import( './propiedades-alegria/trabajadores/trabajadores.routes' ).then((m) => m.TRABAJADORES_ROUTES),
                         },
                         {
-                            path: 'usuarios',
-                            canActivate: [  
-                                //() => inject(AuthService).isSuperuser()
-                            ],
-                            loadChildren: () => import( './propiedades-alegria/usuarios/usuarios.routes').then((m) => m.USUARIO_ROUTES),
-                        },
-                        {
                             path: 'propiedades',
+                            canActivate: [
+                                () => inject(AuthService).isStaff()
+                            ],
                             loadChildren: () => import('./propiedades-alegria/propiedades/propiedades.routes').then(m => m.PROPIEDADES_ROUTES)
                         },
                         {
                             path: 'propietarios',
+                            canActivate:[
+                                () => inject(AuthService).isStaff()
+                            ],
                             loadChildren: () => import('./propiedades-alegria/propietarios/propietario.routes').then(m => m.PROPIETARIO_ROUTES)
-                        }
+                        },
+                        {
+                            path: 'usuarios',
+                            canActivate: [  
+                                () => inject(AuthService).isSuperuser()
+                            ],
+                            loadChildren: () => import( './propiedades-alegria/usuarios/usuarios.routes').then((m) => m.USUARIO_ROUTES),
+                        },
+                        {
+                            path: 'empty',
+                            loadComponent: () => import('./propiedades-alegria/pages/empty/empty.component').then(m => m.EmptyComponent)
+                        },
                     ],
                 },
                 {

@@ -1,6 +1,5 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { finalize } from 'rxjs';
 
@@ -57,7 +56,6 @@ import { AuthService } from '../../core/services/auth.service';
 export class LoginComponent {
     authService = inject(AuthService);
     fb = inject(FormBuilder);
-    router = inject(Router);
 
     messages: Message[] = [];
     loading = false;
@@ -79,9 +77,7 @@ export class LoginComponent {
                 })
             )
             .subscribe({
-                next: () => {
-                    this.router.navigate(['/'], { replaceUrl: true });
-                },
+                next: () => {},
                 error: (err) => {
                     this.messages = [
                         {

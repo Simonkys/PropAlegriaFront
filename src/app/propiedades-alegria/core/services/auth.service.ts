@@ -55,11 +55,15 @@ export class AuthService {
     logout() {
         return  this.http.post(`${environment.apiUrl}/logout/?token=${this.getCurrentUser()?.token}`,{}).pipe(
             finalize(() => {
-                localStorage.removeItem(this.userKey);
-                this.userSubject.next(null);
+                this.clearSession();
                 this.router.navigate(['auth/login'], { replaceUrl: true });
             })
         )
+    }
+
+    clearSession() {
+        localStorage.removeItem(this.userKey);
+        this.userSubject.next(null);
     }
 
     isAuthenticated() {

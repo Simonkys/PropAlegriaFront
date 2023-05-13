@@ -11,7 +11,7 @@ export function authGuard() {
     tap(isAuth => {
         if(!isAuth) {
             router.navigate(['auth/login'], { replaceUrl: true });
-        }
+        }           
     })
    )
 

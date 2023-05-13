@@ -17,7 +17,7 @@ import { AppTopBarComponent } from './app.topbar.component';
 import { AppSidebarComponent } from './app.sidebar.component';
 import { AppLayoutComponent } from './app.layout.component';
 import { AppFooterComponent } from './app.footer.component';
-import { MessageModule } from 'primeng/message';
+
 
 @NgModule({
     declarations: [

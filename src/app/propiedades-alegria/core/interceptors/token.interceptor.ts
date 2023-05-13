@@ -6,12 +6,14 @@ import {
 import { inject } from '@angular/core';
 import { catchError, tap, throwError } from 'rxjs';
 import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
 
 export function TokenInterceptor(
     request: HttpRequest<unknown>,
     next: HttpHandlerFn
 ) {
     const authService = inject(AuthService);
+    const router = inject(Router);
 
     const token = authService.getCurrentUser()?.token;
     if (token) {
@@ -27,7 +29,8 @@ export function TokenInterceptor(
         catchError((err) => {
             if(err instanceof HttpErrorResponse && err.status === 403 ) {
                 console.log('INTERCEPTOR',err)
-                authService.logout().subscribe()
+                authService.clearSession()
+                router.navigate(['auth/login'], {replaceUrl: true});
                 return next(request)
             } else {
                 return throwError(() => err);

@@ -1,40 +1,27 @@
-import { OnInit, inject } from '@angular/core';
+import { inject } from '@angular/core';
 import { Component } from '@angular/core';
 import { LayoutService } from './service/app.layout.service';
 import { AuthService } from '../propiedades-alegria/core/services/auth.service';
-import { filter, map } from 'rxjs';
-import { PermisoEnum, PermisoOption } from '../propiedades-alegria/core/models/usuario.model';
-import { PermisoService } from '../propiedades-alegria/core/services/permiso.service';
+import { Subscription, filter, map } from 'rxjs';
+import { Auth } from '../propiedades-alegria/core/models/auth.model';
 
 @Component({
     selector: 'app-menu',
     templateUrl: './app.menu.component.html',
 })
-export class AppMenuComponent implements OnInit {
-
+export class AppMenuComponent {
 
     layoutService = inject(LayoutService) 
     authService = inject(AuthService)
-    permisoService = inject(PermisoService)
-    model: any[] = [];
 
-    
-    ngOnInit(): void {
-        this.authService.user$.pipe(
-            filter(user => user ? true: false),
-            map(user => this.permisoService.mapfromUsuario(user?.usuario!)),
-            map(perm => this.getModelFor(perm))
-        ).subscribe(items => {
-            this.model = [
-                {
-                    label: 'Home',
-                    items: items
-                }
-            ]
-        })
-    }
+    userSub?: Subscription
+    model$ = this.authService.user$.pipe(
+        filter(user =>  user ? true: false),
+        map(user => this.getMenu(user!))
+    )
 
-    getModelFor(userPermOption: PermisoOption) {
+
+    getMenu(user: Auth) {
         const dashboard = {
             label: 'Dashboard',
             icon: 'pi pi-fw pi-home',
@@ -44,11 +31,6 @@ export class AppMenuComponent implements OnInit {
             label: 'Trabajadores',
             icon: 'pi pi-fw pi-user',
             routerLink: ['/trabajadores/listado'],
-        }
-        const usuarios = {
-            label: 'Usuarios',
-            icon: 'pi pi-fw pi-lock',
-            routerLink: ['/usuarios/listado'],
         }
 
         const propiedades = {
@@ -63,17 +45,36 @@ export class AppMenuComponent implements OnInit {
             routerLink: ['/propietarios/listado'],
         }
 
-
-        if(userPermOption.permValue === PermisoEnum.SuperUsuario) {
-            return [dashboard, trabajadores, usuarios, propiedades, propietarios]
+        const usuarios = {
+            label: 'Usuarios',
+            icon: 'pi pi-fw pi-lock',
+            routerLink: ['/usuarios/listado'],
         }
-        if (userPermOption.permValue === PermisoEnum.Staff) {
-            return [dashboard, trabajadores, usuarios, propiedades,  propietarios]
+
+
+        if(user.usuario.is_superuser) {
+            return [
+                {
+                    label: 'Administracion',
+                    items: [dashboard, trabajadores, propiedades, propietarios]
+                },
+                {
+                    label: 'Seguridad',
+                    items: [usuarios]
+                }
+            ]
+        }
+        if (user.usuario.is_staff) {
+            return [
+                {
+                    label: 'Administracion',
+                    items: [dashboard, trabajadores, propiedades, propietarios]
+                },
+            ]
         } else {
-            return [dashboard, trabajadores, usuarios, propiedades, propietarios]
+            return []
         }
-
-
-        
+   
     }
+
 }
