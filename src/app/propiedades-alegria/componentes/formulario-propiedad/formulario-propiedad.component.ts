@@ -88,9 +88,9 @@ export class FormularioPropiedadComponent implements OnInit {
     }
 
     if(this.propiedad) {
-      this.crearPropiedad(propiedadForm)
+      this.actualizarPropiedad({...propiedadForm, id: this.propiedad.id})
     } else {
-
+      this.crearPropiedad(propiedadForm)
     }
 
     
