@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TableModule } from 'primeng/table';
 import { Propiedad } from '../../core/models/propiedad.model';
@@ -23,11 +23,18 @@ export class ListadoPropiedadComponent {
 
   @Input() hidePropietario: boolean = false;
 
+  @Output() crearActionEvent = new EventEmitter<void>();
+  @Output() editarActionEvent = new EventEmitter<number>();
+  @Output() detalleActionEvent = new EventEmitter<number>();
+  @Output() eliminarActionEvent = new EventEmitter<number>();
+
 
   editarAction(propiedad: Propiedad) {}
 
   eliminarAction(propiedad: Propiedad) {}
 
-  crearAction() {}
+  crearAction() {
+    this.crearActionEvent.emit();
+  }
 
 }

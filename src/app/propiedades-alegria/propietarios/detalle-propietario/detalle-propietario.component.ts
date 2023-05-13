@@ -1,7 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PropietarioService } from '../../core/services/propietario.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { forkJoin, map, switchMap } from 'rxjs';
 import { CuentaBancariaService } from '../../core/services/cuenta-bancaria.service';
 import { FormularioCuentaBancariaComponent } from '../../componentes/formulario-cuenta-bancaria/formulario-cuenta-bancaria.component';
@@ -33,6 +33,7 @@ export class DetallePropietarioComponent implements OnInit {
   propiedadesService = inject(PropiedadesService);
 
   route = inject(ActivatedRoute);
+  router = inject(Router);
   
 
   propietario?: Propietario;
@@ -79,5 +80,9 @@ export class DetallePropietarioComponent implements OnInit {
   activarCreacionCuentaBancaria() {
     this.creacionCuentaActiva = true;
   }
+
+  crearPropiedad(propietario: Propietario) {
+    this.router.navigate(['propiedades', 'registro'], {state:  {propietarioId: propietario.id}});
+}
 
 }

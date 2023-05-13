@@ -1,0 +1,8 @@
+<div class="card">
+    <h4>Registro propiedad</h4>
+    <app-formulario-propiedad 
+        [propietarioId]="propietarioId"
+        (cancelEvent)="handleCancelEvent()"
+        (submitEvent)="handleSubmitEvent($event)"
+    />
+</div>

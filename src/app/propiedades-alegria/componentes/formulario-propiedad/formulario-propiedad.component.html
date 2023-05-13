@@ -1,0 +1,108 @@
+<form [formGroup]="form">
+    <div class="grid mb-3">
+        <div class="col flex flex-column gap-2">
+            <span class="p-float-label">
+
+                <input 
+                    type="text" 
+                    pInputText 
+                    placeholder="Av. caupolican 254 depto 23"
+                    formControlName="direccion_ppdd"
+                    [style]="{ width: '100%' }" 
+                />
+                <label>Dirección *</label>
+            </span>
+        </div>
+
+        <div class="col flex flex-column gap-2">
+            <span class="p-float-label">
+
+                <input 
+                    type="text" 
+                    pInputText 
+                    placeholder="134-14123-11230-1234"
+                    formControlName="rol_ppdd"
+                    [style]="{ width: '100%' }" 
+                />
+                <label>Rol</label>
+            </span>
+        </div>
+    </div>
+
+    <div class="grid mb-3">
+        <div class="col flex flex-column gap-2">
+            <span class="p-float-label">
+                <p-dropdown
+                    formControlName="tipopropiedad_id"
+                    [options]="(tipoPropiedades$ | async)!"
+                    optionLabel="nombre_tipoppdd"
+                    optionValue="id"
+                    [style]="{ width: '100%' }"
+                    placeholder="Tipo propiedad"
+                    inputId="float-label"
+                ></p-dropdown>
+                <label for="float-label">Tipo propiedad *</label>
+            </span>
+        </div>
+        <div class="col flex flex-column gap-2">
+            <span class="p-float-label">
+                <input
+                    pKeyFilter="int"
+                    pInputText
+                    formControlName="numero_ppdd"
+                    placeholder="123"
+                    [style]="{ width: '100%' }"
+                />
+                <label>N° de propiedad</label>
+            </span>
+            <small
+                >Solo números son permitidos,
+                <strong>Ej: 123</strong>
+            </small>
+        </div>
+    </div>
+
+    <app-ubicacion-form (selectedComunaIdEvent)="handleSelectedComuna($event)"></app-ubicacion-form>
+    <div class="grid mb-3">
+
+        <div class="col flex flex-column gap-2">
+            <span class="p-float-label">
+                <p-dropdown
+                    formControlName="propietario_id"
+                    [options]="(propietarios$ | async)!"
+                    optionLabel="pri_nom_prop"
+                    optionValue="id"
+                    [style]="{ width: '100%' }"
+                    placeholder="Propietario"
+                    [filter]="true"
+                    [filterBy]="'pri_nom_prop,pri_ape_prop,rut_prop'"
+                    filterPlaceholder="Rut, nombre, apellido"
+                    inputId="float-label"
+                >
+                <ng-template pTemplate="selectedItem" let-propietario>
+                    <div>{{propietario.rut_prop}} ({{propietario.pri_nom_prop}} {{propietario.pri_ape_prop}})  </div>
+                </ng-template>
+                <ng-template pTemplate="item" let-propietario>
+                    <div>{{propietario.rut_prop}} ({{propietario.pri_nom_prop}} {{propietario.pri_ape_prop}})  </div>
+                </ng-template>
+            </p-dropdown>
+                <label for="float-label">Propietario *</label>
+            </span>
+        </div>
+        <div class="col flex flex-column gap-2"></div>
+    </div>
+
+    <div class="flex">
+        <p-button
+            styleClass="mr-3"
+            [disabled]="form.invalid"
+            label="Guardar"
+            (click)="submit()"
+        ></p-button>
+        <p-button
+            label="Cancelar"
+            styleClass="p-button-danger"
+            (click)="cancel()"
+        ></p-button>
+    </div>
+</form>
