@@ -1,76 +1,70 @@
-<ng-container *ngIf="propiedades.length > 0; else NotFound">
-    <p-table [value]="propiedades" [tableStyle]="{ 'min-width': '50rem' }">
-        <ng-template pTemplate="caption">
-            <p-button 
-                *ngIf="crear"
-                class="mr-2" 
-                label="Registrar" 
-                icon="pi pi-plus" 
-                styleClass="p-button-success"
-                (click)="crearAction()"
-            >
-            </p-button>
-        </ng-template>
+<p-table [value]="propiedades" [tableStyle]="{ 'min-width': '50rem' }">
+    <ng-template pTemplate="caption">
+        <p-button 
+            *ngIf="crear"
+            class="mr-2" 
+            label="Registrar" 
+            icon="pi pi-plus" 
+            styleClass="p-button-success"
+            (click)="crearAction()"
+        >
+        </p-button>
+    </ng-template>
 
-        <ng-template pTemplate="header">
-            <tr>
-                <th>Cod</th>
-                <th>Comuna</th>
-                <th>Dirección</th>
-                <th *ngIf="!hidePropietario">Propietario</th>
-                <th>Acciones</th>
-            </tr>
-        </ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Cod</th>
+            <th>Comuna</th>
+            <th>Dirección</th>
+            <th *ngIf="!hidePropietario">Propietario</th>
+            <th>Acciones</th>
+        </tr>
+    </ng-template>
 
-        <ng-template pTemplate="body" let-propiedad>
-            <tr>
-                <td>{{ propiedad.id }}</td>
-                <td>{{ propiedad.comuna.nom_comuna }}</td>
-                <td> {{ propiedad.direccion_ppdd }}
-                    <span *ngIf="propiedad.numero_ppdd">
-                        {{propiedad.tipopropiedad.nombre_tipoppdd}}:
-                        {{ propiedad.numero_ppdd }}
-                    </span>
-                </td>
-                <td *ngIf="!hidePropietario">
-                    <a class="underline" [routerLink]="['/propietarios', propiedad.propietario.id,'detalle']">
-                        {{propiedad.propietario.pri_ape_prop}} {{propiedad.propietario.pri_nom_prop}}
-                    </a>
-                </td>
-                <td >
-                    <div class="flex">
-                        <button
-                            *ngIf="detalle"
-                            pButton
-                            pRipple
-                            icon="pi pi-eye"
-                            class="p-button-rounded p-button-primary mr-2"
-                            [routerLink]="['/propiedades', propiedad.id, 'detalle']"
-                        ></button>
-                        <button
-                            *ngIf="editar"
-                            pButton
-                            pRipple
-                            icon="pi pi-pencil"
-                            class="p-button-rounded p-button-warning mr-2"
-                            (click)="editarAction(propiedad)"
-                        ></button>
-                        <button
-                            *ngIf="eliminar"
-                            pButton
-                            pRipple
-                            icon="pi pi-trash"
-                            class="p-button-rounded p-button-danger mr-2"
-                            (click)="eliminarAction(propiedad)"
-                        ></button>
-                    </div>
-                </td>
-            </tr>
-        </ng-template>
-    </p-table>
+    <ng-template pTemplate="body" let-propiedad>
+        <tr>
+            <td>{{ propiedad.id }}</td>
+            <td>{{ propiedad.comuna.nom_comuna }}</td>
+            <td> {{ propiedad.direccion_ppdd }}
+                <span *ngIf="propiedad.numero_ppdd">
+                    {{propiedad.tipopropiedad.nombre_tipoppdd}}:
+                    {{ propiedad.numero_ppdd }}
+                </span>
+            </td>
+            <td *ngIf="!hidePropietario">
+                <a class="underline" [routerLink]="['/propietarios', propiedad.propietario.id,'detalle']">
+                    {{propiedad.propietario.pri_ape_prop}} {{propiedad.propietario.pri_nom_prop}}
+                </a>
+            </td>
+            <td >
+                <div class="flex">
+                    <button
+                        *ngIf="detalle"
+                        pButton
+                        pRipple
+                        icon="pi pi-eye"
+                        class="p-button-rounded p-button-primary mr-2"
+                        [routerLink]="['/propiedades', propiedad.id, 'detalle']"
+                    ></button>
+                    <button
+                        *ngIf="editar"
+                        pButton
+                        pRipple
+                        icon="pi pi-pencil"
+                        class="p-button-rounded p-button-warning mr-2"
+                        (click)="editarAction(propiedad)"
+                    ></button>
+                    <button
+                        *ngIf="eliminar"
+                        pButton
+                        pRipple
+                        icon="pi pi-trash"
+                        class="p-button-rounded p-button-danger mr-2"
+                        (click)="eliminarAction(propiedad)"
+                    ></button>
+                </div>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
 
-</ng-container>
-
-<ng-template #NotFound>
-    <p >No se encontraron propiedades</p>
-</ng-template>  

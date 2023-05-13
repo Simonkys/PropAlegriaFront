@@ -9,6 +9,7 @@ import { catchError, tap, throwError } from "rxjs";
     { providedIn: 'root'}
 )
 export class PropiedadesService {
+   
     private http = inject(HttpClient);
     private messageService = inject(MessageService);
     private apiUrl = `${environment.apiUrl}/api/propiedad`
@@ -48,6 +49,17 @@ export class PropiedadesService {
             }),
             catchError((error: HttpErrorResponse) => this.handleError(error))
         )
+    }
+
+    eliminarPropiedad(propiedad: Propiedad) {
+       return this.http.delete<void>(`${this.apiUrl}/${propiedad.id}/`).pipe(
+        tap(() => {
+            this.messageService.addMessage({
+                details: ['Propiedad eliminar exitosamente!'],
+                role: 'info'
+            })
+        }),
+       )
     }
 
 
