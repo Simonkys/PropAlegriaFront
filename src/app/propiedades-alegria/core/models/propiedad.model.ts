@@ -27,3 +27,15 @@ export interface Propiedad {
     tipopropiedad: PropiedadTipoPropiedad;
 }
 
+
+export interface PropiedadForm {
+    id?: number;
+
+    direccion_ppdd:   string;
+    numero_ppdd:      number | null;
+    rol_ppdd:         string | null;
+    comuna_id:        number;
+    propietario_id:   number;
+    tipopropiedad_id: number;
+}
+

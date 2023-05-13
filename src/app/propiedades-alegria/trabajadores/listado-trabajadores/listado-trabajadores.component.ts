@@ -44,6 +44,8 @@ export class ListadoTrabajadoresComponent implements OnInit {
 
     cols: { field: string; header: string }[] = [];
 
+    globalFilterFields: string[] = ['rut_trab', 'pri_nom_trab', 'pri_ape_trab']
+
     ngOnInit(): void {
         
         this.cols = [

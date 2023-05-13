@@ -36,10 +36,14 @@
 
     <div class="card">
         <h4>Propiedades</h4>
+        <app-listado-propiedad 
+            [propiedades]="propiedades"
+            [hidePropietario]="true"
+        />
     </div>
 
     <div class="card" *ngIf="creacionCuentaActiva">
-        <h4>Nueva cuenta</h4>
+        <h4>Registro cuenta</h4>
         <app-formulario-cuenta-bancaria 
             [rut_propietario]="propietario.rut_prop"
             (submitEvent)="guardarCuentaBancaria($event)"

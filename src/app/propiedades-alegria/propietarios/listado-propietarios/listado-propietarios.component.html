@@ -1,4 +1,5 @@
 <div class="card" *ngIf="propietarios$ | async as propietarios">
+    <h4>Propietarios</h4>
     <p-table
         [value]="propietarios"
         [tableStyle]="{ 'min-width': '50rem' }"

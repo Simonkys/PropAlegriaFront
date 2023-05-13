@@ -2,18 +2,27 @@ import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PropietarioService } from '../../core/services/propietario.service';
 import { ActivatedRoute } from '@angular/router';
-import { map, switchMap } from 'rxjs';
+import { forkJoin, map, switchMap } from 'rxjs';
 import { CuentaBancariaService } from '../../core/services/cuenta-bancaria.service';
 import { FormularioCuentaBancariaComponent } from '../../componentes/formulario-cuenta-bancaria/formulario-cuenta-bancaria.component';
 import { CuentaBancaria } from '../../core/models/cuenta-bancaria.models';
 import { Propietario } from '../../core/models/propietario.model';
 import { ListadoCuentaBancariaComponent } from '../../componentes/listado-cuenta-bancaria/listado-cuenta-bancaria.component';
 import { ButtonModule } from 'primeng/button';
+import { PropiedadesService } from '../../core/services/propiedades.service';
+import { Propiedad } from '../../core/models/propiedad.model';
+import { ListadoPropiedadComponent } from '../../componentes/listado-propiedad/listado-propiedad.component';
 
 @Component({
   selector: 'app-detalle-propietario',
   standalone: true,
-  imports: [CommonModule, FormularioCuentaBancariaComponent, ListadoCuentaBancariaComponent, ButtonModule],
+  imports: [
+    CommonModule, 
+    FormularioCuentaBancariaComponent, 
+    ListadoCuentaBancariaComponent, 
+    ListadoPropiedadComponent,
+    ButtonModule
+  ],
   templateUrl: './detalle-propietario.component.html',
   styleUrls: ['./detalle-propietario.component.scss']
 })
@@ -21,11 +30,15 @@ import { ButtonModule } from 'primeng/button';
 export class DetallePropietarioComponent implements OnInit {
   propietarioService = inject(PropietarioService);
   cuentaBancariaService = inject(CuentaBancariaService);
+  propiedadesService = inject(PropiedadesService);
+
   route = inject(ActivatedRoute);
   
 
   propietario?: Propietario;
   cuentasBancarias: CuentaBancaria[] = [];
+  propiedades: Propiedad[] = [];
+  
   creacionCuentaActiva: boolean = false;
 
 
@@ -33,12 +46,19 @@ export class DetallePropietarioComponent implements OnInit {
     this.route.paramMap.pipe(
       map(params => Number(params.get('id'))),
       switchMap(id => this.propietarioService.getPropietario(id)),
-      switchMap(propietario => { return this.cuentaBancariaService.getCuentasBancariasByRut(propietario.rut_prop).pipe(
-          map(cuentasBancarias => ({ propietario, cuentasBancarias}))
+      switchMap(propietario => { 
+        const cuentasBancarias$ = this.cuentaBancariaService.getCuentasBancariasByRut(propietario.rut_prop)
+        const propiedades$ = this.propiedadesService.getPropiedadesPorPropietario(propietario.id)
+
+        return forkJoin([propiedades$, cuentasBancarias$]).pipe(
+          map(([propiedades, cuentasBancarias]) => {
+            return { propietario, propiedades, cuentasBancarias }
+          })
         )
       })
-    ).subscribe(({ propietario, cuentasBancarias }) => {
+    ).subscribe(({ propietario, propiedades, cuentasBancarias }) => {
       this.propietario = propietario;
+      this.propiedades = propiedades
       this.cuentasBancarias = cuentasBancarias;
     })
   }
