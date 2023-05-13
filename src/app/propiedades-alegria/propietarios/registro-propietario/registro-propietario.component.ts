@@ -2,7 +2,8 @@ import { Component, inject } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
 import { FormularioPropietarioComponent } from '../../componentes/formulario-propietario/formulario-propietario.component';
 import { ActivatedRoute } from '@angular/router';
-import { Propietario } from '../../core/models/propietario.model';
+import { PropietarioForm } from '../../core/models/propietario.model';
+import { PropietarioService } from '../../core/services/propietario.service';
 
 @Component({
   selector: 'app-registro-propietario',
@@ -18,10 +19,14 @@ export class RegistroPropietarioComponent {
   
   location = inject(Location)
   route = inject(ActivatedRoute)
+  propietarioService = inject(PropietarioService)
 
 
-  handleSubmitEvent(propietario: Propietario) {
-    this.location.back();
+  handleSubmitEvent(propietarioForm: PropietarioForm) {
+    this.propietarioService.registrarPropietario(propietarioForm)
+      .subscribe(() => {
+        this.location.back();
+      })
   }
 
   handleCancelEvent() {

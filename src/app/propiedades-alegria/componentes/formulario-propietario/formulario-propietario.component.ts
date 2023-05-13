@@ -4,10 +4,8 @@ import { ButtonModule } from 'primeng/button';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { Propietario, PropietarioForm } from '../../core/models/propietario.model';
-import { PropietarioService } from '../../core/services/propietario.service';
-import { finalize } from 'rxjs';
 import { KeyFilterModule } from 'primeng/keyfilter';
-import { UbicacionFormComponent } from '../../ubicaciones/ubicacion-form/ubicacion-form.component';
+import { UbicacionFormComponent } from '../ubicacion-form/ubicacion-form.component';
 
 @Component({
   selector: 'app-formulario-propietario',
@@ -27,11 +25,11 @@ export class FormularioPropietarioComponent implements OnInit {
 
   @Input() propietario?: Propietario
 
-  @Output() submitEvent = new EventEmitter<Propietario>();
+  @Output() submitEvent = new EventEmitter<PropietarioForm>();
   @Output() cancelEvent = new EventEmitter<void>();
 
   fb = inject(FormBuilder)
-  propietarioService = inject(PropietarioService)
+  
 
   form = this.fb.group({
     rut_prop: this.fb.nonNullable.control<string>('',
@@ -89,42 +87,13 @@ export class FormularioPropietarioComponent implements OnInit {
       email_prop: values.email_prop!,
       contacto_prop: values.contacto_prop!,
       comuna_id: values.comuna_id!,
+      id: this.propietario?.id
     }
 
-    if(this.propietario) {
-      this.actualizarPropietario({...propietarioForm, id: this.propietario.id});
-    } else {
-      this.registrarPropietario(propietarioForm);
-    }
+    this.submitEvent.emit(propietarioForm);
   }
-
-  registrarPropietario(propietarioForm: PropietarioForm ) {
-    this.propietarioService.registrarPropietario(propietarioForm).pipe(
-      finalize(() => { })
-    ).subscribe({
-      next: (response) => {
-        this.form.reset();
-        this.submitEvent.emit(response);
-      },
-      error: (err) => {}
-    })
-  }
-
-  actualizarPropietario(propietarioForm: PropietarioForm) {
-    this.propietarioService.actualizarPropietario(propietarioForm).pipe(
-      finalize(() => { })
-    ).subscribe({
-      next: (response) => {
-        this.form.reset();
-        this.submitEvent.emit(response);
-      },
-      error: (err) => {}
-    })
-  }
-
 
   cancelar() {
-    this.form.reset();
     this.cancelEvent.emit();
   }
 

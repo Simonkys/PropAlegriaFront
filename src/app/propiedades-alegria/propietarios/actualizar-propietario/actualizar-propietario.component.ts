@@ -3,7 +3,7 @@ import { CommonModule, Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { map, switchMap } from 'rxjs';
 import { PropietarioService } from '../../core/services/propietario.service';
-import { Propietario } from '../../core/models/propietario.model';
+import { PropietarioForm } from '../../core/models/propietario.model';
 import { FormularioPropietarioComponent } from '../../componentes/formulario-propietario/formulario-propietario.component';
 
 
@@ -25,8 +25,11 @@ export class ActualizarPropietarioComponent {
     switchMap(id => this.propietarioService.getPropietario(id))
   )
 
-  handleSubmitEvent(propietario: Propietario) {
-    this.location.back();
+  handleSubmitEvent(propietarioForm: PropietarioForm) {
+    this.propietarioService.actualizarPropietario(propietarioForm)
+      .subscribe(() => {
+        this.location.back();
+      })
   }
 
   handleCancelEvent() {

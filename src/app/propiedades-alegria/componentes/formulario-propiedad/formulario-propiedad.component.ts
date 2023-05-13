@@ -4,7 +4,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { PropiedadesService } from '../../core/services/propiedades.service';
 import { Propiedad, PropiedadForm } from '../../core/models/propiedad.model';
 import { TipoPropiedadesService } from '../../core/services/tipo-propiedades.service';
-import { UbicacionFormComponent } from '../../ubicaciones/ubicacion-form/ubicacion-form.component';
+import { UbicacionFormComponent } from '../ubicacion-form/ubicacion-form.component';
 import { InputTextModule } from 'primeng/inputtext';
 import { DropdownModule } from 'primeng/dropdown';
 import { KeyFilterModule } from 'primeng/keyfilter';
