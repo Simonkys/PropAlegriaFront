@@ -16,6 +16,7 @@
             <th>Email</th>
             <th>Celular</th>
             <th>Rut</th>
+            <th>Estado</th>
             <th>Acciones</th>
         </tr>
     </ng-template>
@@ -26,6 +27,7 @@
             <td>{{arrendatario.correo_arr}}</td>
             <td>{{arrendatario.contancto_arr}}</td>
             <td>{{arrendatario.rut_arr}}</td>
+            <td><p-tag [value]="arrendatario.estado ? 'Activo': 'Inactivo'" [severity]="arrendatario.estado ? 'success': 'danger'"></p-tag></td>
             <td>
                 <div class="flex">
                     <button

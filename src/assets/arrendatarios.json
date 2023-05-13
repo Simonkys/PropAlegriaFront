@@ -22,8 +22,7 @@
       "contancto_arr": "+56987654321",
       "correo_arr": "mariagarcia@mail.com",
       "estado": true,
-      "saldo": 50000,
-      "cuenta": 987654321
+      "saldo": 50000
     },
     {
       "id": 3,
@@ -35,8 +34,7 @@
       "contancto_arr": "+56924681012",
       "correo_arr": "pedrosanchez@mail.com",
       "estado": false,
-      "saldo": 0,
-      "cuenta": 456789123
+      "saldo": 0
     },
     {
       "id": 4,
@@ -48,8 +46,7 @@
       "contancto_arr": "+56936912151",
       "correo_arr": "luisfernandez@mail.com",
       "estado": true,
-      "saldo": 200000,
-      "cuenta": 654321987
+      "saldo": 200000
     },
     {
       "id": 5,
@@ -61,8 +58,7 @@
       "contancto_arr": "+56975395128",
       "correo_arr": "anahernandez@mail.com",
       "estado": true,
-      "saldo": 150000,
-      "cuenta": 789456123
+      "saldo": 150000
     }
   ]
   

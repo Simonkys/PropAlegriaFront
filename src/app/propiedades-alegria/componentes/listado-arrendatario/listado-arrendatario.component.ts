@@ -4,11 +4,12 @@ import { Arrendatario } from '../../core/models/arrendatario.model';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { RouterLink } from '@angular/router';
+import { TagModule } from 'primeng/tag';
 
 @Component({
   selector: 'app-listado-arrendatario',
   standalone: true,
-  imports: [CommonModule, RouterLink, ButtonModule, TableModule],
+  imports: [CommonModule, RouterLink, ButtonModule, TableModule, TagModule],
   templateUrl: './listado-arrendatario.component.html',
   styleUrls: ['./listado-arrendatario.component.scss']
 })

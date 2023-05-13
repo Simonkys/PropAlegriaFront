@@ -20,9 +20,19 @@
             <div class="font-medium">{{arrendatario.correo_arr}}</div>
         </div>
 
-        <div class="col-8">
+        <div class="col-4">
             <div class="text-sm font-bold text-600 mb-1">Celular</div>
             <div class="font-medium">{{arrendatario.contancto_arr}}</div>
+        </div>
+
+        <div class="col-4">
+            <div class="text-sm font-bold text-600 mb-1">Estado</div>
+            <p-tag [value]="arrendatario.estado ? 'Activo': 'Inactivo'" [severity]="arrendatario.estado ? 'success': 'danger'"></p-tag>
+        </div>
+
+        <div class="col-12">
+            <div class="text-sm font-bold text-600 mb-1">Saldo</div>
+            <div class="font-medium">{{arrendatario.saldo | currency}}</div>
         </div>
         <div class="col-4">
             <div class="flex">

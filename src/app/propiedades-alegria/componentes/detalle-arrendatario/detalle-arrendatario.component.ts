@@ -5,12 +5,13 @@ import { ButtonModule } from 'primeng/button';
 import { RouterLink } from '@angular/router';
 import { ConfirmationService } from 'primeng/api';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
+import { TagModule } from 'primeng/tag';
 
 @Component({
   selector: 'app-detalle-arrendatario',
   standalone: true,
   providers: [ConfirmationService],
-  imports: [CommonModule, ButtonModule, RouterLink, ConfirmPopupModule],
+  imports: [CommonModule, ButtonModule, RouterLink, ConfirmPopupModule, TagModule],
   templateUrl: './detalle-arrendatario.component.html',
   styleUrls: ['./detalle-arrendatario.component.scss']
 })
