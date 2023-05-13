@@ -17,7 +17,7 @@ export class ListadoPropiedadComponent {
   @Input() propiedades: Propiedad[] = []
 
   @Input() crear: boolean = true;
-  @Input() editar: boolean = true;
+  @Input() editar: boolean = false;
   @Input() eliminar: boolean = false;
   @Input() detalle: boolean = true;
 

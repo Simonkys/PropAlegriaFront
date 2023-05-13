@@ -31,6 +31,24 @@
                 <div class="text-sm font-bold text-600 mb-1">Celular</div>
                 <div class="font-medium">{{propietario.contacto_prop}}</div>
             </div>
+
+            <div class="col-4">
+                <div class="flex">
+                    <p-button 
+                        icon="pi pi-pencil" 
+                        styleClass="p-button-warning mr-2"
+                        [routerLink]="['/propietarios', propietario.id, 'actualizar']"
+                    >
+                    </p-button>
+                    <p-confirmPopup></p-confirmPopup>
+                    <p-button 
+                        icon="pi pi-trash" 
+                        styleClass="p-button-danger"
+                        (click)="eliminarPropietario($event, propietario)"
+                    >
+                    </p-button>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -40,7 +58,6 @@
             [propiedades]="propiedades"
             [hidePropietario]="true"
             (crearActionEvent)="crearPropiedad(propietario)"
-            (editarActionEvent)="editarPropiedad($event)"
         />
     </div>
 

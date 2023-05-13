@@ -30,22 +30,13 @@
                 <td>{{propietario.contacto_prop}}</td>
                 <td>{{propietario.rut_prop}}</td>
                 <td class="flex">
-                    
-                        <button
-                            pButton
-                            pRipple
-                            icon="pi pi-eye"
-                            class="p-button-rounded p-button-primary mr-2"
-                            [routerLink]="['/propietarios', propietario.id, 'detalle']"
-                        ></button>
-                        <button
-                            pButton
-                            pRipple
-                            icon="pi pi-pencil"
-                            class="p-button-rounded p-button-warning mr-2"
-                            [routerLink]="['/propietarios', propietario.id, 'actualizar']"
-                        ></button>
-                    
+                    <button
+                        pButton
+                        pRipple
+                        icon="pi pi-eye"
+                        class="p-button-rounded p-button-primary mr-2"
+                        [routerLink]="['/propietarios', propietario.id, 'detalle']"
+                    ></button>
                 </td>
             </tr>
         </ng-template>

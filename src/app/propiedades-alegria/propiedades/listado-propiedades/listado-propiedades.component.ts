@@ -18,7 +18,6 @@ import { Router } from '@angular/router';
                 *ngIf="propiedades$ | async as propiedades"
                 [propiedades]="propiedades"
                 (crearActionEvent)="crearPropiedad()"
-                (editarActionEvent)="editarPropiedad($event)"
             />
         </div>
 `
@@ -31,10 +30,5 @@ export class ListadoPropiedadesComponent {
 
     crearPropiedad() {
         this.router.navigate(['propiedades', 'registro'])
-    }
-
-
-    editarPropiedad(propiedadId: number) {
-        this.router.navigate(['propiedades', propiedadId, 'actualizar']);
     }
 }

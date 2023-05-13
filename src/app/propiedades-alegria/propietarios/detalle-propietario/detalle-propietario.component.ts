@@ -1,7 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PropietarioService } from '../../core/services/propietario.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { forkJoin, map, switchMap } from 'rxjs';
 import { CuentaBancariaService } from '../../core/services/cuenta-bancaria.service';
 import { FormularioCuentaBancariaComponent } from '../../componentes/formulario-cuenta-bancaria/formulario-cuenta-bancaria.component';
@@ -12,15 +12,20 @@ import { ButtonModule } from 'primeng/button';
 import { PropiedadesService } from '../../core/services/propiedades.service';
 import { Propiedad } from '../../core/models/propiedad.model';
 import { ListadoPropiedadComponent } from '../../componentes/listado-propiedad/listado-propiedad.component';
+import { ConfirmPopupModule } from 'primeng/confirmpopup';
+import { ConfirmationService } from 'primeng/api';
 
 @Component({
   selector: 'app-detalle-propietario',
   standalone: true,
+  providers: [ConfirmationService],
   imports: [
     CommonModule, 
     FormularioCuentaBancariaComponent, 
     ListadoCuentaBancariaComponent, 
     ListadoPropiedadComponent,
+    RouterLink,
+    ConfirmPopupModule,
     ButtonModule
   ],
   templateUrl: './detalle-propietario.component.html',
@@ -31,6 +36,7 @@ export class DetallePropietarioComponent implements OnInit {
   propietarioService = inject(PropietarioService);
   cuentaBancariaService = inject(CuentaBancariaService);
   propiedadesService = inject(PropiedadesService);
+  confimService = inject(ConfirmationService);
 
   route = inject(ActivatedRoute);
   router = inject(Router);
@@ -85,8 +91,23 @@ export class DetallePropietarioComponent implements OnInit {
     this.router.navigate(['propiedades', 'registro'], {state:  {propietarioId: propietario.id}});
   }
 
-  editarPropiedad(propiedadId: number) {
-    this.router.navigate(['propiedades', propiedadId, 'actualizar']);
-}
+
+  eliminarPropietario(event: Event, propietario: Propietario){
+    this.confimService.confirm({
+      target: event.target || new EventTarget(),
+      message: `¿Estas segur@ de eliminar el propietario`,
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.propietarioService.eliminarPropietario(propietario)
+          .pipe()
+          .subscribe({
+            next: () => {
+              this.router.navigate(['propietarios', 'listado'])
+            },
+            error: (err) => {}
+          })
+      },
+    });
+  }
 
 }

@@ -36,12 +36,18 @@
         </div>
 
         <div class="col-4">
-            <p-confirmPopup></p-confirmPopup>
             <div class="flex">
+                <p-button 
+                    icon="pi pi-pencil" 
+                    styleClass="p-button-warning mr-2"
+                    [routerLink]="['/propiedades', propiedad.id, 'actualizar']"
+                >
+                </p-button>
+                <p-confirmPopup></p-confirmPopup>
                 <p-button
-                label="Eliminar"
-                styleClass="p-button-danger"
-                (click)="eliminarPropiedad($event, propiedad)"
+                    icon="pi pi-trash" 
+                    styleClass="p-button-danger"
+                    (click)="eliminarPropiedad($event, propiedad)"
                 ></p-button>
             </div>
         </div>

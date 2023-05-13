@@ -47,6 +47,18 @@ export class PropietarioService {
         )
     }
 
+    eliminarPropietario(propietario: Propietario) {
+        return this.http.delete<void>(`${this.apiUrl}/${propietario.id}/`).pipe(
+            tap( () =>{
+                this.messageService.addMessage({
+                    details: ['Propietario eliminado exitosamente!'],
+                    role: 'info'
+                })
+            }),
+            catchError((err: HttpErrorResponse) => this.handleError(err))
+        )
+    }
+
     private handleError(error: HttpErrorResponse) {
         const msg = JSON.stringify(error.error);
         if (error.status == 400) {
