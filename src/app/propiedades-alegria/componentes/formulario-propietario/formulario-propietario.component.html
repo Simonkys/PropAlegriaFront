@@ -1,1 +1,90 @@
-<p>formulario-propietario works!</p>
+<form [formGroup]="form">
+    <div class="p-formgrid grid mb-3">
+        <div class="col flex flex-column gap-2">
+            <span class="p-float-label">
+                <input type="text" pInputText formControlName="rut_prop" autofocus placeholder="19.109.516-2"
+                    [style]="{ width: '100%' }" />
+                <label>Rut *</label>
+            </span>
+            <small>Rut con puntos y con guión,
+                <strong> Ej: 11.625.443-8</strong>
+            </small>
+        </div>
+        <div class="col flex flex-column gap-2">
+            <span class="p-float-label">
+                <input type="email" pInputText formControlName="email_prop" placeholder="ejemplo@email.com"
+                    [style]="{ width: '100%' }" />
+                <label>Email *</label>
+            </span>
+        </div>
+    </div>
+
+    <div class="p-formgrid grid mb-3">
+        <div class="col flex flex-column gap-2">
+            <span class="p-float-label">
+                <input type="text" pInputText formControlName="pri_nom_prop" placeholder="Carlos"
+                    [style]="{ width: '100%' }" />
+                <label>Primer nombre *</label>
+            </span>
+        </div>
+        <div class="col flex flex-column gap-2">
+            <span class="p-float-label">
+                <input type="text" pInputText formControlName="seg_nom_prop" placeholder="Gomez"
+                    [style]="{ width: '100%' }" />
+                <label>Segundo nombre *</label>
+            </span>
+        </div>
+    </div>
+
+    <div class="p-formgrid grid mb-3">
+        <div class="col flex flex-column gap-2">
+            <span class="p-float-label">
+                <input type="text" pInputText formControlName="pri_ape_prop" placeholder="Contreras"
+                    [style]="{ width: '100%' }" />
+                <label>Primer apellido *</label>
+            </span>
+        </div>
+        <div class="col flex flex-column gap-2">
+            <span class="p-float-label">
+                <input type="text" pInputText formControlName="seg_ape_prop" class="Gonzales" placeholder="Aguirre"
+                    [style]="{ width: '100%' }" />
+                <label>Segundo apellido *</label>
+            </span>
+        </div>
+    </div>
+    <app-ubicacion-form [initialComunaId]="propietario?.comuna?.id" (selectedComunaIdEvent)="handleSelectedComuna($event)"></app-ubicacion-form>
+
+    <div class="p-formgrid grid mb-3">
+        <div class="col flex flex-column gap-2">
+            <span class="p-float-label">
+                <input type="text" pInputText formControlName="direccion_prop" [style]="{ width: '100%' }"
+                    placeholder="Av. caupolican 254 depto 23" />
+                <label>Dirección *</label>
+            </span>
+        </div>
+        <div class="col flex flex-column gap-2">
+            <span class="p-float-label">
+                <input pKeyFilter="int" pInputText formControlName="contacto_prop" placeholder="92312456"
+                    [style]="{ width: '100%' }" />
+                <label>Celular *</label>
+            </span>
+            <small>Solo números son permitidos,
+                <strong>Ej: 93526734</strong></small>
+        </div>
+    </div>
+
+    <div class="flex">
+        <p-button
+            styleClass="mr-3"
+            [disabled]="form.invalid"
+            label="Guardar"
+            (click)="submit()"
+        ></p-button>
+        <p-button
+            label="Cancelar"
+            styleClass="p-button-danger"
+            (click)="cancelar()"
+        ></p-button>
+    </div>
+
+</form>

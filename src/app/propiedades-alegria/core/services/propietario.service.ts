@@ -2,7 +2,7 @@ import { Injectable, inject } from "@angular/core";
 import { Propietario, PropietarioForm } from "../models/propietario.model";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { environment } from "src/environments/environment";
-import { catchError, throwError } from "rxjs";
+import { catchError, tap, throwError } from "rxjs";
 import { MessageService } from "./message.service";
 
 
@@ -23,8 +23,26 @@ export class PropietarioService {
         return this.http.get<Propietario>(`${this.apiUrl}/${id}/`);
     }
 
-    createPropietario(propietario: PropietarioForm) {
-        return this.http.post<Propietario>(`${this.apiUrl}/`, propietario).pipe(
+    registrarPropietario(propietarioForm: PropietarioForm) {
+        return this.http.post<Propietario>(`${this.apiUrl}/`, propietarioForm).pipe(
+            tap( () => {
+                this.messageService.addMessage({
+                    details: ['Propietario actualizado exitosamente!'],
+                    role: 'success'
+                })
+            }),
+            catchError((err: HttpErrorResponse) => this.handleError(err))
+        )
+    }
+
+    actualizarPropietario(propietarioForm: PropietarioForm) {
+        return this.http.put<Propietario>(`${this.apiUrl}/${propietarioForm.id}/`, propietarioForm).pipe(
+            tap( () => {
+                this.messageService.addMessage({
+                    details: ['Propietario actualizado exitosamente!'],
+                    role: 'success'
+                })
+            }),
             catchError((err: HttpErrorResponse) => this.handleError(err))
         )
     }

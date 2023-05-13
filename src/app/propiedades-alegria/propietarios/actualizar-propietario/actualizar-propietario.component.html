@@ -1,1 +1,11 @@
-<p>actualizar-propietario works!</p>
+<div class="card">
+    <h4>Actualizar propietario</h4>
+    <ng-container *ngIf="propietario$ | async as propietario" >
+        <app-formulario-propietario 
+            [propietario]="propietario"
+            (submitEvent)="handleSubmitEvent($event)"
+            (cancelEvent)="handleCancelEvent()"
+        />
+    </ng-container>
+
+</div>

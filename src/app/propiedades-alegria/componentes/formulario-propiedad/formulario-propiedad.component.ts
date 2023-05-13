@@ -92,9 +92,8 @@ export class FormularioPropiedadComponent implements OnInit {
     } else {
       this.crearPropiedad(propiedadForm)
     }
-
-    
   }
+
 
 
   crearPropiedad(propiedadForm: PropiedadForm) {
