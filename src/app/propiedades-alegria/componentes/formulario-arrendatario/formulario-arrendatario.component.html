@@ -1,1 +1,113 @@
-<p>formulario-arrendatario works!</p>
+<form [formGroup]="form">
+    <div class="grid mb-3">
+        <div class="col flex flex-column gap-2">
+            <span class="p-float-label">
+                <input 
+                    type="text" 
+                    pInputText 
+                    formControlName="rut_arr" 
+                    autofocus 
+                    placeholder="19.109.516-2"
+                    [style]="{ width: '100%' }" />
+                <label>Rut *</label>
+            </span>
+            <small>Rut con puntos y con guión,
+                <strong> Ej: 11.625.443-8</strong>
+            </small>
+        </div>
+        <div class="col flex flex-column gap-2">
+            <span class="p-float-label">
+                <input type="email" pInputText formControlName="correo_arr" placeholder="ejemplo@email.com"
+                    [style]="{ width: '100%' }" />
+                <label>Email *</label>
+            </span>
+        </div>
+    </div>
+
+    <div class="grid mb-3">
+        <div class="col flex flex-column gap-2">
+            <span class="p-float-label">
+                <input type="text" pInputText formControlName="pri_nom_arr" placeholder="Carlos"
+                    [style]="{ width: '100%' }" />
+                <label>Primer nombre *</label>
+            </span>
+        </div>
+        <div class="col flex flex-column gap-2">
+            <span class="p-float-label">
+                <input type="text" pInputText formControlName="seg_nom_arr" placeholder="Gomez"
+                    [style]="{ width: '100%' }" />
+                <label>Segundo nombre</label>
+            </span>
+        </div>
+    </div>
+
+    <div class="grid mb-3">
+        <div class="col flex flex-column gap-2">
+            <span class="p-float-label">
+                <input type="text" pInputText formControlName="pri_ape_arr" placeholder="Contreras"
+                    [style]="{ width: '100%' }" />
+                <label>Primer apellido *</label>
+            </span>
+        </div>
+        <div class="col flex flex-column gap-2">
+            <span class="p-float-label">
+                <input type="text" pInputText formControlName="seg_ape_arr" class="Gonzales" placeholder="Aguirre"
+                    [style]="{ width: '100%' }" />
+                <label>Segundo apellido</label>
+            </span>
+        </div>
+    </div>
+
+    <div class="grid mb-3">
+        <div class="col flex flex-column gap-2">
+            <span class="p-float-label">
+                <input pKeyFilter="int" pInputText formControlName="contacto_arr" placeholder="92312456"
+                    [style]="{ width: '100%' }" />
+                <label>Celular *</label>
+            </span>
+            <small>Solo números son permitidos,
+                <strong>Ej: 93526734</strong></small>
+        </div>
+
+        <div class="col flex flex-column gap-2">
+            <span class="p-float-label" >
+                <p-inputNumber
+                    placeholder="$ 199.123 *"
+                    formControlName="saldo"
+                    prefix="$ "
+                    [style]="{ width: '100%' }"
+                    inputId="integeronly"> 
+                </p-inputNumber>
+                <label>Saldo</label>
+            </span>
+        </div>
+        
+    </div>
+
+    <div class="grid mb-4">
+        <div class="col flex flex-column gap-2">
+            <p-selectButton 
+                [options]="opcionesEstadoArrendatario" 
+                formControlName="estado" 
+                optionLabel="label" 
+                optionValue="value">
+            </p-selectButton>
+        </div>
+        <div class="col flex flex-column gap-2"></div>
+    </div>
+
+
+    <div class="flex">
+        <p-button
+            styleClass="mr-3"
+            [disabled]="form.invalid"
+            label="Guardar"
+            (click)="submit()"
+        ></p-button>
+        <p-button
+            label="Cancelar"
+            styleClass="p-button-danger"
+            (click)="cancel()"
+        ></p-button>
+    </div>
+</form>

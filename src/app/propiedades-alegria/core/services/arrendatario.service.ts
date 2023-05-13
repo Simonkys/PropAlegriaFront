@@ -1,7 +1,7 @@
 import { Injectable, inject } from "@angular/core";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { environment } from "src/environments/environment";
-import { Arrendatario } from "../models/arrendatario.model";
+import { Arrendatario, ArrendatarioForm } from "../models/arrendatario.model";
 import { catchError, map, tap, throwError } from "rxjs";
 import { MessageService } from "./message.service";
 
@@ -16,12 +16,34 @@ export class ArrendatarioService {
 
 
     getArrendatarios() {
-        return this.http.get<Arrendatario[]>('./assets/arrendatarios.json');
+        return this.http.get<Arrendatario[]>(`${this.apiUrl}/`);
     }
 
     getArrendatario(id: number) {
-        return this.http.get<Arrendatario[]>('./assets/arrendatarios.json').pipe(
-            map(data => data.find(d => d.id === id)),
+        return this.http.get<Arrendatario>(`${this.apiUrl}/${id}/`);
+    }
+
+    registrarArrendatario(arrendatarioForm: ArrendatarioForm) {
+        return this.http.post<Arrendatario>(`${this.apiUrl}/`, arrendatarioForm).pipe(
+            tap(() => {
+                this.messageService.addMessage({
+                    details: ['Arrendatario registrado exitosamente!'],
+                    role: 'success'
+                })
+            }),
+            catchError((err: HttpErrorResponse) => this.handleError(err))
+        )
+    }
+
+    actualizarArrendatario(arrendatarioForm: ArrendatarioForm) {
+        return this.http.put<Arrendatario>(`${this.apiUrl}/${arrendatarioForm.id}/`, arrendatarioForm).pipe(
+            tap(() => {
+                this.messageService.addMessage({
+                    details: ['Arrendatario actualizado exitosamente!'],
+                    role: 'success'
+                })
+            }),
+            catchError((err: HttpErrorResponse) => this.handleError(err))
         )
     }
 
