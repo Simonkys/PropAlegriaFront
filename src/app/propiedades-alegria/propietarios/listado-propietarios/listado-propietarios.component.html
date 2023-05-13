@@ -7,7 +7,7 @@
     <ng-template pTemplate="caption">
         <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
             <p-button class="mr-2" label="Registrar" icon="pi pi-plus" styleClass="p-button-success"
-                (click)="gotToRegistroPropietario()">
+                [routerLink]="['/propietarios', 'registro']">
             </p-button>
         </div>
     </ng-template>
@@ -30,15 +30,22 @@
                 <td>{{propietario.contacto_prop}}</td>
                 <td>{{propietario.rut_prop}}</td>
                 <td class="flex">
-                    <div>
+                    
                         <button
                             pButton
                             pRipple
                             icon="pi pi-eye"
                             class="p-button-rounded p-button-primary mr-2"
-                            (click)="detail(propietario)"
+                            [routerLink]="['/propietarios', propietario.id, 'detalle']"
                         ></button>
-                    </div>
+                        <button
+                            pButton
+                            pRipple
+                            icon="pi pi-pencil"
+                            class="p-button-rounded p-button-warning mr-2"
+                            [routerLink]="['/propietarios', propietario.id, 'actualizar']"
+                        ></button>
+                    
                 </td>
             </tr>
         </ng-template>

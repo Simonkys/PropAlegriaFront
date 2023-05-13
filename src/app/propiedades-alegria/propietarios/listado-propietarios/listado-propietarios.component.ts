@@ -4,7 +4,6 @@ import { Router, RouterLink } from '@angular/router';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { PropietarioService } from '../../core/services/propietario.service';
-import { Propietario } from '../../core/models/propietario.model';
 
 @Component({
   selector: 'app-listado-propietarios',
@@ -20,13 +19,5 @@ export class ListadoPropietariosComponent {
 
   propietarios$ = this.propietariosService.getPropietarios();
 
-
-  detail(propiedad: Propietario) {
-    this.router.navigate(['propietarios', propiedad.id, 'detalle']);
-  }
-
-  gotToRegistroPropietario() {
-    this.router.navigate(['propietarios/registro']);
-  }
 
 }
