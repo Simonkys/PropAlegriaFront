@@ -1,1 +1,8 @@
-<p>detalle-arrendatarios-page works!</p>
+<div class="card">
+    <h4>Detalle arrendatario</h4>
+    <app-detalle-arrendatario
+        *ngIf="arrendatario$ | async as arrendatario"
+        [arrendatario]="arrendatario"
+        (eliminarEvent)="eliminar($event)"
+    />
+</div>

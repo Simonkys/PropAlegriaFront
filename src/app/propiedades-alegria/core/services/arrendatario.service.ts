@@ -1,7 +1,9 @@
 import { Injectable, inject } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { environment } from "src/environments/environment";
 import { Arrendatario } from "../models/arrendatario.model";
+import { catchError, map, tap, throwError } from "rxjs";
+import { MessageService } from "./message.service";
 
 
 @Injectable(
@@ -9,10 +11,45 @@ import { Arrendatario } from "../models/arrendatario.model";
 )
 export class ArrendatarioService {
     private http = inject(HttpClient)
-    private apiUrl = `${environment.apiUrl}/api/arrendatario/`
+    private messageService = inject(MessageService)
+    private apiUrl = `${environment.apiUrl}/api/arrendatario`
 
 
     getArrendatarios() {
-        return this.http.get<Arrendatario[]>(this.apiUrl);
+        return this.http.get<Arrendatario[]>('./assets/arrendatarios.json');
+    }
+
+    getArrendatario(id: number) {
+        return this.http.get<Arrendatario[]>('./assets/arrendatarios.json').pipe(
+            map(data => data.find(d => d.id === id)),
+        )
+    }
+
+
+    eliminarArrendatario(arrendatario: Arrendatario) {
+        return this.http.delete(`${this.apiUrl}/${arrendatario.id}/`).pipe(
+            tap( () =>{
+                this.messageService.addMessage({
+                    details: ['Arrendatario eliminado exitosamente!'],
+                    role: 'info'
+                })
+            }),
+            catchError((err: HttpErrorResponse) => this.handleError(err))
+        )
+    }
+
+
+    private handleError(error: HttpErrorResponse) {
+        const msg = JSON.stringify(error.error);
+        if (error.status == 400) {
+            const errores = Object.values(error.error).map((msg) =>
+                String(msg)
+            );
+            this.messageService.addMessage({
+                details: errores,
+                role: 'error',
+            });
+        }
+        return throwError(() => new Error(msg));
     }
 }

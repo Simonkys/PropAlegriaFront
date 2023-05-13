@@ -1,0 +1,46 @@
+<ng-container *ngIf="arrendatario">
+    <div class="grid">
+        <div class="col-4">
+            <div class="text-sm font-bold text-600 mb-1">Rut</div>
+            <div class="font-medium">{{arrendatario.rut_arr}}</div>
+        </div>
+
+        <div class="col-4" >
+            <div class="text-sm font-bold text-600 mb-1">Nombres</div>
+            <div class="font-medium">{{arrendatario.pri_nom_arr}} {{arrendatario.seg_nom_arr}}</div>
+        </div>
+
+        <div class="col-4">
+            <div class="text-sm font-bold text-600 mb-1">Apellidos</div>
+            <div class="font-medium">{{arrendatario.pri_ape_arr}} {{arrendatario.seg_ape_arr}}</div>
+        </div>
+
+        <div class="col-4">
+            <div class="text-sm font-bold text-600 mb-1">Email</div>
+            <div class="font-medium">{{arrendatario.correo_arr}}</div>
+        </div>
+
+        <div class="col-8">
+            <div class="text-sm font-bold text-600 mb-1">Celular</div>
+            <div class="font-medium">{{arrendatario.contancto_arr}}</div>
+        </div>
+        <div class="col-4">
+            <div class="flex">
+                <p-button 
+                    icon="pi pi-pencil" 
+                    styleClass="p-button-warning mr-2"
+                    [routerLink]="['/arrendatarios', arrendatario.id, 'actualizar']"
+                >
+                </p-button>
+                <p-confirmPopup></p-confirmPopup>
+                <p-button 
+                    icon="pi pi-trash" 
+                    styleClass="p-button-danger"
+                    (click)="eliminar($event, arrendatario)"
+                >
+                </p-button>
+            </div>
+        </div>
+        
+    </div>
+</ng-container>
