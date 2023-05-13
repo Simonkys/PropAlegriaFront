@@ -1,1 +1,42 @@
-<p>listado-arrendatario works!</p>
+<p-table [value]="arrendatarios" [tableStyle]="{ 'min-width': '50rem' }">
+    <ng-template pTemplate="caption">
+        <p-button 
+            class="mr-2" 
+            label="Registrar" 
+            icon="pi pi-plus" 
+            styleClass="p-button-success"
+            [routerLink]="['/arrendatarios', 'registro']"
+        >
+        </p-button>
+    </ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Cod</th>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Celular</th>
+            <th>Rut</th>
+            <th>Acciones</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-arrendatario>
+        <tr>
+            <td>{{arrendatario.id}}</td>
+            <td>{{arrendatario.pri_nom_arr}} {{arrendatario.pri_ape_arr}}</td>
+            <td>{{arrendatario.correo_arr}}</td>
+            <td>{{arrendatario.contancto_arr}}</td>
+            <td>{{arrendatario.rut_arr}}</td>
+            <td>
+                <div class="flex">
+                    <button
+                        pButton
+                        pRipple
+                        icon="pi pi-eye"
+                        class="p-button-rounded p-button-primary mr-2"
+                        [routerLink]="['/arrendatarios', arrendatario.id, 'detalle']"
+                    ></button>
+                </div>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>

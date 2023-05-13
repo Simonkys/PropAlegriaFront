@@ -1,13 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ListadoArrendatarioComponent } from '../../componentes/listado-arrendatario/listado-arrendatario.component';
+import { ArrendatarioService } from '../../core/services/arrendatario.service';
 
 @Component({
   selector: 'app-listado-arrendatarios-page',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ListadoArrendatarioComponent],
   templateUrl: './listado-arrendatarios-page.component.html',
   styleUrls: ['./listado-arrendatarios-page.component.scss']
 })
 export class ListadoArrendatariosPageComponent {
+
+  arrendatariosService = inject(ArrendatarioService)
+
+  arrendatarios$ = this.arrendatariosService.getArrendatarios();
 
 }
