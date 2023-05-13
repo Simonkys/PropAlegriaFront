@@ -64,7 +64,13 @@ export class AuthService {
 
     isAuthenticated() {
         return this.user$.pipe(
-            map(user => user ? true: false)
+            map(user => {
+                if(!user) { return false }
+                const {token, usuario} = user;
+                if(!token) {return false}
+                if(!usuario) { return false; }
+                return usuario.id ? true: false;
+            })
         )
     }
 
