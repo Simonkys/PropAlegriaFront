@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Arrendatario } from '../../core/models/arrendatario.model';
+import { Arrendatario } from '../../arrendatario.model';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { RouterLink } from '@angular/router';

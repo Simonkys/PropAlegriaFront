@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, inject, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Arrendatario, ArrendatarioForm } from '../../core/models/arrendatario.model';
+import { Arrendatario, ArrendatarioForm } from '../../arrendatario.model';
 import { InputTextModule } from 'primeng/inputtext';
 import { KeyFilterModule } from 'primeng/keyfilter';
 import { ButtonModule } from 'primeng/button';

@@ -1,9 +1,9 @@
 import { Route } from "@angular/router";
 import { ArrendatarioComponent } from "./arrendatario.component";
-import { ListadoArrendatariosPageComponent } from "./listado-arrendatarios-page/listado-arrendatarios-page.component";
-import { RegistroArrendatariosPageComponent } from "./registro-arrendatarios-page/registro-arrendatarios-page.component";
-import { DetalleArrendatariosPageComponent } from "./detalle-arrendatarios-page/detalle-arrendatarios-page.component";
-import { ActualizarArrendatariosPageComponent } from "./actualizar-arrendatarios-page/actualizar-arrendatarios-page.component";
+import { ListadoArrendatariosPageComponent } from "./pages/listado-arrendatarios-page/listado-arrendatarios-page.component";
+import { RegistroArrendatariosPageComponent } from "./pages/registro-arrendatarios-page/registro-arrendatarios-page.component";
+import { DetalleArrendatariosPageComponent } from "./pages/detalle-arrendatarios-page/detalle-arrendatarios-page.component";
+import { ActualizarArrendatariosPageComponent } from "./pages/actualizar-arrendatarios-page/actualizar-arrendatarios-page.component";
 
 
 export const ARRENDATARIO_ROUTES: Route[] = [

@@ -1,6 +1,6 @@
 import { Component, Input, Output, inject, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Arrendatario } from '../../core/models/arrendatario.model';
+import { Arrendatario } from '../../arrendatario.model';
 import { ButtonModule } from 'primeng/button';
 import { RouterLink } from '@angular/router';
 import { ConfirmationService } from 'primeng/api';

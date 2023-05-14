@@ -1,8 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
-import { FormularioArrendatarioComponent } from '../../componentes/formulario-arrendatario/formulario-arrendatario.component';
-import { ArrendatarioService } from '../../core/services/arrendatario.service';
-import { ArrendatarioForm } from '../../core/models/arrendatario.model';
+import { FormularioArrendatarioComponent } from '../../components/formulario-arrendatario/formulario-arrendatario.component';
+import { ArrendatarioService } from '../../arrendatario.service';
+import { ArrendatarioForm } from '../../arrendatario.model';
 import { ActivatedRoute } from '@angular/router';
 import { map, switchMap } from 'rxjs';
 

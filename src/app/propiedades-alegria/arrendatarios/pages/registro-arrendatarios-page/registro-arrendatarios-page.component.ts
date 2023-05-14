@@ -1,8 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
-import { ArrendatarioForm } from '../../core/models/arrendatario.model';
-import { ArrendatarioService } from '../../core/services/arrendatario.service';
-import { FormularioArrendatarioComponent } from '../../componentes/formulario-arrendatario/formulario-arrendatario.component';
+import { ArrendatarioForm } from '../../arrendatario.model';
+import { ArrendatarioService } from '../../arrendatario.service';
+import { FormularioArrendatarioComponent } from '../../components/formulario-arrendatario/formulario-arrendatario.component';
 
 @Component({
   selector: 'app-registro-arrendatarios-page',

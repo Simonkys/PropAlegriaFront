@@ -9,7 +9,7 @@ import { PropiedadesService } from '../core/services/propiedades.service';
 import { TipoPropiedadesService } from '../core/services/tipo-propiedades.service';
 import { PropietarioService } from '../core/services/propietario.service';
 import { PersonalidadJuridicaService } from '../core/services/personalidad-juridica.service';
-import { ArrendatarioService } from '../core/services/arrendatario.service';
+import { ArrendatarioService } from '../arrendatarios/arrendatario.service';
 import { ArriendoService } from '../core/services/arriendo.service';
 import { CuentaBancariaService } from '../core/services/cuenta-bancaria.service';
 import { DetalleArriendoService } from '../core/services/detalle-arriendo.service';

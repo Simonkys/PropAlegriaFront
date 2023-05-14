@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ListadoArrendatarioComponent } from '../../componentes/listado-arrendatario/listado-arrendatario.component';
-import { ArrendatarioService } from '../../core/services/arrendatario.service';
+import { ListadoArrendatarioComponent } from '../../components/listado-arrendatario/listado-arrendatario.component';
+import { ArrendatarioService } from '../../arrendatario.service';
 
 @Component({
   selector: 'app-listado-arrendatarios-page',
