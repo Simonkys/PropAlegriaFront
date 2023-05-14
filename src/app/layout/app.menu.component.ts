@@ -41,13 +41,13 @@ export class AppMenuComponent {
 
         const propietarios = {
             label: 'Propietarios',
-            icon: 'pi pi-fw pi-user',
+            icon: 'pi pi-fw pi-id-card',
             routerLink: ['/propietarios/listado'],
         }
 
         const arrendatarios = {
             label: 'Arrendatarios',
-            icon: 'pi pi-fw pi-user',
+            icon: 'pi pi-fw pi-users',
             routerLink: ['/arrendatarios/listado'],
         }
 
