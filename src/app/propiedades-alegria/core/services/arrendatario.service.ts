@@ -64,9 +64,7 @@ export class ArrendatarioService {
     private handleError(error: HttpErrorResponse) {
         const msg = JSON.stringify(error.error);
         if (error.status == 400) {
-            const errores = Object.values(error.error).map((msg) =>
-                String(msg)
-            );
+            const errores = Object.entries(error.error).map((msg) =>`${msg[0].toUpperCase()}: ${msg[1]}`);
             this.messageService.addMessage({
                 details: errores,
                 role: 'error',
