@@ -1,5 +1,5 @@
 interface ArriendoArrendatario {
-    id: string;
+    id: number;
     rut_arr: string;
     pri_nom_arr: string;
     seg_nom_arr: string | null;
@@ -8,8 +8,13 @@ interface ArriendoArrendatario {
     correo_arr: string;
 }
 
+interface ArriendoPropiedad {
+    id: number;
+}
+
 export interface Arriendo{
-    id?: number;
+    id: number;
+
     cod_arriendo: number;
     fecha_inicio: Date;
     fech_termino: Date;
@@ -20,5 +25,23 @@ export interface Arriendo{
     estado_arriendo: string;
     porcentaje_multa: number;
 
-    arrendatario_id: ArriendoArrendatario;
+    arrendatario: ArriendoArrendatario;
+    propiedad: ArriendoPropiedad | null;
+}
+
+export interface ArriendoForm{
+    id?: number;
+
+    cod_arriendo: number;
+    fecha_inicio: Date;
+    fech_termino: Date;
+    fecha_pri_ajuste: Date;
+    periodo_reajuste: Date;
+    monto_arriendo: number;
+    fecha_entrega: Date;
+    estado_arriendo: string;
+    porcentaje_multa: number;
+
+    arrendatario_id: number;
+    propiedad_id: number | null;
 }

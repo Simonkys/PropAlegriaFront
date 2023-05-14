@@ -1,5 +1,5 @@
 export interface Arrendatario {
-    id?: number;
+    id: number;
     rut_arr: string;
     pri_nom_arr: string;
     seg_nom_arr: string | null;

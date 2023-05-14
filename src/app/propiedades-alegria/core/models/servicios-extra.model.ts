@@ -1,8 +1,8 @@
 export interface ServicioExtra {
-    id? : number;
+    id?: number;
     nom_servicio: string;
     descripcion: string;
     fecha: Date;
     Monto: number;
-    arriendo_id: number;
+    arriendo: number;
 }
