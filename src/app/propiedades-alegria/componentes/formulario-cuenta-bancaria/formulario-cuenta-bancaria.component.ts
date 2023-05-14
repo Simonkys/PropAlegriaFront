@@ -28,8 +28,8 @@ export class FormularioCuentaBancariaComponent implements OnInit {
   bancos$ = this.bancoService.getBancos()
 
   form = this.fb.group({
-    cuenta: this.fb.control<number | null>(null, [Validators.required]),
-    estado_cuenta: this.fb.control<string>({value: 'Primaria', disabled: true}, [Validators.required]),
+    cuenta: this.fb.control<number | null>(null, [Validators.required, Validators.maxLength(16)]),
+    estado_cuenta: this.fb.control<string>({value: 'Primaria', disabled: true}, [Validators.required, Validators.maxLength(100)]),
     propietario_rut: this.fb.control<string>('', [Validators.required]),
     banco_id: this.fb.control<number | null>(null, [Validators.required]),
     tipo_cuenta_id: this.fb.control<number | null>(null, [Validators.required])
