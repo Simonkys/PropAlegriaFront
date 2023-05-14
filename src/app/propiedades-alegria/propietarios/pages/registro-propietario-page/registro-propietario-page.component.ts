@@ -1,21 +1,21 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
-import { FormularioPropietarioComponent } from '../../componentes/formulario-propietario/formulario-propietario.component';
+import { FormularioPropietarioComponent } from '../../components/formulario-propietario/formulario-propietario.component';
 import { ActivatedRoute } from '@angular/router';
-import { PropietarioForm } from '../../core/models/propietario.model';
-import { PropietarioService } from '../../core/services/propietario.service';
+import { PropietarioForm } from '../../propietario.model';
+import { PropietarioService } from '../../propietario.service';
 
 @Component({
-  selector: 'app-registro-propietario',
+  selector: 'app-registro-propietario-page',
   standalone: true,
   imports: [
     CommonModule, 
     FormularioPropietarioComponent
   ],
-  templateUrl: './registro-propietario.component.html',
-  styleUrls: ['./registro-propietario.component.scss']
+  templateUrl: './registro-propietario-page.component.html',
+  styleUrls: ['./registro-propietario-page.component.scss']
 })
-export class RegistroPropietarioComponent {
+export class RegistroPropietarioPageComponent {
   
   location = inject(Location)
   route = inject(ActivatedRoute)

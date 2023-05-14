@@ -9,7 +9,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { DropdownModule } from 'primeng/dropdown';
 import { KeyFilterModule } from 'primeng/keyfilter';
 import { ButtonModule } from 'primeng/button';
-import { PropietarioService } from '../../core/services/propietario.service';
+import { PropietarioService } from '../../propietarios/propietario.service';
 import { finalize } from 'rxjs';
 
 @Component({

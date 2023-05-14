@@ -2,19 +2,19 @@ import { Component, inject } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { map, switchMap } from 'rxjs';
-import { PropietarioService } from '../../core/services/propietario.service';
-import { PropietarioForm } from '../../core/models/propietario.model';
-import { FormularioPropietarioComponent } from '../../componentes/formulario-propietario/formulario-propietario.component';
+import { PropietarioService } from '../../propietario.service';
+import { PropietarioForm } from '../../propietario.model';
+import { FormularioPropietarioComponent } from '../../components/formulario-propietario/formulario-propietario.component';
 
 
 @Component({
-  selector: 'app-actualizar-propietario',
+  selector: 'app-actualizar-propietario-page',
   standalone: true,
   imports: [CommonModule, FormularioPropietarioComponent],
-  templateUrl: './actualizar-propietario.component.html',
-  styleUrls: ['./actualizar-propietario.component.scss']
+  templateUrl: './actualizar-propietario-page.component.html',
+  styleUrls: ['./actualizar-propietario-page.component.scss']
 })
-export class ActualizarPropietarioComponent {
+export class ActualizarPropietarioPageComponent {
 
   propietarioService = inject(PropietarioService)
   location = inject(Location)

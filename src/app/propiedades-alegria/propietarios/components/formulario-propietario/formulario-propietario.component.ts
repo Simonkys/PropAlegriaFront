@@ -3,9 +3,9 @@ import { CommonModule } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
-import { Propietario, PropietarioForm } from '../../core/models/propietario.model';
+import { Propietario, PropietarioForm } from '../../propietario.model';
 import { KeyFilterModule } from 'primeng/keyfilter';
-import { UbicacionFormComponent } from '../ubicacion-form/ubicacion-form.component';
+import { UbicacionFormComponent } from '../../../componentes/ubicacion-form/ubicacion-form.component';
 
 @Component({
   selector: 'app-formulario-propietario',

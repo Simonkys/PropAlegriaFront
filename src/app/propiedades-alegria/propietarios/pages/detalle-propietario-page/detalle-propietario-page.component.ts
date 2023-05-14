@@ -1,22 +1,22 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PropietarioService } from '../../core/services/propietario.service';
+import { PropietarioService } from '../../propietario.service';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { forkJoin, map, switchMap } from 'rxjs';
-import { CuentaBancariaService } from '../../core/services/cuenta-bancaria.service';
-import { FormularioCuentaBancariaComponent } from '../../componentes/formulario-cuenta-bancaria/formulario-cuenta-bancaria.component';
-import { CuentaBancaria, CuentaBancariaForm } from '../../core/models/cuenta-bancaria.models';
-import { Propietario } from '../../core/models/propietario.model';
-import { ListadoCuentaBancariaComponent } from '../../componentes/listado-cuenta-bancaria/listado-cuenta-bancaria.component';
+import { CuentaBancariaService } from '../../../core/services/cuenta-bancaria.service';
+import { FormularioCuentaBancariaComponent } from '../../../componentes/formulario-cuenta-bancaria/formulario-cuenta-bancaria.component';
+import { CuentaBancaria, CuentaBancariaForm } from '../../../core/models/cuenta-bancaria.models';
+import { Propietario } from '../../propietario.model';
+import { ListadoCuentaBancariaComponent } from '../../../componentes/listado-cuenta-bancaria/listado-cuenta-bancaria.component';
 import { ButtonModule } from 'primeng/button';
-import { PropiedadesService } from '../../core/services/propiedades.service';
-import { Propiedad } from '../../core/models/propiedad.model';
-import { ListadoPropiedadComponent } from '../../componentes/listado-propiedad/listado-propiedad.component';
+import { PropiedadesService } from '../../../core/services/propiedades.service';
+import { Propiedad } from '../../../core/models/propiedad.model';
+import { ListadoPropiedadComponent } from '../../../componentes/listado-propiedad/listado-propiedad.component';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { ConfirmationService } from 'primeng/api';
 
 @Component({
-  selector: 'app-detalle-propietario',
+  selector: 'app-detalle-propietario-page',
   standalone: true,
   providers: [ConfirmationService],
   imports: [
@@ -28,11 +28,11 @@ import { ConfirmationService } from 'primeng/api';
     ConfirmPopupModule,
     ButtonModule
   ],
-  templateUrl: './detalle-propietario.component.html',
-  styleUrls: ['./detalle-propietario.component.scss']
+  templateUrl: './detalle-propietario-page.component.html',
+  styleUrls: ['./detalle-propietario-page.component.scss']
 })
 
-export class DetallePropietarioComponent implements OnInit {
+export class DetallePropietarioPageComponent implements OnInit {
   propietarioService = inject(PropietarioService);
   cuentaBancariaService = inject(CuentaBancariaService);
   propiedadesService = inject(PropiedadesService);

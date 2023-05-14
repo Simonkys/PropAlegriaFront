@@ -7,7 +7,7 @@ import { LayoutService } from 'src/app/layout/service/app.layout.service';
 
 import { PropiedadesService } from '../core/services/propiedades.service';
 import { TipoPropiedadesService } from '../core/services/tipo-propiedades.service';
-import { PropietarioService } from '../core/services/propietario.service';
+import { PropietarioService } from '../propietarios/propietario.service';
 import { PersonalidadJuridicaService } from '../core/services/personalidad-juridica.service';
 import { ArrendatarioService } from '../arrendatarios/arrendatario.service';
 import { ArriendoService } from '../core/services/arriendo.service';

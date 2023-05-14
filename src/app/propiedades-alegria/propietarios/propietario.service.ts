@@ -1,9 +1,9 @@
 import { Injectable, inject } from "@angular/core";
-import { Propietario, PropietarioForm } from "../models/propietario.model";
+import { Propietario, PropietarioForm } from "./propietario.model";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { environment } from "src/environments/environment";
 import { catchError, tap, throwError } from "rxjs";
-import { MessageService } from "./message.service";
+import { MessageService } from "../core/services/message.service";
 
 
 @Injectable(

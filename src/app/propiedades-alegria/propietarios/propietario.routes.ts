@@ -1,9 +1,9 @@
 import { Route } from "@angular/router";
 import { PropietarioComponent } from "./propietario.component";
-import { DetallePropietarioComponent } from "./detalle-propietario/detalle-propietario.component";
-import { ListadoPropietariosComponent } from "./listado-propietarios/listado-propietarios.component";
-import { RegistroPropietarioComponent } from "./registro-propietario/registro-propietario.component";
-import { ActualizarPropietarioComponent } from "./actualizar-propietario/actualizar-propietario.component";
+import { DetallePropietarioPageComponent } from "./pages/detalle-propietario-page/detalle-propietario-page.component";
+import { ListadoPropietariosPageComponent } from "./pages/listado-propietarios-page/listado-propietarios-page.component";
+import { RegistroPropietarioPageComponent } from "./pages/registro-propietario-page/registro-propietario-page.component";
+import { ActualizarPropietarioPageComponent } from "./pages/actualizar-propietario-page/actualizar-propietario-page.component";
 
 export const PROPIETARIO_ROUTES: Route[] = [
     {
@@ -12,19 +12,19 @@ export const PROPIETARIO_ROUTES: Route[] = [
         children: [
             {
                 path: "listado",
-                component: ListadoPropietariosComponent
+                component: ListadoPropietariosPageComponent
             },
             {
                 path: 'registro',
-                component: RegistroPropietarioComponent
+                component: RegistroPropietarioPageComponent
             },
             {
                 path: ":id/detalle",
-                component: DetallePropietarioComponent
+                component: DetallePropietarioPageComponent
             },
             {
                 path: ":id/actualizar",
-                component: ActualizarPropietarioComponent
+                component: ActualizarPropietarioPageComponent
             }        
         ]
     },
