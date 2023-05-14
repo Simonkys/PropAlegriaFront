@@ -33,10 +33,10 @@ import { Trabajador, TrabajadorForm } from '../../core/models/trabajador.model';
     styleUrls: ['./trabajador-form.component.scss'],
 })
 export class TrabajadorFormComponent implements OnInit {
-    
+
     fb = inject(FormBuilder);
     trabajadorService = inject(TrabajadorService);
-    
+
     @Input() trabajador?: Trabajador
     @Output() saveEvent = new EventEmitter<TrabajadorForm>()
     @Output() cancelEvent = new EventEmitter<boolean>()
@@ -45,32 +45,22 @@ export class TrabajadorFormComponent implements OnInit {
     tipoTrabajador$ = this.trabajadorService.getTipoDeTrabajadores();
 
 
-    trabajadorForm = this.fb.group({
-        rut_trab: this.fb.nonNullable.control<string>('', 
-            [ 
-                Validators.required, 
-                Validators.pattern(/^(\d{1,2}(?:\.\d{1,3}){2}-[\dkK])$/),
-            ],
-        ),
-        pri_nom_trab: this.fb.nonNullable.control<string>('', [Validators.required]), 
-        seg_nom_trab: this.fb.control<string>('', [Validators.required]),
-        pri_ape_trab: this.fb.nonNullable.control<string>('', [Validators.required]), 
-        seg_ape_trab: this.fb.control<string>('', [Validators.required]),
-        email: this.fb.control<string>('', [Validators.required, Validators.email]),
+    form = this.fb.group({
+        rut_trab: this.fb.nonNullable.control<string>('', [Validators.required, Validators.pattern(/^(\d{1,2}(?:\.\d{1,3}){2}-[\dkK])$/)]),
+        pri_nom_trab: this.fb.nonNullable.control<string>('', [Validators.required, Validators.maxLength(50)]),
+        seg_nom_trab: this.fb.control<string>('', [Validators.maxLength(50)]),
+        pri_ape_trab: this.fb.nonNullable.control<string>('', [Validators.required, Validators.maxLength(50)]),
+        seg_ape_trab: this.fb.control<string>('', [Validators.maxLength(50)]),
+        email: this.fb.control<string>('', [Validators.email]),
         comuna_id: this.fb.control<number | null>(null, [Validators.required]),
-        celular: this.fb.control<number | null>(null, [
-            Validators.required,
-            Validators.minLength(4),
-            Validators.maxLength(15),
-        ],),
-        direccion: this.fb.nonNullable.control<string>('', [Validators.required]),
-        tipo_trab: this.fb.control<number | null>(null, [ Validators.required,]),
-        usuario_id: this.fb.control<number | null>(null)
+        celular: this.fb.control<number | null>(null, [Validators.required, Validators.minLength(4), Validators.maxLength(15)]),
+        direccion: this.fb.nonNullable.control<string>('', [Validators.required, Validators.maxLength(255)]),
+        tipo_trab: this.fb.control<number | null>(null, [Validators.required]),
     });
 
     ngOnInit(): void {
-        if(this.trabajador) {
-            this.trabajadorForm.patchValue({
+        if (this.trabajador) {
+            this.form.patchValue({
                 rut_trab: this.trabajador.rut_trab,
                 pri_nom_trab: this.trabajador.pri_nom_trab,
                 seg_nom_trab: this.trabajador.seg_nom_trab,
@@ -81,23 +71,18 @@ export class TrabajadorFormComponent implements OnInit {
                 celular: this.trabajador.celular,
                 tipo_trab: this.trabajador.tipo_trab.id,
                 direccion: this.trabajador.direccion,
-                usuario_id: this.trabajador.usuario_id?.id
             })
         }
     }
 
-    cancelar() {
-        this.cancelEvent.emit(true)
+    handleSelectedComuna(comunaId: number | null) {
+        this.form.patchValue({ comuna_id: comunaId })
     }
 
-    handleSelectedComuna(comunaId: number | null){
-        this.trabajadorForm.patchValue({comuna_id: comunaId})
-    }
+    submit() {
+        if (this.form.invalid) return;
 
-    guardarTrabajador() {
-        if (this.trabajadorForm.invalid) return;
-
-        const values = this.trabajadorForm.getRawValue();
+        const values = this.form.getRawValue();
         const trabajador: TrabajadorForm = {
             rut_trab: values.rut_trab,
             pri_nom_trab: values.pri_nom_trab,
@@ -107,10 +92,14 @@ export class TrabajadorFormComponent implements OnInit {
             email: values.email,
             comuna_id: values.comuna_id!,
             celular: values.celular!,
-            tipo_trab: values.tipo_trab!,
+            tipo_trab_id: values.tipo_trab!,
             direccion: values.direccion,
-            usuario_id: values.usuario_id
+            id: this.trabajador?.id
         }
-      this.saveEvent.emit({...trabajador, id: this.trabajador?.id})
+        this.saveEvent.emit(trabajador)
+    }
+
+    cancelar() {
+        this.cancelEvent.emit(true)
     }
 }

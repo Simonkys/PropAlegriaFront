@@ -60,8 +60,8 @@ export interface TrabajadorForm {
     celular: number;
 
     comuna_id: number;
-    tipo_trab: number;
+    tipo_trab_id: number;
+    usuario?: number;
 
-    usuario_id: number | null;
     email: string | null;
 }

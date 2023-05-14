@@ -145,7 +145,7 @@ export class RegistroUsuarioComponent {
                     switchMap((user) => {
                         return this.trabajadorService.pathValue({
                             id: this.trabajadorSeleccionado?.id,
-                            usuario_id: user.id
+                            usuario: user.id
                         })
                     })
                 )
