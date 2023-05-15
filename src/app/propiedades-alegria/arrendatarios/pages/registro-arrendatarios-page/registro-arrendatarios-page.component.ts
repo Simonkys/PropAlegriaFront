@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
+
 import { ArrendatarioForm } from '../../arrendatario.model';
 import { ArrendatarioService } from '../../arrendatario.service';
 import { FormularioArrendatarioComponent } from '../../components/formulario-arrendatario/formulario-arrendatario.component';

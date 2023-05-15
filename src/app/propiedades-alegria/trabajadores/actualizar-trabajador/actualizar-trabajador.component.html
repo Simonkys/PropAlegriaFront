@@ -1,6 +1,9 @@
 <div class="card">
-    <div class="mb-4">
-        <h5>Actualizar Empleado</h5>
-    </div>
-    <app-trabajador-form *ngIf="trabajador$ | async as trab" [trabajador]="trab" (cancelEvent)="cancelar()" (saveEvent)="guardarTrabajador($event)"></app-trabajador-form>
+    <h4>Actualizar trabajador</h4>
+    <app-trabajador-form 
+        *ngIf="trabajador$ | async as trabajador" 
+        [trabajador]="trabajador" 
+        (saveEvent)="submit($event)"
+        (cancelEvent)="cancelar()"
+    />
 </div>

@@ -1,4 +1,8 @@
 <div class="card">
     <h4>Registro trabajador</h4>
-    <app-trabajador-form (cancelEvent)="cancelar()" (saveEvent)="guardarTrabajador($event)"></app-trabajador-form>
+    <app-trabajador-form 
+        (saveEvent)="submit($event)"
+        (cancelEvent)="cancelar()" 
+    />
+    
 </div>

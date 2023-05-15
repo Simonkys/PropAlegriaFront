@@ -1,8 +1,7 @@
 import { Component, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { finalize } from 'rxjs';
+import { CommonModule, Location } from '@angular/common';
+
 import { TrabajadorService } from 'src/app/propiedades-alegria/core/services/trabajador.service';
-import { Router } from '@angular/router';
 import { TrabajadorFormComponent } from '../trabajador-form/trabajador-form.component';
 import { TrabajadorForm } from '../../core/models/trabajador.model';
 
@@ -15,31 +14,18 @@ import { TrabajadorForm } from '../../core/models/trabajador.model';
     styleUrls: ['./registro-trabajador.component.scss'],
 })
 export class RegistroTrabajadorComponent {
+
     trabajadorService = inject(TrabajadorService);
-    router = inject(Router);
-    loading = false;
 
-    ngOnInit(): void {}
+    location = inject(Location);
 
-    cancelar() {
-        this.router.navigate(['trabajadores/listado']);
+    submit(trabajadorForm: TrabajadorForm) {
+        this.trabajadorService.crearTrabajador(trabajadorForm)
+            .pipe()
+            .subscribe(() => this.location.back())
     }
 
-    guardarTrabajador(trabajador: TrabajadorForm) {
-        this.loading = true;
-        this.trabajadorService
-            .crearTrabajador(trabajador)
-            .pipe(
-                finalize(() => {
-                    window.scrollTo(0, 0);
-                    this.loading = false;
-                })
-            )
-            .subscribe({
-                next: (res) => {
-                    this.router.navigate(['trabajadores/listado']);
-                },
-                error: (err) => {},
-            });
+    cancelar() {
+        this.location.back()
     }
 }

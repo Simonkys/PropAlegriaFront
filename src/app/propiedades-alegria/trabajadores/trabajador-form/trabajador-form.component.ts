@@ -34,13 +34,13 @@ import { Trabajador, TrabajadorForm } from '../../core/models/trabajador.model';
 })
 export class TrabajadorFormComponent implements OnInit {
 
+    @Input() trabajador?: Trabajador
+
+    @Output() saveEvent = new EventEmitter<TrabajadorForm>()
+    @Output() cancelEvent = new EventEmitter()
+    
     fb = inject(FormBuilder);
     trabajadorService = inject(TrabajadorService);
-
-    @Input() trabajador?: Trabajador
-    @Output() saveEvent = new EventEmitter<TrabajadorForm>()
-    @Output() cancelEvent = new EventEmitter<boolean>()
-
 
     tipoTrabajador$ = this.trabajadorService.getTipoDeTrabajadores();
 
@@ -100,6 +100,6 @@ export class TrabajadorFormComponent implements OnInit {
     }
 
     cancelar() {
-        this.cancelEvent.emit(true)
+        this.cancelEvent.emit()
     }
 }
