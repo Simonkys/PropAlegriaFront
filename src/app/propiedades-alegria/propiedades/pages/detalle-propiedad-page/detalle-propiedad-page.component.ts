@@ -9,14 +9,14 @@ import { Propiedad } from 'src/app/propiedades-alegria/propiedades/propiedad.mod
 import { PropiedadesService } from 'src/app/propiedades-alegria/propiedades/propiedades.service';
 
 @Component({
-  selector: 'app-detalle-propiedad',
+  selector: 'app-detalle-propiedad-page',
   standalone: true,
   providers: [ConfirmationService],
   imports: [CommonModule, RouterLink, ButtonModule, ConfirmPopupModule],
-  templateUrl: './detalle-propiedad.component.html',
-  styleUrls: ['./detalle-propiedad.component.scss']
+  templateUrl: './detalle-propiedad-page.component.html',
+  styleUrls: ['./detalle-propiedad-page.component.scss']
 })
-export class DetallePropiedadComponent {
+export class DetallePropiedadPageComponent {
 
   propiedadService = inject(PropiedadesService)
   route = inject(ActivatedRoute)

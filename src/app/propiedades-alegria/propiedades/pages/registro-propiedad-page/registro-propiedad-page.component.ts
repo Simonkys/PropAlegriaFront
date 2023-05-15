@@ -6,13 +6,13 @@ import { Propiedad } from 'src/app/propiedades-alegria/propiedades/propiedad.mod
 import { FormularioPropiedadComponent } from '../../components/formulario-propiedad/formulario-propiedad.component';
 
 @Component({
-  selector: 'app-registro-propiedad',
+  selector: 'app-registro-propiedad-page',
   standalone: true,
   imports: [CommonModule, FormularioPropiedadComponent],
-  templateUrl: './registro-propiedad.component.html',
-  styleUrls: ['./registro-propiedad.component.scss']
+  templateUrl: './registro-propiedad-page.component.html',
+  styleUrls: ['./registro-propiedad-page.component.scss']
 })
-export class RegistroPropiedadComponent implements OnInit {
+export class RegistroPropiedadPageComponent implements OnInit {
 
   router = inject(Router);
   route = inject(ActivatedRoute);

@@ -7,13 +7,13 @@ import { PropiedadesService } from 'src/app/propiedades-alegria/propiedades/prop
 import { FormularioPropiedadComponent } from '../../components/formulario-propiedad/formulario-propiedad.component';
 
 @Component({
-  selector: 'app-actualizar-propiedad',
+  selector: 'app-actualizar-propiedad-page',
   standalone: true,
   imports: [CommonModule, FormularioPropiedadComponent],
-  templateUrl: './actualizar-propiedad.component.html',
-  styleUrls: ['./actualizar-propiedad.component.scss']
+  templateUrl: './actualizar-propiedad-page.component.html',
+  styleUrls: ['./actualizar-propiedad-page.component.scss']
 })
-export class ActualizarPropiedadComponent {
+export class ActualizarPropiedadPageComponent {
 
   propiedadService = inject(PropiedadesService)
   route = inject(ActivatedRoute)

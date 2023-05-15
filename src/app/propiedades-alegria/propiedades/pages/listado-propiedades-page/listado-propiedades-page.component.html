@@ -1,0 +1,8 @@
+<div class="card" >
+    <h4>Propiedades</h4>
+    <app-listado-propiedad
+        *ngIf="propiedades$ | async as propiedades"
+        [propiedades]="propiedades"
+        (crearActionEvent)="registrarPropiedad()"
+    />
+</div>

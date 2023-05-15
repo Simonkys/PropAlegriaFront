@@ -5,30 +5,19 @@ import { ListadoPropiedadComponent } from '../../components/listado-propiedad/li
 import { PropiedadesService } from 'src/app/propiedades-alegria/propiedades/propiedades.service';
 
 @Component({
-    selector: 'app-listado-propiedades',
+    selector: 'app-listado-propiedades-page',
     standalone: true,
-    imports: [
-        CommonModule, 
-        ListadoPropiedadComponent,
-    ],
-    template: `
-        <div class="card" >
-            <h4>Propiedades</h4>
-            <app-listado-propiedad
-                *ngIf="propiedades$ | async as propiedades"
-                [propiedades]="propiedades"
-                (crearActionEvent)="crearPropiedad()"
-            />
-        </div>
-`
+    imports: [ CommonModule, ListadoPropiedadComponent],
+    templateUrl: "./listado-propiedades-page.component.html",
+    styleUrls: ['./listado-propiedades-page.component.scss']
 })
-export class ListadoPropiedadesComponent {
+export class ListadoPropiedadesPageComponent {
     propiedadesService = inject(PropiedadesService);
     router = inject(Router);
 
     propiedades$ = this.propiedadesService.getPropiedades();
 
-    crearPropiedad() {
+    registrarPropiedad() {
         this.router.navigate(['propiedades', 'registro'])
     }
 }
