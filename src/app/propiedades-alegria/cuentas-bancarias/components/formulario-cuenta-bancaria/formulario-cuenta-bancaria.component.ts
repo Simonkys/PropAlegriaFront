@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { BancoService } from '../../core/services/banco.service';
-import {  CuentaBancariaForm } from '../../core/models/cuenta-bancaria.models';
+import { BancoService } from '../../banco.service';
+import {  CuentaBancariaForm } from '../../cuenta-bancaria.models';
 import { ButtonModule } from 'primeng/button';
 import { KeyFilterModule } from 'primeng/keyfilter';
 import { InputTextModule } from 'primeng/inputtext';

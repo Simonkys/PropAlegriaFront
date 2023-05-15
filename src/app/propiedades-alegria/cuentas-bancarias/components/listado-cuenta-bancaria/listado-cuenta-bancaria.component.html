@@ -5,7 +5,7 @@
             label="Registrar" 
             icon="pi pi-plus" 
             styleClass="p-button-success"
-            (click)="registroCuentaBancariaEvent()"
+            (click)="registro()"
         >
         </p-button>
     </ng-template>
@@ -32,7 +32,7 @@
                         pRipple
                         icon="pi pi-trash"
                         class="p-button-rounded p-button-danger"
-                        (click)="eliminarCuentaBancaria($event, cuenta)"
+                        (click)="eliminar($event, cuenta)"
                     ></button>
                 </div>
             </td>

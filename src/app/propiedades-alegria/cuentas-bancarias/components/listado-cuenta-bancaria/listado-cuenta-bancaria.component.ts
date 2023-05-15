@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CuentaBancaria } from '../../core/models/cuenta-bancaria.models';
+import { CuentaBancaria } from '../../cuenta-bancaria.models';
 import { ConfirmationService } from 'primeng/api';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { ButtonModule } from 'primeng/button';
@@ -22,7 +22,7 @@ export class ListadoCuentaBancariaComponent {
   
   confimService = inject(ConfirmationService);
 
-  eliminarCuentaBancaria(event: Event, cuenta: CuentaBancaria) {
+  eliminar(event: Event, cuenta: CuentaBancaria) {
     this.confimService.confirm({
       target: event.target || new EventTarget(),
       message: `¿Estas segur@ de eliminar la cuenta`,
@@ -34,7 +34,7 @@ export class ListadoCuentaBancariaComponent {
   }
 
 
-  registroCuentaBancariaEvent() {
+  registro() {
     this.registroEvent.emit();
   }
 }

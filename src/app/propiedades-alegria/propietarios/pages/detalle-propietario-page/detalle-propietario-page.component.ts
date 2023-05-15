@@ -5,10 +5,10 @@ import { forkJoin, map, switchMap } from 'rxjs';
 
 import { PropietarioService } from '../../propietario.service';
 import { Propietario } from '../../propietario.model';
-import { CuentaBancariaService } from '../../../core/services/cuenta-bancaria.service';
-import { CuentaBancaria, CuentaBancariaForm } from '../../../core/models/cuenta-bancaria.models';
-import { FormularioCuentaBancariaComponent } from '../../../componentes/formulario-cuenta-bancaria/formulario-cuenta-bancaria.component';
-import { ListadoCuentaBancariaComponent } from '../../../componentes/listado-cuenta-bancaria/listado-cuenta-bancaria.component';
+import { CuentaBancariaService } from '../../../cuentas-bancarias/cuenta-bancaria.service';
+import { CuentaBancaria, CuentaBancariaForm } from '../../../cuentas-bancarias/cuenta-bancaria.models';
+import { FormularioCuentaBancariaComponent } from '../../../cuentas-bancarias/components/formulario-cuenta-bancaria/formulario-cuenta-bancaria.component';
+import { ListadoCuentaBancariaComponent } from '../../../cuentas-bancarias/components/listado-cuenta-bancaria/listado-cuenta-bancaria.component';
 import { PropiedadesService } from '../../../propiedades/propiedades.service';
 import { Propiedad } from '../../../propiedades/propiedad.model';
 import { ListadoPropiedadComponent } from 'src/app/propiedades-alegria/propiedades/components/listado-propiedad/listado-propiedad.component';

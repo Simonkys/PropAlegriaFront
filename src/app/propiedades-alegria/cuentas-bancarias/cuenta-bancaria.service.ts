@@ -1,9 +1,9 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { CuentaBancaria, CuentaBancariaForm } from '../models/cuenta-bancaria.models';
+import { CuentaBancaria, CuentaBancariaForm } from './cuenta-bancaria.models';
 import { Observable, catchError, tap, throwError } from 'rxjs';
-import { MessageService } from './message.service';
+import { MessageService } from '../core/services/message.service';
 
 @Injectable({
     providedIn: 'root',
