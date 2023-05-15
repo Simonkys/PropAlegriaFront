@@ -68,7 +68,7 @@ export class ListadoTrabajadoresPageComponent implements OnInit {
             icon: 'pi pi-exclamation-triangle',
             accept: () => {
                 this.trabajadorService
-                    .eliminarTrabajador(trabajador.id!)
+                    .eliminarTrabajador(trabajador)
                     .pipe(finalize(() => {}))
                     .subscribe();
             },

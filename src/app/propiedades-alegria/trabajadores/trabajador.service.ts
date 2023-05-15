@@ -109,13 +109,13 @@ export class TrabajadorService {
         );
     }
 
-    eliminarTrabajador(trabajadorId: number) {
+    eliminarTrabajador(trabajador: Trabajador) {
         return this.http
-            .delete(`${environment.apiUrl}/api/trabajador/${trabajadorId}/`)
+            .delete(`${environment.apiUrl}/api/trabajador/${trabajador.id}/`)
             .pipe(
                 tap((_) => {
                     const filterData = this.trabajadorSubject.value.filter(
-                        (d) => d.id !== trabajadorId
+                        (d) => d.id !== trabajador.id
                     );
                     this.trabajadorSubject.next([...filterData]);
                     this.messageService.addMessage({

@@ -1,0 +1,54 @@
+<ng-container *ngIf="trabajador">
+    <div class="grid">
+        <div class="col-4">
+            <div class="text-sm font-bold text-600 mb-1">Rut</div>
+            <div class="font-medium">{{trabajador.rut_trab}}</div>
+        </div>
+
+        <div class="col-4">
+            <div class="text-sm font-bold text-600 mb-1">Nombres</div>
+            <div class="font-medium">{{trabajador.pri_nom_trab}} {{trabajador.seg_nom_trab}}</div>
+        </div>
+
+        <div class="col-4">
+            <div class="text-sm font-bold text-600 mb-1">Apellidos</div>
+            <div class="font-medium">{{trabajador.pri_ape_trab}} {{trabajador.seg_ape_trab}}</div>
+        </div>
+
+        <div class="col-4">
+            <div class="text-sm font-bold text-600 mb-1">Dirección</div>
+            <div class="font-medium">{{trabajador.direccion}}, {{trabajador.comuna.nom_com}}</div>
+        </div>
+
+        <div class="col-4">
+            <div class="text-sm font-bold text-600 mb-1">Email</div>
+            <div class="font-medium">{{trabajador.email ?? '- - - -'}}</div>
+        </div>
+
+        <div class="col-4">
+            <div class="text-sm font-bold text-600 mb-1">Celular</div>
+            <div class="font-medium">{{trabajador.celular}}</div>
+        </div>
+        <div class="col-4">
+            <div class="text-sm font-bold text-600 mb-1">Tipo Trabajador</div>
+            <div class="font-medium">{{trabajador.tipo_trab.tipo}}</div>
+        </div>
+        <div class="col-4">
+            <div class="flex">
+                <p-button 
+                    icon="pi pi-pencil" 
+                    styleClass="p-button-warning mr-2"
+                    (click)="actualizar()"
+                >
+                </p-button>
+                <p-confirmPopup></p-confirmPopup>
+                <p-button 
+                    icon="pi pi-trash" 
+                    styleClass="p-button-danger"
+                    (click)="eliminar($event)"
+                >
+                </p-button>
+            </div>
+        </div>
+    </div>
+</ng-container>
