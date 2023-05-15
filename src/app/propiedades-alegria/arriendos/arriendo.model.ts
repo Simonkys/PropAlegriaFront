@@ -15,14 +15,14 @@ interface ArriendoPropiedad {
 export interface Arriendo{
     id: number;
 
-    cod_arriendo: number;
+    cod_arriendo: string | null;
     fecha_inicio: Date;
     fech_termino: Date;
     fecha_pri_ajuste: Date;
-    periodo_reajuste: Date;
+    periodo_reajuste: number;
     monto_arriendo: number;
-    fecha_entrega: Date;
-    estado_arriendo: string;
+    fecha_entrega: Date | null;
+    estado_arriendo: boolean;
     porcentaje_multa: number;
 
     arrendatario: ArriendoArrendatario;
@@ -32,14 +32,14 @@ export interface Arriendo{
 export interface ArriendoForm{
     id?: number;
 
-    cod_arriendo: number;
+    cod_arriendo: string | null;
     fecha_inicio: Date;
     fech_termino: Date;
     fecha_pri_ajuste: Date;
-    periodo_reajuste: Date;
+    periodo_reajuste: number;
     monto_arriendo: number;
-    fecha_entrega: Date;
-    estado_arriendo: string;
+    fecha_entrega: Date | null;
+    estado_arriendo: boolean;
     porcentaje_multa: number;
 
     arrendatario_id: number;
