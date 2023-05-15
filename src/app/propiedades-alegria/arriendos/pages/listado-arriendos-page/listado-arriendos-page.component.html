@@ -1,3 +1,9 @@
 <div class="card">
     <h4>Arriendos</h4>
+    <app-listado-arriendos 
+        *ngIf="arriendos$ | async as arriendos"
+        [arriendos]="arriendos"
+        (detalleEvent)="handleDetailEvent($event)"
+        (registrarEvent)="handleRegistrarEvent()"
+    />
 </div>

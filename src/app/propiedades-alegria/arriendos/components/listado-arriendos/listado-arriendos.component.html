@@ -1,1 +1,34 @@
-<p>listado-arriendos works!</p>
+<p-table [value]="arriendos" [tableStyle]="{ 'min-width': '50rem' }">
+    <ng-template pTemplate="caption">
+        <p-button 
+            class="mr-2" 
+            label="Registrar" 
+            icon="pi pi-plus" 
+            styleClass="p-button-success"
+            (click)="registrar()"
+        >
+        </p-button>
+    </ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Cod</th>
+            <th>Acciones</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-arriendo>
+        <tr>
+            <td>{{arriendo.id}}</td>
+            <td>
+                <div class="flex">
+                    <button
+                        pButton
+                        pRipple
+                        icon="pi pi-search"
+                        class="p-button-rounded p-button-primary mr-2"
+                        (detalle)="detalle(arriendo)"
+                    ></button>
+                </div>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
