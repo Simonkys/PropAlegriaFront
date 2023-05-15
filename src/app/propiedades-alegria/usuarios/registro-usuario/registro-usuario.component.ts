@@ -19,8 +19,7 @@ import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { TrabajadorService } from '../../trabajadores/trabajador.service';
 import { map, startWith, switchMap } from 'rxjs';
 
-import { TipoTrabajador, TipoTrabajadorEnum, Trabajador,
-} from '../../trabajadores/trabajador.model';
+import { TipoTrabajador, TipoTrabajadorEnum, Trabajador} from '../../trabajadores/trabajador.model';
 import { UsuarioService } from '../../core/services/usuario.service';
 import { PermisoEnum } from '../../core/models/usuario.model';
 import { PermisoService } from '../../core/services/permiso.service';
@@ -83,9 +82,7 @@ export class RegistroUsuarioComponent {
                 Validators.required,
                 Validators.minLength(6),
                 Validators.maxLength(15),
-                Validators.pattern(
-                    /(?=(.*[0-9]))(?=.*[\!@#$%^&*()\\[\]{}\-_+=~`|:;"'<>,./?])(?=.*[a-z])(?=(.*[A-Z]))(?=(.*)).{6,15}/
-                ),
+                Validators.pattern(/(?=(.*[0-9]))(?=.*[\!@#$%^&*()\\[\]{}\-_+=~`|:;"'<>,./?])(?=.*[a-z])(?=(.*[A-Z]))(?=(.*)).{6,15}/),
             ]
         }),
         permisos: new FormControl<PermisoEnum>(PermisoEnum.Simple, {nonNullable: true}),

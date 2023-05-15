@@ -2,25 +2,27 @@ interface ArriendoArrendatario {
     id: number;
     rut_arr: string;
     pri_nom_arr: string;
-    seg_nom_arr: string | null;
     pri_ape_arr: string;
-    seg_ape_arr: string | null;
-    correo_arr: string;
 }
 
 interface ArriendoPropiedad {
     id: number;
+    direccion_ppdd: string;
+    numero_ppdd: string | null;
 }
 
 export interface Arriendo{
     id: number;
 
     cod_arriendo: string | null;
+
     fecha_inicio: Date;
-    fech_termino: Date;
-    fecha_pri_ajuste: Date;
+    fecha_termino: Date;
+    fecha_pri_ajuste: Date | null;
+
     periodo_reajuste: number;
     monto_arriendo: number;
+
     fecha_entrega: Date | null;
     estado_arriendo: boolean;
     porcentaje_multa: number;
@@ -33,11 +35,14 @@ export interface ArriendoForm{
     id?: number;
 
     cod_arriendo: string | null;
+
     fecha_inicio: Date;
-    fech_termino: Date;
-    fecha_pri_ajuste: Date;
+    fecha_termino: Date;
+    fecha_pri_ajuste: Date | null;
+
     periodo_reajuste: number;
     monto_arriendo: number;
+
     fecha_entrega: Date | null;
     estado_arriendo: boolean;
     porcentaje_multa: number;

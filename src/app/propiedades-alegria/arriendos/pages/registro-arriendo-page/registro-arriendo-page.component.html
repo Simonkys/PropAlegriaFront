@@ -1,6 +1,7 @@
 <div class="card">
     <h4>Registro arriendo</h4>
-    <app-formulario-arriendo 
+    <app-formulario-arriendo
+        (submitEvent)="handleSubmitEvent($event)"
         (cancelEvent)="handleCancelEvent()"
     />
 </div>

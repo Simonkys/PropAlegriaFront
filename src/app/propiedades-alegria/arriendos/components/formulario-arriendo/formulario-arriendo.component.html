@@ -13,7 +13,82 @@
             </span>
         </div>
         <div class="col flex flex-column gap-2">
-            
+            <span class="p-float-label">
+                <p-calendar formControlName="fecha_inicio" [showIcon]="true" [style]="{ width: '100%' }"></p-calendar>
+                <label>Fecha de inicio *</label>
+            </span>
+        </div>
+    </div>
+
+    <div class="grid mb-3">
+        <div class="col flex flex-column gap-2">
+            <span class="p-float-label">
+                <p-calendar formControlName="fecha_termino" [showIcon]="true" [style]="{ width: '100%' }"></p-calendar>
+                <label>Fecha de término *</label>
+            </span>
+        </div>
+
+        <div class="col flex flex-column gap-2">
+            <span class="p-float-label">
+                <p-calendar formControlName="fecha_pri_ajuste" [showIcon]="true" [style]="{ width: '100%' }"></p-calendar>
+                <label>Fecha del primer reajuste *</label>
+            </span>
+        </div>
+    </div>
+
+    <div class="grid mb-3">
+        <div class="col flex flex-column gap-2">
+            <span class="p-float-label">
+                <p-dropdown  formControlName="periodo_reajuste" [options]="periodos_reajuste" [style]="{ width: '100%' }">
+                    <ng-template let-periodo pTemplate="selectedItem">{{periodo}} meses.</ng-template>
+                    <ng-template let-periodo pTemplate="item">{{periodo}} meses.</ng-template>
+                </p-dropdown>
+                <label>Periodo de reajuste *</label>
+                <small>En meses</small>
+            </span>
+        </div>
+        <div class="col flex flex-column gap-2">
+            <span class="p-float-label" >
+                <p-inputNumber
+                    placeholder="$ 199.123 *"
+                    formControlName="monto_arriendo"
+                    prefix="$ "
+                    [style]="{ width: '100%' }"
+                    inputId="integeronly"> 
+                </p-inputNumber>
+                <label>Monto arriendo</label>
+            </span>
+        </div>
+    </div>
+
+    <div class="grid mb-3">
+        <div class="col flex flex-column gap-2">
+            <span class="p-float-label">
+                <p-calendar formControlName="fecha_entrega" [showIcon]="true" [style]="{ width: '100%' }"></p-calendar>
+                <label>Fecha de entrega</label>
+            </span>
+        </div>
+
+        <div class="col flex flex-column gap-2">
+            <span class="p-float-label">
+                <input pKeyFilter="int" pInputText formControlName="porcentaje_multa" placeholder="50 %"
+                    [style]="{ width: '100%' }" />
+                <label>Porcentaje de multa *</label>
+            </span>
+            <small>Solo números son permitidos 1-100 %</small>
+        </div>        
+    </div>
+
+    <div class="grid mb-4">
+        <div class="col flex flex-column gap-2">
+            <p-selectButton 
+                [options]="opcionesEstadoArriendo" 
+                formControlName="estado_arriendo" 
+                optionLabel="label" 
+                optionValue="value"
+                [style]="{ width: '100%' }"
+            >
+            </p-selectButton>
         </div>
     </div>
 
@@ -30,6 +105,4 @@
             (click)="cancel()"
         ></p-button>
     </div>
-
-
 </form>

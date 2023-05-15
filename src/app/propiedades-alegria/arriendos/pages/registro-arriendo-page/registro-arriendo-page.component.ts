@@ -1,6 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
 import { FormularioArriendoComponent } from '../../components/formulario-arriendo/formulario-arriendo.component';
+import { ArriendoForm } from '../../arriendo.model';
+import { ArriendoService } from '../../arriendo.service';
 
 
 @Component({
@@ -13,8 +15,13 @@ import { FormularioArriendoComponent } from '../../components/formulario-arriend
 export class RegistroArriendoPageComponent {
 
   location = inject(Location)
+  arriendoService = inject(ArriendoService)
 
 
+
+  handleSubmitEvent(formularioArriendo: ArriendoForm) {
+    this.arriendoService.createArriendo(formularioArriendo).subscribe()
+  }
 
   handleCancelEvent() {
     this.location.back()
