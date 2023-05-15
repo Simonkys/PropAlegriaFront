@@ -1,9 +1,11 @@
 import { Route } from '@angular/router';
+
 import { TrabajadorComponent } from './trabajador.component';
-import { ListadoTrabajadoresComponent } from './listado-trabajadores/listado-trabajadores.component';
-import { RegistroTrabajadorComponent } from './registro-trabajador/registro-trabajador.component';
-import { ActualizarTrabajadorComponent } from './actualizar-trabajador/actualizar-trabajador.component';
-import { DetalleTrabajadorComponent } from './detalle-trabajador/detalle-trabajador.component';
+
+import { ListadoTrabajadoresPageComponent } from './pages/listado-trabajadores-page/listado-trabajadores-page.component';
+import { RegistroTrabajadorPageComponent } from './pages/registro-trabajador-page/registro-trabajador-page.component';
+import { ActualizarTrabajadorPageComponent } from './pages/actualizar-trabajador-page/actualizar-trabajador-page.component';
+import { DetalleTrabajadorPageComponent } from './pages/detalle-trabajador-page/detalle-trabajador-page.component';
 
 export const TRABAJADORES_ROUTES: Route[] = [
     {
@@ -12,19 +14,19 @@ export const TRABAJADORES_ROUTES: Route[] = [
         children: [
             {
                 path: 'listado',
-                component: ListadoTrabajadoresComponent 
+                component: ListadoTrabajadoresPageComponent 
             },
             {
                 path: 'registro',
-                component: RegistroTrabajadorComponent                    
+                component: RegistroTrabajadorPageComponent                    
             },
             {
                 path: ':id/actualizar',
-                component: ActualizarTrabajadorComponent
+                component: ActualizarTrabajadorPageComponent
             },
             {
                 path: ':id/detalle',
-                component: DetalleTrabajadorComponent
+                component: DetalleTrabajadorPageComponent
             },
         ],
     },

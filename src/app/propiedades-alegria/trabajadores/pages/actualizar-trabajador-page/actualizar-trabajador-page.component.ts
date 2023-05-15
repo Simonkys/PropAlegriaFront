@@ -1,20 +1,21 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
-import { map, switchMap } from 'rxjs';
-import { TrabajadorService } from 'src/app/propiedades-alegria/core/services/trabajador.service';
 import { ActivatedRoute } from '@angular/router';
-import { TrabajadorFormComponent } from '../trabajador-form/trabajador-form.component';
-import { TrabajadorForm } from '../../core/models/trabajador.model';
+import { map, switchMap } from 'rxjs';
+
+import { TrabajadorService } from 'src/app/propiedades-alegria/trabajadores/trabajador.service';
+import { TrabajadorFormComponent } from '../../components/trabajador-form/trabajador-form.component';
+import { TrabajadorForm } from '../../trabajador.model';
 
 
 @Component({
-    selector: 'app-actualizar-trabajador',
+    selector: 'app-actualizar-trabajador-page',
     standalone: true,
     imports: [CommonModule, TrabajadorFormComponent],
-    templateUrl: './actualizar-trabajador.component.html',
-    styleUrls: ['./actualizar-trabajador.component.scss'],
+    templateUrl: './actualizar-trabajador-page.component.html',
+    styleUrls: ['./actualizar-trabajador-page.component.scss'],
 })
-export class ActualizarTrabajadorComponent {
+export class ActualizarTrabajadorPageComponent {
 
     trabajadorService = inject(TrabajadorService)
     location = inject(Location)

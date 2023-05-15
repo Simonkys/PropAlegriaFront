@@ -16,11 +16,11 @@ import { SelectButtonModule } from 'primeng/selectbutton';
 import { ConfirmationService } from 'primeng/api';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
 
-import { TrabajadorService } from '../../core/services/trabajador.service';
+import { TrabajadorService } from '../../trabajadores/trabajador.service';
 import { map, startWith, switchMap } from 'rxjs';
 
 import { TipoTrabajador, TipoTrabajadorEnum, Trabajador,
-} from '../../core/models/trabajador.model';
+} from '../../trabajadores/trabajador.model';
 import { UsuarioService } from '../../core/services/usuario.service';
 import { PermisoEnum } from '../../core/models/usuario.model';
 import { PermisoService } from '../../core/services/permiso.service';

@@ -11,9 +11,9 @@ import { ButtonModule } from 'primeng/button';
 import { DropdownModule } from 'primeng/dropdown';
 import { TooltipModule } from 'primeng/tooltip';
 import { KeyFilterModule } from 'primeng/keyfilter';
-import { TrabajadorService } from 'src/app/propiedades-alegria/core/services/trabajador.service';
-import { UbicacionFormComponent } from '../../componentes/ubicacion-form/ubicacion-form.component';
-import { Trabajador, TrabajadorForm } from '../../core/models/trabajador.model';
+import { TrabajadorService } from 'src/app/propiedades-alegria/trabajadores/trabajador.service';
+import { UbicacionFormComponent } from '../../../componentes/ubicacion-form/ubicacion-form.component';
+import { Trabajador, TrabajadorForm } from '../../trabajador.model';
 
 
 @Component({
@@ -36,7 +36,7 @@ export class TrabajadorFormComponent implements OnInit {
 
     @Input() trabajador?: Trabajador
 
-    @Output() saveEvent = new EventEmitter<TrabajadorForm>()
+    @Output() submitEvent = new EventEmitter<TrabajadorForm>()
     @Output() cancelEvent = new EventEmitter()
     
     fb = inject(FormBuilder);
@@ -96,7 +96,7 @@ export class TrabajadorFormComponent implements OnInit {
             direccion: values.direccion,
             id: this.trabajador?.id
         }
-        this.saveEvent.emit(trabajador)
+        this.submitEvent.emit(trabajador)
     }
 
     cancelar() {

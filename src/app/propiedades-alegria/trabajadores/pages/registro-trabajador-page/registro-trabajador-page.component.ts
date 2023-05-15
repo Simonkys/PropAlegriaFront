@@ -1,19 +1,19 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
 
-import { TrabajadorService } from 'src/app/propiedades-alegria/core/services/trabajador.service';
-import { TrabajadorFormComponent } from '../trabajador-form/trabajador-form.component';
-import { TrabajadorForm } from '../../core/models/trabajador.model';
+import { TrabajadorService } from 'src/app/propiedades-alegria/trabajadores/trabajador.service';
+import { TrabajadorFormComponent } from '../../components/trabajador-form/trabajador-form.component';
+import { TrabajadorForm } from '../../trabajador.model';
 
 
 @Component({
-    selector: 'app-registro-trabajador',
+    selector: 'app-registro-trabajador-page',
     standalone: true,
     imports: [CommonModule, TrabajadorFormComponent],
-    templateUrl: './registro-trabajador.component.html',
-    styleUrls: ['./registro-trabajador.component.scss'],
+    templateUrl: './registro-trabajador-page.component.html',
+    styleUrls: ['./registro-trabajador-page.component.scss'],
 })
-export class RegistroTrabajadorComponent {
+export class RegistroTrabajadorPageComponent {
 
     trabajadorService = inject(TrabajadorService);
 

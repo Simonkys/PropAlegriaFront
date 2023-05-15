@@ -6,8 +6,8 @@ import { ToolbarModule } from 'primeng/toolbar';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { Table, TableModule } from 'primeng/table';
-import { TrabajadorService } from 'src/app/propiedades-alegria/core/services/trabajador.service';
-import { Trabajador } from 'src/app/propiedades-alegria/core/models/trabajador.model';
+import { TrabajadorService } from 'src/app/propiedades-alegria/trabajadores/trabajador.service';
+import { Trabajador } from 'src/app/propiedades-alegria/trabajadores/trabajador.model';
 import { ConfirmationService } from 'primeng/api';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { MessagesModule } from 'primeng/messages';
@@ -17,7 +17,7 @@ import { FormsModule } from '@angular/forms';
 
 
 @Component({
-    selector: 'app-listado-trabajadores',
+    selector: 'app-listado-trabajadores-page',
     standalone: true,
     imports: [
         CommonModule,
@@ -31,10 +31,10 @@ import { FormsModule } from '@angular/forms';
         MultiSelectModule,
     ],
     providers: [ConfirmationService],
-    templateUrl: './listado-trabajadores.component.html',
-    styleUrls: ['./listado-trabajadores.component.scss'],
+    templateUrl: './listado-trabajadores-page.component.html',
+    styleUrls: ['./listado-trabajadores-page.component.scss'],
 })
-export class ListadoTrabajadoresComponent implements OnInit {
+export class ListadoTrabajadoresPageComponent implements OnInit {
 
     router = inject(Router);
     trabajadorService = inject(TrabajadorService);

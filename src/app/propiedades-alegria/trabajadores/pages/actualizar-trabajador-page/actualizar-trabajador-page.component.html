@@ -3,7 +3,7 @@
     <app-trabajador-form 
         *ngIf="trabajador$ | async as trabajador" 
         [trabajador]="trabajador" 
-        (saveEvent)="submit($event)"
+        (submitEvent)="submit($event)"
         (cancelEvent)="cancelar()"
     />
 </div>

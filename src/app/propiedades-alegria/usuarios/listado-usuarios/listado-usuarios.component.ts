@@ -15,7 +15,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
 import { UsuarioConPermiso } from '../../core/models/usuario.model';
 import { finalize, map } from 'rxjs';
-import { TrabajadorService } from '../../core/services/trabajador.service';
+import { TrabajadorService } from '../../trabajadores/trabajador.service';
 import { PermisoService } from '../../core/services/permiso.service';
 
 @Component({
