@@ -67,7 +67,7 @@ export class DetallePropietarioPageComponent implements OnInit {
 
   guardarCuentaBancaria(cuentaBancariaForm: CuentaBancariaForm) {
     this.cuentaBancariaService.createCuentaBancaria(cuentaBancariaForm)
-      .subscribe((cuenta) => this.creacionCuentaActiva = false)
+      .subscribe((cuenta) => this.cancelarCreacionCuentaBancaria())
   }
 
   eliminarCuentaBancaria(cuenta: CuentaBancaria) {

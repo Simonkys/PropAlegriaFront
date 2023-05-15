@@ -1,32 +1,43 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
 import { TrabajadorService } from '../../trabajador.service';
-import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { switchMap } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
+import { map, switchMap } from 'rxjs';
 
 
 import { Trabajador } from '../../trabajador.model';
 import { DetalleTrabajadorComponent } from '../../components/detalle-trabajador/detalle-trabajador.component';
+import { ListadoCuentaBancariaComponent } from 'src/app/propiedades-alegria/cuentas-bancarias/components/listado-cuenta-bancaria/listado-cuenta-bancaria.component';
+import { CuentaBancariaService } from 'src/app/propiedades-alegria/cuentas-bancarias/cuenta-bancaria.service';
+import { FormularioCuentaBancariaComponent } from 'src/app/propiedades-alegria/cuentas-bancarias/components/formulario-cuenta-bancaria/formulario-cuenta-bancaria.component';
+import { CuentaBancaria, CuentaBancariaForm } from 'src/app/propiedades-alegria/cuentas-bancarias/cuenta-bancaria.models';
 
 @Component({
   selector: 'app-detalle-trabajador-page',
   standalone: true,
-  imports: [CommonModule, DetalleTrabajadorComponent],
+  imports: [CommonModule, DetalleTrabajadorComponent, ListadoCuentaBancariaComponent, FormularioCuentaBancariaComponent],
   templateUrl: './detalle-trabajador-page.component.html',
   styleUrls: ['./detalle-trabajador-page.component.scss']
 })
 export class DetalleTrabajadorPageComponent {
 
   trabajadorService = inject(TrabajadorService);
+  cuentaBancariaService = inject(CuentaBancariaService);
   
   router = inject(Router);
   location = inject(Location);
   route = inject(ActivatedRoute);
 
+  creacionCuentaActiva: boolean = false;
+
   trabajador$ = this.route.paramMap.pipe(
-    switchMap((params: ParamMap) => {
-      const id = Number(params.get('id'))
-      return this.trabajadorService.getTrabajadorById(id).pipe()
+    map(params => Number(params.get('id'))),
+    switchMap(id => this.trabajadorService.getTrabajadorById(id)),
+    switchMap(trabajador => {
+      const cuentasBancarias$ = this.cuentaBancariaService.getCuentasBancariasByRut(trabajador.rut_trab)
+      return cuentasBancarias$.pipe(
+        map(_ => trabajador)
+      )
     })
   )
 
@@ -38,5 +49,24 @@ export class DetalleTrabajadorPageComponent {
   handleEliminarEvent(trabajador: Trabajador){
     this.trabajadorService.eliminarTrabajador(trabajador)
       .subscribe(() => this.location.back())
+  }
+
+
+  guardarCuentaBancaria(cuentaBancariaForm: CuentaBancariaForm) {
+    this.cuentaBancariaService.createCuentaBancaria(cuentaBancariaForm)
+      .subscribe(() => this.cancelarCreacionCuentaBancaria())
+  }
+
+  eliminarCuentaBancaria(cuenta: CuentaBancaria) {
+    this.cuentaBancariaService.eliminarCuentaBancaria(cuenta)
+      .subscribe()
+  }
+  
+  cancelarCreacionCuentaBancaria() {
+    this.creacionCuentaActiva = false;
+  }
+
+  activarCreacionCuentaBancaria() {
+    this.creacionCuentaActiva = true;
   }
 }

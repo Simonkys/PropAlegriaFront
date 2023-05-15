@@ -8,4 +8,21 @@
         />
     </div>
 
+    <div class="card" *ngIf="creacionCuentaActiva">
+        <h4>Registro cuenta</h4>
+        <app-formulario-cuenta-bancaria 
+            [rut_propietario]="trabajador.rut_trab"
+            (submitEvent)="guardarCuentaBancaria($event)"
+            (cancelEvent)="cancelarCreacionCuentaBancaria()"
+        />
+    </div>
+
+    <div class="card">
+        <h4>Cuentas bancarias</h4>
+        <app-listado-cuenta-bancaria 
+            (registroEvent)="activarCreacionCuentaBancaria()"
+            (eliminarEvent)="eliminarCuentaBancaria($event)"
+        />
+    </div>
+
 </ng-container>
