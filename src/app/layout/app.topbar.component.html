@@ -1,14 +1,10 @@
 <div class="layout-topbar">
     <a class="layout-topbar-logo" routerLink="">
         <img
-            src="assets/layout/images/{{
-                layoutService.config.colorScheme === 'light'
-                    ? 'logo-dark'
-                    : 'logo-white'
-            }}.svg"
+            src="../../assets/img/logo.png"
             alt="logo"
         />
-        <span>Propiedades Alegría</span>
+
     </a>
 
     <button
@@ -16,7 +12,7 @@
         class="p-link layout-menu-button layout-topbar-button"
         (click)="layoutService.onMenuToggle()"
     >
-        <i class="pi pi-bars"></i>
+        <i class="pi pi-bars color-icons"></i>
     </button>
 
     <button
@@ -24,7 +20,7 @@
         class="p-link layout-topbar-menu-button layout-topbar-button"
         (click)="layoutService.showProfileSidebar()"
     >
-        <i class="pi pi-ellipsis-v"></i>
+        <i class="pi pi-ellipsis-v color-icons"></i>
     </button>
 
     <div
@@ -36,11 +32,11 @@
         }"
     >
         <button class="p-link layout-topbar-button">
-            <i class="pi pi-user"></i>
+            <i class="pi pi-user color-icons"></i>
             <span>Perfil</span>
         </button>
         <button class="p-link layout-topbar-button" (click)="logout()">
-            <i class="pi pi-sign-out"></i>
+            <i class="pi pi-sign-out color-icons"></i>
             <span>Salir</span>
         </button>
     </div>
