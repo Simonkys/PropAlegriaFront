@@ -40,7 +40,6 @@ export class DetallePropietarioPageComponent implements OnInit {
   
 
   propietario?: Propietario;
-  cuentasBancarias: CuentaBancaria[] = [];
   propiedades: Propiedad[] = [];
   
   creacionCuentaActiva: boolean = false;
@@ -60,26 +59,20 @@ export class DetallePropietarioPageComponent implements OnInit {
           })
         )
       })
-    ).subscribe(({ propietario, propiedades, cuentasBancarias }) => {
+    ).subscribe(({ propietario, propiedades }) => {
       this.propietario = propietario;
       this.propiedades = propiedades
-      this.cuentasBancarias = cuentasBancarias;
     })
   }
 
   guardarCuentaBancaria(cuentaBancariaForm: CuentaBancariaForm) {
     this.cuentaBancariaService.createCuentaBancaria(cuentaBancariaForm)
-      .subscribe((cuenta) => {
-        this.cuentasBancarias = [cuenta, ...this.cuentasBancarias];
-        this.creacionCuentaActiva = false;
-      })
+      .subscribe((cuenta) => this.creacionCuentaActiva = false)
   }
 
   eliminarCuentaBancaria(cuenta: CuentaBancaria) {
     this.cuentaBancariaService.eliminarCuentaBancaria(cuenta)
-      .subscribe(() => {
-        this.cuentasBancarias = this.cuentasBancarias.filter(cuentaBancaria => cuentaBancaria.id !== cuenta.id);
-      })
+      .subscribe()
   }
   
   cancelarCreacionCuentaBancaria() {

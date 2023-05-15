@@ -5,6 +5,7 @@ import { ConfirmationService } from 'primeng/api';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
+import { CuentaBancariaService } from '../../cuenta-bancaria.service';
 
 @Component({
   selector: 'app-listado-cuenta-bancaria',
@@ -15,12 +16,14 @@ import { TableModule } from 'primeng/table';
   styleUrls: ['./listado-cuenta-bancaria.component.scss']
 })
 export class ListadoCuentaBancariaComponent {
-  @Input() cuentasBancarias: CuentaBancaria[] = [];
-
+ 
   @Output() registroEvent = new EventEmitter<void>();
   @Output() eliminarEvent = new EventEmitter<CuentaBancaria>();
   
   confimService = inject(ConfirmationService);
+  cuentasBancariasService = inject(CuentaBancariaService)
+  
+  cuentas$ = this.cuentasBancariasService.cuentasBancarias$;
 
   eliminar(event: Event, cuenta: CuentaBancaria) {
     this.confimService.confirm({

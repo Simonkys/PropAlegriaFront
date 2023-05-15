@@ -30,7 +30,6 @@ export class DetalleArrendatariosPageComponent implements OnInit {
   creacionCuentaActiva: boolean = false;
 
   arrendatario?: Arrendatario;
-  cuentasBancarias: CuentaBancaria[] = [];
 
   ngOnInit(): void {
     this.route.paramMap.pipe(
@@ -38,12 +37,11 @@ export class DetalleArrendatariosPageComponent implements OnInit {
       switchMap(id => this.arrendatarioService.getArrendatario(id)),
       switchMap(arrendatario => {
         return this.cuentaBancariaService.getCuentasBancariasByRut(arrendatario.rut_arr).pipe(
-          map((cuentasBancarias) => ({cuentasBancarias, arrendatario}))
+          map(() => arrendatario)
         )
       })
-    ).subscribe((data) => {
-      this.arrendatario = data.arrendatario;
-      this.cuentasBancarias = data.cuentasBancarias;
+    ).subscribe((arrendatario) => {
+      this.arrendatario = arrendatario;
     })
   }
 
@@ -59,17 +57,12 @@ export class DetalleArrendatariosPageComponent implements OnInit {
 
   guardarCuentaBancaria(cuentaBancariaForm: CuentaBancariaForm) {
     this.cuentaBancariaService.createCuentaBancaria(cuentaBancariaForm)
-      .subscribe((cuenta) => {
-        this.cuentasBancarias = [cuenta, ...this.cuentasBancarias];
-        this.creacionCuentaActiva = false;
-      })
+      .subscribe((cuenta) => this.creacionCuentaActiva = false)
   }
 
   eliminarCuentaBancaria(cuenta: CuentaBancaria) {
     this.cuentaBancariaService.eliminarCuentaBancaria(cuenta)
-      .subscribe(() => {
-        this.cuentasBancarias = this.cuentasBancarias.filter(cuentaBancaria => cuentaBancaria.id !== cuenta.id);
-      })
+      .subscribe()
   }
 
   cancelarCreacionCuentaBancaria() {

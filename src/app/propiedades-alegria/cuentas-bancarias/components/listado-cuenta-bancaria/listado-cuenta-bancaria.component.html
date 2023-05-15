@@ -1,4 +1,5 @@
-<p-table [value]="cuentasBancarias" [tableStyle]="{ 'min-width': '50rem' }">
+<ng-container *ngIf="cuentas$ | async as cuentas">
+<p-table [value]="cuentas" [tableStyle]="{ 'min-width': '50rem' }">
     <ng-template pTemplate="caption">
         <p-button 
             class="mr-2" 
@@ -39,3 +40,4 @@
         </tr>
     </ng-template>
 </p-table>
+</ng-container>
