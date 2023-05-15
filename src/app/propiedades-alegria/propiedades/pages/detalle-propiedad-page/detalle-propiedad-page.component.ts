@@ -1,18 +1,16 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router} from '@angular/router';
 import { map, switchMap } from 'rxjs';
-import { ButtonModule } from 'primeng/button';
-import { ConfirmPopupModule } from 'primeng/confirmpopup';
-import { ConfirmationService } from 'primeng/api';
+
 import { Propiedad } from 'src/app/propiedades-alegria/propiedades/propiedad.model';
 import { PropiedadesService } from 'src/app/propiedades-alegria/propiedades/propiedades.service';
+import { DetallePropiedadComponent } from '../../components/detalle-propiedad/detalle-propiedad.component';
 
 @Component({
   selector: 'app-detalle-propiedad-page',
   standalone: true,
-  providers: [ConfirmationService],
-  imports: [CommonModule, RouterLink, ButtonModule, ConfirmPopupModule],
+  imports: [CommonModule, DetallePropiedadComponent],
   templateUrl: './detalle-propiedad-page.component.html',
   styleUrls: ['./detalle-propiedad-page.component.scss']
 })
@@ -20,30 +18,26 @@ export class DetallePropiedadPageComponent {
 
   propiedadService = inject(PropiedadesService)
   route = inject(ActivatedRoute)
-  location = inject(Location);
-  confimService = inject(ConfirmationService);
+  router = inject(Router)
+  location = inject(Location)
 
   propiedad$ = this.route.paramMap.pipe(
     map(params => Number(params.get('id'))),
     switchMap(id => this.propiedadService.getPropiedad(id))
   )
 
-  eliminarPropiedad(event: Event, propiedad: Propiedad) {
-    this.confimService.confirm({
-      target: event.target || new EventTarget(),
-      message: `¿Estas segur@ de eliminar la propiedad`,
-      icon: 'pi pi-exclamation-triangle',
-      accept: () => {
-        this.propiedadService.eliminarPropiedad(propiedad)
-          .pipe()
-          .subscribe({
-            next: () => {
-              this.location.back();
-            },
-            error: (err) => {}
-          })
-      },
-    });
+  handleEliminarEvent(propiedad: Propiedad) {
+    this.propiedadService.eliminarPropiedad(propiedad)
+      .subscribe(() => this.location.back())
+  }
+
+
+  handleActulizarEvent(propiedad: Propiedad) {
+    this.router.navigate(['propiedades', propiedad.id, 'actualizar'])
+  }
+
+  handleDetallePropietarioEvent(propietarioId: number) {
+    this.router.navigate(['propietarios', propietarioId, 'detalle'])
   }
 
 }

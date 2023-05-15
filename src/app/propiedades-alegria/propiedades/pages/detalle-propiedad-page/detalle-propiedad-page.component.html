@@ -1,58 +1,11 @@
-<div class="card" *ngIf="propiedad$ | async as propiedad">
-    <h4>Detalle Propiedad</h4>
-    <div class="grid">
-
-        <div class="col-4">
-            <div class="text-sm font-bold text-600 mb-1">Código</div>
-            <div class="font-medium">{{propiedad.id}}</div>
-        </div>
-
-        <div class="col-4" >
-            <div class="text-sm font-bold text-600 mb-1">Rol</div>
-            <div class="font-medium">{{propiedad.rol_ppdd ?? '---'}}</div>
-        </div>
-
-        <div class="col-4">
-            <div class="text-sm font-bold text-600 mb-1">Tipo Propiedad</div>
-            <div class="font-medium">{{propiedad.tipopropiedad.nombre_tipoppdd}}</div>
-        </div>
-        
-        <div class="col-8">
-            <div class="text-sm font-bold text-600 mb-1">Dirección</div>
-            <div class="font-medium">{{propiedad.direccion_ppdd}}, <strong>{{propiedad.comuna.nom_comuna}}</strong></div>
-            <span *ngIf="propiedad.numero_ppdd">
-                {{propiedad.tipopropiedad.nombre_tipoppdd}}:
-                {{ propiedad.numero_ppdd }}
-            </span>
-        </div>
-        
-        <div class="col-4">
-            <div class="text-sm font-bold text-600 mb-1">Propietario</div>
-            <div class="font-medium ">
-                <a class="underline" [routerLink]="['/propietarios', propiedad.propietario.id, 'detalle']">
-                    {{propiedad.propietario.pri_ape_prop}} {{propiedad.propietario.pri_nom_prop}}
-                </a>
-            </div>
-        </div>
-
-        <div class="col-4">
-            <div class="flex">
-                <p-button 
-                    icon="pi pi-pencil" 
-                    styleClass="p-button-warning mr-2"
-                    [routerLink]="['/propiedades', propiedad.id, 'actualizar']"
-                >
-                </p-button>
-                <p-confirmPopup></p-confirmPopup>
-                <p-button
-                    icon="pi pi-trash" 
-                    styleClass="p-button-danger"
-                    (click)="eliminarPropiedad($event, propiedad)"
-                ></p-button>
-            </div>
-        </div>
-        
-        
+<ng-container *ngIf="propiedad$ | async as propiedad">
+    <div class="card" >
+        <h4>Detalle Propiedad</h4>
+        <app-detalle-propiedad 
+            [propiedad]="propiedad"
+            (actualizarEvent)="handleActulizarEvent(propiedad)"
+            (eliminarEvent)="handleEliminarEvent(propiedad)"
+            (detallePropietarioEvent)="handleDetallePropietarioEvent(propiedad.propietario.id)"
+        />
     </div>
-
-</div>
+</ng-container>
