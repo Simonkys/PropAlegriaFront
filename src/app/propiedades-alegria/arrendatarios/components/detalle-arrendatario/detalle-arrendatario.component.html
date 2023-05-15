@@ -39,14 +39,14 @@
                 <p-button 
                     icon="pi pi-pencil" 
                     styleClass="p-button-warning mr-2"
-                    [routerLink]="['/arrendatarios', arrendatario.id, 'actualizar']"
+                    (click)="actualizar()"
                 >
                 </p-button>
                 <p-confirmPopup></p-confirmPopup>
                 <p-button 
                     icon="pi pi-trash" 
                     styleClass="p-button-danger"
-                    (click)="eliminar($event, arrendatario)"
+                    (click)="eliminar($event)"
                 >
                 </p-button>
             </div>

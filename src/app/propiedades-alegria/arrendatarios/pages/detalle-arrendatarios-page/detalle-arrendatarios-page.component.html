@@ -4,7 +4,8 @@
         <h4>Detalle arrendatario</h4>
         <app-detalle-arrendatario
             [arrendatario]="arrendatario"
-            (eliminarEvent)="eliminar($event)"
+            (actualizarEvent)="handleActualizarEvent(arrendatario)"
+            (eliminarEvent)="handleEliminarEvent(arrendatario)"
         />
     </div>
 

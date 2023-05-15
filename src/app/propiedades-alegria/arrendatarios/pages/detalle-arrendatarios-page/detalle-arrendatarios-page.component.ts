@@ -1,6 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { map, switchMap } from 'rxjs';
 
 import { ArrendatarioService } from '../../arrendatario.service';
@@ -19,10 +19,13 @@ import { CuentaBancariaService } from '../../../cuentas-bancarias/cuenta-bancari
   styleUrls: ['./detalle-arrendatarios-page.component.scss']
 })
 export class DetalleArrendatariosPageComponent implements OnInit {
-  route = inject(ActivatedRoute)
-  location = inject(Location)
+
   cuentaBancariaService = inject(CuentaBancariaService);
   arrendatarioService = inject(ArrendatarioService)
+
+  router = inject(Router)
+  route = inject(ActivatedRoute)
+  location = inject(Location)
 
   creacionCuentaActiva: boolean = false;
 
@@ -44,8 +47,11 @@ export class DetalleArrendatariosPageComponent implements OnInit {
     })
   }
 
+  handleActualizarEvent(arrendatario: Arrendatario) {
+    this.router.navigate(['arrendatarios', arrendatario.id, 'actualizar'])
+  }
 
-  eliminar(arrendatario: Arrendatario) {
+  handleEliminarEvent(arrendatario: Arrendatario) {
     this.arrendatarioService.eliminarArrendatario(arrendatario)
     .pipe()
     .subscribe(() => this.location.back())
