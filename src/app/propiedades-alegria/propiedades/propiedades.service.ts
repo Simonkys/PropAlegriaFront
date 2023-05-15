@@ -1,8 +1,8 @@
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable, inject } from "@angular/core";
 import { environment } from "src/environments/environment";
-import { Propiedad, PropiedadForm } from "../models/propiedad.model";
-import { MessageService } from "./message.service";
+import { Propiedad, PropiedadForm } from "./propiedad.model";
+import { MessageService } from "../core/services/message.service";
 import { catchError, tap, throwError } from "rxjs";
 
 @Injectable(

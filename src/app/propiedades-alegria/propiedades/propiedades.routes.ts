@@ -1,9 +1,9 @@
 import { Route } from "@angular/router";
-import { ListadoPropiedadesComponent } from "./listado-propiedades/listado-propiedades.component";
-import { DetallePropiedadComponent } from "./detalle-propiedad/detalle-propiedad.component";
 import { PropiedadComponent } from "./propiedades.component";
-import { RegistroPropiedadComponent } from "./registro-propiedad/registro-propiedad.component";
-import { ActualizarPropiedadComponent } from "./actualizar-propiedad/actualizar-propiedad.component";
+import { ActualizarPropiedadComponent } from "./pages/actualizar-propiedad/actualizar-propiedad.component";
+import { DetallePropiedadComponent } from "./pages/detalle-propiedad/detalle-propiedad.component";
+import { ListadoPropiedadesComponent } from "./pages/listado-propiedades/listado-propiedades.component";
+import { RegistroPropiedadComponent } from "./pages/registro-propiedad/registro-propiedad.component";
 
 export const PROPIEDADES_ROUTES: Route[] = [
     {

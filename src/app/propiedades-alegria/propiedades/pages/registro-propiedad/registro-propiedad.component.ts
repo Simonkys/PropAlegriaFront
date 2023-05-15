@@ -1,8 +1,9 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
-import { FormularioPropiedadComponent } from '../../componentes/formulario-propiedad/formulario-propiedad.component';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Propiedad } from '../../core/models/propiedad.model';
+
+import { Propiedad } from 'src/app/propiedades-alegria/propiedades/propiedad.model';
+import { FormularioPropiedadComponent } from '../../components/formulario-propiedad/formulario-propiedad.component';
 
 @Component({
   selector: 'app-registro-propiedad',

@@ -1,9 +1,9 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TableModule } from 'primeng/table';
-import { Propiedad } from '../../core/models/propiedad.model';
 import { RouterLink } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
+import { Propiedad } from 'src/app/propiedades-alegria/propiedades/propiedad.model';
 
 @Component({
   selector: 'app-listado-propiedad',

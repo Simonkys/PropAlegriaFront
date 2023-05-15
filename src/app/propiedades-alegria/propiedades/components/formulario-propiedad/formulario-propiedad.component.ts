@@ -1,16 +1,16 @@
 import { Component, EventEmitter, Inject, Input, OnInit, Output, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { PropiedadesService } from '../../core/services/propiedades.service';
-import { Propiedad, PropiedadForm } from '../../core/models/propiedad.model';
-import { TipoPropiedadesService } from '../../core/services/tipo-propiedades.service';
-import { UbicacionFormComponent } from '../ubicacion-form/ubicacion-form.component';
 import { InputTextModule } from 'primeng/inputtext';
 import { DropdownModule } from 'primeng/dropdown';
 import { KeyFilterModule } from 'primeng/keyfilter';
 import { ButtonModule } from 'primeng/button';
-import { PropietarioService } from '../../propietarios/propietario.service';
 import { finalize } from 'rxjs';
+import { UbicacionFormComponent } from 'src/app/propiedades-alegria/componentes/ubicacion-form/ubicacion-form.component';
+import { Propiedad, PropiedadForm } from 'src/app/propiedades-alegria/propiedades/propiedad.model';
+import { PropiedadesService } from 'src/app/propiedades-alegria/propiedades/propiedades.service';
+import { TipoPropiedadesService } from 'src/app/propiedades-alegria/core/services/tipo-propiedades.service';
+import { PropietarioService } from 'src/app/propiedades-alegria/propietarios/propietario.service';
 
 @Component({
   selector: 'app-formulario-propiedad',

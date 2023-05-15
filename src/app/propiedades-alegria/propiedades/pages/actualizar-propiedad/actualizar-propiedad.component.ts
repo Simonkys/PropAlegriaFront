@@ -2,9 +2,9 @@ import { Component, inject } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { map, switchMap } from 'rxjs';
-import { PropiedadesService } from '../../core/services/propiedades.service';
-import { FormularioPropiedadComponent } from '../../componentes/formulario-propiedad/formulario-propiedad.component';
-import { Propiedad } from '../../core/models/propiedad.model';
+import { Propiedad } from 'src/app/propiedades-alegria/propiedades/propiedad.model';
+import { PropiedadesService } from 'src/app/propiedades-alegria/propiedades/propiedades.service';
+import { FormularioPropiedadComponent } from '../../components/formulario-propiedad/formulario-propiedad.component';
 
 @Component({
   selector: 'app-actualizar-propiedad',

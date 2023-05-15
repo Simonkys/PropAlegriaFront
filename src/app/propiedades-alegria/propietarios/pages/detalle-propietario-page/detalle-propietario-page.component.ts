@@ -1,19 +1,22 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PropietarioService } from '../../propietario.service';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { forkJoin, map, switchMap } from 'rxjs';
-import { CuentaBancariaService } from '../../../core/services/cuenta-bancaria.service';
-import { FormularioCuentaBancariaComponent } from '../../../componentes/formulario-cuenta-bancaria/formulario-cuenta-bancaria.component';
-import { CuentaBancaria, CuentaBancariaForm } from '../../../core/models/cuenta-bancaria.models';
-import { Propietario } from '../../propietario.model';
-import { ListadoCuentaBancariaComponent } from '../../../componentes/listado-cuenta-bancaria/listado-cuenta-bancaria.component';
+
 import { ButtonModule } from 'primeng/button';
-import { PropiedadesService } from '../../../core/services/propiedades.service';
-import { Propiedad } from '../../../core/models/propiedad.model';
-import { ListadoPropiedadComponent } from '../../../componentes/listado-propiedad/listado-propiedad.component';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { ConfirmationService } from 'primeng/api';
+
+import { PropietarioService } from '../../propietario.service';
+import { Propietario } from '../../propietario.model';
+import { CuentaBancariaService } from '../../../core/services/cuenta-bancaria.service';
+import { CuentaBancaria, CuentaBancariaForm } from '../../../core/models/cuenta-bancaria.models';
+import { FormularioCuentaBancariaComponent } from '../../../componentes/formulario-cuenta-bancaria/formulario-cuenta-bancaria.component';
+import { ListadoCuentaBancariaComponent } from '../../../componentes/listado-cuenta-bancaria/listado-cuenta-bancaria.component';
+import { PropiedadesService } from '../../../propiedades/propiedades.service';
+import { Propiedad } from '../../../propiedades/propiedad.model';
+import { ListadoPropiedadComponent } from 'src/app/propiedades-alegria/propiedades/components/listado-propiedad/listado-propiedad.component';
+
 
 @Component({
   selector: 'app-detalle-propietario-page',
