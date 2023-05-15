@@ -10,7 +10,7 @@ import { TipoPropiedadesService } from '../core/services/tipo-propiedades.servic
 import { PropietarioService } from '../propietarios/propietario.service';
 import { PersonalidadJuridicaService } from '../core/services/personalidad-juridica.service';
 import { ArrendatarioService } from '../arrendatarios/arrendatario.service';
-import { ArriendoService } from '../core/services/arriendo.service';
+import { ArriendoService } from '../arriendos/arriendo.service';
 import { CuentaBancariaService } from '../cuentas-bancarias/cuenta-bancaria.service';
 import { DetalleArriendoService } from '../core/services/detalle-arriendo.service';
 import { GastoComunService } from '../core/services/gasto-comun.service';

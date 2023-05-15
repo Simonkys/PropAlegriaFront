@@ -52,6 +52,13 @@ import { AuthService } from './propiedades-alegria/core/services/auth.service';
                             loadChildren: () => import('./propiedades-alegria/arrendatarios/arrendatario.routes').then(m => m.ARRENDATARIO_ROUTES)
                         },
                         {
+                            path: 'arriendos',
+                            canActivate: [
+                                () => inject(AuthService).isStaff()
+                            ],
+                            loadChildren: () => import('./propiedades-alegria/arriendos/arriendo.route').then(m => m.ARRIENDO_ROUTES)
+                        },
+                        {
                             path: 'usuarios',
                             canActivate: [  
                                 () => inject(AuthService).isSuperuser()
