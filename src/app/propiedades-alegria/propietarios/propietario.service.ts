@@ -27,7 +27,7 @@ export class PropietarioService {
         return this.http.post<Propietario>(`${this.apiUrl}/`, propietarioForm).pipe(
             tap( () => {
                 this.messageService.addMessage({
-                    details: ['Propietario actualizado exitosamente!'],
+                    details: ['Propietario registrado exitosamente!'],
                     role: 'success'
                 })
             }),
