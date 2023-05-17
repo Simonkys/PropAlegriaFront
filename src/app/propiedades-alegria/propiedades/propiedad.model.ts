@@ -19,12 +19,17 @@ interface PropiedadPropietario {
 
 export interface Propiedad {
     id:               number;
+
     direccion_ppdd:   string;
     numero_ppdd:      number | null;
     rol_ppdd:         string | null;
+
     comuna:        PropiedadComuna;
     propietario:   PropiedadPropietario;
     tipopropiedad: PropiedadTipoPropiedad;
+
+    nro_bodega: number | null;
+    nro_estacionamiento: number | null;
 }
 
 
@@ -39,3 +44,25 @@ export interface PropiedadForm {
     tipopropiedad_id: number;
 }
 
+export interface Bodega {
+    numero_bodega: number;
+    bodega_independiente: boolean;
+}
+
+export interface Estacionamiento {
+    numero_estacionamiento: number;
+    estacionamiento_independiente: boolean;
+}
+
+
+export interface RegistroPropiedadForm {
+    direccion_ppdd:   string;
+    numero_ppdd:      number | null;
+    rol_ppdd:         string | null;
+    comuna:        number;
+    propietario:   number;
+    tipopropiedad: number;
+
+    bodega: Bodega | null;
+    estacionamiento: Estacionamiento | null;
+}

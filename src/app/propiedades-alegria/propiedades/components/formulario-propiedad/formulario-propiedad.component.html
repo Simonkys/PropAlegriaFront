@@ -95,6 +95,56 @@
         <div class="col flex flex-column gap-2"></div>
     </div>
 
+    <div class="grid mb-3" *ngIf="form.get('tipopropiedad_id')?.value === DEPARTAMENTO" >
+        <div class="col flex flex-column gap-5" >
+            <div class="flex align-items-center gap-5">
+                <div class="flex align-items-center gap-3">
+                    <label>Incluye bodega:</label>
+                    <p-inputSwitch formControlName="incluir_bodega"></p-inputSwitch>
+                </div>
+        
+                <div class="flex align-items-center gap-3">
+                    <div class="p-float-label">
+                        <input pInputText pKeyFilter="int" placeholder="123" formControlName="numero_bodega">
+                        <label > N° bodega</label>
+                    </div>
+                    <div class="flex align-items-center gap-2">
+                        <p-checkbox 
+                            pTooltip="Si arriendo independiente está habilitado, la bodega se registrará como una propiedad independiente." 
+                            formControlName="bodega_independiente" 
+                            [binary]="true"></p-checkbox>
+                        <label > Arriendo independiente</label>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="flex align-items-center gap-5">
+                <div class="flex align-items-center gap-3">
+                    <label>Incluye estacionamiento:</label>
+                    <p-inputSwitch formControlName="incluir_estacionamiento"></p-inputSwitch>
+                </div>
+        
+                <div class="flex align-items-center gap-3">
+                    <div class="p-float-label">
+                        <input pInputText pKeyFilter="int" placeholder="123" formControlName="numero_estacionamiento">
+                        <label > N° estacionamiento</label>
+                    </div>
+                    <div class="flex align-items-center gap-2">
+                        <p-checkbox 
+                            pTooltip="Si arriendo independiente está habilitado, el estacionamiento se registrará como una propiedad independiente." 
+                            formControlName="estacionamiento_independiente" 
+                            [binary]="true"></p-checkbox>
+                        <label > Arriendo independiente</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    
+
     <div class="flex">
         <p-button
             styleClass="mr-3"

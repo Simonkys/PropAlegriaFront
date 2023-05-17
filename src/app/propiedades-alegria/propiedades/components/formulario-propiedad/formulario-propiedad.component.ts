@@ -7,10 +7,13 @@ import { KeyFilterModule } from 'primeng/keyfilter';
 import { ButtonModule } from 'primeng/button';
 import { finalize } from 'rxjs';
 import { UbicacionFormComponent } from 'src/app/propiedades-alegria/componentes/ubicacion-form/ubicacion-form.component';
-import { Propiedad, PropiedadForm } from 'src/app/propiedades-alegria/propiedades/propiedad.model';
+import { Propiedad, PropiedadForm, RegistroPropiedadForm } from 'src/app/propiedades-alegria/propiedades/propiedad.model';
 import { PropiedadesService } from 'src/app/propiedades-alegria/propiedades/propiedades.service';
 import { TipoPropiedadesService } from 'src/app/propiedades-alegria/core/services/tipo-propiedades.service';
 import { PropietarioService } from 'src/app/propiedades-alegria/propietarios/propietario.service';
+import { InputSwitchModule } from 'primeng/inputswitch';
+import { CheckboxModule } from 'primeng/checkbox';
+import { TooltipModule } from 'primeng/tooltip';
 
 @Component({
   selector: 'app-formulario-propiedad',
@@ -22,7 +25,10 @@ import { PropietarioService } from 'src/app/propiedades-alegria/propietarios/pro
     InputTextModule,
     DropdownModule,
     KeyFilterModule,
-    ButtonModule
+    ButtonModule,
+    InputSwitchModule,
+    CheckboxModule,
+    TooltipModule
   ],
   templateUrl: './formulario-propiedad.component.html',
   styleUrls: ['./formulario-propiedad.component.scss']
@@ -36,6 +42,9 @@ export class FormularioPropiedadComponent implements OnInit {
   @Output() submitEvent = new EventEmitter<Propiedad>();
   @Output() cancelEvent = new EventEmitter<void>();
 
+
+  DEPARTAMENTO = 1
+
   propiedadService = inject(PropiedadesService);
   tipoPropiedadesService = inject(TipoPropiedadesService);
   propietarioService = inject(PropietarioService);
@@ -46,12 +55,20 @@ export class FormularioPropiedadComponent implements OnInit {
   propietarios$ = this.propietarioService.getPropietarios();
 
   form = this.fb.group({
-    direccion_ppdd: this.fb.control<string>('', [Validators.required]),
+    direccion_ppdd: this.fb.control<string>('', [Validators.required, Validators.maxLength(150)]),
     numero_ppdd: this.fb.control<number | null>(null, []),
-    rol_ppdd: this.fb.control<string | null>(null, []),
+    rol_ppdd: this.fb.control<string | null>(null, [Validators.maxLength(50)]),
     comuna_id: this.fb.control<number | null>(null, [Validators.required]),
     propietario_id: this.fb.control<number | null>(null, [Validators.required]),
     tipopropiedad_id: this.fb.control<number | null>(null, [Validators.required]),
+
+    incluir_bodega: this.fb.nonNullable.control<boolean>(false, []),
+    numero_bodega: this.fb.control<number | null>({value: null, disabled: true}, [],),
+    bodega_independiente: this.fb.control<boolean>({value: false, disabled: true}, []),
+
+    incluir_estacionamiento: this.fb.nonNullable.control<boolean>(false, []),
+    numero_estacionamiento: this.fb.control<number | null>({value: null, disabled: true}, []),
+    estacionamiento_independiente: this.fb.control<boolean>({value: false, disabled: true}, []),
   })
 
   ngOnInit() {
@@ -67,37 +84,53 @@ export class FormularioPropiedadComponent implements OnInit {
       })
       this.form.controls['propietario_id'].disable();
     }
-    else if(this.propietarioId) {
+
+    if(this.propietarioId) {
       this.form.patchValue({propietario_id: this.propietarioId})
       this.form.controls['propietario_id'].disable();
     }
+
+    this.handleBodegaChanges()
+    this.handleEstacionamientoChanges()   
   }
 
   submit() {
     if(this.form.invalid) return;
 
-    const formValues = this.form.getRawValue();
-
-    const propiedadForm: PropiedadForm = {
-      direccion_ppdd: formValues.direccion_ppdd!,
-      numero_ppdd: formValues.numero_ppdd,
-      rol_ppdd: formValues.rol_ppdd,
-      comuna_id: formValues.comuna_id!,
-      propietario_id: formValues.propietario_id!,
-      tipopropiedad_id: formValues.tipopropiedad_id!
-    }
-
-    if(this.propiedad) {
-      this.actualizarPropiedad({...propiedadForm, id: this.propiedad.id})
+    if (this.propiedad) {
+      this.actualizarPropiedad()
     } else {
-      this.crearPropiedad(propiedadForm)
+      this.crearPropiedad()
     }
+
   }
 
 
 
-  crearPropiedad(propiedadForm: PropiedadForm) {
-    this.propiedadService.crearPropiedad(propiedadForm)
+  crearPropiedad() {
+    const formValues = this.form.getRawValue();
+
+    const bodega = formValues.incluir_bodega ? {
+      numero_bodega: formValues.numero_bodega!,
+      bodega_independiente: formValues.bodega_independiente!
+    } : null
+
+    const estacionamiento = formValues.incluir_estacionamiento ? {
+      numero_estacionamiento: formValues.numero_estacionamiento!,
+      estacionamiento_independiente: formValues.estacionamiento_independiente!
+    } : null
+
+    const registroPropiedadForm: RegistroPropiedadForm = {
+      comuna: formValues.comuna_id!,
+      direccion_ppdd: formValues.direccion_ppdd!,
+      numero_ppdd: formValues.numero_ppdd,
+      propietario: formValues.propietario_id!,
+      rol_ppdd: formValues.rol_ppdd,
+      tipopropiedad: formValues.tipopropiedad_id!,
+      bodega: bodega,
+      estacionamiento: estacionamiento
+    }
+    this.propiedadService.crearPropiedad(registroPropiedadForm)
       .pipe(
         finalize(() => { })
       )
@@ -110,7 +143,18 @@ export class FormularioPropiedadComponent implements OnInit {
       })
   }
 
-  actualizarPropiedad(propiedadForm: PropiedadForm) {
+  actualizarPropiedad() {
+    const formValues = this.form.getRawValue();
+    const propiedadForm: PropiedadForm = {
+      comuna_id: formValues.comuna_id!,
+      direccion_ppdd: formValues.direccion_ppdd!,
+      numero_ppdd: formValues.numero_ppdd,
+      propietario_id: formValues.propietario_id!,
+      rol_ppdd: formValues.rol_ppdd,
+      tipopropiedad_id: formValues.tipopropiedad_id!,
+      id: this.propiedad?.id
+    }
+
     this.propiedadService.actualizarPropiedad(propiedadForm)
       .pipe(
         finalize(() => { })
@@ -132,5 +176,41 @@ export class FormularioPropiedadComponent implements OnInit {
   cancel() {
     this.form.reset();
     this.cancelEvent.emit();
+  }
+
+  handleBodegaChanges() {
+    this.form.get('incluir_bodega')?.valueChanges.subscribe((incluyeBodega) => {
+      if(incluyeBodega) {
+        this.form.get('numero_bodega')?.reset()
+        this.form.get('numero_bodega')?.setValidators([Validators.required, Validators.max(999999)])
+        this.form.get('numero_bodega')?.updateValueAndValidity()
+        this.form.get('numero_bodega')?.enable()
+        this.form.get('bodega_independiente')?.enable()
+      } else {
+        this.form.get('numero_bodega')?.reset();
+        this.form.get('numero_bodega')?.clearValidators();
+        this.form.get('numero_bodega')?.updateValueAndValidity();
+        this.form.get('numero_bodega')?.disable()
+        this.form.get('bodega_independiente')?.disable()
+      }
+    })
+  }
+
+  handleEstacionamientoChanges() {
+    this.form.get('incluir_estacionamiento')?.valueChanges.subscribe((incluirEstacionamiento) => {
+      if(incluirEstacionamiento) {
+        this.form.get('numero_estacionamiento')?.reset()
+        this.form.get('numero_estacionamiento')?.setValidators([Validators.required, Validators.max(999999)])
+        this.form.get('numero_estacionamiento')?.updateValueAndValidity()
+        this.form.get('numero_estacionamiento')?.enable()
+        this.form.get('estacionamiento_independiente')?.enable()
+      } else {
+        this.form.get('numero_estacionamiento')?.reset();
+        this.form.get('numero_estacionamiento')?.clearValidators();
+        this.form.get('numero_estacionamiento')?.updateValueAndValidity();
+        this.form.get('numero_estacionamiento')?.disable()
+        this.form.get('estacionamiento_independiente')?.disable()
+      }
+    })
   }
 }

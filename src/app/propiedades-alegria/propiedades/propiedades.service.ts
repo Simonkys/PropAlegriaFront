@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable, inject } from "@angular/core";
 import { environment } from "src/environments/environment";
-import { Propiedad, PropiedadForm } from "./propiedad.model";
+import { Propiedad, PropiedadForm, RegistroPropiedadForm } from "./propiedad.model";
 import { MessageService } from "../core/services/message.service";
 import { catchError, tap, throwError } from "rxjs";
 
@@ -27,7 +27,7 @@ export class PropiedadesService {
         return this.http.get<Propiedad[]>(`${this.apiUrl}/?propietario=${propietarioId}`);
     }
 
-    crearPropiedad(propiedadForm: PropiedadForm) {
+    crearPropiedad(propiedadForm: RegistroPropiedadForm) {
         return this.http.post<Propiedad>(`${this.apiUrl}/`, propiedadForm).pipe(
             tap(() => {
                 this.messageService.addMessage({
