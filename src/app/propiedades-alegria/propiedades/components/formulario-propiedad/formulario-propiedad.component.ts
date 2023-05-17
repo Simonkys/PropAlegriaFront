@@ -11,6 +11,7 @@ import { PropiedadesService } from 'src/app/propiedades-alegria/propiedades/prop
 import { TipoPropiedadesService } from 'src/app/propiedades-alegria/core/services/tipo-propiedades.service';
 import { PropietarioService } from 'src/app/propiedades-alegria/propietarios/propietario.service';
 import { InputSwitchModule } from 'primeng/inputswitch';
+import { TipoPropiedadEnum } from 'src/app/propiedades-alegria/core/models/tipo-propiedad.model';
 
 @Component({
   selector: 'app-formulario-propiedad',
@@ -37,14 +38,16 @@ export class FormularioPropiedadComponent implements OnInit {
   @Output() submitEvent = new EventEmitter<Propiedad>();
   @Output() cancelEvent = new EventEmitter<void>();
 
-
-  DEPARTAMENTO = 1
+  
 
   propiedadService = inject(PropiedadesService);
   tipoPropiedadesService = inject(TipoPropiedadesService);
   propietarioService = inject(PropietarioService);
 
   fb = inject(FormBuilder)
+
+
+  TipoPropiedadEnum = TipoPropiedadEnum
 
   tipoPropiedades$ = this.tipoPropiedadesService.getTipoPropiedades();
   propietarios$ = this.propietarioService.getPropietarios();
@@ -98,10 +101,10 @@ export class FormularioPropiedadComponent implements OnInit {
 
     const formValues = this.form.getRawValue();
 
-    const nro_bodega = formValues.incluir_bodega && formValues.tipopropiedad_id === this.DEPARTAMENTO
+    const nro_bodega = formValues.incluir_bodega && formValues.tipopropiedad_id === TipoPropiedadEnum.DEPARTAMENTO
       ? formValues.numero_bodega : null
 
-    const nro_estacionamiento = formValues.incluir_estacionamiento && formValues.tipopropiedad_id === this.DEPARTAMENTO
+    const nro_estacionamiento = formValues.incluir_estacionamiento && formValues.tipopropiedad_id === TipoPropiedadEnum.DEPARTAMENTO
     ? formValues.numero_estacionamiento : null
 
     const propiedadForm: PropiedadForm = {
@@ -146,7 +149,7 @@ export class FormularioPropiedadComponent implements OnInit {
   handleTipoPropiedadChanges() {
     this.form.get('tipopropiedad_id')?.valueChanges
       .subscribe((tipoId) => {  
-        if( tipoId !== this.DEPARTAMENTO) {
+        if( tipoId !== TipoPropiedadEnum.DEPARTAMENTO) {
           this.invalidateEstacionamiento()
           this.invalidateBodega()
         } else {

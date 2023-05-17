@@ -6,6 +6,7 @@ import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { ConfirmationService } from 'primeng/api';
 
 import { Propiedad } from '../../propiedad.model';
+import { TipoPropiedadEnum } from 'src/app/propiedades-alegria/core/models/tipo-propiedad.model';
 
 @Component({
   selector: 'app-detalle-propiedad',
@@ -24,6 +25,8 @@ export class DetallePropiedadComponent {
   @Output() detallePropietarioEvent = new EventEmitter();
   
   confimService = inject(ConfirmationService);
+
+  TipoPropiedadEnum = TipoPropiedadEnum
 
   eliminar(event: Event){
     this.confimService.confirm({
