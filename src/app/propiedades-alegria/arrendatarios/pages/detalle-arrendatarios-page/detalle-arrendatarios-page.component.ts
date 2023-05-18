@@ -10,11 +10,18 @@ import { FormularioCuentaBancariaComponent } from '../../../cuentas-bancarias/co
 import { ListadoCuentaBancariaComponent } from '../../../cuentas-bancarias/components/listado-cuenta-bancaria/listado-cuenta-bancaria.component';
 import { CuentaBancaria, CuentaBancariaForm } from '../../../cuentas-bancarias/cuenta-bancaria.models';
 import { CuentaBancariaService } from '../../../cuentas-bancarias/cuenta-bancaria.service';
+import { ListadoArriendosComponent } from 'src/app/propiedades-alegria/arriendos/components/listado-arriendos/listado-arriendos.component';
+import { Arriendo } from 'src/app/propiedades-alegria/arriendos/arriendo.model';
 
 @Component({
   selector: 'app-detalle-arrendatarios-page',
   standalone: true,
-  imports: [CommonModule, DetalleArrendatarioComponent, FormularioCuentaBancariaComponent, ListadoCuentaBancariaComponent],
+  imports: [
+    CommonModule, 
+    DetalleArrendatarioComponent, 
+    ListadoArriendosComponent,
+    FormularioCuentaBancariaComponent, 
+    ListadoCuentaBancariaComponent],
   templateUrl: './detalle-arrendatarios-page.component.html',
   styleUrls: ['./detalle-arrendatarios-page.component.scss']
 })
@@ -71,6 +78,14 @@ export class DetalleArrendatariosPageComponent implements OnInit {
 
   activarCreacionCuentaBancaria() {
     this.creacionCuentaActiva = true;
+  }
+
+  handleRegistroArriendoEvent(arrendatario: Arrendatario) {
+    this.router.navigate(['arriendos', 'registro'], {state:  {arrendatario: arrendatario}})
+  }
+
+  handleDetalleArriendoEvent(arriendo: Arriendo){
+    this.router.navigate(['arriendos', arriendo.id, 'detalle'])
   }
 
 }

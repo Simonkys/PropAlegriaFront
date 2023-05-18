@@ -11,24 +11,41 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { SelectButtonModule } from 'primeng/selectbutton';
 
 import { Arriendo, ArriendoForm } from '../../arriendo.model';
+import { SelectorPropiedadesComponent } from 'src/app/propiedades-alegria/componentes/selector-propiedades/selector-propiedades.component';
+import { Arrendatario } from 'src/app/propiedades-alegria/arrendatarios/arrendatario.model';
+import { ArrendatarioService } from 'src/app/propiedades-alegria/arrendatarios/arrendatario.service';
 
 
 @Component({
   selector: 'app-formulario-arriendo',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, ButtonModule, InputTextModule, KeyFilterModule, CalendarModule, DropdownModule, InputNumberModule, SelectButtonModule],
+  imports: [
+    CommonModule, 
+    ReactiveFormsModule, 
+    ButtonModule, 
+    InputTextModule, 
+    KeyFilterModule, 
+    CalendarModule, 
+    DropdownModule, 
+    InputNumberModule, 
+    SelectButtonModule, 
+    SelectorPropiedadesComponent
+],
   templateUrl: './formulario-arriendo.component.html',
   styleUrls: ['./formulario-arriendo.component.scss']
 })
 export class FormularioArriendoComponent implements OnInit {
 
-  @Input() arriendo?: Arriendo;
-
+  @Input() arriendo?: Arriendo
+  @Input() arrendatario?: Arrendatario
 
   @Output() cancelEvent = new EventEmitter()
   @Output() submitEvent = new EventEmitter<ArriendoForm>()
 
   fb = inject(FormBuilder)
+  arrendatarioService = inject(ArrendatarioService)
+
+  arrendatarios$ = this.arrendatarioService.getArrendatarios()
 
   periodos_reajuste: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
   opcionesEstadoArriendo: {label: string; value: boolean}[] = [
@@ -50,8 +67,8 @@ export class FormularioArriendoComponent implements OnInit {
     estado_arriendo: this.fb.control<boolean>(true, [Validators.required]),
     porcentaje_multa: this.fb.control<number | null>(null, [Validators.required, Validators.min(0), Validators.max(100)]),
 
-    arrendatario_id: this.fb.control<number | null>(1, [Validators.required]),
-    propiedad_id: this.fb.control<number | null>(1, []),
+    arrendatario_id: this.fb.control<number | null>(null, [Validators.required]),
+    propiedad_id: this.fb.control<number | null>(null, [Validators.required]),
   })
 
 
@@ -70,6 +87,11 @@ export class FormularioArriendoComponent implements OnInit {
         arrendatario_id: this.arriendo.arrendatario.id,
         propiedad_id: this.arriendo.propiedad?.id,
       })
+    }
+
+    if(this.arrendatario) {
+      this.form.patchValue({arrendatario_id: this.arrendatario.id})
+      this.form.controls['arrendatario_id'].disable();
     }
   }
 
@@ -99,5 +121,9 @@ export class FormularioArriendoComponent implements OnInit {
 
   cancel() {
     this.cancelEvent.emit()
+  }
+
+  handlePropiedadSelectedEvent(propiedadId: number) {
+    this.form.patchValue({propiedad_id: propiedadId})
   }
 }

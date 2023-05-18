@@ -1,45 +1,91 @@
 <form [formGroup]="form">
+
     <div class="grid mb-3">
-        <div class="col flex flex-column gap-2">
+        <div class="col-12">
+            <app-selector-propiedades (selectedEvent)="handlePropiedadSelectedEvent($event)" />
+        </div>
+    </div>
+
+    <div class="grid mb-3">
+        <div class="col-6">
             <span class="p-float-label">
-                <input 
-                    type="text" 
-                    pInputText 
-                    formControlName="cod_arriendo" 
-                    autofocus 
-                    placeholder="1234-1234-1234-1234"
+
+                <ng-container *ngIf="arrendatario; else ArrendatarioSelector">
+                    <input 
+                        type="text" 
+                        pInputText 
+                        value="{{arrendatario.rut_arr}} ({{arrendatario.pri_nom_arr}} {{arrendatario.pri_ape_arr}})"
+                        [disabled]="true" 
+                        [style]="{ width: '100%' }">
+                </ng-container>
+
+                <ng-template #ArrendatarioSelector>
+                        <p-dropdown 
+                            formControlName="arrendatario_id" 
+                            [options]="(arrendatarios$ | async)!"
+                            optionLabel="pri_nom_arr" 
+                            optionValue="id" 
+                            [style]="{ width: '100%' }"
+                            placeholder="Arrendatario" 
+                            [filter]="true" 
+                            [filterBy]="'pri_nom_arr,pri_ape_arr,rut_arr'"
+                            filterPlaceholder="Rut, nombre, apellido" 
+                            inputId="float-label">
+                            <ng-template pTemplate="selectedItem" let-arrendatario>
+                                <div>{{arrendatario.rut_arr}} ({{arrendatario.pri_nom_arr}}
+                                    {{arrendatario.pri_ape_arr}}) </div>
+                            </ng-template>
+                            <ng-template pTemplate="item" let-arrendatario>
+                                <div>{{arrendatario.rut_arr}} ({{arrendatario.pri_nom_arr}}
+                                    {{arrendatario.pri_ape_arr}}) </div>
+                            </ng-template>
+                        </p-dropdown>
+                </ng-template>
+
+                <label>Arrendatario</label>
+            </span>
+        </div>
+
+        <div class="col-6">
+            <span class="p-float-label">
+                <input type="text" pInputText formControlName="cod_arriendo" autofocus placeholder="1234-1234-1234-1234"
                     [style]="{ width: '100%' }" />
                 <label>Código</label>
             </span>
         </div>
-        <div class="col flex flex-column gap-2">
+    </div>
+
+
+
+    <div class="grid mb-3">
+
+        <div class="col-6">
             <span class="p-float-label">
                 <p-calendar formControlName="fecha_inicio" [showIcon]="true" [style]="{ width: '100%' }"></p-calendar>
                 <label>Fecha de inicio *</label>
             </span>
         </div>
-    </div>
-
-    <div class="grid mb-3">
-        <div class="col flex flex-column gap-2">
+        <div class="col-6">
             <span class="p-float-label">
                 <p-calendar formControlName="fecha_termino" [showIcon]="true" [style]="{ width: '100%' }"></p-calendar>
                 <label>Fecha de término *</label>
             </span>
         </div>
-
-        <div class="col flex flex-column gap-2">
-            <span class="p-float-label">
-                <p-calendar formControlName="fecha_pri_ajuste" [showIcon]="true" [style]="{ width: '100%' }"></p-calendar>
-                <label>Fecha del primer reajuste *</label>
-            </span>
-        </div>
     </div>
 
     <div class="grid mb-3">
+
         <div class="col flex flex-column gap-2">
             <span class="p-float-label">
-                <p-dropdown  formControlName="periodo_reajuste" [options]="periodos_reajuste" [style]="{ width: '100%' }">
+                <p-calendar formControlName="fecha_pri_ajuste" [showIcon]="true"
+                    [style]="{ width: '100%' }"></p-calendar>
+                <label>Fecha del primer reajuste *</label>
+            </span>
+        </div>
+        <div class="col flex flex-column gap-2">
+            <span class="p-float-label">
+                <p-dropdown formControlName="periodo_reajuste" [options]="periodos_reajuste"
+                    [style]="{ width: '100%' }">
                     <ng-template let-periodo pTemplate="selectedItem">{{periodo}} meses.</ng-template>
                     <ng-template let-periodo pTemplate="item">{{periodo}} meses.</ng-template>
                 </p-dropdown>
@@ -47,27 +93,28 @@
                 <small>En meses</small>
             </span>
         </div>
+    </div>
+
+    <div class="grid mb-3">
+
         <div class="col flex flex-column gap-2">
-            <span class="p-float-label" >
-                <p-inputNumber
-                    placeholder="$ 199.123 *"
-                    formControlName="monto_arriendo"
-                    prefix="$ "
-                    [style]="{ width: '100%' }"
-                    inputId="integeronly"> 
+            <span class="p-float-label">
+                <p-inputNumber placeholder="$ 199.123 *" formControlName="monto_arriendo" prefix="$ "
+                    [style]="{ width: '100%' }" inputId="integeronly">
                 </p-inputNumber>
                 <label>Monto arriendo</label>
             </span>
         </div>
-    </div>
 
-    <div class="grid mb-3">
         <div class="col flex flex-column gap-2">
             <span class="p-float-label">
                 <p-calendar formControlName="fecha_entrega" [showIcon]="true" [style]="{ width: '100%' }"></p-calendar>
                 <label>Fecha de entrega</label>
             </span>
         </div>
+    </div>
+
+    <div class="grid mb-5">
 
         <div class="col flex flex-column gap-2">
             <span class="p-float-label">
@@ -76,33 +123,16 @@
                 <label>Porcentaje de multa *</label>
             </span>
             <small>Solo números son permitidos 1-100 %</small>
-        </div>        
-    </div>
-
-    <div class="grid mb-4">
+        </div>
         <div class="col flex flex-column gap-2">
-            <p-selectButton 
-                [options]="opcionesEstadoArriendo" 
-                formControlName="estado_arriendo" 
-                optionLabel="label" 
-                optionValue="value"
-                [style]="{ width: '100%' }"
-            >
+            <p-selectButton [options]="opcionesEstadoArriendo" formControlName="estado_arriendo" optionLabel="label"
+                optionValue="value" [style]="{ width: '100%' }">
             </p-selectButton>
         </div>
     </div>
 
     <div class="flex">
-        <p-button
-            styleClass="mr-3"
-            [disabled]="form.invalid"
-            label="Guardar"
-            (click)="submit()"
-        ></p-button>
-        <p-button
-            label="Cancelar"
-            styleClass="p-button-danger"
-            (click)="cancel()"
-        ></p-button>
+        <p-button styleClass="mr-3" [disabled]="form.invalid" label="Guardar" (click)="submit()"></p-button>
+        <p-button label="Cancelar" styleClass="p-button-danger" (click)="cancel()"></p-button>
     </div>
 </form>

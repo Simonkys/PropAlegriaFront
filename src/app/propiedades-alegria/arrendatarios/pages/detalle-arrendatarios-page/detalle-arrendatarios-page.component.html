@@ -9,6 +9,14 @@
         />
     </div>
 
+    <div class="card">
+        <h4>Arriendos</h4>
+        <app-listado-arriendos 
+            (registrarEvent)="handleRegistroArriendoEvent(arrendatario)"
+            (detalleEvent)="handleDetalleArriendoEvent($event)"
+        />
+    </div>
+
     <div class="card"  *ngIf="creacionCuentaActiva">
         <h4>Registro cuenta</h4>
         <app-formulario-cuenta-bancaria
