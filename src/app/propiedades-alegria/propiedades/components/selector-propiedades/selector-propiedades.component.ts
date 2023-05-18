@@ -1,7 +1,8 @@
 import { Component, EventEmitter, Output, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PropiedadesService } from '../../propiedades/propiedades.service';
+import { PropiedadesService } from '../../propiedades.service';
 import { DropdownModule } from 'primeng/dropdown';
+import { Propiedad } from '../../propiedad.model';
 
 @Component({
   selector: 'app-selector-propiedades',
@@ -16,12 +17,12 @@ export class SelectorPropiedadesComponent {
 
   propiedades$ = this.propiedadService.getPropiedades()
 
-  @Output() selectedEvent = new EventEmitter<number>();
+  @Output() selectedEvent = new EventEmitter<Propiedad>();
 
 
 
-  selected(propiedadId: number) {
-      this.selectedEvent.emit(propiedadId)
+  selected(propiedad: Propiedad) {
+      this.selectedEvent.emit(propiedad)
   }
 
 }

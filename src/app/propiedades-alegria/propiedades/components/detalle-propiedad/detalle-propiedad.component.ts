@@ -20,6 +20,11 @@ export class DetallePropiedadComponent {
 
   @Input() propiedad?: Propiedad;
 
+  @Input() mostrarEliminar: boolean = true
+  @Input() mostrarActualizar: boolean = true
+  @Input() mostrarLinkPropietario: boolean = true
+  @Input() ocultarAcciones: boolean = false
+
   @Output() eliminarEvent = new EventEmitter();
   @Output() actualizarEvent = new EventEmitter();
   @Output() detallePropietarioEvent = new EventEmitter();

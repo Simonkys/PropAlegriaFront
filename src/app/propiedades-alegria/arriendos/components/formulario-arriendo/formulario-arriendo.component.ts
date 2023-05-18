@@ -11,9 +11,11 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { SelectButtonModule } from 'primeng/selectbutton';
 
 import { Arriendo, ArriendoForm } from '../../arriendo.model';
-import { SelectorPropiedadesComponent } from 'src/app/propiedades-alegria/componentes/selector-propiedades/selector-propiedades.component';
+import { SelectorPropiedadesComponent } from 'src/app/propiedades-alegria/propiedades/components/selector-propiedades/selector-propiedades.component';
 import { Arrendatario } from 'src/app/propiedades-alegria/arrendatarios/arrendatario.model';
 import { ArrendatarioService } from 'src/app/propiedades-alegria/arrendatarios/arrendatario.service';
+import { DetallePropiedadComponent } from 'src/app/propiedades-alegria/propiedades/components/detalle-propiedad/detalle-propiedad.component';
+import { Propiedad } from 'src/app/propiedades-alegria/propiedades/propiedad.model';
 
 
 @Component({
@@ -29,7 +31,8 @@ import { ArrendatarioService } from 'src/app/propiedades-alegria/arrendatarios/a
     DropdownModule, 
     InputNumberModule, 
     SelectButtonModule, 
-    SelectorPropiedadesComponent
+    SelectorPropiedadesComponent,
+    DetallePropiedadComponent
 ],
   templateUrl: './formulario-arriendo.component.html',
   styleUrls: ['./formulario-arriendo.component.scss']
@@ -46,6 +49,7 @@ export class FormularioArriendoComponent implements OnInit {
   arrendatarioService = inject(ArrendatarioService)
 
   arrendatarios$ = this.arrendatarioService.getArrendatarios()
+  propiedadSeleccionada?: Propiedad
 
   periodos_reajuste: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
   opcionesEstadoArriendo: {label: string; value: boolean}[] = [
@@ -61,7 +65,7 @@ export class FormularioArriendoComponent implements OnInit {
     fecha_pri_ajuste: this.fb.control<Date | null>(null, [Validators.required]),
 
     periodo_reajuste: this.fb.control<number | null>(1, [Validators.required, Validators.min(1), Validators.max(12)]),
-    monto_arriendo: this.fb.control<number | null>(null, [Validators.required, Validators.min(0), Validators.maxLength(16)]),
+    monto_arriendo: this.fb.control<number | null>(0, [Validators.required, Validators.min(0), Validators.maxLength(16)]),
 
     fecha_entrega: this.fb.control<Date | null>(null, []),
     estado_arriendo: this.fb.control<boolean>(true, [Validators.required]),
@@ -123,7 +127,8 @@ export class FormularioArriendoComponent implements OnInit {
     this.cancelEvent.emit()
   }
 
-  handlePropiedadSelectedEvent(propiedadId: number) {
-    this.form.patchValue({propiedad_id: propiedadId})
+  handlePropiedadSelectedEvent(propiedad: Propiedad) {
+    this.propiedadSeleccionada = propiedad
+    this.form.patchValue({propiedad_id: propiedad.id})
   }
 }

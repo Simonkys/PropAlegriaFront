@@ -2,7 +2,19 @@
 
     <div class="grid mb-3">
         <div class="col-12">
-            <app-selector-propiedades (selectedEvent)="handlePropiedadSelectedEvent($event)" />
+            <app-selector-propiedades [hidden]="!!propiedadSeleccionada" (selectedEvent)="handlePropiedadSelectedEvent($event)" />
+        </div>
+    </div>
+
+    <div class="grid mb-3" *ngIf="propiedadSeleccionada">
+        <div class="col-12">
+            <div class="card slide-in-right">
+                <h4>Propiedad</h4>
+                <app-detalle-propiedad 
+                    [propiedad]="propiedadSeleccionada"
+                    [ocultarAcciones]="true"
+                />
+            </div>
         </div>
     </div>
 

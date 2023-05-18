@@ -65,3 +65,17 @@ $gutter: 1rem; //for primeflex grid system
 .color-icons{
     color: whitesmoke;
 }
+
+
+@keyframes slideInFromRight {
+    0% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+  
+  .slide-in-right {
+    animation: slideInFromRight 200ms ease-in;
+  }

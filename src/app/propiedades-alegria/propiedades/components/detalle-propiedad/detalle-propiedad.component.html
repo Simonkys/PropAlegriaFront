@@ -1,5 +1,5 @@
 <ng-container *ngIf="propiedad">
-    <div class="grid">
+    <div class="grid" [style]="{width: '100%'}">
         <div class="col-4">
             <div class="text-sm font-bold text-600 mb-1">Código</div>
             <div class="font-medium">{{propiedad.id}}</div>
@@ -28,9 +28,16 @@
         <div [ngClass]="propiedad.tipopropiedad.id === TipoPropiedadEnum.DEPARTAMENTO ? 'col-4': 'col-8'">
             <div class="text-sm font-bold text-600 mb-1">Propietario</div>
             <div class="font-medium ">
-                <p-button [label]="propiedad.propietario.pri_ape_prop + ' ' + propiedad.propietario.pri_nom_prop"
-                    styleClass="p-button-link text-left p-0" (click)="detallePropietario()">
+                <p-button 
+                    *ngIf="mostrarLinkPropietario && !ocultarAcciones; else Nolink"
+                    [label]="propiedad.propietario.pri_ape_prop + ' ' + propiedad.propietario.pri_nom_prop"
+                    styleClass="p-button-link text-left p-0" 
+                    (click)="detallePropietario()">
                 </p-button>
+
+                <ng-template #Nolink>
+                    {{propiedad.propietario.pri_ape_prop}} {{propiedad.propietario.pri_nom_prop}}
+                </ng-template>
 
             </div>
         </div>
@@ -43,12 +50,12 @@
             <div class="font-medium">{{propiedad.nro_estacionamiento ?? 'No incluye'}}</div>
         </div>
 
-        <div class="col-4">
+        <div class="col-4" *ngIf="!ocultarAcciones">
             <div class="flex">
-                <p-button icon="pi pi-pencil" styleClass="p-button-warning mr-2" (click)="actualizar()">
+                <p-button icon="pi pi-pencil" styleClass="p-button-warning mr-2" (click)="actualizar()" *ngIf="mostrarActualizar">
                 </p-button>
                 <p-confirmPopup></p-confirmPopup>
-                <p-button icon="pi pi-trash" styleClass="p-button-danger" (click)="eliminar($event)"></p-button>
+                <p-button icon="pi pi-trash" styleClass="p-button-danger" (click)="eliminar($event)" *ngIf="mostrarEliminar"></p-button>
             </div>
         </div>
     </div>
