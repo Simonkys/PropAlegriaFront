@@ -41,6 +41,18 @@ export class ArriendoService {
         )
     }
 
+    eliminarArriendo(arriendo: Arriendo) {
+        return this.http.delete(`${this.apiUrl}/${arriendo.id}`).pipe(
+            tap(() => {
+                this.messageService.addMessage({
+                    details: ['Arriendo eliminado exitosamente!'],
+                    role: 'warn'
+                })
+            }),
+            catchError((error: HttpErrorResponse) => this.handleError(error))
+        )
+    }
+
 
     private handleError(error: HttpErrorResponse) {
         const msg = JSON.stringify(error.error);

@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ArriendoService } from '../../arriendo.service';
 import {map, switchMap} from 'rxjs'
@@ -17,6 +17,7 @@ import { Arriendo } from '../../arriendo.model';
 export class DetalleArriendoPageComponent {
 
   route = inject(ActivatedRoute)
+  location = inject(Location)
   router = inject(Router)
 
   arriendoService = inject(ArriendoService)
@@ -27,7 +28,11 @@ export class DetalleArriendoPageComponent {
   )
 
 
-  handleEliminarEvent(arriendo: Arriendo) {}
+  handleEliminarEvent(arriendo: Arriendo) {
+    this.arriendoService.eliminarArriendo(arriendo).subscribe(() => {
+      this.location.back()
+    })
+  }
 
 
   handleActualizarEvent(arriendo: Arriendo) {
