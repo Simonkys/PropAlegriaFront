@@ -1,3 +1,10 @@
-<div class="card">
-    <h4>Detalle arriendo</h4>
-</div>
+<ng-container *ngIf="arriendo$ | async as arriendo">
+    <div class="card">
+        <h4>Detalle arriendo</h4>
+        <app-detalle-arriendo 
+            [arriendo]="arriendo"
+            (eliminarEvent)="handleEliminarEvent(arriendo)"
+            (actualizarEvent)="handleActualizarEvent(arriendo)"
+        />
+    </div>
+</ng-container>

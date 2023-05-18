@@ -11,7 +11,8 @@
 
     <div class="card">
         <h4>Arriendos</h4>
-        <app-listado-arriendos 
+        <app-listado-arriendos
+            [arriendos]="arriendos"
             (registrarEvent)="handleRegistroArriendoEvent(arrendatario)"
             (detalleEvent)="handleDetalleArriendoEvent($event)"
         />

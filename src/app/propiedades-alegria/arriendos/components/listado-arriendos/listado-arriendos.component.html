@@ -11,13 +11,35 @@
     </ng-template>
     <ng-template pTemplate="header">
         <tr>
-            <th>Cod</th>
+            <th>#</th>
+            <th>cod_arriendo</th>
+            <th>fecha_inicio</th>
+            <th>fecha_termino</th>
+            <th>fecha_pri_ajuste</th>
+            <th>periodo_reajuste</th>
+            <th>monto_arriendo</th>
+            <th>fecha_entrega</th>
+            <th>estado_arriendo</th>
+            <th>porcentaje_multa</th>
+            <th>Arrendatario</th>
+            <th>Propiedad</th>
             <th>Acciones</th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-arriendo>
         <tr>
             <td>{{arriendo.id}}</td>
+            <td>{{arriendo.cod_arriendo}}</td>
+            <td>{{arriendo.fecha_inicio}}</td>
+            <td>{{arriendo.fecha_termino}}</td>
+            <td>{{arriendo.fecha_pri_ajuste}}</td>
+            <td>{{arriendo.periodo_reajuste}}</td>
+            <td>{{arriendo.monto_arriendo}}</td>
+            <td>{{arriendo.fecha_entrega}}</td>
+            <td><p-tag [value]="arriendo.estado_arriendo ? 'Activo': 'Inactivo'" [severity]="arriendo.estado_arriendo ? 'success': 'danger'"></p-tag></td>
+            <td>{{arriendo.porcentaje_multa}}</td>
+            <td>{{arriendo.arrendatario.pri_nom_arr}} {{arriendo.arrendatario.pri_ape_arr}}</td>
+            <td>{{arriendo.propiedad.id}} - {{arriendo.propiedad.direccion_ppdd}}</td>
             <td>
                 <div class="flex">
                     <button
@@ -25,7 +47,7 @@
                         pRipple
                         icon="pi pi-search"
                         class="p-button-rounded p-button-primary mr-2"
-                        (detalle)="detalle(arriendo)"
+                        (click)="detalle(arriendo)"
                     ></button>
                 </div>
             </td>

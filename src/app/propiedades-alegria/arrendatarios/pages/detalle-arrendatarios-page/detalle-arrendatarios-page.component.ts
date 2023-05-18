@@ -1,7 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
-import { map, switchMap } from 'rxjs';
+import { forkJoin, map, switchMap } from 'rxjs';
 
 import { ArrendatarioService } from '../../arrendatario.service';
 import { Arrendatario } from '../../arrendatario.model';
@@ -12,6 +12,7 @@ import { CuentaBancaria, CuentaBancariaForm } from '../../../cuentas-bancarias/c
 import { CuentaBancariaService } from '../../../cuentas-bancarias/cuenta-bancaria.service';
 import { ListadoArriendosComponent } from 'src/app/propiedades-alegria/arriendos/components/listado-arriendos/listado-arriendos.component';
 import { Arriendo } from 'src/app/propiedades-alegria/arriendos/arriendo.model';
+import { ArriendoService } from 'src/app/propiedades-alegria/arriendos/arriendo.service';
 
 @Component({
   selector: 'app-detalle-arrendatarios-page',
@@ -29,6 +30,7 @@ export class DetalleArrendatariosPageComponent implements OnInit {
 
   cuentaBancariaService = inject(CuentaBancariaService);
   arrendatarioService = inject(ArrendatarioService)
+  arriendoService = inject(ArriendoService)
 
   router = inject(Router)
   route = inject(ActivatedRoute)
@@ -37,18 +39,25 @@ export class DetalleArrendatariosPageComponent implements OnInit {
   creacionCuentaActiva: boolean = false;
 
   arrendatario?: Arrendatario;
+  arriendos: Arriendo[] = []
 
   ngOnInit(): void {
     this.route.paramMap.pipe(
       map(params => Number(params.get('id'))),
       switchMap(id => this.arrendatarioService.getArrendatario(id)),
       switchMap(arrendatario => {
-        return this.cuentaBancariaService.getCuentasBancariasByRut(arrendatario.rut_arr).pipe(
-          map(() => arrendatario)
+        const arriendos$ = this.arriendoService.getArriendoByArrendatario(arrendatario.id)
+        const cuentasBancarias$ = this.cuentaBancariaService.getCuentasBancariasByRut(arrendatario.rut_arr)
+
+        return forkJoin([arriendos$, cuentasBancarias$]).pipe(
+          map(([arriendos, cuentasBancarias]) => {
+            return {arriendos, cuentasBancarias, arrendatario}
+          })
         )
       })
-    ).subscribe((arrendatario) => {
+    ).subscribe(({arriendos, arrendatario}) => {
       this.arrendatario = arrendatario;
+      this.arriendos = arriendos
     })
   }
 

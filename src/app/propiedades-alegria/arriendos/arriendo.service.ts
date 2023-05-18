@@ -1,7 +1,9 @@
 import { Injectable, inject } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { environment } from "src/environments/environment";
 import { Arriendo, ArriendoForm } from "./arriendo.model";
+import { MensajeService } from "../core/services/message.service";
+import { catchError, tap, throwError } from "rxjs";
 
 
 @Injectable({
@@ -9,6 +11,7 @@ import { Arriendo, ArriendoForm } from "./arriendo.model";
 })
 export class ArriendoService {
     private http = inject(HttpClient)
+    private messageService = inject(MensajeService);
     private apiUrl = `${environment.apiUrl}/api/arriendo`
 
 
@@ -16,7 +19,39 @@ export class ArriendoService {
         return this.http.get<Arriendo[]>(`${this.apiUrl}/`);
     }
 
-    createArriendo(arriendoForm: ArriendoForm) {
-        return this.http.post<Arriendo>(`${this.apiUrl}/`, arriendoForm)
+
+    getArriendo(id: number) {
+        return this.http.get<Arriendo>(`${this.apiUrl}/${id}/`)
     }
+
+
+    getArriendoByArrendatario(arrendatarioId: number) {
+        return this.http.get<Arriendo[]>(`${this.apiUrl}/?arrendatario_id=${arrendatarioId}`);
+    }
+
+    createArriendo(arriendoForm: ArriendoForm) {
+        return this.http.post<Arriendo>(`${this.apiUrl}/`, arriendoForm).pipe(
+            tap(() => {
+                this.messageService.addMessage({
+                    details: ['Arriendo registrado exitosamente!'],
+                    role: 'success'
+                })
+            }),
+            catchError((error: HttpErrorResponse) => this.handleError(error))
+        )
+    }
+
+
+    private handleError(error: HttpErrorResponse) {
+        const msg = JSON.stringify(error.error);
+        if (error.status == 400) {
+            const errores = Object.entries(error.error).map((msg) =>`${msg[0].toUpperCase()}: ${msg[1]}`);
+            this.messageService.addMessage({
+                details: errores,
+                role: 'error',
+            });
+        }
+        return throwError(() => new Error(msg));
+    }
+
 }

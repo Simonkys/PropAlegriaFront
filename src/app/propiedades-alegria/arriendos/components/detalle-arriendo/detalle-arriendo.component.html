@@ -1,0 +1,72 @@
+<ng-container *ngIf="arriendo">
+    <div class="grid" [style]="{width: '100%'}">
+        <div class="col-4">
+            <div class="text-sm font-bold text-600 mb-1">#</div>
+            <div class="font-medium">{{arriendo.id}}</div>
+        </div>
+        <div class="col-4">
+            <div class="text-sm font-bold text-600 mb-1">Código arriendo</div>
+            <div class="font-medium">{{arriendo.cod_arriendo ?? '---'}}</div>
+        </div>
+
+        <div class="col-4">
+            <div class="text-sm font-bold text-600 mb-1">Fecha de inicio</div>
+            <div class="font-medium">{{arriendo.fecha_inicio | date:'shortDate'}}</div>
+        </div>
+
+        <div class="col-4">
+            <div class="text-sm font-bold text-600 mb-1">Fecha de término</div>
+            <div class="font-medium">{{arriendo.fecha_termino | date:'shortDate'}}</div>
+        </div>
+
+        <div class="col-4">
+            <div class="text-sm font-bold text-600 mb-1">Fecha pri ajuste ¿?</div>
+            <div class="font-medium">{{arriendo.fecha_pri_ajuste | date:'shortDate'}}</div>
+        </div>
+
+        <div class="col-4">
+            <div class="text-sm font-bold text-600 mb-1">Periodo reajuste</div>
+            <div class="font-medium">{{arriendo.periodo_reajuste}} mes(es).</div>
+        </div>
+
+        <div class="col-4">
+            <div class="text-sm font-bold text-600 mb-1">Monto arriendo</div>
+            <div class="font-medium">{{arriendo.monto_arriendo | currency}}</div>
+        </div>
+
+        <div class="col-4">
+            <div class="text-sm font-bold text-600 mb-1">Fecha de entrega</div>
+            <div class="font-medium">{{arriendo.fecha_entrega | date:'shortDate'}}</div>
+        </div>
+
+        <div class="col-4">
+            <div class="text-sm font-bold text-600 mb-1">Estado</div>
+            <p-tag [value]="arriendo.estado_arriendo ? 'Activo': 'Inactivo'" [severity]="arriendo.estado_arriendo ? 'success': 'danger'"></p-tag>
+        </div>
+
+        <div class="col-4">
+            <div class="text-sm font-bold text-600 mb-1">Porcentaje de multa</div>
+            <div class="font-medium">{{arriendo.porcentaje_multa}}%</div>
+        </div>
+
+        <div class="col-4">
+            <div class="text-sm font-bold text-600 mb-1">Arrendatario</div>
+            <div class="font-medium">{{arriendo.arrendatario.pri_nom_arr}} {{arriendo.arrendatario.pri_ape_arr}}</div>
+        </div>
+
+        <div class="col-4" *ngIf="arriendo.propiedad">
+            <div class="text-sm font-bold text-600 mb-1">Propiedad</div>
+            <div class="font-medium">{{arriendo.propiedad.id}} - {{arriendo.propiedad.direccion_ppdd}}, N° {{arriendo.propiedad.numero_ppdd}}</div>
+        </div>
+
+
+        <div class="col-12" >
+            <div class="flex">
+                <p-button icon="pi pi-pencil" styleClass="p-button-warning mr-2" (click)="actualizar()" >
+                </p-button>
+                <p-confirmPopup></p-confirmPopup>
+                <p-button icon="pi pi-trash" styleClass="p-button-danger" (click)="eliminar($event)"></p-button>
+            </div>
+        </div>
+    </div>
+</ng-container>

@@ -6,12 +6,13 @@ import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 
 import { Arriendo } from '../../arriendo.model';
+import { TagModule } from 'primeng/tag';
 
 
 @Component({
   selector: 'app-listado-arriendos',
   standalone: true,
-  imports: [CommonModule, ButtonModule, TableModule],
+  imports: [CommonModule, ButtonModule, TableModule, TagModule],
   templateUrl: './listado-arriendos.component.html',
   styleUrls: ['./listado-arriendos.component.scss']
 })
