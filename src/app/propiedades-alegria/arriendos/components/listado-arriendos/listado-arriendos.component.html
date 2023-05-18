@@ -30,12 +30,12 @@
         <tr>
             <td>{{arriendo.id}}</td>
             <td>{{arriendo.cod_arriendo}}</td>
-            <td>{{arriendo.fecha_inicio}}</td>
-            <td>{{arriendo.fecha_termino}}</td>
-            <td>{{arriendo.fecha_pri_ajuste}}</td>
+            <td>{{arriendo.fecha_inicio | date:'shortDate'}}</td>
+            <td>{{arriendo.fecha_termino | date:'shortDate'}}</td>
+            <td>{{arriendo.fecha_pri_ajuste | date:'shortDate'}}</td>
             <td>{{arriendo.periodo_reajuste}}</td>
             <td>{{arriendo.monto_arriendo}}</td>
-            <td>{{arriendo.fecha_entrega}}</td>
+            <td>{{arriendo.fecha_entrega | date:'shortDate'}}</td>
             <td><p-tag [value]="arriendo.estado_arriendo ? 'Activo': 'Inactivo'" [severity]="arriendo.estado_arriendo ? 'success': 'danger'"></p-tag></td>
             <td>{{arriendo.porcentaje_multa}}</td>
             <td>{{arriendo.arrendatario.pri_nom_arr}} {{arriendo.arrendatario.pri_ape_arr}}</td>
