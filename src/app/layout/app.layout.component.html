@@ -5,15 +5,6 @@
     </div>
     <div class="layout-main-container">
         <div class="layout-main"> 
-            <ng-container *ngIf="messageService.message$ | async as msg">
-                <div class="message-container {{msg.role}}">
-                    <div class="message">
-                        <p *ngFor="let m of msg.details"> {{m}}</p>
-                    </div>
-                    
-                    <button type="button" (click)="close()">X</button>
-                </div>
-            </ng-container>
             <router-outlet></router-outlet>
         </div>
         <app-footer></app-footer>

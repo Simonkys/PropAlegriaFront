@@ -10,6 +10,7 @@ import { PasswordModule } from 'primeng/password';
 import { Message } from 'primeng/api';
 
 import { AuthService } from '../../core/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-login',
@@ -55,6 +56,7 @@ import { AuthService } from '../../core/services/auth.service';
 })
 export class LoginComponent {
     authService = inject(AuthService);
+    router = inject(Router);
     fb = inject(FormBuilder);
 
     messages: Message[] = [];
@@ -77,7 +79,15 @@ export class LoginComponent {
                 })
             )
             .subscribe({
-                next: () => {},
+                next: (user) => {
+                    if(user.usuario.is_superuser) {
+                        this.router.navigate(['dashboard'], {replaceUrl: true});
+                    } else if (user.usuario.is_staff) {
+                        this.router.navigate(['dashboard'], {replaceUrl: true});
+                    } else {
+                        this.router.navigate(['empty'], {replaceUrl: true});
+                    }
+                },
                 error: (err) => {
                     this.messages = [
                         {

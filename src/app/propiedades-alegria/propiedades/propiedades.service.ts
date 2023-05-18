@@ -2,7 +2,7 @@ import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable, inject } from "@angular/core";
 import { environment } from "src/environments/environment";
 import { Propiedad, PropiedadForm } from "./propiedad.model";
-import { MessageService } from "../core/services/message.service";
+import { MensajeService } from "../core/services/message.service";
 import { catchError, tap, throwError } from "rxjs";
 
 @Injectable(
@@ -11,7 +11,7 @@ import { catchError, tap, throwError } from "rxjs";
 export class PropiedadesService {
    
     private http = inject(HttpClient);
-    private messageService = inject(MessageService);
+    private messageService = inject(MensajeService);
     private apiUrl = `${environment.apiUrl}/api/propiedad`
 
     getPropiedades() {

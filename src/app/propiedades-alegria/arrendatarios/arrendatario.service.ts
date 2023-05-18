@@ -3,7 +3,7 @@ import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { environment } from "src/environments/environment";
 import { Arrendatario, ArrendatarioForm } from "./arrendatario.model";
 import { catchError, map, tap, throwError } from "rxjs";
-import { MessageService } from "../core/services/message.service";
+import { MensajeService } from "../core/services/message.service";
 
 
 @Injectable(
@@ -11,7 +11,7 @@ import { MessageService } from "../core/services/message.service";
 )
 export class ArrendatarioService {
     private http = inject(HttpClient)
-    private messageService = inject(MessageService)
+    private messageService = inject(MensajeService)
     private apiUrl = `${environment.apiUrl}/api/arrendatario`
 
 
@@ -53,7 +53,7 @@ export class ArrendatarioService {
             tap( () =>{
                 this.messageService.addMessage({
                     details: ['Arrendatario eliminado exitosamente!'],
-                    role: 'info'
+                    role: 'warn'
                 })
             }),
             catchError((err: HttpErrorResponse) => this.handleError(err))

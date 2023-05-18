@@ -3,6 +3,7 @@ import { ButtonModule } from 'primeng/button';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 
 import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -14,7 +15,7 @@ import { AuthService } from './propiedades-alegria/core/services/auth.service';
 
 @NgModule({
     declarations: [AppComponent],
-    imports: [AppRoutingModule, AppLayoutModule, ButtonModule],
+    imports: [AppRoutingModule, AppLayoutModule, ButtonModule, ToastModule],
     providers: [
         ProductService,
         AuthService,

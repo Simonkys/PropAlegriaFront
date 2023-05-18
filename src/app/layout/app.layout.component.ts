@@ -4,7 +4,6 @@ import { filter, Subscription } from 'rxjs';
 import { LayoutService } from './service/app.layout.service';
 import { AppSidebarComponent } from './app.sidebar.component';
 import { AppTopBarComponent } from './app.topbar.component';
-import { MessageService } from '../propiedades-alegria/core/services/message.service';
 
 @Component({
     selector: 'app-layout',
@@ -25,7 +24,6 @@ export class AppLayoutComponent implements OnDestroy {
         public layoutService: LayoutService,
         public renderer: Renderer2,
         public router: Router,
-        public messageService: MessageService
     ) {
         this.overlayMenuOpenSubscription =
             this.layoutService.overlayOpen$.subscribe(() => {
@@ -107,9 +105,6 @@ export class AppLayoutComponent implements OnDestroy {
         this.unblockBodyScroll();
     }
 
-    close() {
-        this.messageService.clearMessage()
-    }
 
     hideProfileMenu() {
         this.layoutService.state.profileSidebarVisible = false;

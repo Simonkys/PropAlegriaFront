@@ -13,14 +13,14 @@ import {
     tap,
     throwError,
 } from 'rxjs';
-import { MessageService } from '../core/services/message.service';
+import { MensajeService } from '../core/services/message.service';
 
 @Injectable({
     providedIn: 'root',
 })
 export class TrabajadorService {
     private http = inject(HttpClient);
-    private messageService = inject(MessageService);
+    private messageService = inject(MensajeService);
 
     private trabajadorSubject = new BehaviorSubject<Trabajador[]>([]);
     private trabajadorLoaded = false;

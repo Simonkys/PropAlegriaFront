@@ -3,14 +3,14 @@ import { Injectable, inject } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { CuentaBancaria, CuentaBancariaForm } from './cuenta-bancaria.models';
 import { BehaviorSubject, Observable, catchError, shareReplay, tap, throwError } from 'rxjs';
-import { MessageService } from '../core/services/message.service';
+import { MensajeService } from '../core/services/message.service';
 
 @Injectable({
     providedIn: 'root',
 })
 export class CuentaBancariaService {
     private http = inject(HttpClient);
-    private messageService = inject(MessageService);
+    private messageService = inject(MensajeService);
 
     private apiUrl = `${environment.apiUrl}/api/cuenta`
 

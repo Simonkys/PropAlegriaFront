@@ -3,7 +3,7 @@ import { Injectable, inject } from "@angular/core";
 import { CreateUserForm, Usuario } from "../models/usuario.model";
 import { environment } from "src/environments/environment";
 import { BehaviorSubject, catchError, switchMap, tap, throwError } from "rxjs";
-import { MessageService } from "./message.service";
+import { MensajeService } from "./message.service";
 
 @Injectable({
     providedIn: 'root'
@@ -11,7 +11,7 @@ import { MessageService } from "./message.service";
 export class UsuarioService {
 
     private http = inject(HttpClient)
-    private messageService = inject(MessageService)
+    private messageService = inject(MensajeService)
 
     private usuarioSubject = new BehaviorSubject<Usuario[]>([]);
     private usuarioLoaded = false;

@@ -3,7 +3,7 @@ import { Propietario, PropietarioForm } from "./propietario.model";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { environment } from "src/environments/environment";
 import { catchError, tap, throwError } from "rxjs";
-import { MessageService } from "../core/services/message.service";
+import { MensajeService } from "../core/services/message.service";
 
 
 @Injectable(
@@ -11,7 +11,7 @@ import { MessageService } from "../core/services/message.service";
 )
 export class PropietarioService {
     private http = inject(HttpClient)
-    private messageService = inject(MessageService)
+    private messageService = inject(MensajeService)
     private apiUrl = `${environment.apiUrl}/api/propietario`
 
 

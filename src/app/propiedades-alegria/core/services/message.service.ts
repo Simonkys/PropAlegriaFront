@@ -1,15 +1,16 @@
 import { Injectable } from "@angular/core";
-import {Subject, filter} from 'rxjs'
+import {Subject} from 'rxjs'
 
-interface Message {
+export interface Message {
     details: string[];
-    role: 'success' | 'error' | 'info'
+    role: 'success' | 'error' | 'info' | 'warn'
+    summary?: string
 }
 
 @Injectable({
     providedIn: 'root'
 })
-export class MessageService {
+export class MensajeService {
     
     private messageSubject = new Subject<Message | null>()
 
