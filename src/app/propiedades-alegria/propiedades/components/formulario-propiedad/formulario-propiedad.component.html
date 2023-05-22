@@ -1,20 +1,24 @@
 <form [formGroup]="form">
-    <div class="grid mb-3">
-        <div class="col flex flex-column gap-2">
-            <span class="p-float-label">
 
-                <input 
-                    type="text" 
-                    pInputText 
-                    placeholder="Av. caupolican 254 depto 23"
-                    formControlName="direccion_ppdd"
-                    [style]="{ width: '100%' }" 
+    <div class="grid mb-3">
+        <div class="col-6">
+            <span class="p-float-label">
+                <input
+                    pKeyFilter="int"
+                    pInputText
+                    formControlName="cod"
+                    placeholder="123"
+                    [style]="{ width: '100%' }"
                 />
-                <label>Dirección *</label>
+                <label>Código</label>
             </span>
+            <small
+                >Solo números son permitidos,
+                <strong>Ej: 123</strong>
+            </small>
         </div>
 
-        <div class="col flex flex-column gap-2">
+        <div class="col-6">
             <span class="p-float-label">
 
                 <input 
@@ -66,6 +70,23 @@
         [initialComunaId]="propiedad?.comuna?.id"
         (selectedComunaIdEvent)="handleSelectedComuna($event)">
     </app-ubicacion-form>
+
+    <div class="grid mb-3">
+        <div class="col-12">
+            <span class="p-float-label">
+
+                <input 
+                    type="text" 
+                    pInputText 
+                    placeholder="Av. caupolican 254 depto 23"
+                    formControlName="direccion_ppdd"
+                    [style]="{ width: '100%' }" 
+                />
+                <label>Dirección *</label>
+            </span>
+        </div>
+    </div>
+    
     <div class="grid mb-3">
 
         <div class="col flex flex-column gap-2">

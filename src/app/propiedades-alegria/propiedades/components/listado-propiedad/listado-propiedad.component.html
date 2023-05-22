@@ -23,7 +23,7 @@
 
     <ng-template pTemplate="body" let-propiedad>
         <tr>
-            <td>{{ propiedad.id }}</td>
+            <td>{{ propiedad.cod ?? '---' }}</td>
             <td>{{ propiedad.comuna.nom_comuna }}</td>
             <td> {{ propiedad.direccion_ppdd }}
                 <span *ngIf="propiedad.numero_ppdd">
