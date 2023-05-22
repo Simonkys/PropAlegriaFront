@@ -68,7 +68,7 @@ export class DetalleArrendatariosPageComponent implements OnInit {
   handleEliminarEvent(arrendatario: Arrendatario) {
     this.arrendatarioService.eliminarArrendatario(arrendatario)
     .pipe()
-    .subscribe(() => this.location.back())
+    .subscribe(() => this.router.navigate(['arrendatarios', 'listado']))
   }
 
   guardarCuentaBancaria(cuentaBancariaForm: CuentaBancariaForm) {
