@@ -29,7 +29,7 @@ export class CuentaBancariaService {
         )
     }
 
-    createCuentaBancaria(cuentaBancaria: CuentaBancariaForm): Observable<CuentaBancaria> {
+    registrarCuentaBancaria(cuentaBancaria: CuentaBancariaForm): Observable<CuentaBancaria> {
         return this.http.post<CuentaBancaria>(`${this.apiUrl}/`, cuentaBancaria).pipe(
             tap(nuevaCuenta => {
                 this.messageService.addMessage({
@@ -39,6 +39,26 @@ export class CuentaBancariaService {
                 this.cuentasBancariasSub.next([nuevaCuenta, ...this.cuentasBancariasSub.value])
             }),
             catchError((error: HttpErrorResponse) => this.handleError(error))
+        )
+    }
+
+    actualizarCuentaBancaria(cuentaBancaria: CuentaBancariaForm) {
+        return this.http.put<CuentaBancaria>(`${this.apiUrl}/${cuentaBancaria.id}/`, cuentaBancaria).pipe(
+            tap(cuentaActualizada => {
+                this.messageService.addMessage({
+                    details: ['Cuenta actualizada exitosamente!'],
+                    role: 'success'
+                })
+
+                const cuentasActualizadas = this.cuentasBancariasSub.value.map(c => {
+                    if (c.id === cuentaActualizada.id) {
+                        return cuentaActualizada
+                    } else {
+                        return c
+                    }
+                })
+                this.cuentasBancariasSub.next(cuentasActualizadas)
+            })
         )
     }
 

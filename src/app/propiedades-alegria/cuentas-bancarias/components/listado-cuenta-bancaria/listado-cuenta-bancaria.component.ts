@@ -17,8 +17,9 @@ import { CuentaBancariaService } from '../../cuenta-bancaria.service';
 })
 export class ListadoCuentaBancariaComponent {
  
-  @Output() registroEvent = new EventEmitter<void>();
-  @Output() eliminarEvent = new EventEmitter<CuentaBancaria>();
+  @Output() registroEvent = new EventEmitter();
+  @Output() actualizarEvent = new EventEmitter<CuentaBancaria>();
+  @Output() eliminarEvent = new EventEmitter<boolean>();
   
   confimService = inject(ConfirmationService);
   cuentasBancariasService = inject(CuentaBancariaService)
@@ -31,13 +32,18 @@ export class ListadoCuentaBancariaComponent {
       message: `¿Estas segur@ de eliminar la cuenta`,
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.eliminarEvent.emit(cuenta);
+        this.cuentasBancariasService.eliminarCuentaBancaria(cuenta).subscribe(() => {
+          this.eliminarEvent.emit(true)
+        })
       },
     });
   }
 
+  editar(cuenta: CuentaBancaria){
+    this.actualizarEvent.emit(cuenta)
+  }
 
   registro() {
-    this.registroEvent.emit();
+    this.registroEvent.emit()
   }
 }

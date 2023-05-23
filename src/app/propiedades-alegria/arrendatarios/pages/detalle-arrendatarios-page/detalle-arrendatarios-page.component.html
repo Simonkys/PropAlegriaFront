@@ -19,9 +19,10 @@
     </div>
 
     <div class="card"  *ngIf="creacionCuentaActiva">
-        <h4>Registro cuenta</h4>
+        <h4>{{ cuentaBancaria ? 'Actualizar cuenta' : 'Registro cuenta'}}</h4>
         <app-formulario-cuenta-bancaria
             [rut_propietario]="arrendatario.rut_arr"
+            [cuentaBancaria]="cuentaBancaria"
             (submitEvent)="guardarCuentaBancaria($event)"
             (cancelEvent)="cancelarCreacionCuentaBancaria()"
         />
@@ -31,6 +32,7 @@
         <h4>Cuentas Bancarias</h4>
         <app-listado-cuenta-bancaria 
             (registroEvent)="activarCreacionCuentaBancaria()"
+            (actualizarEvent)="actualizarCuentaBancaria($event)"
             (eliminarEvent)="eliminarCuentaBancaria($event)"
         />
     </div>

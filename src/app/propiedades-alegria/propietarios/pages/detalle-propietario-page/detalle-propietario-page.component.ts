@@ -6,7 +6,7 @@ import { forkJoin, map, switchMap } from 'rxjs';
 import { PropietarioService } from '../../propietario.service';
 import { Propietario } from '../../propietario.model';
 import { CuentaBancariaService } from '../../../cuentas-bancarias/cuenta-bancaria.service';
-import { CuentaBancaria, CuentaBancariaForm } from '../../../cuentas-bancarias/cuenta-bancaria.models';
+import { CuentaBancaria } from '../../../cuentas-bancarias/cuenta-bancaria.models';
 import { FormularioCuentaBancariaComponent } from '../../../cuentas-bancarias/components/formulario-cuenta-bancaria/formulario-cuenta-bancaria.component';
 import { ListadoCuentaBancariaComponent } from '../../../cuentas-bancarias/components/listado-cuenta-bancaria/listado-cuenta-bancaria.component';
 import { PropiedadesService } from '../../../propiedades/propiedades.service';
@@ -43,6 +43,7 @@ export class DetallePropietarioPageComponent implements OnInit {
   propiedades: Propiedad[] = [];
   
   creacionCuentaActiva: boolean = false;
+  cuentaBancaria?: CuentaBancaria
 
 
   ngOnInit(): void {
@@ -65,18 +66,22 @@ export class DetallePropietarioPageComponent implements OnInit {
     })
   }
 
-  guardarCuentaBancaria(cuentaBancariaForm: CuentaBancariaForm) {
-    this.cuentaBancariaService.createCuentaBancaria(cuentaBancariaForm)
-      .subscribe((cuenta) => this.cancelarCreacionCuentaBancaria())
+  guardarCuentaBancaria(result: boolean) {
+    if(result) {
+      this.cancelarCreacionCuentaBancaria()
+    }
   }
 
-  eliminarCuentaBancaria(cuenta: CuentaBancaria) {
-    this.cuentaBancariaService.eliminarCuentaBancaria(cuenta)
-      .subscribe()
+  actualizarCuentaBancaria(cuentaBancaria: CuentaBancaria) {
+    this.cuentaBancaria = cuentaBancaria
+    this.activarCreacionCuentaBancaria()
   }
+
+  eliminarCuentaBancaria(result: boolean) {}
   
   cancelarCreacionCuentaBancaria() {
     this.creacionCuentaActiva = false;
+    this.cuentaBancaria = undefined
   }
 
   activarCreacionCuentaBancaria() {

@@ -25,16 +25,21 @@
             <td>{{cuenta.estado_cuenta}}</td>
             <td>{{cuenta.banco.nombre_banco}}</td>
             <td>{{cuenta.tipocuenta.nom_cuenta}}</td>
-            <td>
+            <td class="flex gap-1">
+                <div >
+                    <p-button
+                        icon="pi pi-pencil" 
+                        styleClass="p-button-warning"
+                        (click)="editar(cuenta)"
+                    ></p-button>
+                </div>
                 <p-confirmPopup></p-confirmPopup>
                 <div >
-                    <button
-                        pButton
-                        pRipple
+                    <p-button
                         icon="pi pi-trash"
-                        class="p-button-rounded p-button-danger"
+                        styleClass="p-button-danger"
                         (click)="eliminar($event, cuenta)"
-                    ></button>
+                    ></p-button>
                 </div>
             </td>
         </tr>

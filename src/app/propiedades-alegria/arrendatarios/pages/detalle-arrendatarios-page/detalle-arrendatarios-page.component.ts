@@ -8,7 +8,7 @@ import { Arrendatario } from '../../arrendatario.model';
 import { DetalleArrendatarioComponent } from '../../components/detalle-arrendatario/detalle-arrendatario.component';
 import { FormularioCuentaBancariaComponent } from '../../../cuentas-bancarias/components/formulario-cuenta-bancaria/formulario-cuenta-bancaria.component';
 import { ListadoCuentaBancariaComponent } from '../../../cuentas-bancarias/components/listado-cuenta-bancaria/listado-cuenta-bancaria.component';
-import { CuentaBancaria, CuentaBancariaForm } from '../../../cuentas-bancarias/cuenta-bancaria.models';
+import { CuentaBancaria } from '../../../cuentas-bancarias/cuenta-bancaria.models';
 import { CuentaBancariaService } from '../../../cuentas-bancarias/cuenta-bancaria.service';
 import { ListadoArriendosComponent } from 'src/app/propiedades-alegria/arriendos/components/listado-arriendos/listado-arriendos.component';
 import { Arriendo } from 'src/app/propiedades-alegria/arriendos/arriendo.model';
@@ -36,10 +36,12 @@ export class DetalleArrendatariosPageComponent implements OnInit {
   route = inject(ActivatedRoute)
   location = inject(Location)
 
-  creacionCuentaActiva: boolean = false;
-
-  arrendatario?: Arrendatario;
+  
+  arrendatario?: Arrendatario
   arriendos: Arriendo[] = []
+  
+  creacionCuentaActiva: boolean = false;
+  cuentaBancaria?: CuentaBancaria
 
   ngOnInit(): void {
     this.route.paramMap.pipe(
@@ -71,18 +73,22 @@ export class DetalleArrendatariosPageComponent implements OnInit {
     .subscribe(() => this.router.navigate(['arrendatarios', 'listado']))
   }
 
-  guardarCuentaBancaria(cuentaBancariaForm: CuentaBancariaForm) {
-    this.cuentaBancariaService.createCuentaBancaria(cuentaBancariaForm)
-      .subscribe((cuenta) => this.creacionCuentaActiva = false)
+  guardarCuentaBancaria(result: boolean) {
+    if(result) {
+      this.cancelarCreacionCuentaBancaria()
+    }
   }
 
-  eliminarCuentaBancaria(cuenta: CuentaBancaria) {
-    this.cuentaBancariaService.eliminarCuentaBancaria(cuenta)
-      .subscribe()
+  actualizarCuentaBancaria(cuentaBancaria: CuentaBancaria) {
+    this.cuentaBancaria = cuentaBancaria
+    this.activarCreacionCuentaBancaria()
   }
+
+  eliminarCuentaBancaria(result: boolean) {}
 
   cancelarCreacionCuentaBancaria() {
     this.creacionCuentaActiva = false;
+    this.cuentaBancaria = undefined
   }
 
   activarCreacionCuentaBancaria() {

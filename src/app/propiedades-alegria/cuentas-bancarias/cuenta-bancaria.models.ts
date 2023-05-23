@@ -15,6 +15,8 @@ export interface CuentaBancaria {
     estado_cuenta: string;
     propietario_rut?: string;
 
+    rut_tercero: string | null;
+
     banco: CuentaBancariaBanco;
     tipocuenta: CuentaBancariaTipoCuenta;
 }
@@ -28,6 +30,8 @@ export interface CuentaBancariaForm {
 
     banco_id: number;
     tipocuenta_id: number;
+
+    rut_tercero: string | null;
 }
 
 

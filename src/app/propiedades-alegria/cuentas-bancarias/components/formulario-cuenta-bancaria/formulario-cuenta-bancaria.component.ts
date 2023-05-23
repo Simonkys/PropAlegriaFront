@@ -2,11 +2,13 @@ import { Component, EventEmitter, Input, OnInit, Output, inject } from '@angular
 import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { BancoService } from '../../banco.service';
-import {  CuentaBancariaForm } from '../../cuenta-bancaria.models';
+import {  CuentaBancaria, CuentaBancariaForm } from '../../cuenta-bancaria.models';
 import { ButtonModule } from 'primeng/button';
 import { KeyFilterModule } from 'primeng/keyfilter';
 import { InputTextModule } from 'primeng/inputtext';
 import { DropdownModule } from 'primeng/dropdown';
+import { CuentaBancariaService } from '../../cuenta-bancaria.service';
+
 
 @Component({
   selector: 'app-formulario-cuenta-bancaria',
@@ -17,14 +19,16 @@ import { DropdownModule } from 'primeng/dropdown';
 })
 export class FormularioCuentaBancariaComponent implements OnInit {
 
-  @Input() rut_propietario!: string;
-  @Output() submitEvent = new EventEmitter<CuentaBancariaForm>();
-  @Output() cancelEvent = new EventEmitter<void>();
+  @Input() rut_propietario!: string
+  @Input() cuentaBancaria?: CuentaBancaria
+  @Output() submitEvent = new EventEmitter<boolean>()
+  @Output() cancelEvent = new EventEmitter()
 
   fb = inject(FormBuilder)
   bancoService = inject(BancoService)
+  cuentasBancariasService = inject(CuentaBancariaService)
 
-  tipoCuentasBanco$ = this.bancoService.getTipoCuentasBanco();
+  tipoCuentasBanco$ = this.bancoService.getTipoCuentasBanco()
   bancos$ = this.bancoService.getBancos()
 
   form = this.fb.group({
@@ -32,13 +36,26 @@ export class FormularioCuentaBancariaComponent implements OnInit {
     estado_cuenta: this.fb.control<string>({value: 'Primaria', disabled: true}, [Validators.required, Validators.maxLength(100)]),
     propietario_rut: this.fb.control<string>('', [Validators.required]),
     banco_id: this.fb.control<number | null>(null, [Validators.required]),
-    tipo_cuenta_id: this.fb.control<number | null>(null, [Validators.required])
+    tipo_cuenta_id: this.fb.control<number | null>(null, [Validators.required]),
+    rut_tercero: this.fb.control<string | null>(null, [Validators.pattern(/^(\d{1,2}(?:\.\d{1,3}){2}-[\dkK])$/),]),
   })
 
 
 
   ngOnInit() {
-    this.form.patchValue({ propietario_rut: this.rut_propietario })
+    if(this.cuentaBancaria) {
+      this.form.patchValue({
+        cuenta: this.cuentaBancaria.cuenta,
+        estado_cuenta: this.cuentaBancaria.estado_cuenta,
+        propietario_rut: this.cuentaBancaria.propietario_rut,
+        banco_id: this.cuentaBancaria.banco.id,
+        tipo_cuenta_id: this.cuentaBancaria.tipocuenta.id,
+        rut_tercero: this.cuentaBancaria.rut_tercero,
+      })
+    } else {
+
+      this.form.patchValue({ propietario_rut: this.rut_propietario })
+    }
   }
 
   submit() {
@@ -51,10 +68,23 @@ export class FormularioCuentaBancariaComponent implements OnInit {
       estado_cuenta: form.estado_cuenta!,
       propietario_rut: form.propietario_rut!,
       banco_id: form.banco_id!,
-      tipocuenta_id: form.tipo_cuenta_id!
+      tipocuenta_id: form.tipo_cuenta_id!,
+      rut_tercero: form.rut_tercero,
+      id: this.cuentaBancaria?.id,
     }
 
-    this.submitEvent.emit(cuentaBancariaForm)
+    if (this.cuentaBancaria) {
+      this.cuentasBancariasService.actualizarCuentaBancaria(cuentaBancariaForm).subscribe({
+        next: () => { this.submitEvent.emit(true) },
+        error: () => { this.submitEvent.emit(false)}
+      })
+    } else {
+      this.cuentasBancariasService.registrarCuentaBancaria(cuentaBancariaForm).subscribe({
+        next: () => { this.submitEvent.emit(true) },
+        error: () => { this.submitEvent.emit(false)}
+      })
+    }
+    
   }
 
   cancel() {
