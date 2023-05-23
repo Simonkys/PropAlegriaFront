@@ -58,7 +58,8 @@ export class CuentaBancariaService {
                     }
                 })
                 this.cuentasBancariasSub.next(cuentasActualizadas)
-            })
+            }),
+            catchError((error: HttpErrorResponse) => this.handleError(error))
         )
     }
 
@@ -71,7 +72,8 @@ export class CuentaBancariaService {
                 })
                 const cuentasfiltradas = this.cuentasBancariasSub.value.filter(c => c.id !== cuentaBancaria.id)
                 this.cuentasBancariasSub.next(cuentasfiltradas)
-            })
+            }),
+            catchError((error: HttpErrorResponse) => this.handleError(error))
         )
     }
 
