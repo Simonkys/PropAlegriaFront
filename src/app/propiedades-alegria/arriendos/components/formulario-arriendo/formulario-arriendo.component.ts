@@ -51,7 +51,7 @@ export class FormularioArriendoComponent implements OnInit {
   arrendatarios$ = this.arrendatarioService.getArrendatarios()
   propiedadSeleccionada?: Propiedad
 
-  periodos_reajuste: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+  periodos_reajuste: number[] = [3, 6, 12]
   opcionesEstadoArriendo: {label: string; value: boolean}[] = [
     { label: 'Activo', value: true },
     { label: 'Inactivo', value: false }
@@ -62,18 +62,22 @@ export class FormularioArriendoComponent implements OnInit {
 
     fecha_inicio: this.fb.control<Date>(new Date(), [Validators.required]),
     fecha_termino: this.fb.control<Date>(new Date(), [Validators.required]),
+    periodo_reajuste: this.fb.control<number | null>(3, [Validators.required, Validators.min(3), Validators.max(12)]),
+
     fecha_pri_ajuste: this.fb.control<Date | null>(null, [Validators.required]),
 
-    periodo_reajuste: this.fb.control<number | null>(1, [Validators.required, Validators.min(1), Validators.max(12)]),
     monto_arriendo: this.fb.control<number | null>(0, [Validators.required, Validators.min(0), Validators.maxLength(16)]),
 
-    fecha_entrega: this.fb.control<Date | null>(null, []),
     estado_arriendo: this.fb.control<boolean>(true, [Validators.required]),
     porcentaje_multa: this.fb.control<number | null>(null, [Validators.required, Validators.min(0), Validators.max(100)]),
-
+    
     arrendatario_id: this.fb.control<number | null>(null, [Validators.required]),
     propiedad_id: this.fb.control<number | null>(null, [Validators.required]),
+
+    fecha_entrega: this.fb.control<Date | null>(null, []),
   })
+
+  fechaTerminoMinDate: Date = new Date()
 
 
   ngOnInit(): void {
@@ -91,13 +95,32 @@ export class FormularioArriendoComponent implements OnInit {
         arrendatario_id: this.arriendo.arrendatario.id,
         propiedad_id: this.arriendo.propiedad?.id,
       })
+    } else {
+      this.form.controls['fecha_entrega'].disable()
+      this.form.controls['fecha_pri_ajuste'].disable()
+      this.setFechaTermino(new Date())
+      this.setFechaPriReajuste(this.form.controls['periodo_reajuste'].value!)
     }
 
     if(this.arrendatario) {
       this.form.patchValue({arrendatario_id: this.arrendatario.id})
       this.form.controls['arrendatario_id'].disable();
     }
+
+    this.form.controls['fecha_inicio'].valueChanges.subscribe(value => {
+      if(value) {
+        this.setFechaTermino(value)
+      }
+    })
+
+    this.form.controls['periodo_reajuste'].valueChanges.subscribe(periodoMesesReajuste => {
+      if(periodoMesesReajuste) {
+        this.setFechaPriReajuste(periodoMesesReajuste)
+      }
+    })
   }
+
+  
 
 
   submit() {
@@ -130,5 +153,23 @@ export class FormularioArriendoComponent implements OnInit {
   handlePropiedadSelectedEvent(propiedad: Propiedad) {
     this.propiedadSeleccionada = propiedad
     this.form.patchValue({propiedad_id: propiedad.id})
+  }
+
+  setFechaPriReajuste(periodoMesesReajuste: number) {
+    this.form.controls['fecha_pri_ajuste'].patchValue(
+      this.addMonths(this.form.controls['fecha_inicio'].value!, periodoMesesReajuste)
+    )
+  }
+
+  setFechaTermino(date: Date) {
+    const fechaTermino = this.addMonths(date, 12)
+    this.fechaTerminoMinDate = fechaTermino
+    this.form.controls['fecha_termino'].patchValue(fechaTermino)
+  }
+
+  addMonths(date: Date, months: number) {
+    const dateCopy = new Date(date);
+    dateCopy.setMonth(dateCopy.getMonth() + months);
+    return dateCopy;
   }
 }
