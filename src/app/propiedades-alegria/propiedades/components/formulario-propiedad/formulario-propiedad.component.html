@@ -1,6 +1,36 @@
 <form [formGroup]="form">
 
     <div class="grid mb-3">
+
+        <div class="col flex flex-column gap-2">
+            <span class="p-float-label">
+                <p-dropdown
+                    formControlName="propietario_id"
+                    [options]="(propietarios$ | async)!"
+                    optionLabel="pri_nom_prop"
+                    optionValue="id"
+                    [style]="{ width: '100%' }"
+                    placeholder="Propietario"
+                    [filter]="true"
+                    [filterBy]="'pri_nom_prop,pri_ape_prop,rut_prop'"
+                    filterPlaceholder="Rut, nombre, apellido"
+                    inputId="float-label"
+                >
+                <ng-template pTemplate="selectedItem" let-propietario>
+                    <div>{{propietario.rut_prop}} ({{propietario.pri_nom_prop}} {{propietario.pri_ape_prop}})  </div>
+                </ng-template>
+                <ng-template pTemplate="item" let-propietario>
+                    <div>{{propietario.rut_prop}} ({{propietario.pri_nom_prop}} {{propietario.pri_ape_prop}})  </div>
+                </ng-template>
+            </p-dropdown>
+                <label for="float-label">Propietario *</label>
+            </span>
+        </div>
+        <div class="col flex flex-column gap-2"></div>
+    </div>
+
+
+    <div class="grid mb-3">
         <div class="col-6">
             <span class="p-float-label">
                 <input
@@ -33,8 +63,26 @@
         </div>
     </div>
 
+    <app-ubicacion-form 
+        [initialComunaId]="propiedad?.comuna?.id"
+        (selectedComunaIdEvent)="handleSelectedComuna($event)">
+    </app-ubicacion-form>
+
+
     <div class="grid mb-3">
-        <div class="col flex flex-column gap-2">
+        <div class="col-6">
+            <span class="p-float-label">
+                <input 
+                    type="text" 
+                    pInputText 
+                    placeholder="Av. caupolican 254"
+                    formControlName="direccion_ppdd"
+                    [style]="{ width: '100%' }" 
+                />
+                <label>Dirección *</label>
+            </span>
+        </div>
+        <div class="col-3">
             <span class="p-float-label">
                 <p-dropdown
                     formControlName="tipopropiedad_id"
@@ -48,104 +96,49 @@
                 <label for="float-label">Tipo propiedad *</label>
             </span>
         </div>
-        <div class="col flex flex-column gap-2">
+        <div class="col-3">
             <span class="p-float-label">
                 <input
-                    pKeyFilter="int"
                     pInputText
                     formControlName="numero_ppdd"
-                    placeholder="123"
+                    placeholder="103"
                     [style]="{ width: '100%' }"
                 />
-                <label>N° de propiedad</label>
+                <label> N° de Propiedad</label>
             </span>
-            <small
-                >Solo números son permitidos,
-                <strong>Ej: 123</strong>
-            </small>
+            <small>(Opcional)</small>
         </div>
-    </div>
-
-    <app-ubicacion-form 
-        [initialComunaId]="propiedad?.comuna?.id"
-        (selectedComunaIdEvent)="handleSelectedComuna($event)">
-    </app-ubicacion-form>
-
-    <div class="grid mb-3">
-        <div class="col-12">
-            <span class="p-float-label">
-
-                <input 
-                    type="text" 
-                    pInputText 
-                    placeholder="Av. caupolican 254 depto 23"
-                    formControlName="direccion_ppdd"
-                    [style]="{ width: '100%' }" 
-                />
-                <label>Dirección *</label>
-            </span>
-        </div>
-    </div>
+    </div>  
     
-    <div class="grid mb-3">
-
-        <div class="col flex flex-column gap-2">
-            <span class="p-float-label">
-                <p-dropdown
-                    formControlName="propietario_id"
-                    [options]="(propietarios$ | async)!"
-                    optionLabel="pri_nom_prop"
-                    optionValue="id"
-                    [style]="{ width: '100%' }"
-                    placeholder="Propietario"
-                    [filter]="true"
-                    [filterBy]="'pri_nom_prop,pri_ape_prop,rut_prop'"
-                    filterPlaceholder="Rut, nombre, apellido"
-                    inputId="float-label"
-                >
-                <ng-template pTemplate="selectedItem" let-propietario>
-                    <div>{{propietario.rut_prop}} ({{propietario.pri_nom_prop}} {{propietario.pri_ape_prop}})  </div>
-                </ng-template>
-                <ng-template pTemplate="item" let-propietario>
-                    <div>{{propietario.rut_prop}} ({{propietario.pri_nom_prop}} {{propietario.pri_ape_prop}})  </div>
-                </ng-template>
-            </p-dropdown>
-                <label for="float-label">Propietario *</label>
-            </span>
-        </div>
-        <div class="col flex flex-column gap-2"></div>
-    </div>
 
     <div class="grid mb-3" *ngIf="form.get('tipopropiedad_id')?.value === TipoPropiedadEnum.DEPARTAMENTO" >
-        <div class="col flex flex-column gap-5" >
-            <div class="flex align-items-center gap-5">
-                <div class="flex align-items-center gap-3">
-                    <label>Incluye bodega:</label>
-                    <p-inputSwitch formControlName="incluir_bodega"></p-inputSwitch>
-                </div>
-        
-                <div class="flex align-items-center gap-3">
-                    <div class="p-float-label">
-                        <input pInputText pKeyFilter="int" placeholder="123" formControlName="numero_bodega">
-                        <label > N° bodega</label>
+        <div class="col-6"></div>
+        <div class="col-6" >
+            
+                <div class="field grid align-items-center">
+                    <label class="col-4">Incluye bodega:</label>
+                    <div class="col-2">
+                        <p-inputSwitch formControlName="incluir_bodega"></p-inputSwitch>
+                    </div>
+                    <div class="col-6">
+                        <div class="p-float-label">
+                            <input pInputText pKeyFilter="int" placeholder="123" formControlName="numero_bodega" [style]="{width: '100%'}">
+                            <label > N° bodega</label>
+                        </div>
                     </div>
                 </div>
-            </div>
-
-
-            <div class="flex align-items-center gap-5">
-                <div class="flex align-items-center gap-3">
-                    <label>Incluye estacionamiento:</label>
-                    <p-inputSwitch formControlName="incluir_estacionamiento"></p-inputSwitch>
-                </div>
-        
-                <div class="flex align-items-center gap-3">
-                    <div class="p-float-label">
-                        <input pInputText pKeyFilter="int" placeholder="123" formControlName="numero_estacionamiento">
-                        <label > N° estacionamiento</label>
+                <div class="field grid align-items-center">
+                    <label class="col-4">Incluye estacionamiento:</label>
+                    <div class="col-2">
+                        <p-inputSwitch  formControlName="incluir_estacionamiento"></p-inputSwitch>
+                    </div>
+                    <div class="col-6">
+                        <div class="p-float-label">
+                            <input pInputText pKeyFilter="int" placeholder="123" formControlName="numero_estacionamiento" [style]="{width: '100%'}">
+                            <label > N° estacionamiento</label>
+                        </div>
                     </div>
                 </div>
-            </div>
         </div>
     </div>
 

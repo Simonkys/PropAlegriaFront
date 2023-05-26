@@ -54,7 +54,7 @@ export class FormularioPropiedadComponent implements OnInit {
 
   form = this.fb.group({
     direccion_ppdd: this.fb.control<string>('', [Validators.required, Validators.maxLength(150)]),
-    numero_ppdd: this.fb.control<number | null>(null, []),
+    numero_ppdd: this.fb.control<string | null>(null, [ Validators.maxLength(50)]),
     rol_ppdd: this.fb.control<string | null>(null, [Validators.maxLength(50)]),
     cod: this.fb.control<number | null>(null, []),
     comuna_id: this.fb.control<number | null>(null, [Validators.required]),
@@ -92,10 +92,8 @@ export class FormularioPropiedadComponent implements OnInit {
       this.form.controls['propietario_id'].disable();
     }
 
-    
-    this.handleTipoPropiedadChanges()
     this.handleBodegaChanges()
-    this.handleEstacionamientoChanges()   
+    this.handleEstacionamientoChanges()  
   }
 
   submit() {
@@ -127,7 +125,6 @@ export class FormularioPropiedadComponent implements OnInit {
     } else {
       this.crearPropiedad(propiedadForm)
     }
-
   }
 
 
@@ -150,17 +147,19 @@ export class FormularioPropiedadComponent implements OnInit {
   cancel() { this.cancelEvent.emit() }
 
   handleTipoPropiedadChanges() {
-    this.form.get('tipopropiedad_id')?.valueChanges
-      .subscribe((tipoId) => {  
+    this.form.get('tipopropiedad_id')?.valueChanges.subscribe(
+      (tipoId) => {
         if( tipoId !== TipoPropiedadEnum.DEPARTAMENTO) {
           this.invalidateEstacionamiento()
           this.invalidateBodega()
+         
         } else {
           this.validateBodega()
           this.validateEstacionamiento()
         }
-        
-    })
+      }
+    )
+    
   }
 
   handleBodegaChanges() {
@@ -187,6 +186,8 @@ export class FormularioPropiedadComponent implements OnInit {
       }
     })
   }
+
+
 
   validateBodega() {
     this.form.get('numero_bodega')?.setValidators([Validators.required, Validators.max(999999)])

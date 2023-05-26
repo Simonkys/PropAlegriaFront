@@ -21,7 +21,7 @@ export interface Propiedad {
     id: number;
 
     direccion_ppdd: string;
-    numero_ppdd: number | null;
+    numero_ppdd: string | null;
     rol_ppdd: string | null;
     cod: number | null;
 
@@ -38,7 +38,7 @@ export interface PropiedadForm {
     id?: number;
 
     direccion_ppdd: string;
-    numero_ppdd: number | null;
+    numero_ppdd: string | null;
     rol_ppdd: string | null;
     cod: number | null;
     comuna_id: number;
