@@ -1,14 +1,36 @@
-<p-table [value]="propiedades" [tableStyle]="{ 'min-width': '50rem' }">
+<p-table 
+    #dt2 [value]="propiedades" 
+    [tableStyle]="{ 'min-width': '50rem' }" 
+    [paginator]="true" 
+    [rows]="5"
+    [globalFilterFields]="filterFields"
+>
     <ng-template pTemplate="caption">
-        <p-button 
-            *ngIf="crear"
-            class="mr-2" 
-            label="Registrar" 
-            icon="pi pi-plus" 
-            styleClass="p-button-success"
-            (click)="crearAction()"
-        >
-        </p-button>
+        <div class="caption-table">
+            <p-button 
+                *ngIf="crear" 
+                class="mr-2" 
+                label="Registrar" 
+                icon="pi pi-plus" 
+                styleClass="p-button-success"
+                (click)="crearAction()">
+            </p-button>
+            <div class="caption-filter">
+                <span class="p-input-icon-left ml-auto">
+                    <i class="pi pi-search"></i>
+                    <input 
+                        pInputText type="text" 
+                        (input)="dt2.filterGlobal($any($event.target).value, 'contains')"
+                        placeholder="Código" />
+                </span>
+                <p-button  
+                    label="Clear"
+                    styleClass="p-button-outlined"
+                    icon="pi pi-filter-slash"
+                    (click)="clear(dt2)">
+                </p-button>
+            </div>
+        </div>
     </ng-template>
 
     <ng-template pTemplate="header">
@@ -36,35 +58,17 @@
                     {{propiedad.propietario.pri_ape_prop}} {{propiedad.propietario.pri_nom_prop}}
                 </a>
             </td>
-            <td >
+            <td>
                 <div class="flex">
-                    <button
-                        *ngIf="detalle"
-                        pButton
-                        pRipple
-                        icon="pi pi-search"
+                    <button *ngIf="detalle" pButton pRipple icon="pi pi-search"
                         class="p-button-rounded p-button-primary mr-2"
-                        [routerLink]="['/propiedades', propiedad.id, 'detalle']"
-                    ></button>
-                    <button
-                        *ngIf="editar"
-                        pButton
-                        pRipple
-                        icon="pi pi-pencil"
-                        class="p-button-rounded p-button-warning mr-2"
-                        (click)="editarAction(propiedad)"
-                    ></button>
-                    <button
-                        *ngIf="eliminar"
-                        pButton
-                        pRipple
-                        icon="pi pi-trash"
-                        class="p-button-rounded p-button-danger mr-2"
-                        (click)="eliminarAction(propiedad)"
-                    ></button>
+                        [routerLink]="['/propiedades', propiedad.id, 'detalle']"></button>
+                    <button *ngIf="editar" pButton pRipple icon="pi pi-pencil"
+                        class="p-button-rounded p-button-warning mr-2" (click)="editarAction(propiedad)"></button>
+                    <button *ngIf="eliminar" pButton pRipple icon="pi pi-trash"
+                        class="p-button-rounded p-button-danger mr-2" (click)="eliminarAction(propiedad)"></button>
                 </div>
             </td>
         </tr>
     </ng-template>
 </p-table>
-
