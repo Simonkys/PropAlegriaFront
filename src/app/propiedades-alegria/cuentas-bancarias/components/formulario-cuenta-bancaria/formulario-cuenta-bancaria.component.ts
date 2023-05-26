@@ -56,6 +56,14 @@ export class FormularioCuentaBancariaComponent implements OnInit {
 
       this.form.patchValue({ propietario_rut: this.rut_propietario })
     }
+
+    this.form.controls['rut_tercero'].valueChanges.subscribe((rutTercero) => {
+      if(!rutTercero || rutTercero === '') {
+        this.form.controls['estado_cuenta'].patchValue('Primaria')
+      } else {
+        this.form.controls['estado_cuenta'].patchValue('Secundaria')
+      }
+    })
   }
 
   submit() {
@@ -69,7 +77,7 @@ export class FormularioCuentaBancariaComponent implements OnInit {
       propietario_rut: form.propietario_rut!,
       banco_id: form.banco_id!,
       tipocuenta_id: form.tipo_cuenta_id!,
-      rut_tercero: form.rut_tercero,
+      rut_tercero: !form.rut_tercero || form.rut_tercero === '' ? null : form.rut_tercero,
       id: this.cuentaBancaria?.id,
     }
 
