@@ -1,16 +1,26 @@
 <div class="card" *ngIf="propietarios$ | async as propietarios">
     <h4>Propietarios</h4>
-    <p-table
-        [value]="propietarios"
-        [tableStyle]="{ 'min-width': '50rem' }"
-    >
-    <ng-template pTemplate="caption">
-        <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
-            <p-button class="mr-2" label="Registrar" icon="pi pi-plus" styleClass="p-button-success"
-                [routerLink]="['/propietarios', 'registro',]">
-            </p-button>
-        </div>
-    </ng-template>
+    <p-table #propietariosTable [tableStyle]="{ 'min-width': '50rem' }" [paginator]="true" [rows]="7"
+        [globalFilterFields]="filterFields" [value]="propietarios">
+        <ng-template pTemplate="caption">
+            <div class="caption-table">
+                <p-button class="mr-2" label="Registrar" icon="pi pi-plus" styleClass="p-button-success"
+                    [routerLink]="['/propietarios', 'registro']">
+                </p-button>
+                <div class="caption-filter">
+                    <span class="p-input-icon-left ml-auto">
+                        <i class="pi pi-search"></i>
+                        <input pInputText type="text"
+                            (input)="propietariosTable.filterGlobal($any($event.target).value, 'contains')"
+                            placeholder="Rut, nombre, apellido..." />
+                    </span>
+                    <p-button label="Clear" styleClass="p-button-outlined" icon="pi pi-filter-slash"
+                        (click)="clear(propietariosTable)">
+                    </p-button>
+                </div>
+            </div>
+
+        </ng-template>
         <ng-template pTemplate="header">
             <tr>
                 <th>Cod</th>
@@ -30,13 +40,8 @@
                 <td>{{propietario.contacto_prop}}</td>
                 <td>{{propietario.rut_prop}}</td>
                 <td class="flex">
-                    <button
-                        pButton
-                        pRipple
-                        icon="pi pi-search"
-                        class="p-button-rounded p-button-primary mr-2"
-                        [routerLink]="['/propietarios', propietario.id, 'detalle']"
-                    ></button>
+                    <button pButton pRipple icon="pi pi-search" class="p-button-rounded p-button-primary mr-2"
+                        [routerLink]="['/propietarios', propietario.id, 'detalle']"></button>
                 </td>
             </tr>
         </ng-template>
