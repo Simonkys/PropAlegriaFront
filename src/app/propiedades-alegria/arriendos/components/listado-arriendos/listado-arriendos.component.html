@@ -11,33 +11,22 @@
     </ng-template>
     <ng-template pTemplate="header">
         <tr>
-            <th>cod_arriendo</th>
-            <th>fecha_inicio</th>
-            <th>fecha_termino</th>
-            <th>fecha_pri_ajuste</th>
-            <th>periodo_reajuste</th>
-            <th>monto_arriendo</th>
-            <th>fecha_entrega</th>
-            <th>estado_arriendo</th>
-            <th>porcentaje_multa</th>
-            <th>Arrendatario</th>
-            <th>Propiedad</th>
+            <th>Código</th>
+            <th>Nombre arrendatario</th>
+            <th>Dirección propiedad</th>
+            <th>Fecha de pago</th>
+            <th>Monto arriendo</th>
             <th>Acciones</th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-arriendo>
         <tr>
-            <td>{{arriendo.cod_arriendo ?? '---'}}</td>
-            <td>{{arriendo.fecha_inicio | date:'dd/MM/yyyy'}}</td>
-            <td>{{arriendo.fecha_termino | date:'dd/MM/yyyy'}}</td>
-            <td>{{arriendo.fecha_pri_ajuste | date:'dd/MM/yyyy'}}</td>
-            <td>{{arriendo.periodo_reajuste}}</td>
+            <td>{{arriendo.propiedad_cod}}</td>
+            <td>{{arriendo.nombre_arrendatario}}
+            <td>{{arriendo.direccion}}
+            <td>{{arriendo.fecha_pago | date:'dd/MM/yyyy'}}</td>
             <td>{{arriendo.monto_arriendo | currency}}</td>
-            <td>{{arriendo.fecha_entrega | date:'dd/MM/yyyy'}}</td>
-            <td><p-tag [value]="arriendo.estado_arriendo ? 'Activo': 'Inactivo'" [severity]="arriendo.estado_arriendo ? 'success': 'danger'"></p-tag></td>
-            <td>{{arriendo.porcentaje_multa}}</td>
-            <td>{{arriendo.arrendatario.pri_nom_arr}} {{arriendo.arrendatario.pri_ape_arr}}</td>
-            <td>{{arriendo.propiedad.id}} - {{arriendo.propiedad.direccion_ppdd}}</td>
+            
             <td>
                 <div class="flex">
                     <button

@@ -1,3 +1,12 @@
+interface Externo {
+    id: number;
+    nombre: string;
+    rut: string | null;
+    contacto: number;
+    correo: string;
+    rol: string;
+}
+
 interface ArriendoArrendatario {
     id: number;
     rut_arr: string;
@@ -14,21 +23,26 @@ interface ArriendoPropiedad {
 export interface Arriendo{
     id: number;
 
-    cod_arriendo: string | null;
+    propiedad: ArriendoPropiedad | null;
+    arrendatario: ArriendoArrendatario;
 
     fecha_inicio: Date;
     fecha_termino: Date;
-    fecha_pri_ajuste: Date | null;
+
+    dia_pago: number;
+    comision: number | null;
 
     periodo_reajuste: number;
-    monto_arriendo: number;
+    fecha_reajuste: Date;
+
+    valor_arriendo: number;
 
     fecha_entrega: Date | null;
     estado_arriendo: boolean;
-    porcentaje_multa: number;
 
-    arrendatario: ArriendoArrendatario;
-    propiedad: ArriendoPropiedad | null;
+    observaciones: string | null;
+
+    externo: Externo;
 }
 
 export interface ArriendoForm{
@@ -49,4 +63,14 @@ export interface ArriendoForm{
 
     arrendatario_id: number;
     propiedad_id: number | null;
+}
+
+
+export interface TablaArriendo {
+    arriendo_id: number;
+    propiedad_cod: number | null;
+    nombre_arrendatario: string;
+    direccion: string;
+    fecha_pago: Date;
+    valor_arriendo: number;
 }

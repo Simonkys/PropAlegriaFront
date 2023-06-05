@@ -11,7 +11,7 @@ import { ListadoCuentaBancariaComponent } from '../../../cuentas-bancarias/compo
 import { CuentaBancaria } from '../../../cuentas-bancarias/cuenta-bancaria.models';
 import { CuentaBancariaService } from '../../../cuentas-bancarias/cuenta-bancaria.service';
 import { ListadoArriendosComponent } from 'src/app/propiedades-alegria/arriendos/components/listado-arriendos/listado-arriendos.component';
-import { Arriendo } from 'src/app/propiedades-alegria/arriendos/arriendo.model';
+import { Arriendo, TablaArriendo } from 'src/app/propiedades-alegria/arriendos/arriendo.model';
 import { ArriendoService } from 'src/app/propiedades-alegria/arriendos/arriendo.service';
 
 @Component({
@@ -38,7 +38,7 @@ export class DetalleArrendatariosPageComponent implements OnInit {
 
   
   arrendatario?: Arrendatario
-  arriendos: Arriendo[] = []
+  arriendos: TablaArriendo[] = []
   
   creacionCuentaActiva: boolean = false;
   cuentaBancaria?: CuentaBancaria
@@ -99,8 +99,8 @@ export class DetalleArrendatariosPageComponent implements OnInit {
     this.router.navigate(['arriendos', 'registro'], {state:  {arrendatario: arrendatario}})
   }
 
-  handleDetalleArriendoEvent(arriendo: Arriendo){
-    this.router.navigate(['arriendos', arriendo.id, 'detalle'])
+  handleDetalleArriendoEvent(arriendoId: number){
+    this.router.navigate(['arriendos', arriendoId, 'detalle'])
   }
 
 }

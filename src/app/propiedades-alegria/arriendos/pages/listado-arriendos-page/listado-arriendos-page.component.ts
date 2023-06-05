@@ -24,7 +24,7 @@ export class ListadoArriendosPageComponent {
     this.router.navigate(['arriendos', 'registro'])
   }
 
-  handleDetailEvent(arriendo: Arriendo) {
-    this.router.navigate(['arriendos', arriendo.id, 'detalle'])
+  handleDetailEvent(arriendoId: number) {
+    this.router.navigate(['arriendos', arriendoId, 'detalle'])
   }
 }

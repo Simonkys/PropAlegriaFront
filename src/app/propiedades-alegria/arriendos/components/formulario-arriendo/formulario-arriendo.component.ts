@@ -83,15 +83,14 @@ export class FormularioArriendoComponent implements OnInit {
   ngOnInit(): void {
     if(this.arriendo) {
       this.form.patchValue({
-        cod_arriendo: this.arriendo.cod_arriendo,
+        cod_arriendo: this.arriendo.propiedad?.numero_ppdd,
         fecha_inicio: this.arriendo.fecha_inicio,
         fecha_termino: this.arriendo.fecha_termino,
-        fecha_pri_ajuste: this.arriendo.fecha_pri_ajuste,
+        fecha_pri_ajuste: this.arriendo.fecha_reajuste,
         periodo_reajuste: this.arriendo.periodo_reajuste,
-        monto_arriendo: this.arriendo.monto_arriendo,
+        monto_arriendo: this.arriendo.valor_arriendo,
         fecha_entrega: this.arriendo.fecha_entrega,
         estado_arriendo: this.arriendo.estado_arriendo,
-        porcentaje_multa: this.arriendo.porcentaje_multa,
         arrendatario_id: this.arriendo.arrendatario.id,
         propiedad_id: this.arriendo.propiedad?.id,
       })
