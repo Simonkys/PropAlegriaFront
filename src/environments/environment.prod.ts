@@ -1,4 +1,4 @@
 export const environment = {
     production: true,
-    apiUrl: 'https://alegriaapp-production.up.railway.app'
+    apiUrl: 'https://alegriaapp-production-64cb.up.railway.app'
 };

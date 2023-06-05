@@ -53,19 +53,31 @@ export class FormularioPropiedadComponent implements OnInit {
   propietarios$ = this.propietarioService.getPropietarios();
 
   form = this.fb.group({
-    direccion_ppdd: this.fb.control<string>('', [Validators.required, Validators.maxLength(150)]),
+    direccion_ppdd: this.fb.nonNullable.control<string>('', [Validators.required, Validators.maxLength(150)]),
     numero_ppdd: this.fb.control<string | null>(null, [ Validators.maxLength(50)]),
     rol_ppdd: this.fb.control<string | null>(null, [Validators.maxLength(50)]),
-    cod: this.fb.control<number | null>(null, []),
+
     comuna_id: this.fb.control<number | null>(null, [Validators.required]),
     propietario_id: this.fb.control<number | null>(null, [Validators.required]),
     tipopropiedad_id: this.fb.control<number | null>(null, [Validators.required]),
 
-    incluir_bodega: this.fb.nonNullable.control<boolean>(false, []),
-    numero_bodega: this.fb.control<number | null>({value: null, disabled: true}, [],),
+    cod: this.fb.control<number | null>(null, []),
 
+    nro_bodega: this.fb.control<number | null>({value: null, disabled: true}, [],),
+    nro_estacionamiento: this.fb.control<number | null>({value: null, disabled: true}, []),
+
+    valor_arriendo_base: this.fb.nonNullable.control<number>(300000, [Validators.required]),
+    es_valor_uf: this.fb.nonNullable.control<boolean>(false, []),
+
+    gas: this.fb.control<string | null>(null, [Validators.required]),
+    agua: this.fb.control<string | null>(null, [Validators.required]),
+    luz: this.fb.control<string | null>(null, [Validators.required]),
+
+    incluye_gc: this.fb.nonNullable.control<boolean>(false, []),
+    valor_gasto_comun: this.fb.nonNullable.control<number>(0, []),
+
+    incluir_bodega: this.fb.nonNullable.control<boolean>(false, []),
     incluir_estacionamiento: this.fb.nonNullable.control<boolean>(false, []),
-    numero_estacionamiento: this.fb.control<number | null>({value: null, disabled: true}, []),
   })
 
   ngOnInit() {
@@ -73,14 +85,18 @@ export class FormularioPropiedadComponent implements OnInit {
     if(this.propiedad) {
       this.form.patchValue({
         direccion_ppdd: this.propiedad.direccion_ppdd,
-        comuna_id: this.propiedad.comuna.id,
         numero_ppdd: this.propiedad.numero_ppdd,
-        cod: this.propiedad.cod,
-        propietario_id: this.propiedad.propietario.id,
         rol_ppdd: this.propiedad.rol_ppdd,
+
+        comuna_id: this.propiedad.comuna.id,
+        propietario_id: this.propiedad.propietario.id,
         tipopropiedad_id: this.propiedad.tipopropiedad.id,
-        numero_bodega: this.propiedad.nro_bodega,
-        numero_estacionamiento: this.propiedad.nro_estacionamiento,
+
+        cod: this.propiedad.cod,
+
+        nro_bodega: this.propiedad.nro_bodega,
+        nro_estacionamiento: this.propiedad.nro_estacionamiento,
+
         incluir_bodega: !!this.propiedad.nro_bodega,
         incluir_estacionamiento: !!this.propiedad.nro_estacionamiento
       })
@@ -102,22 +118,36 @@ export class FormularioPropiedadComponent implements OnInit {
     const formValues = this.form.getRawValue();
 
     const nro_bodega = formValues.incluir_bodega && formValues.tipopropiedad_id === TipoPropiedadEnum.DEPARTAMENTO
-      ? formValues.numero_bodega : null
+      ? formValues.nro_bodega : null
 
     const nro_estacionamiento = formValues.incluir_estacionamiento && formValues.tipopropiedad_id === TipoPropiedadEnum.DEPARTAMENTO
-    ? formValues.numero_estacionamiento : null
+    ? formValues.nro_estacionamiento : null
 
     const propiedadForm: PropiedadForm = {
-      comuna_id: formValues.comuna_id!,
-      direccion_ppdd: formValues.direccion_ppdd!,
+      id: this.propiedad?.id,
+
+      direccion_ppdd: formValues.direccion_ppdd,
       numero_ppdd: formValues.numero_ppdd,
-      cod: formValues.cod,
-      propietario_id: formValues.propietario_id!,
       rol_ppdd: formValues.rol_ppdd,
+
+      comuna_id: formValues.comuna_id!,
       tipopropiedad_id: formValues.tipopropiedad_id!,
+      propietario_id: formValues.propietario_id!,
+
+      cod: formValues.cod,
+
       nro_bodega: nro_bodega,
       nro_estacionamiento: nro_estacionamiento,
-      id: this.propiedad?.id
+
+      valor_arriendo_base: formValues.valor_arriendo_base,
+      es_valor_uf: formValues.es_valor_uf,
+
+      gas: formValues.gas,
+      agua: formValues.agua,
+      luz: formValues.luz,
+
+      incluye_gc: formValues.incluye_gc,
+      valor_gasto_comun: formValues.valor_gasto_comun,
     }
 
     if (this.propiedad) {
@@ -166,10 +196,10 @@ export class FormularioPropiedadComponent implements OnInit {
     this.form.get('incluir_bodega')?.valueChanges.subscribe((incluyeBodega) => {
       if(incluyeBodega) {
         this.validateBodega()
-        this.form.get('numero_bodega')?.enable()
+        this.form.get('nro_bodega')?.enable()
       } else {
         this.invalidateBodega()
-        this.form.get('numero_bodega')?.disable()
+        this.form.get('nro_bodega')?.disable()
       }
     })
   }
@@ -179,10 +209,10 @@ export class FormularioPropiedadComponent implements OnInit {
     this.form.get('incluir_estacionamiento')?.valueChanges.subscribe((incluirEstacionamiento) => {
       if(incluirEstacionamiento) {
         this.validateEstacionamiento()
-        this.form.get('numero_estacionamiento')?.enable()
+        this.form.get('nro_estacionamiento')?.enable()
       } else {
         this.invalidateEstacionamiento()
-        this.form.get('numero_estacionamiento')?.disable()
+        this.form.get('nro_estacionamiento')?.disable()
       }
     })
   }
@@ -190,23 +220,23 @@ export class FormularioPropiedadComponent implements OnInit {
 
 
   validateBodega() {
-    this.form.get('numero_bodega')?.setValidators([Validators.required, Validators.max(999999)])
-    this.form.get('numero_bodega')?.updateValueAndValidity()    
+    this.form.get('nro_bodega')?.setValidators([Validators.required, Validators.max(999999)])
+    this.form.get('nro_bodega')?.updateValueAndValidity()    
   }
 
   invalidateBodega() {
-    this.form.get('numero_bodega')?.clearValidators()
-    this.form.get('numero_bodega')?.updateValueAndValidity()
+    this.form.get('nro_bodega')?.clearValidators()
+    this.form.get('nro_bodega')?.updateValueAndValidity()
   }
 
   validateEstacionamiento() {
-    this.form.get('numero_estacionamiento')?.setValidators([Validators.required, Validators.max(999999)])
-    this.form.get('numero_estacionamiento')?.updateValueAndValidity()
+    this.form.get('nro_estacionamiento')?.setValidators([Validators.required, Validators.max(999999)])
+    this.form.get('nro_estacionamiento')?.updateValueAndValidity()
   }
 
   invalidateEstacionamiento() {
-    this.form.get('numero_estacionamiento')?.clearValidators()
-    this.form.get('numero_estacionamiento')?.updateValueAndValidity()
+    this.form.get('nro_estacionamiento')?.clearValidators()
+    this.form.get('nro_estacionamiento')?.updateValueAndValidity()
     
   }
 

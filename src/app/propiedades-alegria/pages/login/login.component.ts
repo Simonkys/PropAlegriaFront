@@ -75,7 +75,6 @@ export class LoginComponent {
             .pipe(
                 finalize(() => {
                     this.loading = false;
-                    this.form.reset();
                 })
             )
             .subscribe({
@@ -87,6 +86,7 @@ export class LoginComponent {
                     } else {
                         this.router.navigate(['empty'], {replaceUrl: true});
                     }
+                    this.form.reset();
                 },
                 error: (err) => {
                     this.messages = [

@@ -23,14 +23,25 @@ export interface Propiedad {
     direccion_ppdd: string;
     numero_ppdd: string | null;
     rol_ppdd: string | null;
-    cod: number | null;
 
     comuna: PropiedadComuna;
     propietario: PropiedadPropietario;
     tipopropiedad: PropiedadTipoPropiedad;
+    
+    cod: number | null;
 
     nro_bodega: number | null;
     nro_estacionamiento: number | null;
+
+    valor_arriendo_base: number;
+    es_valor_uf: boolean;
+
+    gas: string | null;
+    agua: string | null;
+    luz: string | null;
+
+    incluye_gc: boolean;
+    valor_gasto_comun: number;
 }
 
 
@@ -40,11 +51,23 @@ export interface PropiedadForm {
     direccion_ppdd: string;
     numero_ppdd: string | null;
     rol_ppdd: string | null;
-    cod: number | null;
+
     comuna_id: number;
     propietario_id: number;
     tipopropiedad_id: number;
 
+    cod: number | null;
+
     nro_bodega: number | null;
     nro_estacionamiento: number | null;
+
+    valor_arriendo_base: number;
+    es_valor_uf: boolean;
+
+    gas: string | null;
+    agua: string | null;
+    luz: string | null;
+
+    incluye_gc: boolean;
+    valor_gasto_comun: number;
 }

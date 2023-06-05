@@ -2,7 +2,7 @@ import { Injectable, inject } from "@angular/core";
 import { Propietario, PropietarioForm } from "./propietario.model";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { environment } from "src/environments/environment";
-import { catchError, tap, throwError } from "rxjs";
+import { catchError, of, tap, throwError } from "rxjs";
 import { MensajeService } from "../core/services/message.service";
 
 
@@ -14,9 +14,20 @@ export class PropietarioService {
     private messageService = inject(MensajeService)
     private apiUrl = `${environment.apiUrl}/api/propietario`
 
+    propietarios: Propietario[] = [] 
+    propietariosLoaded = false
+
 
     getPropietarios() {
-        return this.http.get<Propietario[]>(`${this.apiUrl}/`);
+        if(this.propietariosLoaded) {
+            return of(this.propietarios)
+        }
+        return this.http.get<Propietario[]>(`${this.apiUrl}/`).pipe(
+            tap((propietarios => {
+                this.propietarios = propietarios
+                this.propietariosLoaded = true
+            }))
+        );
     }
 
     getPropietario(id: number) {
@@ -25,11 +36,12 @@ export class PropietarioService {
 
     registrarPropietario(propietarioForm: PropietarioForm) {
         return this.http.post<Propietario>(`${this.apiUrl}/`, propietarioForm).pipe(
-            tap( () => {
+            tap( (nuevoPropietario) => {
                 this.messageService.addMessage({
                     details: ['Propietario registrado exitosamente!'],
                     role: 'success'
                 })
+                this.propietarios = [nuevoPropietario, ...this.propietarios]
             }),
             catchError((err: HttpErrorResponse) => this.handleError(err))
         )
@@ -37,10 +49,17 @@ export class PropietarioService {
 
     actualizarPropietario(propietarioForm: PropietarioForm) {
         return this.http.put<Propietario>(`${this.apiUrl}/${propietarioForm.id}/`, propietarioForm).pipe(
-            tap( () => {
+            tap( (propietarioActualizado) => {
                 this.messageService.addMessage({
                     details: ['Propietario actualizado exitosamente!'],
                     role: 'success'
+                })
+                this.propietarios = this.propietarios.map(p => {
+                    if(p.id === propietarioActualizado.id) {
+                        return propietarioActualizado
+                    } else {
+                        return p
+                    }
                 })
             }),
             catchError((err: HttpErrorResponse) => this.handleError(err))
@@ -54,6 +73,8 @@ export class PropietarioService {
                     details: ['Propietario eliminado exitosamente!'],
                     role: 'info'
                 })
+                this.propietarios = this.propietarios.filter(p => p.id !== propietario.id)
+
             }),
             catchError((err: HttpErrorResponse) => this.handleError(err))
         )

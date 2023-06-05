@@ -4,7 +4,7 @@
 
 export const environment = {
     production: false,
-    apiUrl: 'https://alegriaapp-production.up.railway.app',
+    apiUrl: 'https://alegriaapp-production-64cb.up.railway.app'
 };
 
 /*
