@@ -2,7 +2,7 @@
     <div class="grid" [style]="{width: '100%'}">
         <div class="col-4">
             <div class="text-sm font-bold text-600 mb-1">Código arriendo</div>
-            <div class="font-medium">{{arriendo.cod_arriendo ?? '---'}}</div>
+            <div class="font-medium">{{arriendo.propiedad?.numero_ppdd ?? '---'}}</div>
         </div>
 
         <div class="col-4">
@@ -17,7 +17,7 @@
 
         <div class="col-4">
             <div class="text-sm font-bold text-600 mb-1">Fecha primer reajuste</div>
-            <div class="font-medium">{{(arriendo.fecha_pri_ajuste | date:'dd/MM/yyyy') ?? '---'}}</div>
+            <div class="font-medium">{{(arriendo.fecha_reajuste | date:'dd/MM/yyyy') ?? '---'}}</div>
         </div>
 
         <div class="col-4">
@@ -27,7 +27,7 @@
 
         <div class="col-4">
             <div class="text-sm font-bold text-600 mb-1">Monto arriendo</div>
-            <div class="font-medium">{{arriendo.monto_arriendo | currency}}</div>
+            <div class="font-medium">{{arriendo.valor_arriendo | currency}}</div>
         </div>
 
         <div class="col-4">
@@ -42,7 +42,7 @@
 
         <div class="col-4">
             <div class="text-sm font-bold text-600 mb-1">Porcentaje de multa</div>
-            <div class="font-medium">{{arriendo.porcentaje_multa}}%</div>
+            <div class="font-medium">Porcentaje%</div>
         </div>
 
         <div class="col-4">

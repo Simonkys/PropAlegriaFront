@@ -1,7 +1,7 @@
 import { Injectable, inject } from "@angular/core";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { environment } from "src/environments/environment";
-import { Arriendo, ArriendoForm } from "./arriendo.model";
+import { Arriendo, ArriendoForm, TablaArriendo } from "./arriendo.model";
 import { MensajeService } from "../core/services/message.service";
 import { catchError, tap, throwError } from "rxjs";
 
@@ -16,7 +16,7 @@ export class ArriendoService {
 
 
     getArriendos() {
-        return this.http.get<Arriendo[]>(`${this.apiUrl}/`);
+        return this.http.get<TablaArriendo[]>(`${this.apiUrl}/`);
     }
 
 
@@ -26,7 +26,7 @@ export class ArriendoService {
 
 
     getArriendoByArrendatario(arrendatarioId: number) {
-        return this.http.get<Arriendo[]>(`${this.apiUrl}/?arrendatario_id=${arrendatarioId}`);
+        return this.http.get<TablaArriendo[]>(`${this.apiUrl}/?arrendatario_id=${arrendatarioId}`);
     }
 
     createArriendo(arriendoForm: ArriendoForm) {

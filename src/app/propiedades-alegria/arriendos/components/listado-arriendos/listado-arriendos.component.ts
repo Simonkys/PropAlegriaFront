@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 
-import { Arriendo } from '../../arriendo.model';
+import { Arriendo, TablaArriendo } from '../../arriendo.model';
 import { TagModule } from 'primeng/tag';
 
 
@@ -18,10 +18,10 @@ import { TagModule } from 'primeng/tag';
 })
 export class ListadoArriendosComponent {
 
-  @Input() arriendos: Arriendo[] = [];
+  @Input() arriendos: TablaArriendo[] = [];
 
   @Output() registrarEvent = new EventEmitter()
-  @Output() detalleEvent = new EventEmitter<Arriendo>()
+  @Output() detalleEvent = new EventEmitter<number>()
 
 
   registrar() {
@@ -29,7 +29,7 @@ export class ListadoArriendosComponent {
   }
 
 
-  detalle(arriendo: Arriendo) {
-    this.detalleEvent.emit(arriendo)
+  detalle(arriendo: TablaArriendo) {
+    this.detalleEvent.emit(arriendo.arriendo_id)
   }
 }
