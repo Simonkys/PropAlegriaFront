@@ -1,7 +1,8 @@
 <ng-container *ngIf="propietario">
     <div class="card">
-        <h4>Detalle Propietario</h4>
-        <app-detalle-propietario 
+        <h4>{{propietario.personalidad_juridica ? 'Personalidad Jurídica': 'Detalle Propietario'}}</h4>
+        <app-detalle-propietario
+        
             [propietario]="propietario"
             (actualizarEvent)="handleActualizarEvent(propietario)"
             (eliminarEvent)="handleEliminarEvent(propietario)"

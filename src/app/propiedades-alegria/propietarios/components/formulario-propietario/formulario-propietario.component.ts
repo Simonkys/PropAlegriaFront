@@ -79,6 +79,7 @@ export class FormularioPropietarioComponent implements OnInit {
     if(this.propietario) {
 
       this.form.patchValue({...this.propietario, comuna_id: this.propietario.comuna.id})
+      this.form.get('pctje_cobro_honorario')?.disable()
 
       if(this.propietario.personalidad_juridica) {
 
@@ -122,7 +123,11 @@ export class FormularioPropietarioComponent implements OnInit {
     };
 
     const personalidadJuridicaValues = this.personalidadJuridicaForm.getRawValue();
-    propietarioForm.personalidad_juridica = {...personalidadJuridicaValues, id: this.propietario?.personalidad_juridica?.id}
+    propietarioForm.personalidad_juridica = {
+      ...personalidadJuridicaValues, 
+      id: this.propietario?.personalidad_juridica?.id,
+      nom_com: this.propietario?.personalidad_juridica?.nom_com
+    }
 
     
     this.submitEvent.emit(propietarioForm);
