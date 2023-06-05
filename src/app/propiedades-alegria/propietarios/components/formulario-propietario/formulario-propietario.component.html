@@ -2,9 +2,9 @@
 
     <div class="grid mb-3">
         <div class="col">
-            <p-checkbox 
-                [binary]="true" 
-                formControlName="tiene_personalidad_juridica" 
+            <p-checkbox
+                [binary]="true"
+                formControlName="tiene_personalidad_juridica"
                 inputId="tiene_personalidad_juridica_id"
                 class="mr-2"
             >
@@ -14,16 +14,16 @@
     </div>
 
     <div class="card"
-        *ngIf="mostarFormularioPersonalidadJuridica" 
+        *ngIf="mostarFormularioPersonalidadJuridica"
         [formGroup]="personalidadJuridicaForm"
     >
         <div class="grid mb-3">
             <div class="col" >
                 <span class="p-float-label">
-                    <input 
-                        type="text" 
-                        pInputText 
-                        formControlName="rut" 
+                    <input
+                        type="text"
+                        pInputText
+                        formControlName="rut"
                         placeholder="19.109.516-2"
                         [style]="{ width: '100%' }"
                          />
@@ -39,7 +39,7 @@
             </div>
         </div>
 
-        <app-ubicacion-form 
+        <app-ubicacion-form
             [initialComunaId]="propietario?.personalidad_juridica?.comuna"
             (selectedComunaIdEvent)="handleSelectedComunaForPersonalidadJuridica($event)"
             >
@@ -48,22 +48,22 @@
         <div class="grid mb-3">
             <div class="col">
                 <span class="p-float-label">
-                    <input 
-                        type="email" 
-                        pInputText 
-                        formControlName="email" 
+                    <input
+                        type="email"
+                        pInputText
+                        formControlName="email"
                         placeholder="ejemplo@email.com"
-                        [style]="{ width: '100%' }" 
+                        [style]="{ width: '100%' }"
                     />
                     <label>Email</label>
                 </span>
             </div>
             <div class="col">
                 <span class="p-float-label">
-                    <input 
-                        pKeyFilter="int" 
-                        pInputText 
-                        formControlName="contacto" 
+                    <input
+                        pKeyFilter="int"
+                        pInputText
+                        formControlName="contacto"
                         placeholder="92312456"
                         [style]="{ width: '100%' }" />
                     <label>Celular</label>
@@ -83,7 +83,7 @@
         </div>
     </div>
 
-    
+
 
     <div class="grid mb-3">
         <div class="col">
@@ -165,14 +165,14 @@
         <div class="col">
             <span class="p-inputgroup">
                 <span class="p-float-label">
-                    <p-inputNumber 
+                    <p-inputNumber
                         formControlName="pctje_cobro_honorario"
-                        inputId="pctjecobrohonorario" 
+                        inputId="pctjecobrohonorario"
                         mode="decimal"
                         [minFractionDigits]="2"
                         [maxFractionDigits]="2"
                         locale="en-ES"
-                        [max]="100"
+                        [max]="10"
                         [maxlength]="6"
                         [style]="{ width: '100%' }"
                         placeholder="7.00"
