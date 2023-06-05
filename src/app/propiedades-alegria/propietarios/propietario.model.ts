@@ -4,6 +4,7 @@ export interface PersonalidadJuridica{
     razon_social: string;
     direccion: string | null;
     comuna: number | null;
+    nom_com?: string | null;
     email: string | null;
     contacto: number | null;
 }

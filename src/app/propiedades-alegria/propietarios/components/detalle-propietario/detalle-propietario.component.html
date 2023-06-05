@@ -1,5 +1,36 @@
 <ng-container *ngIf="propietario">
     <div class="grid">
+        <ng-container *ngIf="propietario.personalidad_juridica as pj">
+            <div class="col-4" >
+                <div class="text-sm font-bold text-600 mb-1">Razón social</div>
+                <div class="font-medium">{{pj.razon_social}}</div>
+            </div>
+            <div class="col-4" >
+                <div class="text-sm font-bold text-600 mb-1">Rut</div>
+                <div class="font-medium">{{pj.rut}}</div>
+            </div>
+            
+            <div class="col-4" >
+                <div class="text-sm font-bold text-600 mb-1">Correo</div>
+                <div class="font-medium">{{pj.email ?? '- - - -'}}</div>
+            </div>
+
+            <div class="col-8" >
+                <div class="text-sm font-bold text-600 mb-1">Dirección</div>
+                <div class="font-medium">{{pj.direccion ?? '- - - -'}}, {{pj.nom_com ?? ''}}</div>
+            </div>
+
+            <div class="col-4" >
+                <div class="text-sm font-bold text-600 mb-1">Teléfono</div>
+                <div class="font-medium">{{pj.contacto ?? '- - - -'}}</div>
+            </div>
+
+        </ng-container>
+
+        <div class="col-12" *ngIf="propietario.personalidad_juridica">
+            <h4>Persona Natural</h4>
+        </div>
+
         <div class="col-4">
             <div class="text-sm font-bold text-600 mb-1">Rut</div>
             <div class="font-medium">{{propietario.rut_prop}}</div>
@@ -30,6 +61,13 @@
             <div class="font-medium">{{propietario.contacto_prop}}</div>
         </div>
 
+        <div class="col-12">
+            <div class="text-sm font-bold text-600 mb-1">Porcentaje cobro honorario</div>
+            <div class="font-medium">{{propietario.pctje_cobro_honorario}}%</div>
+        </div>
+
+        
+            
         <div class="col-4">
             <div class="flex">
                 <p-button 
