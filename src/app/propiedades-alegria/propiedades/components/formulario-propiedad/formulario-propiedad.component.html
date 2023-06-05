@@ -108,6 +108,92 @@
             </span>
             <small>(Opcional)</small>
         </div>
+        <!-- Código GAS -->
+        <div class="col-4">
+            <span class="p-float-label">
+                <input
+                    pKeyFilter="int"
+                    pInputText
+                    formControlName="gas"
+                    placeholder="1 (GasSur)"
+                    [style]="{ width: '100%' }"
+                />
+                <label>Código Servicio Gas</label>
+            </span>
+        </div>
+        <!-- Código AGUA -->
+        <div class="col-4">
+            <span class="p-float-label">
+                <input
+                    pKeyFilter="int"
+                    pInputText
+                    formControlName="agua"
+                    placeholder="1 (ESSBIO)"
+                    [style]="{ width: '100%' }"
+                />
+                <label>Código Servicio Agua</label>
+            </span>
+        </div>
+        <!-- Código LUZ -->
+        <div class="col-4">
+            <span class="p-float-label">
+                <input
+                    pKeyFilter="int"
+                    pInputText
+                    formControlName="luz"
+                    placeholder="1 (CGE)"
+                    [style]="{ width: '100%' }"
+                />
+                <label>Código Servicio Luz</label>
+            </span>
+        </div>
+        <!-- Valor Arriendo Base -->
+        <div class="col-6">
+            <span class="p-float-label">
+                <input
+                    pKeyFilter="int"
+                    pInputText
+                    formControlName="valor_arriendo_base"
+                    placeholder="300000"
+                    [style]="{ width: '100%' }"
+                />
+                <label>Valor arriendo base</label>
+            </span>
+        </div>
+        <!-- Valor Gasto Común -->
+        <div class="col-6">
+            <span class="p-float-label">
+                <input
+                    pKeyFilter="int"
+                    pInputText
+                    formControlName="valor_gasto_comun"
+                    placeholder="50000"
+                    [style]="{ width: '100%' }"
+                />
+                <label>Valor gasto común</label>
+            </span>
+        </div>
+        <!-- ¿Es valor_arriendo_base en UF? -->
+        <div class="col-6" id="checkbox">
+            <p-checkbox 
+                [binary]="true" 
+                formControlName="es_valor_uf"
+                class="mr-2"
+                >
+            </p-checkbox>
+            <label>¿Es el valor arriendo base en UF?</label>
+        </div>
+        <!-- ¿Incluye gasto común? -->
+        <div class="col-6" id="checkbox">
+            <p-checkbox 
+                [(ngModel)]="habilitarCampoValorGastoComun"
+                [binary]="true" 
+                formControlName="incluye_gc"
+                class="mr-2"
+                >
+            </p-checkbox>
+            <label>¿Incluye gasto común en valor de arriendo?</label>
+        </div>
     </div>  
     
 
