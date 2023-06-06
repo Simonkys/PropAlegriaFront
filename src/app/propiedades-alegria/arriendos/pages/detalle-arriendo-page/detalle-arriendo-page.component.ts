@@ -4,13 +4,15 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ArriendoService } from '../../arriendo.service';
 import {map, switchMap} from 'rxjs'
 
+
 import { DetalleArriendoComponent } from '../../components/detalle-arriendo/detalle-arriendo.component';
 import { Arriendo } from '../../arriendo.model';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'app-detalle-arriendo-page',
   standalone: true,
-  imports: [CommonModule, DetalleArriendoComponent],
+  imports: [CommonModule, DetalleArriendoComponent, ButtonModule],
   templateUrl: './detalle-arriendo-page.component.html',
   styleUrls: ['./detalle-arriendo-page.component.scss']
 })
@@ -37,6 +39,10 @@ export class DetalleArriendoPageComponent {
 
   handleActualizarEvent(arriendo: Arriendo) {
     this.router.navigate(['arriendos', arriendo.id, 'actualizar'])
+  }
+
+  volver() {
+    this.location.back();
   }
 
 }
