@@ -31,6 +31,13 @@ import { AuthService } from './propiedades-alegria/core/services/auth.service';
                             loadChildren: () => import( './propiedades-alegria/trabajadores/trabajadores.routes' ).then((m) => m.TRABAJADORES_ROUTES),
                         },
                         {
+                            path: 'externos',
+                            canActivate: [
+                                () => inject(AuthService).isStaff()
+                            ],
+                            loadChildren: () => import( './propiedades-alegria/externos/externos.routes' ).then((m) => m.EXTERNOS_ROUTES),
+                        },
+                        {
                             path: 'propiedades',
                             canActivate: [
                                 () => inject(AuthService).isStaff()
