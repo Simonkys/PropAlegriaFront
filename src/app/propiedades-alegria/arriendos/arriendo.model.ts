@@ -1,12 +1,3 @@
-interface Externo {
-    id: number;
-    nombre: string;
-    rut: string | null;
-    contacto: number;
-    correo: string;
-    rol: string;
-}
-
 interface ArriendoArrendatario {
     id: number;
     rut_arr: string;
@@ -42,7 +33,6 @@ export interface Arriendo{
 
     observaciones: string | null;
 
-    externo: Externo;
 }
 
 export interface ArriendoForm{
