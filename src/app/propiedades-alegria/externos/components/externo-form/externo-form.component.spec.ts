@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ExternosComponent } from './externos.component';
+import { ExternoFormComponent } from './externo-form.component';
 
-describe('ExternosComponent', () => {
-  let component: ExternosComponent;
-  let fixture: ComponentFixture<ExternosComponent>;
+describe('ExternoFormComponent', () => {
+  let component: ExternoFormComponent;
+  let fixture: ComponentFixture<ExternoFormComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ ExternosComponent ]
+      imports: [ ExternoFormComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ExternosComponent);
+    fixture = TestBed.createComponent(ExternoFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

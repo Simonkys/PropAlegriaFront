@@ -9,6 +9,6 @@ import { RouterOutlet } from "@angular/router";
   <router-outlet></router-outlet>
 `
 })
-export class ExternosComponent {
+export class ExternoComponent {
 
 }
