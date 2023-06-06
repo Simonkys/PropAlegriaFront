@@ -58,7 +58,7 @@ export class FormularioPropiedadComponent implements OnInit {
 
   form = this.fb.group({
     direccion_ppdd: this.fb.nonNullable.control<string>('', [Validators.required, Validators.maxLength(150)]),
-    numero_ppdd: this.fb.control<string | null>(null, [ Validators.maxLength(50)]),
+    numero_ppdd: this.fb.control<string | null>(null, [Validators.maxLength(50)]),
     rol_ppdd: this.fb.control<string | null>(null, [Validators.maxLength(50)]),
 
     comuna_id: this.fb.control<number | null>(null, [Validators.required]),
@@ -73,9 +73,9 @@ export class FormularioPropiedadComponent implements OnInit {
     valor_arriendo_base: this.fb.nonNullable.control<number>(0, [Validators.required]),
     es_valor_uf: this.fb.nonNullable.control<boolean>(false, []),
 
-    gas: this.fb.control<string | null>(null, [Validators.required]),
-    agua: this.fb.control<string | null>(null, [Validators.required]),
-    luz: this.fb.control<string | null>(null, [Validators.required]),
+    gas: this.fb.control<string | null>(null),
+    agua: this.fb.control<string | null>(null),
+    luz: this.fb.control<string | null>(null),
 
     incluye_gc: this.fb.nonNullable.control<boolean>(false, []),
     valor_gasto_comun: this.fb.nonNullable.control<number>(0, []),
