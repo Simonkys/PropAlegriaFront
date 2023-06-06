@@ -5,6 +5,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { DropdownModule } from 'primeng/dropdown';
 import { KeyFilterModule } from 'primeng/keyfilter';
 import { ButtonModule } from 'primeng/button';
+import { CheckboxModule } from 'primeng/checkbox';
 import { UbicacionFormComponent } from 'src/app/propiedades-alegria/componentes/ubicacion-form/ubicacion-form.component';
 import { Propiedad, PropiedadForm } from 'src/app/propiedades-alegria/propiedades/propiedad.model';
 import { PropiedadesService } from 'src/app/propiedades-alegria/propiedades/propiedades.service';
@@ -25,6 +26,7 @@ import { TipoPropiedadEnum } from 'src/app/propiedades-alegria/core/models/tipo-
     KeyFilterModule,
     ButtonModule,
     InputSwitchModule,
+    CheckboxModule,
   ],
   templateUrl: './formulario-propiedad.component.html',
   styleUrls: ['./formulario-propiedad.component.scss']
@@ -46,6 +48,8 @@ export class FormularioPropiedadComponent implements OnInit {
 
   fb = inject(FormBuilder)
 
+  esValorUF: boolean = false
+  habilitarCampoValorGastoComun: boolean = false
 
   TipoPropiedadEnum = TipoPropiedadEnum
 
@@ -54,7 +58,7 @@ export class FormularioPropiedadComponent implements OnInit {
 
   form = this.fb.group({
     direccion_ppdd: this.fb.nonNullable.control<string>('', [Validators.required, Validators.maxLength(150)]),
-    numero_ppdd: this.fb.control<string | null>(null, [ Validators.maxLength(50)]),
+    numero_ppdd: this.fb.control<string | null>(null, [Validators.maxLength(50)]),
     rol_ppdd: this.fb.control<string | null>(null, [Validators.maxLength(50)]),
 
     comuna_id: this.fb.control<number | null>(null, [Validators.required]),
@@ -66,12 +70,12 @@ export class FormularioPropiedadComponent implements OnInit {
     nro_bodega: this.fb.control<number | null>({value: null, disabled: true}, [],),
     nro_estacionamiento: this.fb.control<number | null>({value: null, disabled: true}, []),
 
-    valor_arriendo_base: this.fb.nonNullable.control<number>(300000, [Validators.required]),
+    valor_arriendo_base: this.fb.nonNullable.control<number>(0, [Validators.required]),
     es_valor_uf: this.fb.nonNullable.control<boolean>(false, []),
 
-    gas: this.fb.control<string | null>(null, [Validators.required]),
-    agua: this.fb.control<string | null>(null, [Validators.required]),
-    luz: this.fb.control<string | null>(null, [Validators.required]),
+    gas: this.fb.control<string | null>(null),
+    agua: this.fb.control<string | null>(null),
+    luz: this.fb.control<string | null>(null),
 
     incluye_gc: this.fb.nonNullable.control<boolean>(false, []),
     valor_gasto_comun: this.fb.nonNullable.control<number>(0, []),
@@ -98,7 +102,17 @@ export class FormularioPropiedadComponent implements OnInit {
         nro_estacionamiento: this.propiedad.nro_estacionamiento,
 
         incluir_bodega: !!this.propiedad.nro_bodega,
-        incluir_estacionamiento: !!this.propiedad.nro_estacionamiento
+        incluir_estacionamiento: !!this.propiedad.nro_estacionamiento,
+
+        gas: this.propiedad.gas,
+        agua: this.propiedad.agua,
+        luz: this.propiedad.luz,
+
+        valor_arriendo_base: this.propiedad.valor_arriendo_base,
+        es_valor_uf: this.propiedad.es_valor_uf,
+
+        incluye_gc: this.propiedad.incluye_gc,
+        valor_gasto_comun: this.propiedad.valor_gasto_comun,
       })
       this.form.controls['propietario_id'].disable();
     }
@@ -238,6 +252,26 @@ export class FormularioPropiedadComponent implements OnInit {
     this.form.get('nro_estacionamiento')?.clearValidators()
     this.form.get('nro_estacionamiento')?.updateValueAndValidity()
     
+  }
+
+  handleEsValorUFChanges() {
+    this.form.get('es_valor_uf')?.valueChanges.subscribe(value => {
+      if(value) {
+        this.esValorUF = true
+      } else {
+        this.esValorUF = false
+      }
+    })
+  }
+
+  handleIncluyeGastoComunChanges() {
+    this.form.get('incluye_gc')?.valueChanges.subscribe(value => {
+      if(value) {
+        this.habilitarCampoValorGastoComun = true
+      } else {
+        this.habilitarCampoValorGastoComun = false
+      }
+    })
   }
 
 
