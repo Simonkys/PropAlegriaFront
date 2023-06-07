@@ -1,0 +1,10 @@
+<ng-container *ngIf="externo$ | async as externo">
+    <div class="card">
+        <h4>Detalle Trabajador Externo</h4>
+        <app-detalle-externo 
+            [externo]="externo"
+            (actualizarEvent)="handleActualizarEvent(externo)"
+            (eliminarEvent)="handleEliminarEvent(externo)"
+        />
+    </div>
+</ng-container>
