@@ -1,0 +1,99 @@
+<form [formGroup]="form">
+    
+    <div class="p-formgrid grid mb-3">
+        <!-- Campo RUT -->
+        <div class="col flex flex-column gap-2">
+            <span class="p-float-label">
+                <input
+                    type="text"
+                    pInputText
+                    formControlName="rut"
+                    autofocus
+                    placeholder="19.109.516-2"
+                    [style]="{ width: '100%' }"
+                />
+                <label>Rut *</label>
+            </span>
+            <small
+                >Rut con puntos y con guión,
+                <strong>Ej: 11.625.443-8</strong>
+            </small>
+        </div>
+
+        <!-- Campo NOMBRE -->
+        <div class="col flex flex-column gap-2">
+            <span class="p-float-label">
+                <input
+                    type="text"
+                    pInputText
+                    formControlName="nombre"
+                    placeholder="Juan Fierro"
+                    [style]="{ width: '100%' }"
+                />
+                <label>Nombre *</label>
+            </span>
+        </div>
+    </div>
+
+    <div class="p-formgrid grid mb-3">
+        <!-- Campo CONTACTO -->
+        <div class="col flex flex-column gap-2">
+            <span class="p-float-label">
+                <input
+                    pKeyFilter="int"
+                    pInputText
+                    formControlName="contacto"
+                    placeholder="92312456"
+                    [style]="{ width: '100%' }"
+                />
+                <label>Contacto *</label>
+            </span>
+            <small
+                >Solo números son permitidos,
+                <strong>Ej: 93526734</strong></small
+            >
+        </div>
+        <!-- Campo EMAIL -->
+        <div class="col flex flex-column gap-2">
+            <span class="p-float-label">
+                <input
+                    type="email"
+                    pInputText
+                    formControlName="correo"
+                    placeholder="ejemplo@email.com"
+                    [style]="{ width: '100%' }"
+                />
+                <label>Correo</label>
+            </span>
+        </div>
+    </div>
+
+    <div class="p-formgrid grid mb-6">
+        <div class="col flex flex-column gap-2">
+            <span class="p-float-label">
+                <input 
+                    type="text" 
+                    pInputText formControlName="rol" 
+                    [style]="{ width: '100%' }" 
+                    placeholder="Gásfiter"
+                />
+                <label>Rol *</label>
+            </span>
+        </div>
+    </div>
+
+    <div class="flex">
+        <p-button
+            styleClass="mr-3"
+            [disabled]="form.invalid"
+            label="Guardar"
+            (click)="submit()"
+        ></p-button>
+        <p-button
+            label="Cancelar"
+            styleClass="p-button-danger"
+            (click)="cancelar()"
+        ></p-button>
+    </div>
+</form>
+

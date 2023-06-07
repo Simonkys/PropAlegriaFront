@@ -1,0 +1,9 @@
+<div class="card">
+    <h4>Actualizar trabajador externo</h4>
+    <app-externo-form 
+        *ngIf="externo$ | async as externo" 
+        [externo]="externo" 
+        (submitEvent)="submit($event)"
+        (cancelEvent)="cancelar()"
+    />
+</div>
