@@ -27,7 +27,7 @@ export interface Propiedad {
     comuna: PropiedadComuna;
     propietario: PropiedadPropietario;
     tipopropiedad: PropiedadTipoPropiedad;
-    
+
     cod: number | null;
 
     nro_bodega: number | null;
@@ -80,6 +80,7 @@ export interface PropiedadSimpleTabla {
     propietario_id: number;
     comuna: string;
     propiedad_id: number;
+    tipo_propiedad: number;
 }
 
 export interface PropiedadConCodigos {
