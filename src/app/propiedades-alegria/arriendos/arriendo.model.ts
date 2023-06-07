@@ -87,6 +87,7 @@ export interface Propiedad {
     propietario:         Propietario;
     tipopropiedad:       Tipopropiedad;
     externo:             number | null;
+    observaciones: string | null;
 }
 
 export interface Comuna {
