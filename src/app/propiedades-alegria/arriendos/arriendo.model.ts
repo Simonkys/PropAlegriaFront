@@ -1,25 +1,21 @@
 export interface ArriendoForm{
     id?: number;
 
-    cod_arriendo: string | null; //quitar
-
     fecha_inicio: Date;
     fecha_termino: Date;
-    fecha_pri_ajuste: Date | null;
 
     dia_pago: number;
 
     periodo_reajuste: number;
-    monto_arriendo: number;
+    
+    valor_arriendo: number;
 
-    fecha_entrega: Date | null; //quitar
-    estado_arriendo: boolean;
-    porcentaje_multa: number; //quitar
+    fecha_entrega: Date | null;
+
+    observaciones: string | null;
 
     arrendatario_id: number;
     propiedad_id: number | null;
-
-    observaciones: string | null;
 }
 
 
@@ -91,6 +87,7 @@ export interface Propiedad {
     propietario:         Propietario;
     tipopropiedad:       Tipopropiedad;
     externo:             number | null;
+    observaciones: string | null;
 }
 
 export interface Comuna {

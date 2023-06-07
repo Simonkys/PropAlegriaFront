@@ -5,8 +5,9 @@
             optionLabel="direccion_ppdd"
             placeholder="Seleccione propiedad"
             [filter]="true"
-            [filterBy]="'cod,direccion_ppdd,propietario.pri_nom_prop,tipopropiedad.nombre_tipoppdd,propietario.pri_ape_prop'"
-            filterPlaceholder="Cod, dirección, propietario, tipo propiedad"
+            [filterBy]="'cod'"
+            filterPlaceholder="Cod"
+            filterMatchMode="equals"
             inputId="float-label"
             (onChange)="selected($event.value)"
         > 

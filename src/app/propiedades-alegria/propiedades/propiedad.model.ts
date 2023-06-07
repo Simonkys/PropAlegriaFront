@@ -42,6 +42,8 @@ export interface Propiedad {
 
     incluye_gc: boolean;
     valor_gasto_comun: number;
+
+    observaciones: string | null;
 }
 
 
@@ -70,6 +72,8 @@ export interface PropiedadForm {
 
     incluye_gc: boolean;
     valor_gasto_comun: number;
+
+    observaciones: string | null;
 }
 
 

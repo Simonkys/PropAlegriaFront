@@ -83,6 +83,8 @@ export class FormularioPropiedadComponent implements OnInit {
 
     incluir_bodega: this.fb.nonNullable.control<boolean>(false, []),
     incluir_estacionamiento: this.fb.nonNullable.control<boolean>(false, []),
+
+    observaciones: this.fb.control<string | null>(null, [])
   })
 
   ngOnInit() {
@@ -114,6 +116,8 @@ export class FormularioPropiedadComponent implements OnInit {
 
         incluye_gc: this.propiedad.incluye_gc,
         valor_gasto_comun: this.propiedad.valor_gasto_comun,
+
+        observaciones: this.propiedad.observaciones
       })
       this.form.controls['propietario_id'].disable();
     } else {
@@ -165,6 +169,8 @@ export class FormularioPropiedadComponent implements OnInit {
 
       incluye_gc: formValues.incluye_gc,
       valor_gasto_comun: formValues.valor_gasto_comun,
+
+      observaciones: formValues.observaciones
     }
 
     if (this.propiedad) {

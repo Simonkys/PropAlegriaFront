@@ -9,8 +9,9 @@
     <div class="grid mb-3" *ngIf="propiedadSeleccionada">
         <div class="col-12">
             <div class="card slide-in-right">
-                <h4>Propiedad</h4>
-                <app-detalle-propiedad
+
+                <app-detalle-propiedad 
+
                     [propiedad]="propiedadSeleccionada"
                     [ocultarAcciones]="true"
                 />
@@ -58,6 +59,7 @@
             </span>
         </div>
 
+
         <div class="col-6">
             <span class="p-float-label">
                 <input type="number" pInputText formControlName="dia_pago" autofocus
@@ -65,6 +67,7 @@
                 <label>Dia de pago</label>
             </span>
         </div>
+
     </div>
 
 
@@ -101,7 +104,7 @@
 
         <div class="col flex flex-column gap-2">
             <span class="p-float-label">
-                <p-calendar dateFormat="dd/mm/yy" formControlName="fecha_pri_ajuste" [showIcon]="true" [readonlyInput]="true"
+                <p-calendar dateFormat="dd/mm/yy" formControlName="fecha_reajuste" [showIcon]="true" [readonlyInput]="true"
                     [style]="{ width: '100%' }"></p-calendar>
                 <label>Fecha del primer reajuste *</label>
             </span>
@@ -111,36 +114,34 @@
 
     <div class="grid mb-3">
 
-        <div class="col flex flex-column gap-2">
+        <div class="col-6">
             <span class="p-float-label">
-                <p-inputNumber placeholder="$ 199.123 *" formControlName="monto_arriendo" prefix="$ "
+                    <p-inputNumber placeholder="$ 199.123 *" formControlName="valor_arriendo" prefix="$ "
                     [style]="{ width: '100%' }" inputId="integeronly">
                 </p-inputNumber>
-                <label>Monto arriendo</label>
+                <label>Valor arriendo</label>
             </span>
         </div>
 
-
-        <div class="col flex flex-column gap-2">
+        <div class="col-6">
             <span class="p-float-label">
-                <input pKeyFilter="int" pInputText formControlName="porcentaje_multa" placeholder="10 %"
-                    [style]="{ width: '100%' }" />
-                <label>Porcentaje de multa *</label>
+
+                <input type="text" pInputText formControlName="dia_pago" pKeyFilter="int" [style]="{ width: '100%' }" placeholder="5"/>
+                <label >Día de pago</label>
+                <small>Día del mes a pagar. (1 - 30)</small>
+
             </span>
-            <small>Solo números son permitidos 1-100 %</small>
         </div>
-
-
     </div>
-    <div class="grid mb-3">
 
-        <div class="col flex flex-column gap-2">
+
+    <div class="grid mb-3">
+        <div class="col-12">
             <span class="p-float-label">
-                <textarea id="float-text" cols="30" rows="10" formControlName="observaciones" pInputTextarea [style]="{ width: '100%' }"></textarea>
-                <label for="float-text">observaciones</label>
+                <input type="text" pInputText formControlName="observaciones" [style]="{ width: '100%' }"/>
+                <label >Observaciones</label>
             </span>
         </div>
-
 
     </div>
 
@@ -154,11 +155,6 @@
         </div>
 
 
-        <!-- <div class="col flex flex-column gap-2">
-            <p-selectButton [options]="opcionesEstadoArriendo" formControlName="estado_arriendo" optionLabel="label"
-                optionValue="value" [style]="{ width: '100%' }">
-            </p-selectButton>
-        </div> -->
     </div>
 
     <div class="flex">
