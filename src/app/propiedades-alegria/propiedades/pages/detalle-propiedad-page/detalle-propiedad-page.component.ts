@@ -6,11 +6,12 @@ import { map, switchMap } from 'rxjs';
 import { Propiedad } from 'src/app/propiedades-alegria/propiedades/propiedad.model';
 import { PropiedadesService } from 'src/app/propiedades-alegria/propiedades/propiedades.service';
 import { DetallePropiedadComponent } from '../../components/detalle-propiedad/detalle-propiedad.component';
+import { ButtonModule } from 'primeng/button';
 
 @Component({
   selector: 'app-detalle-propiedad-page',
   standalone: true,
-  imports: [CommonModule, DetallePropiedadComponent],
+  imports: [CommonModule, DetallePropiedadComponent, ButtonModule],
   templateUrl: './detalle-propiedad-page.component.html',
   styleUrls: ['./detalle-propiedad-page.component.scss']
 })
@@ -38,6 +39,11 @@ export class DetallePropiedadPageComponent {
 
   handleDetallePropietarioEvent(propietarioId: number) {
     this.router.navigate(['propietarios', propietarioId, 'detalle'])
+  }
+
+
+  volver() {
+    this.location.back();
   }
 
 }
