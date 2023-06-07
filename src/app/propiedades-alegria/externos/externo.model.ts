@@ -1,5 +1,5 @@
 export interface Externo {
-    id?: number;
+    id: number;
     nombre: string;
     rut: string | null;
     contacto: number;
