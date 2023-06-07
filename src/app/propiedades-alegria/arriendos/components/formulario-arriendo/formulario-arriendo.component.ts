@@ -23,16 +23,16 @@ import { Propiedad } from 'src/app/propiedades-alegria/propiedades/propiedad.mod
   selector: 'app-formulario-arriendo',
   standalone: true,
   imports: [
-    CommonModule, 
-    ReactiveFormsModule, 
-    ButtonModule, 
-    InputTextModule, 
-    KeyFilterModule, 
-    CalendarModule, 
-    DropdownModule, 
+
+    CommonModule,
+    ReactiveFormsModule,
+    ButtonModule,
+    InputTextModule,
+    KeyFilterModule,
+    CalendarModule,
+    DropdownModule,
     InputNumberModule,
     SelectButtonModule,
-    InputTextareaModule,
     SelectorPropiedadesComponent,
     DetallePropiedadComponent
 ],
@@ -57,7 +57,7 @@ export class FormularioArriendoComponent implements OnInit {
   fechaTerminoMinDate: Date = new Date()
 
 
-  form = this.fb.group({
+ form = this.fb.group({
     fecha_inicio: this.fb.control<Date>(new Date(), [Validators.required]),
     fecha_termino: this.fb.control<Date>(new Date(), [Validators.required]),
     periodo_reajuste: this.fb.control<number | null>(3, [Validators.required, Validators.min(3), Validators.max(12)]),
@@ -76,7 +76,7 @@ export class FormularioArriendoComponent implements OnInit {
 
   ngOnInit(): void {
     if(this.arriendo) {
-      
+
       this.form.patchValue({
         fecha_inicio: this.arriendo.fecha_inicio,
         fecha_termino: this.arriendo.fecha_termino,
@@ -87,7 +87,8 @@ export class FormularioArriendoComponent implements OnInit {
         observaciones: this.arriendo.observaciones,
         dia_pago: this.arriendo.dia_pago,
         arrendatario_id: this.arriendo.arrendatario.id,
-        propiedad_id: this.arriendo.propiedad?.id,
+        propiedad_id: this.arriendo.propiedad?.id
+
       })
     } else {
       this.form.controls['fecha_entrega'].disable()
@@ -114,7 +115,7 @@ export class FormularioArriendoComponent implements OnInit {
     })
   }
 
-  
+
 
 
   submit() {
@@ -148,7 +149,7 @@ export class FormularioArriendoComponent implements OnInit {
       propiedad_id: propiedad.id,
       valor_arriendo: propiedad.valor_arriendo_base
     })
-    
+
   }
 
   setFechaPriReajuste(periodoMesesReajuste: number) {

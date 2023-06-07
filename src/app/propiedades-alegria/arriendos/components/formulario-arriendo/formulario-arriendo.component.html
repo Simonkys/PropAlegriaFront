@@ -9,7 +9,9 @@
     <div class="grid mb-3" *ngIf="propiedadSeleccionada">
         <div class="col-12">
             <div class="card slide-in-right">
+
                 <app-detalle-propiedad 
+
                     [propiedad]="propiedadSeleccionada"
                     [ocultarAcciones]="true"
                 />
@@ -22,25 +24,25 @@
             <span class="p-float-label">
 
                 <ng-container *ngIf="arrendatario; else ArrendatarioSelector">
-                    <input 
-                        type="text" 
-                        pInputText 
+                    <input
+                        type="text"
+                        pInputText
                         value="{{arrendatario.rut_arr}} ({{arrendatario.pri_nom_arr}} {{arrendatario.pri_ape_arr}})"
-                        [disabled]="true" 
+                        [disabled]="true"
                         [style]="{ width: '100%' }">
                 </ng-container>
 
                 <ng-template #ArrendatarioSelector>
-                        <p-dropdown 
-                            formControlName="arrendatario_id" 
+                        <p-dropdown
+                            formControlName="arrendatario_id"
                             [options]="(arrendatarios$ | async)!"
-                            optionLabel="pri_nom_arr" 
-                            optionValue="id" 
+                            optionLabel="pri_nom_arr"
+                            optionValue="id"
                             [style]="{ width: '100%' }"
-                            placeholder="Arrendatario" 
-                            [filter]="true" 
+                            placeholder="Arrendatario"
+                            [filter]="true"
                             [filterBy]="'pri_nom_arr,pri_ape_arr,rut_arr'"
-                            filterPlaceholder="Rut, nombre, apellido" 
+                            filterPlaceholder="Rut, nombre, apellido"
                             inputId="float-label">
                             <ng-template pTemplate="selectedItem" let-arrendatario>
                                 <div>{{arrendatario.rut_arr}} ({{arrendatario.pri_nom_arr}}
@@ -56,6 +58,16 @@
                 <label>Arrendatario</label>
             </span>
         </div>
+
+
+        <div class="col-6">
+            <span class="p-float-label">
+                <input type="number" pInputText formControlName="dia_pago" autofocus
+                    [style]="{ width: '100%' }" />
+                <label>Dia de pago</label>
+            </span>
+        </div>
+
     </div>
 
 
@@ -97,7 +109,7 @@
                 <label>Fecha del primer reajuste *</label>
             </span>
         </div>
-        
+
     </div>
 
     <div class="grid mb-3">
@@ -113,12 +125,15 @@
 
         <div class="col-6">
             <span class="p-float-label">
+
                 <input type="text" pInputText formControlName="dia_pago" pKeyFilter="int" [style]="{ width: '100%' }" placeholder="5"/>
                 <label >Día de pago</label>
                 <small>Día del mes a pagar. (1 - 30)</small>
+
             </span>
         </div>
     </div>
+
 
     <div class="grid mb-3">
         <div class="col-12">
@@ -127,6 +142,7 @@
                 <label >Observaciones</label>
             </span>
         </div>
+
     </div>
 
     <div class="grid mb-5">
@@ -137,6 +153,7 @@
                 <label>Fecha de entrega</label>
             </span>
         </div>
+
 
     </div>
 
