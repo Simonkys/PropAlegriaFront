@@ -10,9 +10,6 @@ import { FormularioCuentaBancariaComponent } from '../../../cuentas-bancarias/co
 import { ListadoCuentaBancariaComponent } from '../../../cuentas-bancarias/components/listado-cuenta-bancaria/listado-cuenta-bancaria.component';
 import { CuentaBancaria } from '../../../cuentas-bancarias/cuenta-bancaria.models';
 import { CuentaBancariaService } from '../../../cuentas-bancarias/cuenta-bancaria.service';
-import { ListadoArriendosComponent } from 'src/app/propiedades-alegria/arriendos/components/listado-arriendos/listado-arriendos.component';
-import { Arriendo, TablaArriendo } from 'src/app/propiedades-alegria/arriendos/arriendo.model';
-import { ArriendoService } from 'src/app/propiedades-alegria/arriendos/arriendo.service';
 
 @Component({
   selector: 'app-detalle-arrendatarios-page',
@@ -20,7 +17,6 @@ import { ArriendoService } from 'src/app/propiedades-alegria/arriendos/arriendo.
   imports: [
     CommonModule, 
     DetalleArrendatarioComponent, 
-    ListadoArriendosComponent,
     FormularioCuentaBancariaComponent, 
     ListadoCuentaBancariaComponent],
   templateUrl: './detalle-arrendatarios-page.component.html',
@@ -30,7 +26,6 @@ export class DetalleArrendatariosPageComponent implements OnInit {
 
   cuentaBancariaService = inject(CuentaBancariaService);
   arrendatarioService = inject(ArrendatarioService)
-  arriendoService = inject(ArriendoService)
 
   router = inject(Router)
   route = inject(ActivatedRoute)
@@ -38,7 +33,6 @@ export class DetalleArrendatariosPageComponent implements OnInit {
 
   
   arrendatario?: Arrendatario
-  arriendos: TablaArriendo[] = []
   
   creacionCuentaActiva: boolean = false;
   cuentaBancaria?: CuentaBancaria
@@ -46,20 +40,21 @@ export class DetalleArrendatariosPageComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.pipe(
       map(params => Number(params.get('id'))),
+
       switchMap(id => this.arrendatarioService.getArrendatario(id)),
+
       switchMap(arrendatario => {
-        const arriendos$ = this.arriendoService.getArriendoByArrendatario(arrendatario.id)
+    
         const cuentasBancarias$ = this.cuentaBancariaService.getCuentasBancariasByRut(arrendatario.rut_arr)
 
-        return forkJoin([arriendos$, cuentasBancarias$]).pipe(
-          map(([arriendos, cuentasBancarias]) => {
-            return {arriendos, cuentasBancarias, arrendatario}
+        return forkJoin([cuentasBancarias$]).pipe(
+          map(([cuentasBancarias]) => {
+            return {cuentasBancarias, arrendatario}
           })
         )
       })
-    ).subscribe(({arriendos, arrendatario}) => {
+    ).subscribe(({ arrendatario}) => {
       this.arrendatario = arrendatario;
-      this.arriendos = arriendos
     })
   }
 
@@ -93,14 +88,6 @@ export class DetalleArrendatariosPageComponent implements OnInit {
 
   activarCreacionCuentaBancaria() {
     this.creacionCuentaActiva = true;
-  }
-
-  handleRegistroArriendoEvent(arrendatario: Arrendatario) {
-    this.router.navigate(['arriendos', 'registro'], {state:  {arrendatario: arrendatario}})
-  }
-
-  handleDetalleArriendoEvent(arriendoId: number){
-    this.router.navigate(['arriendos', arriendoId, 'detalle'])
   }
 
 }

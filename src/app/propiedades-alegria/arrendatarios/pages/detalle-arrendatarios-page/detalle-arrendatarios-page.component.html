@@ -8,15 +8,7 @@
             (eliminarEvent)="handleEliminarEvent(arrendatario)"
         />
     </div>
-
-    <div class="card">
-        <h4>Arriendos</h4>
-        <app-listado-arriendos
-            [arriendos]="arriendos"
-            (registrarEvent)="handleRegistroArriendoEvent(arrendatario)"
-            (detalleEvent)="handleDetalleArriendoEvent($event)"
-        />
-    </div>
+    
 
     <div class="card"  *ngIf="creacionCuentaActiva">
         <h4>{{ cuentaBancaria ? 'Actualizar cuenta' : 'Registro cuenta'}}</h4>
