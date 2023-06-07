@@ -6,7 +6,8 @@
             placeholder="Seleccione propiedad"
             [filter]="true"
             [filterBy]="'cod'"
-            filterPlaceholder="Cod, dirección, propietario, tipo propiedad"
+            filterPlaceholder="Cod"
+            filterMatchMode="equals"
             inputId="float-label"
             (onChange)="selected($event.value)"
         > 

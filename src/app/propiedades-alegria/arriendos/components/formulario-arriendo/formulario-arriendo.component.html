@@ -9,7 +9,6 @@
     <div class="grid mb-3" *ngIf="propiedadSeleccionada">
         <div class="col-12">
             <div class="card slide-in-right">
-                <h4>Propiedad</h4>
                 <app-detalle-propiedad 
                     [propiedad]="propiedadSeleccionada"
                     [ocultarAcciones]="true"
@@ -105,7 +104,7 @@
 
         <div class="col-6">
             <span class="p-float-label">
-                    <p-inputNumber placeholder="$ 199.123 *" formControlName="" prefix="$ "
+                    <p-inputNumber placeholder="$ 199.123 *" formControlName="valor_arriendo" prefix="$ "
                     [style]="{ width: '100%' }" inputId="integeronly">
                 </p-inputNumber>
                 <label>Valor arriendo</label>
