@@ -4,7 +4,7 @@
 
 export const environment = {
     production: false,
-    apiUrl: 'https://alegriaapp-production-64cb.up.railway.app'
+    apiUrl: 'http://localhost:8000'
 };
 
 /*

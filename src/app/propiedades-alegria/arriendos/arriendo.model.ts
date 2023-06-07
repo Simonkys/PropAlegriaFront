@@ -1,18 +1,18 @@
 export interface ArriendoForm{
     id?: number;
 
-    cod_arriendo: string | null;
-
     fecha_inicio: Date;
     fecha_termino: Date;
-    fecha_pri_ajuste: Date | null;
+
+    dia_pago: number;
 
     periodo_reajuste: number;
-    monto_arriendo: number;
+    
+    valor_arriendo: number;
 
     fecha_entrega: Date | null;
-    estado_arriendo: boolean;
-    porcentaje_multa: number;
+
+    observaciones: string | null;
 
     arrendatario_id: number;
     propiedad_id: number | null;
