@@ -76,7 +76,7 @@ export class FormularioArriendoComponent implements OnInit {
 
   ngOnInit(): void {
     if(this.arriendo) {
-      
+
       this.form.patchValue({
         fecha_inicio: this.arriendo.fecha_inicio,
         fecha_termino: this.arriendo.fecha_termino,
@@ -87,9 +87,8 @@ export class FormularioArriendoComponent implements OnInit {
         observaciones: this.arriendo.observaciones,
         dia_pago: this.arriendo.dia_pago,
         arrendatario_id: this.arriendo.arrendatario.id,
-        propiedad_id: this.arriendo.propiedad?.id,
-        dia_pago: this.arriendo.dia_pago,
-        observaciones: this.arriendo.observaciones
+        propiedad_id: this.arriendo.propiedad?.id
+
       })
     } else {
       this.form.controls['fecha_entrega'].disable()
@@ -150,7 +149,7 @@ export class FormularioArriendoComponent implements OnInit {
       propiedad_id: propiedad.id,
       valor_arriendo: propiedad.valor_arriendo_base
     })
-    
+
   }
 
   setFechaPriReajuste(periodoMesesReajuste: number) {
