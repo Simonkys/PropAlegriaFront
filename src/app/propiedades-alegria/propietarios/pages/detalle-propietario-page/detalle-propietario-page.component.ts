@@ -116,4 +116,8 @@ export class DetallePropietarioPageComponent implements OnInit {
     });
   }
 
+  volver() {
+    this.location.back();
+  }
+
 }
