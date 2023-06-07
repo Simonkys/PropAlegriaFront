@@ -20,7 +20,7 @@
                     <i class="pi pi-search"></i>
                     <input 
                         pInputText type="text" 
-                        (input)="dt2.filterGlobal($any($event.target).value, 'contains')"
+                        (input)="dt2.filterGlobal($any($event.target).value, 'equals')"
                         placeholder="Código" />
                 </span>
                 <p-button  
