@@ -25,7 +25,7 @@
             <td>{{arriendo.nombre_arrendatario}}
             <td>{{arriendo.direccion}}
             <td>{{arriendo.fecha_pago | date:'dd/MM/yyyy'}}</td>
-            <td>{{arriendo.monto_arriendo | currency}}</td>
+            <td>${{arriendo.monto_arriendo | number}}</td>
             
             <td>
                 <div class="flex">

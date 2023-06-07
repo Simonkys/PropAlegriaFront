@@ -79,7 +79,6 @@ export class FormularioPropietarioComponent implements OnInit {
     if(this.propietario) {
 
       this.form.patchValue({...this.propietario, comuna_id: this.propietario.comuna.id})
-      this.form.get('pctje_cobro_honorario')?.disable()
 
       if(this.propietario.personalidad_juridica) {
 
