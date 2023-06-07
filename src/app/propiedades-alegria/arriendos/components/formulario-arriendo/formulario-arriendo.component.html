@@ -10,7 +10,7 @@
         <div class="col-12">
             <div class="card slide-in-right">
                 <h4>Propiedad</h4>
-                <app-detalle-propiedad 
+                <app-detalle-propiedad
                     [propiedad]="propiedadSeleccionada"
                     [ocultarAcciones]="true"
                 />
@@ -23,25 +23,25 @@
             <span class="p-float-label">
 
                 <ng-container *ngIf="arrendatario; else ArrendatarioSelector">
-                    <input 
-                        type="text" 
-                        pInputText 
+                    <input
+                        type="text"
+                        pInputText
                         value="{{arrendatario.rut_arr}} ({{arrendatario.pri_nom_arr}} {{arrendatario.pri_ape_arr}})"
-                        [disabled]="true" 
+                        [disabled]="true"
                         [style]="{ width: '100%' }">
                 </ng-container>
 
                 <ng-template #ArrendatarioSelector>
-                        <p-dropdown 
-                            formControlName="arrendatario_id" 
+                        <p-dropdown
+                            formControlName="arrendatario_id"
                             [options]="(arrendatarios$ | async)!"
-                            optionLabel="pri_nom_arr" 
-                            optionValue="id" 
+                            optionLabel="pri_nom_arr"
+                            optionValue="id"
                             [style]="{ width: '100%' }"
-                            placeholder="Arrendatario" 
-                            [filter]="true" 
+                            placeholder="Arrendatario"
+                            [filter]="true"
                             [filterBy]="'pri_nom_arr,pri_ape_arr,rut_arr'"
-                            filterPlaceholder="Rut, nombre, apellido" 
+                            filterPlaceholder="Rut, nombre, apellido"
                             inputId="float-label">
                             <ng-template pTemplate="selectedItem" let-arrendatario>
                                 <div>{{arrendatario.rut_arr}} ({{arrendatario.pri_nom_arr}}
@@ -60,9 +60,9 @@
 
         <div class="col-6">
             <span class="p-float-label">
-                <input type="text" pInputText formControlName="cod_arriendo" autofocus placeholder="1234-1234-1234-1234"
+                <input type="number" pInputText formControlName="dia_pago" autofocus
                     [style]="{ width: '100%' }" />
-                <label>Código</label>
+                <label>Dia de pago</label>
             </span>
         </div>
     </div>
@@ -106,7 +106,7 @@
                 <label>Fecha del primer reajuste *</label>
             </span>
         </div>
-        
+
     </div>
 
     <div class="grid mb-3">
@@ -123,14 +123,25 @@
 
         <div class="col flex flex-column gap-2">
             <span class="p-float-label">
-                <input pKeyFilter="int" pInputText formControlName="porcentaje_multa" placeholder="50 %"
+                <input pKeyFilter="int" pInputText formControlName="porcentaje_multa" placeholder="10 %"
                     [style]="{ width: '100%' }" />
                 <label>Porcentaje de multa *</label>
             </span>
             <small>Solo números son permitidos 1-100 %</small>
         </div>
 
-        
+
+    </div>
+    <div class="grid mb-3">
+
+        <div class="col flex flex-column gap-2">
+            <span class="p-float-label">
+                <textarea id="float-text" cols="30" rows="10" formControlName="observaciones" pInputTextarea [style]="{ width: '100%' }"></textarea>
+                <label for="float-text">observaciones</label>
+            </span>
+        </div>
+
+
     </div>
 
     <div class="grid mb-5">
@@ -143,11 +154,11 @@
         </div>
 
 
-        <div class="col flex flex-column gap-2">
+        <!-- <div class="col flex flex-column gap-2">
             <p-selectButton [options]="opcionesEstadoArriendo" formControlName="estado_arriendo" optionLabel="label"
                 optionValue="value" [style]="{ width: '100%' }">
             </p-selectButton>
-        </div>
+        </div> -->
     </div>
 
     <div class="flex">

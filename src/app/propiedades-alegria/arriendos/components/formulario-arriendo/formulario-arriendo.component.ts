@@ -22,15 +22,15 @@ import { Propiedad } from 'src/app/propiedades-alegria/propiedades/propiedad.mod
   selector: 'app-formulario-arriendo',
   standalone: true,
   imports: [
-    CommonModule, 
-    ReactiveFormsModule, 
-    ButtonModule, 
-    InputTextModule, 
-    KeyFilterModule, 
-    CalendarModule, 
-    DropdownModule, 
-    InputNumberModule, 
-    SelectButtonModule, 
+    CommonModule,
+    ReactiveFormsModule,
+    ButtonModule,
+    InputTextModule,
+    KeyFilterModule,
+    CalendarModule,
+    DropdownModule,
+    InputNumberModule,
+    SelectButtonModule,
     SelectorPropiedadesComponent,
     DetallePropiedadComponent
 ],
@@ -70,11 +70,13 @@ export class FormularioArriendoComponent implements OnInit {
 
     estado_arriendo: this.fb.control<boolean>(true, [Validators.required]),
     porcentaje_multa: this.fb.control<number | null>(null, [Validators.required, Validators.min(0), Validators.max(100)]),
-    
+
     arrendatario_id: this.fb.control<number | null>(null, [Validators.required]),
     propiedad_id: this.fb.control<number | null>(null, [Validators.required]),
 
     fecha_entrega: this.fb.control<Date | null>(null, []),
+    dia_pago: this.fb.control<number | null>(5, [Validators.required]),
+    observaciones: this.fb.control<string | null>(null, [])
   })
 
   fechaTerminoMinDate: Date = new Date()
@@ -93,6 +95,8 @@ export class FormularioArriendoComponent implements OnInit {
         estado_arriendo: this.arriendo.estado_arriendo,
         arrendatario_id: this.arriendo.arrendatario.id,
         propiedad_id: this.arriendo.propiedad?.id,
+        dia_pago: this.arriendo.dia_pago,
+        observaciones: this.arriendo.observaciones
       })
     } else {
       this.form.controls['fecha_entrega'].disable()
@@ -119,7 +123,7 @@ export class FormularioArriendoComponent implements OnInit {
     })
   }
 
-  
+
 
 
   submit() {
@@ -139,6 +143,8 @@ export class FormularioArriendoComponent implements OnInit {
         porcentaje_multa: values.porcentaje_multa!,
         arrendatario_id: values.arrendatario_id!,
         propiedad_id: values.propiedad_id,
+        dia_pago: values.dia_pago!,
+        observaciones: values.observaciones
     }
 
     this.submitEvent.emit(arriendoForm)
