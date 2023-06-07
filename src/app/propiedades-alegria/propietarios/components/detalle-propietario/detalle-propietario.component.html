@@ -37,13 +37,8 @@
         </div>
 
         <div class="col-4" >
-            <div class="text-sm font-bold text-600 mb-1">Nombres</div>
-            <div class="font-medium">{{propietario.pri_nom_prop}} {{propietario.seg_nom_prop}}</div>
-        </div>
-
-        <div class="col-4">
-            <div class="text-sm font-bold text-600 mb-1">Apellidos</div>
-            <div class="font-medium">{{propietario.pri_ape_prop}} {{propietario.seg_ape_prop}}</div>
+            <div class="text-sm font-bold text-600 mb-1">Nombre</div>
+            <div class="font-medium">{{propietario.pri_nom_prop}} {{propietario.seg_nom_prop}} {{propietario.pri_ape_prop}} {{propietario.seg_ape_prop}}</div>
         </div>
 
         <div class="col-4">
@@ -66,24 +61,5 @@
             <div class="font-medium">{{propietario.pctje_cobro_honorario}}%</div>
         </div>
 
-        
-            
-        <div class="col-4">
-            <div class="flex">
-                <p-button 
-                    icon="pi pi-pencil" 
-                    styleClass="p-button-warning mr-2"
-                    (click)="actualizar()"
-                >
-                </p-button>
-                <p-confirmPopup></p-confirmPopup>
-                <p-button 
-                    icon="pi pi-trash" 
-                    styleClass="p-button-danger"
-                    (click)="eliminar($event)"
-                >
-                </p-button>
-            </div>
-        </div>
     </div>
 </ng-container>

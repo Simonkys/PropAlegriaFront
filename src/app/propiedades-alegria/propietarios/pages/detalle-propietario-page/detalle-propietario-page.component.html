@@ -1,12 +1,48 @@
 <ng-container *ngIf="propietario">
     <div class="card">
-        <h4>{{propietario.personalidad_juridica ? 'Personalidad Jurídica': 'Detalle Propietario'}}</h4>
-        <app-detalle-propietario
-        
-            [propietario]="propietario"
-            (actualizarEvent)="handleActualizarEvent(propietario)"
-            (eliminarEvent)="handleEliminarEvent(propietario)"
+        <div class="flex w-100 justify-content-between mb-3">
+            <div>
+                <h4>{{propietario.personalidad_juridica ? 'Personalidad Jurídica': 'Detalle Propietario'}}</h4>
+            </div>
+            <div>
+                <div class="flex">
+                    <p-button 
+                        icon="pi pi-pencil" 
+                        styleClass="p-button-warning mr-2"
+                        (click)="handleActualizarEvent(propietario)"
+                        >
+                    </p-button>
+                
+                    <p-confirmPopup></p-confirmPopup>
+                    <p-button 
+                        icon="pi pi-trash" 
+                        styleClass="p-button-danger"
+                        (click)="handleEliminarPropietario($event, propietario)"
+                    >
+                    </p-button>
+                </div>
+            </div>
+        </div>
+
+        <app-detalle-propietario [propietario]="propietario"/>
+
+
+        <div class="card" *ngIf="creacionCuentaActiva">
+            <h4>{{ cuentaBancaria ? 'Actualizar cuenta' : 'Registro cuenta'}}</h4>
+            <app-formulario-cuenta-bancaria 
+                [rut_propietario]="propietario.rut_prop"
+                [cuentaBancaria]="cuentaBancaria"
+                (submitEvent)="guardarCuentaBancaria($event)"
+                (cancelEvent)="cancelarCreacionCuentaBancaria()"
+            />    
+        </div>
+
+        <app-listado-cuenta-bancaria 
+            (registroEvent)="activarCreacionCuentaBancaria()"
+            (actualizarEvent)="actualizarCuentaBancaria($event)"
+            (eliminarEvent)="eliminarCuentaBancaria($event)"
         />
+        
     </div>
 
     <div class="card">
@@ -15,25 +51,6 @@
             [propiedades]="propiedades"
             [hidePropietario]="true"
             (crearActionEvent)="crearPropiedad(propietario)"
-        />
-    </div>
-
-    <div class="card" *ngIf="creacionCuentaActiva">
-        <h4>{{ cuentaBancaria ? 'Actualizar cuenta' : 'Registro cuenta'}}</h4>
-        <app-formulario-cuenta-bancaria 
-            [rut_propietario]="propietario.rut_prop"
-            [cuentaBancaria]="cuentaBancaria"
-            (submitEvent)="guardarCuentaBancaria($event)"
-            (cancelEvent)="cancelarCreacionCuentaBancaria()"
-        />
-    </div>
-
-    <div class="card">
-        <h4>Cuentas Bancarias</h4>
-        <app-listado-cuenta-bancaria 
-            (registroEvent)="activarCreacionCuentaBancaria()"
-            (actualizarEvent)="actualizarCuentaBancaria($event)"
-            (eliminarEvent)="eliminarCuentaBancaria($event)"
         />
     </div>
 

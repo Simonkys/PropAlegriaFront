@@ -24,9 +24,12 @@ export class FormularioCuentaBancariaComponent implements OnInit {
   @Output() submitEvent = new EventEmitter<boolean>()
   @Output() cancelEvent = new EventEmitter()
 
+  
+
   fb = inject(FormBuilder)
   bancoService = inject(BancoService)
   cuentasBancariasService = inject(CuentaBancariaService)
+
 
   tipoCuentasBanco$ = this.bancoService.getTipoCuentasBanco()
   bancos$ = this.bancoService.getBancos()

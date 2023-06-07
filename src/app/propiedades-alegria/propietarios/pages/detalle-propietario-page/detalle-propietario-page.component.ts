@@ -13,17 +13,23 @@ import { PropiedadesService } from '../../../propiedades/propiedades.service';
 import { Propiedad } from '../../../propiedades/propiedad.model';
 import { ListadoPropiedadComponent } from 'src/app/propiedades-alegria/propiedades/components/listado-propiedad/listado-propiedad.component';
 import { DetallePropietarioComponent } from '../../components/detalle-propietario/detalle-propietario.component';
+import { ConfirmationService } from 'primeng/api';
+import { ButtonModule } from 'primeng/button';
+import { ConfirmPopupModule } from 'primeng/confirmpopup';
 
 
 @Component({
   selector: 'app-detalle-propietario-page',
   standalone: true,
+  providers: [ConfirmationService],
   imports: [
     CommonModule, 
     FormularioCuentaBancariaComponent, 
     ListadoCuentaBancariaComponent, 
     ListadoPropiedadComponent,
-    DetallePropietarioComponent
+    DetallePropietarioComponent,
+    ButtonModule, 
+    ConfirmPopupModule
   ],
   templateUrl: './detalle-propietario-page.component.html',
   styleUrls: ['./detalle-propietario-page.component.scss']
@@ -37,7 +43,8 @@ export class DetallePropietarioPageComponent implements OnInit {
   route = inject(ActivatedRoute);
   location = inject(Location)
   router = inject(Router);
-  
+
+  confimService = inject(ConfirmationService);
 
   propietario?: Propietario;
   propiedades: Propiedad[] = [];
@@ -96,9 +103,17 @@ export class DetallePropietarioPageComponent implements OnInit {
     this.router.navigate(['propietarios', propietario.id, 'actualizar'])
   }
 
-  handleEliminarEvent(propietario: Propietario){
-    this.propietarioService.eliminarPropietario(propietario)
-      .subscribe(() => this.location.back())
+
+  handleEliminarPropietario(event: Event, propietario: Propietario){
+    this.confimService.confirm({
+      target: event.target || new EventTarget(),
+      message: `¿Estas segur@ de eliminar el propietario?`,
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.propietarioService.eliminarPropietario(propietario)
+          .subscribe(() => this.location.back())
+      },
+    });
   }
 
 }
