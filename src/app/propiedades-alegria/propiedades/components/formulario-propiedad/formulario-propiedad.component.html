@@ -1,4 +1,12 @@
 <form [formGroup]="form">
+    <div class="title">
+        <div>
+            <h4>{{propiedad ? 'Editar propiedad' : 'Registrar propiedad'}}</h4>
+        </div>
+        <div>
+            <h4>Código: {{codigoPropiedad}}</h4>
+        </div>
+    </div>
 
     <div class="grid mb-3">
 
@@ -33,24 +41,6 @@
     <div class="grid mb-3">
         <div class="col-6">
             <span class="p-float-label">
-                <input
-                    pKeyFilter="int"
-                    pInputText
-                    formControlName="cod"
-                    placeholder="123"
-                    [style]="{ width: '100%' }"
-                />
-                <label>Código</label>
-            </span>
-            <small
-                >Solo números son permitidos,
-                <strong>Ej: 123</strong>
-            </small>
-        </div>
-
-        <div class="col-6">
-            <span class="p-float-label">
-
                 <input 
                     type="text" 
                     pInputText 

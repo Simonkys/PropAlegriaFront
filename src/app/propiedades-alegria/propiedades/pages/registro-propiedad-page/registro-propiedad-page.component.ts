@@ -19,10 +19,16 @@ export class RegistroPropiedadPageComponent implements OnInit {
   location = inject(Location);
 
   propietarioId?: number;
+  codigoPropiedad? : number;
 
   ngOnInit() {
     const state: any = this.location.getState();
     this.propietarioId = state['propietarioId'];
+    this.codigoPropiedad = Number(state['cod'])
+  
+    if(!this.codigoPropiedad) {
+      this.location.back();
+    }
   }
 
   handleSubmitEvent(propiedad: Propiedad) {

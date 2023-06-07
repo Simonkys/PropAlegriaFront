@@ -36,6 +36,7 @@ export class FormularioPropiedadComponent implements OnInit {
 
   @Input() propiedad?: Propiedad;
   @Input() propietarioId?: number;
+  @Input() codigoPropiedad!: number;
 
   @Output() submitEvent = new EventEmitter<Propiedad>();
   @Output() cancelEvent = new EventEmitter<void>();
@@ -65,7 +66,7 @@ export class FormularioPropiedadComponent implements OnInit {
     propietario_id: this.fb.control<number | null>(null, [Validators.required]),
     tipopropiedad_id: this.fb.control<number | null>(null, [Validators.required]),
 
-    cod: this.fb.control<number | null>(null, []),
+    cod: this.fb.control<number | null>({value: null, disabled: true}, []),
 
     nro_bodega: this.fb.control<number | null>({value: null, disabled: true}, [],),
     nro_estacionamiento: this.fb.control<number | null>({value: null, disabled: true}, []),
@@ -115,6 +116,8 @@ export class FormularioPropiedadComponent implements OnInit {
         valor_gasto_comun: this.propiedad.valor_gasto_comun,
       })
       this.form.controls['propietario_id'].disable();
+    } else {
+      this.form.patchValue({cod: this.codigoPropiedad})
     }
 
     if(this.propietarioId) {

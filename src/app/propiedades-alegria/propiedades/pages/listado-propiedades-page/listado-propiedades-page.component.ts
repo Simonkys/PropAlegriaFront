@@ -1,13 +1,13 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { ListadoPropiedadComponent } from '../../components/listado-propiedad/listado-propiedad.component';
 import { PropiedadesService } from 'src/app/propiedades-alegria/propiedades/propiedades.service';
+import { ListadoPropiedadesCodigoComponent } from '../../components/listado-propiedades-codigo/listado-propiedades-codigo.component';
 
 @Component({
     selector: 'app-listado-propiedades-page',
     standalone: true,
-    imports: [ CommonModule, ListadoPropiedadComponent],
+    imports: [ CommonModule, ListadoPropiedadesCodigoComponent],
     templateUrl: "./listado-propiedades-page.component.html",
     styleUrls: ['./listado-propiedades-page.component.scss']
 })
@@ -15,9 +15,7 @@ export class ListadoPropiedadesPageComponent {
     propiedadesService = inject(PropiedadesService);
     router = inject(Router);
 
-    propiedades$ = this.propiedadesService.getPropiedades();
+    propiedades$ = this.propiedadesService.getPropiedadesConCodigos();
 
-    registrarPropiedad() {
-        this.router.navigate(['propiedades', 'registro'])
-    }
+
 }

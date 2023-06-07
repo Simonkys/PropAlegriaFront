@@ -1,0 +1,75 @@
+<p-table 
+    #dt2 [value]="propiedadesCod" 
+    [tableStyle]="{ 'min-width': '50rem' }" 
+    [paginator]="true" 
+    [rows]="25"
+    [globalFilterFields]="filterFields"
+>
+    <ng-template pTemplate="caption">
+        <div class="caption-table">
+            <div class="caption-filter">
+                <span class="p-input-icon-left ml-auto">
+                    <i class="pi pi-search"></i>
+                    <input 
+                        pInputText type="text" 
+                        (input)="dt2.filterGlobal($any($event.target).value, 'contains')"
+                        placeholder="Código" />
+                </span>
+                <p-button  
+                    label="Clear"
+                    styleClass="p-button-outlined"
+                    icon="pi pi-filter-slash"
+                    (click)="clear(dt2)">
+                </p-button>
+            </div>
+        </div>
+    </ng-template>
+
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Cod</th>
+            <th>Comuna</th>
+            <th>Dirección</th>
+            <th>Propietario</th>
+            <th>Acciones</th>
+        </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-propiedadCod>
+        <tr *ngIf="propiedadCod.propiedad as propiedad; else CodigoTemplate">
+            <td>{{ propiedadCod.cod }}</td>
+            <td>{{ propiedad.comuna }}</td>
+            <td> {{propiedad.direccion }}</td>
+            <td >
+                <a class="underline" [routerLink]="['/propietarios', propiedad.propietario_id,'detalle']">
+                    {{propiedad.propietario}}
+                </a>
+            </td>
+            <td>
+                <div class="flex">
+                    <button pButton pRipple icon="pi pi-search"
+                        class="p-button-rounded p-button-primary mr-2"
+                        [routerLink]="['/propiedades', propiedad.propiedad_id, 'detalle']">
+                    </button>
+                </div>
+            </td>
+        </tr>
+        <ng-template #CodigoTemplate>
+            <tr>
+                <td>{{propiedadCod.cod}}</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>
+                    <div class="flex">
+                        <button pButton pRipple icon="pi pi-search"
+                            class="p-button-rounded p-button-primary mr-2"
+                            (click)="registrarPropiedad(propiedadCod.cod)"
+                        >Registrar
+                        </button>
+                    </div>
+                </td>
+            </tr>
+        </ng-template>
+    </ng-template>
+</p-table>

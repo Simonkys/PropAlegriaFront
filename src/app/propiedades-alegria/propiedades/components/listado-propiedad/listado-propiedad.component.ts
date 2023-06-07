@@ -25,8 +25,8 @@ export class ListadoPropiedadComponent {
   @Input() hidePropietario: boolean = false;
 
   @Output() crearActionEvent = new EventEmitter<void>();
-  @Output() editarActionEvent = new EventEmitter<number>();
   @Output() detalleActionEvent = new EventEmitter<number>();
+  @Output() editarActionEvent = new EventEmitter<number>();
   @Output() eliminarActionEvent = new EventEmitter<number>();
 
   filterFields: string[] = ['cod']

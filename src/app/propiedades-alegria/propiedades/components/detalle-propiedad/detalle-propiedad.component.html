@@ -63,21 +63,20 @@
         <div class="col-4">
             <div class="text-sm font-bold text-600 mb-1">Valor base de arriendo</div>
             
-            <div *ngIf="!propiedad.es_valor_uf;else ValorUF" class="font-medium">{{propiedad.valor_arriendo_base | currency}}</div>
+            <div *ngIf="!propiedad.es_valor_uf;else ValorUF" class="font-medium">${{propiedad.valor_arriendo_base | number}}</div>
             <ng-template #ValorUF>
-                <div class="font-medium">UF {{propiedad.valor_arriendo_base}}</div>
+                <div class="font-medium">UF {{propiedad.valor_arriendo_base | number}}</div>
             </ng-template>
         </div>
 
-        <div class="col-8 mb-3">
-            <div class="text-sm font-bold text-600 mb-1">Valor gasto común <span class="bold text-900">{{propiedad.incluye_gc ? '(Se incluye en el arriendo)': '(No corresponde)'}}</span></div>
-            <div class="font-medium">{{propiedad.valor_gasto_comun | currency}}</div>
+        <div class="col-8" *ngIf="propiedad.incluye_gc">
+            <div class="text-sm font-bold text-600 mb-1">Valor gasto común </div>
+            <div class="font-medium">${{propiedad.valor_gasto_comun | number}}</div>
         </div>
 
+        <div class="mb-3"></div>
 
-        
-
-        <div class="col-4" *ngIf="!ocultarAcciones">
+        <div class="col-12" *ngIf="!ocultarAcciones">
             <div class="flex">
                 <p-button icon="pi pi-pencil" styleClass="p-button-warning mr-2" (click)="actualizar()" *ngIf="mostrarActualizar">
                 </p-button>

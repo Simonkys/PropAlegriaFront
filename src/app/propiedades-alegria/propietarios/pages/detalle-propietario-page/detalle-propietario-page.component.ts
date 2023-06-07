@@ -89,7 +89,7 @@ export class DetallePropietarioPageComponent implements OnInit {
   }
 
   crearPropiedad(propietario: Propietario) {
-    this.router.navigate(['propiedades', 'registro'], {state:  {propietarioId: propietario.id}});
+    this.router.navigate(['propiedades', 'listado']);
   }
 
   handleActualizarEvent(propietario: Propietario) {

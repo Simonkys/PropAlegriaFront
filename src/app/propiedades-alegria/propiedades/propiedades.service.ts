@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable, inject } from "@angular/core";
 import { environment } from "src/environments/environment";
-import { Propiedad, PropiedadForm } from "./propiedad.model";
+import { Propiedad, PropiedadConCodigos, PropiedadForm } from "./propiedad.model";
 import { MensajeService } from "../core/services/message.service";
 import { catchError, of, tap, throwError } from "rxjs";
 
@@ -16,6 +16,9 @@ export class PropiedadesService {
 
     private propiedades: Propiedad[] = []
     propiedadesLoaded = false
+
+    private propiedadesConCodigos: PropiedadConCodigos[] = []
+    propiedadesConCodigosLoaded = false
 
     getPropiedades() {
         if(this.propiedadesLoaded) {
@@ -79,8 +82,21 @@ export class PropiedadesService {
             })
 
             this.propiedades = this.propiedades.filter(prop => prop.id !== propiedad.id)
+            this.propiedadesConCodigos = this.propiedadesConCodigos.filter(prop => prop.propiedad?.propiedad_id !== propiedad.id)
         }),
        )
+    }
+
+    getPropiedadesConCodigos() {
+        if (this.propiedadesConCodigosLoaded)  {
+            return of(this.propiedadesConCodigos)
+        }
+        return this.http.get<PropiedadConCodigos[]>(`${this.apiUrl}/con_codigo/`).pipe(
+            tap((propiedades) => {
+                this.propiedadesConCodigos = propiedades;
+                this.propiedadesConCodigosLoaded = true;
+            })
+        )
     }
 
 

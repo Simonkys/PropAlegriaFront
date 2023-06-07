@@ -1,8 +1,8 @@
 <div class="card">
-    <h4>Actualizar propiedad</h4>
     <ng-container *ngIf="propiedad$ | async as propiedad">
         <app-formulario-propiedad
             [propiedad]="propiedad"
+            [codigoPropiedad]="propiedad.cod!"
             (cancelEvent)="handleCancelEvent()"
             (submitEvent)="handleSubmitEvent($event)"
         />

@@ -3,3 +3,10 @@
     justify-content: left; /* Centrado horizontal */
     align-items: center; /* Centrado vertical */
   }
+
+  .title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }

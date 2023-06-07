@@ -71,3 +71,18 @@ export interface PropiedadForm {
     incluye_gc: boolean;
     valor_gasto_comun: number;
 }
+
+
+
+export interface PropiedadSimpleTabla {
+    direccion: string;
+    propietario: string;
+    propietario_id: number;
+    comuna: string;
+    propiedad_id: number;
+}
+
+export interface PropiedadConCodigos {
+    cod: number;
+    propiedad: PropiedadSimpleTabla | null;
+}
