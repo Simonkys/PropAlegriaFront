@@ -6,7 +6,6 @@
 </p-button>
 <ng-container *ngIf="propiedad$ | async as propiedad">
     <div class="card" >
-        <h4>Detalle Propiedad</h4>
         <app-detalle-propiedad 
             [propiedad]="propiedad"
             (actualizarEvent)="handleActulizarEvent(propiedad)"
