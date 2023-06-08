@@ -13,7 +13,8 @@
                     <input
                         pInputText type="text"
                         (input)="dt2.filterGlobal($any($event.target).value, 'equals')"
-                        placeholder="Código" />
+                        placeholder="Código"
+                    />
                 </span>
                 <p-button
                     label="Clear"
@@ -27,12 +28,12 @@
 
     <ng-template pTemplate="header">
         <tr>
-            <th>Cod</th>
-            <th>Tipo</th>
-            <th>Comuna</th>
-            <th>Dirección</th>
-            <th>Propietario</th>
-            <th>Acciones</th>
+            <th><b>Cod</b></th>
+            <th><b>Tipo</b></th>
+            <th><b>Comuna</b></th>
+            <th><b>Dirección</b></th>
+            <th><b>Propietario</b></th>
+            <th><b>Acciones</b></th>
         </tr>
     </ng-template>
 
@@ -51,7 +52,6 @@
             <td>{{ propiedad.direccion }}</td>
             <td>
                 <button pButton pRipple
-                    id="propietario-button"
                     icon="pi pi-user"
                     class="p-button-text mr-2"
                     style="color:#006C86; width: 200px;"
