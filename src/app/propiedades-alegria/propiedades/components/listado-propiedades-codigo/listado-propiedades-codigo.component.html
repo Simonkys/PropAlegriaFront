@@ -19,6 +19,7 @@
                     label="Clear"
                     styleClass="p-button-outlined"
                     icon="pi pi-filter-slash"
+                    style="color:#006C86"
                     (click)="clear(dt2)">
                 </p-button>
             </div>
@@ -48,10 +49,17 @@
                 </ng-container>
               </td>
             <td>{{ propiedad.comuna }}</td>
-            <td> {{propiedad.direccion}} </td>
-            <td >
-                <a class="underline" [routerLink]="['/propietarios', propiedad.propietario_id,'detalle']">
-                    {{propiedad.propietario}}
+            <td>{{ propiedad.direccion }}</td>
+            <td>
+                <button pButton pRipple
+                    icon="pi pi-user"
+                    class="p-button-text mr-2"
+                    style="color:#006C86; width: 200px;"
+                    label="{{ propiedad.propietario }}"
+                    [routerLink]="['/propietarios', propiedad.propietario_id,'detalle']">
+                </button>
+                <a class="underline" >
+                    
                 </a>
             </td>
             <td>
