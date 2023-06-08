@@ -43,6 +43,7 @@ export class FormularioArriendoComponent implements OnInit {
 
   @Input() arriendo?: Arriendo
   @Input() arrendatario?: Arrendatario
+  @Input() propiedad?: Propiedad
 
   @Output() cancelEvent = new EventEmitter()
   @Output() submitEvent = new EventEmitter<ArriendoForm>()
@@ -91,6 +92,10 @@ export class FormularioArriendoComponent implements OnInit {
 
       })
     } else {
+      if(this.propiedad) {
+        this.form.patchValue({propiedad_id: this.propiedad.id})
+        this.propiedadSeleccionada = this.propiedad
+      }
       this.form.controls['fecha_entrega'].disable()
       this.form.controls['fecha_reajuste'].disable()
       this.setFechaTermino(new Date())

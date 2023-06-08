@@ -2,7 +2,9 @@
 
     <div class="grid mb-3">
         <div class="col-12">
-            <app-selector-propiedades (selectedEvent)="handlePropiedadSelectedEvent($event)" />
+            <ng-container *ngIf="!propiedad">
+                <app-selector-propiedades (selectedEvent)="handlePropiedadSelectedEvent($event)" />
+            </ng-container>
         </div>
     </div>
 

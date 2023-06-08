@@ -4,6 +4,7 @@ import { FormularioArriendoComponent } from '../../components/formulario-arriend
 import { ArriendoForm } from '../../arriendo.model';
 import { ArriendoService } from '../../arriendo.service';
 import { Arrendatario } from 'src/app/propiedades-alegria/arrendatarios/arrendatario.model';
+import { Propiedad } from 'src/app/propiedades-alegria/propiedades/propiedad.model';
 
 
 @Component({
@@ -20,12 +21,15 @@ export class RegistroArriendoPageComponent implements OnInit {
   arriendoService = inject(ArriendoService)
 
 
-  arrendatario?: Arrendatario;
+  arrendatario?: Arrendatario
+  propiedad?: Propiedad
 
 
   ngOnInit(): void {
     const state: any = this.location.getState();
+
     this.arrendatario = state['arrendatario'];
+    this.propiedad = state['propiedad']
   }
 
 
