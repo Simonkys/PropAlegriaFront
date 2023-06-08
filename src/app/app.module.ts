@@ -13,6 +13,7 @@ import { TokenInterceptor } from './propiedades-alegria/core/interceptors/token.
 import { ProductService } from './propiedades-alegria/dashboard/service/product.service';
 import { AuthService } from './propiedades-alegria/core/services/auth.service';
 
+
 @NgModule({
     declarations: [AppComponent],
     imports: [AppRoutingModule, AppLayoutModule, ButtonModule, ToastModule],
