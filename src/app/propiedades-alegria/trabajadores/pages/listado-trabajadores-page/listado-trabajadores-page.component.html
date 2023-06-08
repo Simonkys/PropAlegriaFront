@@ -56,13 +56,15 @@
                 <td class="flex">
                     <div>
                         <button pButton pRipple icon="pi pi-search" class="p-button-rounded p-button-primary mr-2"
-                            (click)="detalleTrabajador(rowData)"></button>
+                            label="Ver" style="background-color: #006C86;" (click)="detalleTrabajador(rowData)"></button>
+
                         <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-warning mr-2"
-                            (click)="editarTrabajador(rowData)"></button>
+                            label="Editar" (click)="editarTrabajador(rowData)"></button>
 
                         <p-confirmPopup></p-confirmPopup>
+
                         <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger"
-                            (click)="eliminarTrabajador($event, rowData)"></button>
+                            label="Eliminar" (click)="eliminarTrabajador($event, rowData)"></button>
                     </div>
                 </td>
             </tr>
