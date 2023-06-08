@@ -6,6 +6,7 @@ import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { ConfirmationService } from 'primeng/api';
 
 import { ValoresGlobales } from '../../valores-globales.model';
+import { ValoresGlobalesService } from '../../valores-globales.service'
 
 @Component({
   selector: 'app-detalle-valor-global',
@@ -17,26 +18,8 @@ import { ValoresGlobales } from '../../valores-globales.model';
 })
 export class DetalleValorGlobalComponent {
 
-  @Input() valoresGlobales?: ValoresGlobales
+  valoresGlobalesService = inject(ValoresGlobalesService);
 
-  @Output() eliminarEvent = new EventEmitter()
-  @Output() actualizarEvent = new EventEmitter()
-
-  confimService = inject(ConfirmationService);
-
-  eliminar(event: Event){
-    this.confimService.confirm({
-      target: event.target || new EventTarget(),
-      message: `¿Estas segur@ de eliminar este Valor Global?`,
-      icon: 'pi pi-exclamation-triangle',
-      accept: () => {
-        this.eliminarEvent.emit()
-      },
-    });
-  }
-
-  actualizar() {
-    this.actualizarEvent.emit()
-  }
+  valoresGlobales = this.valoresGlobalesService.getValoresGlobales()
 
 }

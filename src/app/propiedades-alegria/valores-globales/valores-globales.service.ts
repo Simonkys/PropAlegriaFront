@@ -4,7 +4,6 @@ import { environment } from 'src/environments/environment';
 import {
     BehaviorSubject,
     catchError,
-    switchMap,
     tap,
     throwError,
 } from 'rxjs';
@@ -14,6 +13,7 @@ import {
     ValoresGlobales,
     ValoresGlobalesForm,
   } from './valores-globales.model';
+import { off } from 'process';
 
 @Injectable({
 providedIn: 'root'
@@ -34,10 +34,9 @@ export class ValoresGlobalesService {
         return this.http
             .get<ValoresGlobales[]>(`${environment.apiUrl}/api/valores_globales/`)
             .pipe(
-                switchMap((data) => {
+                tap((data) => {
                     this.valoresGlobalesSubject.next(data);
                     this.valoresGlobalesLoaded = true;
-                    return this.valoresGlobalesSubject;
                 })
             );
     }

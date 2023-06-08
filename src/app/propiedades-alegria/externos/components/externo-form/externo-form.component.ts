@@ -41,7 +41,7 @@ export class ExternoFormComponent implements OnInit {
   @Output() cancelEvent = new EventEmitter()
   
   fb = inject(FormBuilder);
-  trabajadorService = inject(ExternoService);
+  externoService = inject(ExternoService);
 
   form = this.fb.group({
     nombre: this.fb.nonNullable.control<string>('', [Validators.required, Validators.maxLength(50)]),
