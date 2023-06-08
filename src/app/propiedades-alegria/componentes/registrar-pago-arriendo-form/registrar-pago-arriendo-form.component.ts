@@ -42,7 +42,7 @@ export class RegistrarPagoArriendoFormComponent implements OnInit{
     if(this.registroPago) {
       this.form.patchValue({
         monto_pagado: this.registroPago.monto_pagado,
-        fecha_pagada: this.registroPago.fecha_pagada
+        fecha_pagada: this.registroPago.fecha_pagada ? new Date( this.registroPago.fecha_pagada) : null
       })
     } else {
       this.location.back()
