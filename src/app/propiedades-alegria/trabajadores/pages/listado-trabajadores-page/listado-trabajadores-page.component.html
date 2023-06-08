@@ -5,7 +5,7 @@
         <ng-template pTemplate="caption">
             <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
                 
-                <!-- Botón Registrar -->
+                <!-- Botón REGISTRAR -->
                 <button pButton pRipple
                     icon="pi pi-plus"
                     class="p-button mr-2"
@@ -16,14 +16,20 @@
                 
                     <span class="flex mt-2 md:mt-0 p-input-icon-left align-items-center justify-content-center">
                     <i class="pi pi-search"></i>
-                    <input pInputText type="text" placeholder="Juan, Carla ..." class="w-full sm:w-auto mr-2" (input)="
+                    <input pInputText type="text" placeholder="Filtre por nombre aquí" class="w-full sm:w-auto mr-2" (input)="
                             dt1.filterGlobal(
                                 $any($event.target).value,
                                 'contains'
                             )
                         " />
-                    <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash"
-                        (click)="clear(dt1)"></button>
+                    <!-- Botón LIMPIAR -->
+                    <button pButton pRipple
+                        icon="pi pi-filter-slash"
+                        class="p-button-outlined mr-2"
+                        style="color: #006C86;"
+                        label="Limpiar"
+                        (click)="clear(dt1)">
+                    </button>
                 </span>
             </div>
         </ng-template>
