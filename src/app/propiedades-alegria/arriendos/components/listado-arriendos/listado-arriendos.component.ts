@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 
-import { Arriendo, TablaArriendo } from '../../arriendo.model';
+import { TablaArriendo } from '../../arriendo.model';
 import { TagModule } from 'primeng/tag';
 
 
