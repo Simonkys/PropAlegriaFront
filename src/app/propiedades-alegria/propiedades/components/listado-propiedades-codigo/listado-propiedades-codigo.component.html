@@ -13,15 +13,17 @@
                     <input
                         pInputText type="text"
                         (input)="dt2.filterGlobal($any($event.target).value, 'equals')"
-                        placeholder="Código"
+                        placeholder="Filtre por código aquí"
                     />
                 </span>
-                <p-button
-                    label="Clear"
-                    styleClass="p-button-outlined"
+                <!-- Botón Limpiar -->
+                <button pButton pRipple
                     icon="pi pi-filter-slash"
+                    class="p-button-outlined mr-2"
+                    style="color: #006C86;"
+                    label="Limpiar"
                     (click)="clear(dt2)">
-                </p-button>
+                </button>
             </div>
         </div>
     </ng-template>
