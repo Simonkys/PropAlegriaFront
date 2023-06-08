@@ -80,4 +80,8 @@ export class DetallePropiedadPageComponent implements OnDestroy, OnInit {
     this.router.navigate(['arriendos', arriendo.arriendo_id, 'detalle'])
   }
 
+  registrarArriendo(propiedad: Propiedad) {
+    this.router.navigate(['arriendos', 'registro'], {state: {propiedad}})
+  }
+
 }

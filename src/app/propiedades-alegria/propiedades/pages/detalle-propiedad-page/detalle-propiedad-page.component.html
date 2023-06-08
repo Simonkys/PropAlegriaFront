@@ -8,19 +8,22 @@
     <div class="card" >
         <app-detalle-propiedad [propiedad]="propiedad"/>
         
-        <div class="col-12" >
-            <div class="flex">
-                <p-button 
-                    icon="pi pi-pencil" 
-                    styleClass="p-button-warning mr-2" 
-                    (click)="actualizar(propiedad)">
-                </p-button>
-                <p-confirmPopup></p-confirmPopup>
-                <p-button 
-                    icon="pi pi-trash" 
-                    styleClass="p-button-danger" 
-                    (click)="eliminar($event, propiedad)">
-                </p-button>
+        <div class="grid">
+
+            <div class="col-12" >
+                <div class="flex">
+                    <p-button 
+                        icon="pi pi-pencil" 
+                        styleClass="p-button-warning mr-2" 
+                        (click)="actualizar(propiedad)">
+                    </p-button>
+                    <p-confirmPopup></p-confirmPopup>
+                    <p-button 
+                        icon="pi pi-trash" 
+                        styleClass="p-button-danger" 
+                        (click)="eliminar($event, propiedad)">
+                    </p-button>
+                </div>
             </div>
         </div>
     </div>
@@ -28,6 +31,7 @@
     <div class="card">
         <div *ngIf="arriendos.length === 0; else Arriendo">
             <p>Esta propiedad no tiene un arriendo en curso</p>
+            <button (click)="registrarArriendo(propiedad)">Registrar arriendo</button>
         </div>
         <ng-template #Arriendo>
             <h4>Arriendo</h4>
