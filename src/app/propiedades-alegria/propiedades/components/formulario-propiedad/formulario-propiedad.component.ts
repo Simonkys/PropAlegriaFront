@@ -49,9 +49,6 @@ export class FormularioPropiedadComponent implements OnInit {
 
   fb = inject(FormBuilder)
 
-  esValorUF: boolean = false
-  habilitarCampoValorGastoComun: boolean = false
-
   TipoPropiedadEnum = TipoPropiedadEnum
 
   tipoPropiedades$ = this.tipoPropiedadesService.getTipoPropiedades();
@@ -261,27 +258,6 @@ export class FormularioPropiedadComponent implements OnInit {
     this.form.get('nro_estacionamiento')?.clearValidators()
     this.form.get('nro_estacionamiento')?.updateValueAndValidity()
     
-  }
-
-  handleEsValorUFChanges() {
-    this.form.get('es_valor_uf')?.valueChanges.subscribe(value => {
-      if(value) {
-        this.esValorUF = true
-      } else {
-        this.esValorUF = false
-      }
-    })
-  }
-
-  handleIncluyeGastoComunChanges() {
-    this.form.get('incluye_gc')?.valueChanges.subscribe(value => {
-      if(value) {
-        this.habilitarCampoValorGastoComun = true
-      } else {
-        this.habilitarCampoValorGastoComun = false
-      }
-    })
-  }
-
+  } 
 
 }

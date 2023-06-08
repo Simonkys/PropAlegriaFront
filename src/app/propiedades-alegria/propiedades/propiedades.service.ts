@@ -3,7 +3,7 @@ import { Injectable, inject } from "@angular/core";
 import { environment } from "src/environments/environment";
 import { Propiedad, PropiedadConCodigos, PropiedadForm } from "./propiedad.model";
 import { MensajeService } from "../core/services/message.service";
-import { catchError, of, tap, throwError } from "rxjs";
+import { BehaviorSubject, catchError, of, tap, throwError } from "rxjs";
 
 @Injectable(
     { providedIn: 'root'}
@@ -14,19 +14,19 @@ export class PropiedadesService {
     private messageService = inject(MensajeService);
     private apiUrl = `${environment.apiUrl}/api/propiedad`
 
-    private propiedades: Propiedad[] = []
+    private propiedades = new BehaviorSubject<Propiedad[]>([])
     propiedadesLoaded = false
 
-    private propiedadesConCodigos: PropiedadConCodigos[] = []
+    private propiedadesConCodigos = new BehaviorSubject<PropiedadConCodigos[]>([])
     propiedadesConCodigosLoaded = false
 
     getPropiedades() {
         if(this.propiedadesLoaded) {
-            return of(this.propiedades)
+            return this.propiedades.asObservable();
         } 
         return this.http.get<Propiedad[]>(`${this.apiUrl}/`).pipe(
             tap((propiedades) => {
-                this.propiedades = propiedades
+                this.propiedades.next(propiedades)
                 this.propiedadesLoaded = true
             })
         )
@@ -48,7 +48,7 @@ export class PropiedadesService {
                     details: ['Propiedad registrada exitosamente!'],
                     role: 'success'
                 })
-                this.propiedades = [nuevaPropiedad, ...this.propiedades]
+                this.propiedades.next([nuevaPropiedad, ...this.propiedades.value])
             }),
             catchError((error: HttpErrorResponse) => this.handleError(error))
         )
@@ -61,13 +61,14 @@ export class PropiedadesService {
                     details: ['Propiedad actualizada exitosamente!'],
                     role: 'success'
                 })
-                this.propiedades = this.propiedades.map(propiedad => {
+                const propiedadesActualizadas = this.propiedades.value.map(propiedad => {
                     if(propiedadActualizada.id === propiedad.id) {
                         return propiedadActualizada
                     } else {
                         return propiedad
                     }
                 })
+                this.propiedades.next(propiedadesActualizadas)
             }),
             catchError((error: HttpErrorResponse) => this.handleError(error))
         )
@@ -81,19 +82,22 @@ export class PropiedadesService {
                 role: 'info'
             })
 
-            this.propiedades = this.propiedades.filter(prop => prop.id !== propiedad.id)
-            this.propiedadesConCodigos = this.propiedadesConCodigos.filter(prop => prop.propiedad?.propiedad_id !== propiedad.id)
+            const propiedadesFiltradas = this.propiedades.value.filter(prop => prop.id !== propiedad.id)
+            const propiedadesConCodigosFiltradas = this.propiedadesConCodigos.value.filter(prop => prop.propiedad?.propiedad_id !== propiedad.id)
+
+            this.propiedades.next(propiedadesFiltradas)
+            this.propiedadesConCodigos.next(propiedadesConCodigosFiltradas)
         }),
        )
     }
 
     getPropiedadesConCodigos() {
         if (this.propiedadesConCodigosLoaded)  {
-            return of(this.propiedadesConCodigos)
+            return this.propiedadesConCodigos.asObservable()
         }
         return this.http.get<PropiedadConCodigos[]>(`${this.apiUrl}/con_codigo/`).pipe(
             tap((propiedades) => {
-                this.propiedadesConCodigos = propiedades;
+                this.propiedadesConCodigos.next(propiedades)
                 this.propiedadesConCodigosLoaded = true;
             })
         )
