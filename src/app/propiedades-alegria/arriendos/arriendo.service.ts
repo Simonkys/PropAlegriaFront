@@ -56,7 +56,7 @@ export class ArriendoService {
 
     private handleError(error: HttpErrorResponse) {
         const msg = JSON.stringify(error.error);
-        if (error.status == 400) {
+        if (error.status == 400 || error.status == 404) {
             const errores = Object.entries(error.error).map((msg) =>`${msg[0].toUpperCase()}: ${msg[1]}`);
             this.messageService.addMessage({
                 details: errores,
