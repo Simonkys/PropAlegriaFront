@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { RouterOutlet } from "@angular/router";
 
 @Component({
   selector: 'app-valores-globales',
   standalone: true,
-  imports: [CommonModule],
-  templateUrl: './valores-globales.component.html',
-  styleUrls: ['./valores-globales.component.scss']
+  imports: [RouterOutlet],
+  template: ` 
+  <router-outlet></router-outlet>
+`
 })
 export class ValoresGlobalesComponent {
 
