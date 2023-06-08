@@ -8,6 +8,13 @@
             (eliminarEvent)="handleEliminarEvent(arrendatario)"
         />
     </div>
+
+    <div class="card">
+        <input type="text" placeholder="Fecha de pago">
+        <input type="text" placeholder="Monto de Pago">
+        <button>Enviar</button>
+    </div>
+    
     
 
     <div class="card"  *ngIf="creacionCuentaActiva">
@@ -28,5 +35,7 @@
             (eliminarEvent)="eliminarCuentaBancaria($event)"
         />
     </div>
+
+    
 
 </ng-container>
