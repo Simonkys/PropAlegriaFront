@@ -1,6 +1,9 @@
 export interface DetalleArriendo {
-    id?: number;
-    fecha_pago: Date;
+    id: number;
     arriendo: number;
-    monto_pago: number | null;
+    fecha_a_pagar: Date;
+    monto_a_pagar: number | null;
+    fecha_pagada: Date | null;
+    monto_pagado: number | null;
+    valor_multa: number;
 }

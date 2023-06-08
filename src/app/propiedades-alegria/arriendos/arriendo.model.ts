@@ -1,3 +1,5 @@
+import { DetalleArriendo } from "../core/models/detalle-arriendo.model";
+
 export interface ArriendoForm{
     id?: number;
 
@@ -115,14 +117,4 @@ export interface Tipopropiedad {
     id:                   number;
     nombre_tipoppdd:      string;
     descripcion_tipoppdd: string;
-}
-
-export interface DetalleArriendo {
-    id: number;
-    arriendo: number;
-    fecha_a_pagar: Date;
-    monto_a_pagar: number | null;
-    fecha_pagada: Date | null;
-    monto_pagado: number | null;
-    valor_multa: number;
 }

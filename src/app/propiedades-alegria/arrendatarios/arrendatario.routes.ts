@@ -4,6 +4,7 @@ import { ListadoArrendatariosPageComponent } from "./pages/listado-arrendatarios
 import { RegistroArrendatariosPageComponent } from "./pages/registro-arrendatarios-page/registro-arrendatarios-page.component";
 import { DetalleArrendatariosPageComponent } from "./pages/detalle-arrendatarios-page/detalle-arrendatarios-page.component";
 import { ActualizarArrendatariosPageComponent } from "./pages/actualizar-arrendatarios-page/actualizar-arrendatarios-page.component";
+import { RegistrarPagoArriendoFormComponent } from "../componentes/registrar-pago-arriendo-form/registrar-pago-arriendo-form.component";
 
 
 export const ARRENDATARIO_ROUTES: Route[] = [
@@ -26,6 +27,10 @@ export const ARRENDATARIO_ROUTES: Route[] = [
             {
                 path: ":id/actualizar",
                 component: ActualizarArrendatariosPageComponent
+            },
+            {
+                path: 'registro-pago',
+                component: RegistrarPagoArriendoFormComponent
             }
         ]
     }

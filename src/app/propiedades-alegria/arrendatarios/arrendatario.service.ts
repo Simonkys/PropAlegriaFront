@@ -1,7 +1,7 @@
 import { Injectable, inject } from "@angular/core";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { environment } from "src/environments/environment";
-import { Arrendatario, ArrendatarioForm } from "./arrendatario.model";
+import { Arrendatario, ArrendatarioArriendo, ArrendatarioForm } from "./arrendatario.model";
 import { catchError, map, tap, throwError } from "rxjs";
 import { MensajeService } from "../core/services/message.service";
 
@@ -14,6 +14,11 @@ export class ArrendatarioService {
     private messageService = inject(MensajeService)
     private apiUrl = `${environment.apiUrl}/api/arrendatario`
 
+
+
+    getArrendatarioArriendo(id: number) {
+        return this.http.get<ArrendatarioArriendo>(`${this.apiUrl}/${id}/detalle/`);
+    }
 
     getArrendatarios() {
         return this.http.get<Arrendatario[]>(`${this.apiUrl}/`);

@@ -1,0 +1,38 @@
+<div class="card">
+    <ng-container *ngIf="registroPago" [formGroup]="form">
+        <h4>Registrar pago arriendo</h4>
+        <div class="grid mb-3">
+            <div class="col-3">
+                <div class="text-sm font-bold text-600 mb-1">Fecha a pagar</div>
+                <div class="font-medium">{{registroPago.fecha_a_pagar}}</div>
+            </div>
+            
+            <div class="col-3">
+                <div class="text-sm font-bold text-600 mb-1">Monto a pagar</div>
+                <div class="font-medium">${{registroPago.monto_a_pagar | number}}</div>
+            </div>
+
+            <div class="col-3">
+                <span class="p-float-label">
+                    <p-calendar dateFormat="dd/mm/yy" formControlName="fecha_pagada" [readonlyInput]="true" [showIcon]="true" [style]="{ width: '100%' }"></p-calendar>
+                    <label>Fecha pagada</label>
+                </span>
+            </div>
+
+            <div class="col-3">
+                <span class="p-float-label">
+                    <p-inputNumber placeholder="$ 199.123 *" formControlName="monto_pagado" prefix="$ "
+                        [style]="{ width: '100%' }" inputId="integeronly">
+                    </p-inputNumber>
+                    <label>Monto pagado</label>
+                </span>
+            </div>
+        </div>
+
+        <div class="flex align-items-end">
+            <p-button styleClass="mr-3" [disabled]="form.invalid" label="Guardar" (click)="registrar()"></p-button>
+            <p-button label="Cancelar" styleClass="p-button-danger" (click)="cancelar()"></p-button>
+        </div>
+
+    </ng-container>
+</div>

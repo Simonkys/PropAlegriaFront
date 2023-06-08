@@ -9,10 +9,16 @@ import { DetalleArriendo } from "../models/detalle-arriendo.model";
 })
 export class DetalleArriendoService {
     private http = inject(HttpClient)
-    private apiUrl = `${environment.apiUrl}/api/detalle_arriendo/`
+    private apiUrl = `${environment.apiUrl}/api/detalle_arriendo`
 
 
     getDetallesArriendo() {
-        return this.http.get<DetalleArriendo[]>(this.apiUrl);
+        return this.http.get<DetalleArriendo[]>(`${this.apiUrl}/`);
     }
+
+    registrarDetalleArriendo(detalleArriendo: DetalleArriendo) {
+        return this.http.put(`${this.apiUrl}/${detalleArriendo.id}/`, detalleArriendo)
+    }
+
+    
 }

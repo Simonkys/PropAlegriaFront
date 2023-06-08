@@ -62,9 +62,11 @@
 
         <div class="col-6">
             <span class="p-float-label">
-                <input type="number" pInputText formControlName="dia_pago" autofocus
-                    [style]="{ width: '100%' }" />
-                <label>Dia de pago</label>
+
+                <input type="text" pInputText formControlName="dia_pago" pKeyFilter="int" [style]="{ width: '100%' }" placeholder="5"/>
+                <label >Día de pago</label>
+                <small>Día del mes a pagar. (1 - 30)</small>
+
             </span>
         </div>
 
@@ -123,15 +125,7 @@
             </span>
         </div>
 
-        <div class="col-6">
-            <span class="p-float-label">
-
-                <input type="text" pInputText formControlName="dia_pago" pKeyFilter="int" [style]="{ width: '100%' }" placeholder="5"/>
-                <label >Día de pago</label>
-                <small>Día del mes a pagar. (1 - 30)</small>
-
-            </span>
-        </div>
+        
     </div>
 
 
