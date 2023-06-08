@@ -1,6 +1,6 @@
 <p-table [value]="arriendos" [tableStyle]="{ 'min-width': '50rem' }">
     <ng-template pTemplate="caption">
-        <!-- Botón Registrar -->
+        <!-- Botón REGISTRAR -->
         <button pButton pRipple
             icon="pi pi-plus"
             class="p-button mr-2"
@@ -11,12 +11,12 @@
     </ng-template>
     <ng-template pTemplate="header">
         <tr>
-            <th><b>Código</b></th>
-            <th><b>Nombre arrendatario</b></th>
-            <th><b>Dirección propiedad</b></th>
-            <th><b>Fecha de pago</b></th>
-            <th><b>Monto arriendo</b></th>
-            <th><b>Acciones</b></th>
+            <th class="font-bold">Código</th>
+            <th class="font-bold">Nombre arrendatario</th>
+            <th class="font-bold">Dirección propiedad</th>
+            <th class="font-bold">Fecha de pago</th>
+            <th class="font-bold">Monto arriendo</th>
+            <th class="font-bold">Acciones</th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-arriendo>
@@ -28,15 +28,17 @@
             <td>${{arriendo.monto_arriendo | number}}</td>
             
             <td>
+                <!-- Botón VER DETALLE -->
                 <div class="flex">
-                    <button
-                        pButton
-                        pRipple
-                        icon="pi pi-search"
-                        class="p-button-rounded p-button-primary mr-2"
-                        (click)="detalle(arriendo)"
-                    ></button>
+                    <button pButton pRipple
+                    icon="pi pi-search"
+                    class="p-button-rounded mr-2"
+                    style="background-color:#006C86; width: 120px;"
+                    label="Ver detalle"
+                    (click)="detalle(arriendo)">
+                </button>
                 </div>
+                
             </td>
         </tr>
     </ng-template>
