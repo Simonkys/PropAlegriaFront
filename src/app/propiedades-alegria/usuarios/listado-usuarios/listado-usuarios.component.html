@@ -1,13 +1,16 @@
 <div class="card">
     <p-toolbar styleClass="mb-4">
         <div class="p-toolbar-group-start">
-            <p-button
-                class="mr-2"
-                label="Nueva cuenta"
+
+            <!-- Botón REGISTRAR -->
+            <button pButton pRipple
                 icon="pi pi-plus"
-                styleClass="p-button-success"
-                (click)="crearNuevaCuenta()"
-            ></p-button>
+                class="p-button mr-2"
+                style="background-color:#F78E00"
+                label="Nueva cuenta"
+                (click)="crearNuevaCuenta()">
+            </button>
+
         </div>
     </p-toolbar>
     <p-table
@@ -17,11 +20,11 @@
     >
         <ng-template pTemplate="header">
             <tr>
-                <th>COD</th>
-                <th>Username</th>
-                <th>Email</th>
-                <th>Permiso</th>
-                <th>Acciones</th>
+                <th class="font-bold">Cod</th>
+                <th class="font-bold">Username</th>
+                <th class="font-bold">Email</th>
+                <th class="font-bold">Permiso</th>
+                <th class="font-bold">Acciones</th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-usuario>
@@ -39,6 +42,7 @@
                             pRipple
                             icon="pi pi-trash"
                             class="p-button-rounded p-button-danger"
+                            label="Eliminar"
                             (click)="eliminarUsuario($event, usuario)"
                         ></button>
                     </div>
