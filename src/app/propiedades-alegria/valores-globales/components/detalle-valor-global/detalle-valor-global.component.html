@@ -1,1 +1,32 @@
-<p>detalle-valor-global works!</p>
+<ng-container *ngIf="valoresGlobales">
+    <div class="grid">
+
+        <div class="col-4">
+            <div class="text-sm font-bold text-600 mb-1">Nombre</div>
+            <div class="font-medium">{{valoresGlobales.nombre}}</div>
+        </div>
+
+        <div class="col-4">
+            <div class="text-sm font-bold text-600 mb-1">Valor</div>
+            <div class="font-medium">{{valoresGlobales.valor}}</div>
+        </div>
+
+        <div class="col-4">
+            <div class="flex">
+                <p-button 
+                    icon="pi pi-pencil" 
+                    styleClass="p-button-warning mr-2"
+                    (click)="actualizar()"
+                >
+                </p-button>
+                <p-confirmPopup></p-confirmPopup>
+                <p-button 
+                    icon="pi pi-trash" 
+                    styleClass="p-button-danger"
+                    (click)="eliminar($event)"
+                >
+                </p-button>
+            </div>
+        </div>
+    </div>
+</ng-container>
