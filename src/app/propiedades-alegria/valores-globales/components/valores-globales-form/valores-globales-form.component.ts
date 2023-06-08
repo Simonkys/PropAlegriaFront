@@ -33,7 +33,7 @@ import { ValoresGlobales, ValoresGlobalesForm } from '../../valores-globales.mod
   templateUrl: './valores-globales-form.component.html',
   styleUrls: ['./valores-globales-form.component.scss']
 })
-export class ValoresGlobalesFormComponent {
+export class ValoresGlobalesFormComponent implements OnInit {
 
   @Input() valoresGlobales?: ValoresGlobales
 
@@ -47,5 +47,30 @@ export class ValoresGlobalesFormComponent {
     nombre: this.fb.nonNullable.control<string>('', [Validators.required, Validators.maxLength(50)]),
     valor: this.fb.nonNullable.control<number>(0, [Validators.required, Validators.minLength(1), Validators.maxLength(15)])
   });
+
+  ngOnInit(): void {
+    if (this.valoresGlobales) {
+      this.form.patchValue({
+        nombre: this.valoresGlobales.nombre,
+        valor: this.valoresGlobales.valor,
+      })
+    }
+  }
+
+  submit() {
+    if (this.form.invalid) return;
+
+    const values = this.form.getRawValue();
+    const externo: ValoresGlobalesForm = {
+      id: this.valoresGlobales?.id,
+      nombre: values.nombre,
+      valor: values.valor,
+    }
+    this.submitEvent.emit(externo)
+  }
+
+  cancelar() {
+    this.cancelEvent.emit()
+  }
 
 }
