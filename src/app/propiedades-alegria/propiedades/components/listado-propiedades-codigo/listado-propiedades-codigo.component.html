@@ -19,6 +19,7 @@
                     label="Clear"
                     styleClass="p-button-outlined"
                     icon="pi pi-filter-slash"
+                    style="color:#006C86"
                     (click)="clear(dt2)">
                 </p-button>
             </div>
@@ -41,23 +42,33 @@
             <td>{{ propiedadCod.cod }}</td>
             <td>
                 <ng-container *ngIf="propiedad.tipo_propiedad == 1">
-                  <i class="pi pi-building"></i>
+                  <i class="pi pi-building" style="font-size: 1rem"></i>
                 </ng-container>
                 <ng-container *ngIf="propiedad.tipo_propiedad == 2">
-                  <i class="pi pi-home"></i>
+                  <i class="pi pi-home" style="font-size: 1rem"></i>
                 </ng-container>
               </td>
             <td>{{ propiedad.comuna }}</td>
-            <td> {{propiedad.direccion}} </td>
-            <td >
-                <a class="underline" [routerLink]="['/propietarios', propiedad.propietario_id,'detalle']">
-                    {{propiedad.propietario}}
+            <td>{{ propiedad.direccion }}</td>
+            <td>
+                <button pButton pRipple
+                    icon="pi pi-user"
+                    class="p-button-text mr-2"
+                    style="color:#006C86; width: 200px;"
+                    label="{{ propiedad.propietario }}"
+                    [routerLink]="['/propietarios', propiedad.propietario_id,'detalle']">
+                </button>
+                <a class="underline" >
+                    
                 </a>
             </td>
             <td>
                 <div class="flex">
-                    <button pButton pRipple icon="pi pi-search"
-                        class="p-button-rounded p-button-primary mr-2"
+                    <button pButton pRipple
+                        icon="pi pi-search"
+                        class="p-button-rounded mr-2"
+                        style="background-color:#006C86; width: 120px;"
+                        label="Ver detalle"
                         [routerLink]="['/propiedades', propiedad.propiedad_id, 'detalle']">
                     </button>
                 </div>
@@ -72,10 +83,12 @@
                 <td></td>
                 <td>
                     <div class="flex">
-                        <button pButton pRipple icon="pi pi-search"
-                            class="p-button-rounded p-button-primary mr-2"
-                            (click)="registrarPropiedad(propiedadCod.cod)"
-                        >Registrar
+                        <button pButton pRipple
+                        icon="pi pi-plus"
+                        class="p-button-rounded mr-2"
+                        style="background-color:#F78E00; width: 120px;"
+                        label="Registrar"
+                        (click)="registrarPropiedad(propiedadCod.cod)">
                         </button>
                     </div>
                 </td>

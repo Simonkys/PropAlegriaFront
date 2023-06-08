@@ -1,0 +1,12 @@
+<div class="card mb-0">
+    <ng-container *ngFor="let valorGlobal of valoresGlobales | async">
+        
+        <div>
+            <div class="font-medium">{{valorGlobal.nombre}}</div>
+        </div>
+        <div>
+            <div class="font-medium">{{valorGlobal.valor}}</div>
+        </div>
+        
+    </ng-container>
+</div>
