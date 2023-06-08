@@ -25,9 +25,13 @@
                 <ng-template pTemplate="body" let-detalleArr>
                     <tr >
                         <td>{{detalleArr.fecha_a_pagar}}</td>
-                        <td>{{ (detalleArr.monto_a_pagar | number) ?? 'Reajustar'}}</td>
-                        <td>{{detalleArr.fecha_pagada}}</td>
-                        <td>{{detalleArr.monto_pagado | number}}</td>
+                        <td>
+                            {{ detalleArr.monto_a_pagar ? '$'+(detalleArr.monto_a_pagar | number) : 'Reajustar' }}
+                        </td>
+                        <td>{{(detalleArr.fecha_pagada) ?? '- - - - - -'}}</td>
+                        <td >
+                            {{detalleArr.monto_pagado ? '$'+(detalleArr.monto_pagado | number) : '- - - - -'}}
+                        </td>
                         <td>
                             <p-button 
                                 icon="pi pi-plus" 

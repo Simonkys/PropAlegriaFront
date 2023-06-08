@@ -24,7 +24,7 @@ export class DetalleArriendoService {
         return this.http.put(`${this.apiUrl}/${detalleArriendo.id}/`, detalleArriendo).pipe(
             tap(() => {
                 this.messageService.addMessage({
-                    details: ['Arriendo eliminado exitosamente!'],
+                    details: ['Pago registrado exitosamente!'],
                     role: 'success'
                 })
             }),
