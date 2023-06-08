@@ -12,11 +12,10 @@
         <div class="col 6">
             <div class="text-sm font-bold text-600 mb-1">Propietario</div>
             <div class="font-medium ">
-                <p-button 
-                    *ngIf="mostrarLinkPropietario && !ocultarAcciones; else Nolink"
+                <p-button
                     [label]="propiedad.propietario.pri_ape_prop + ' ' + propiedad.propietario.pri_nom_prop"
                     styleClass="p-button-link text-left p-0" 
-                    (click)="detallePropietario()">
+                    routerLink='/propietarios/{{propiedad.propietario.id}}/detalle'>
                 </p-button>
 
                 <ng-template #Nolink>
@@ -79,13 +78,5 @@
             <div class="font-medium">{{propiedad.observaciones ?? '- - -'}}</div>
         </div>
 
-        <div class="col-12" *ngIf="!ocultarAcciones">
-            <div class="flex">
-                <p-button icon="pi pi-pencil" styleClass="p-button-warning mr-2" (click)="actualizar()" *ngIf="mostrarActualizar">
-                </p-button>
-                <p-confirmPopup></p-confirmPopup>
-                <p-button icon="pi pi-trash" styleClass="p-button-danger" (click)="eliminar($event)" *ngIf="mostrarEliminar"></p-button>
-            </div>
-        </div>
     </div>
 </ng-container>

@@ -4,13 +4,36 @@
     icon="pi pi-arrow-left" 
     styleClass="p-button-sm p-button-outlined mb-3">
 </p-button>
-<ng-container *ngIf="propiedad$ | async as propiedad">
+<ng-container *ngIf="propiedad">
     <div class="card" >
-        <app-detalle-propiedad 
-            [propiedad]="propiedad"
-            (actualizarEvent)="handleActulizarEvent(propiedad)"
-            (eliminarEvent)="handleEliminarEvent(propiedad)"
-            (detallePropietarioEvent)="handleDetallePropietarioEvent(propiedad.propietario.id)"
-        />
+        <app-detalle-propiedad [propiedad]="propiedad"/>
+        
+        <div class="col-12" >
+            <div class="flex">
+                <p-button 
+                    icon="pi pi-pencil" 
+                    styleClass="p-button-warning mr-2" 
+                    (click)="actualizar(propiedad)">
+                </p-button>
+                <p-confirmPopup></p-confirmPopup>
+                <p-button 
+                    icon="pi pi-trash" 
+                    styleClass="p-button-danger" 
+                    (click)="eliminar($event, propiedad)">
+                </p-button>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div *ngIf="arriendos.length === 0; else Arriendo">
+            <p>Esta propiedad no tiene un arriendo en curso</p>
+        </div>
+        <ng-template #Arriendo>
+            <h4>Arriendo</h4>
+            <div *ngFor="let arriendo of arriendos">
+                <button (click)="verDetalleArriendo(arriendo)">Ver detalle</button>
+            </div>
+        </ng-template>
     </div>
 </ng-container>

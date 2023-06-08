@@ -1,5 +1,5 @@
 import { Injectable, inject } from "@angular/core";
-import { HttpClient, HttpErrorResponse } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse, HttpParams, HttpParamsOptions } from "@angular/common/http";
 import { environment } from "src/environments/environment";
 import { Arriendo, ArriendoForm, TablaArriendo } from "./arriendo.model";
 import { MensajeService } from "../core/services/message.service";
@@ -15,8 +15,8 @@ export class ArriendoService {
     private apiUrl = `${environment.apiUrl}/api/arriendo`
 
 
-    getArriendos() {
-        return this.http.get<TablaArriendo[]>(`${this.apiUrl}/`);
+    getArriendos(query: {} = {}) {
+        return this.http.get<TablaArriendo[]>(`${this.apiUrl}/`, {params: query});
     }
 
 
