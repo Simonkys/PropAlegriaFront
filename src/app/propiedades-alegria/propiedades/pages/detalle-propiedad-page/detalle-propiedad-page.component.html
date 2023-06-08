@@ -36,7 +36,13 @@
         <ng-template #Arriendo>
             <h4>Arriendo</h4>
             <div *ngFor="let arriendo of arriendos">
-                <button (click)="verDetalleArriendo(arriendo)">Ver detalle</button>
+                <button pButton pRipple
+                        icon="pi pi-search"
+                        class="p-button mr-2"
+                        style="background-color:#006C86; width: 120px;"
+                        label="Ver detalle"
+                        (click)="verDetalleArriendo(arriendo)">
+                    </button>
             </div>
         </ng-template>
     </div>
