@@ -11,5 +11,34 @@
 }
 
 td {
+    width: auto;
     padding-block: 2px !important;
 }
+
+td:first-child {
+    width: 5%;
+}
+
+td:nth-child(2) {
+    width: 5%;
+}
+
+td:nth-child(3) {
+    width: 30%;
+}
+
+td:nth-child(4) {
+    width: 50%;
+}
+
+td:nth-child(5) {
+    width: 10%;
+}
+
+td:last-child {
+    width: 10%;
+}
+
+// td {
+//     padding-block: 2px !important;
+// }

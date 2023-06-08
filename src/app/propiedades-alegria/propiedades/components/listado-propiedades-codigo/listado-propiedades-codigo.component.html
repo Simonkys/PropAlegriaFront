@@ -13,27 +13,29 @@
                     <input
                         pInputText type="text"
                         (input)="dt2.filterGlobal($any($event.target).value, 'equals')"
-                        placeholder="Código" />
+                        placeholder="Filtre por código aquí"
+                    />
                 </span>
-                <p-button
-                    label="Clear"
-                    styleClass="p-button-outlined"
+                <!-- Botón Limpiar -->
+                <button pButton pRipple
                     icon="pi pi-filter-slash"
-                    style="color:#006C86"
+                    class="p-button-outlined mr-2"
+                    style="color: #006C86;"
+                    label="Limpiar"
                     (click)="clear(dt2)">
-                </p-button>
+                </button>
             </div>
         </div>
     </ng-template>
 
     <ng-template pTemplate="header">
         <tr>
-            <th>Cod</th>
-            <th>Tipo</th>
-            <th>Comuna</th>
-            <th>Dirección</th>
-            <th>Propietario</th>
-            <th>Acciones</th>
+            <th><b>Cod</b></th>
+            <th><b>Tipo</b></th>
+            <th><b>Comuna</b></th>
+            <th><b>Dirección</b></th>
+            <th><b>Propietario</b></th>
+            <th><b>Acciones</b></th>
         </tr>
     </ng-template>
 
@@ -58,7 +60,7 @@
                     label="{{ propiedad.propietario }}"
                     [routerLink]="['/propietarios', propiedad.propietario_id,'detalle']">
                 </button>
-                <a class="underline" >
+                <a class="underline">
                     
                 </a>
             </td>

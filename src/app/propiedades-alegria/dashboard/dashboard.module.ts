@@ -22,7 +22,7 @@ import { DetalleValorGlobalComponent } from '../valores-globales/components/deta
         PanelMenuModule,
         ButtonModule,
         DashboardsRoutingModule,
-        DetalleValorGlobalComponent
+        DetalleValorGlobalComponent,
     ],
     declarations: [DashboardComponent]
 })
