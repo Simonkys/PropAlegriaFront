@@ -43,14 +43,14 @@ export class ValoresGlobalesService {
     }
 
     // Retrieve
-    getValoresGlobalesById(id: number) {
+    getValorGlobalById(id: number) {
         return this.http.get<ValoresGlobales>(
             `${environment.apiUrl}/api/valores_globales/${id}/`
         );
     }
 
     // Create
-    crearValoresGlobales(valoresGlobales: ValoresGlobalesForm) {
+    crearValorGlobal(valoresGlobales: ValoresGlobalesForm) {
         return this.http
             .post<ValoresGlobales>(
                 `${environment.apiUrl}/api/valores_globales/`,
@@ -73,7 +73,7 @@ export class ValoresGlobalesService {
     }
 
     // Update
-    actualizarValoresGlobales(valoresGlobales: ValoresGlobalesForm) {
+    actualizarValorGlobal(valoresGlobales: ValoresGlobalesForm) {
         return this.http
             .put<ValoresGlobales>(
                 `${environment.apiUrl}/api/valores_globales/${valoresGlobales.id}/`,
@@ -112,7 +112,7 @@ export class ValoresGlobalesService {
     }
 
     // Destroy
-    eliminarValoresGlobales(valoresGlobales: ValoresGlobales) {
+    eliminarValorGlobal(valoresGlobales: ValoresGlobales) {
         return this.http
             .delete(`${environment.apiUrl}/api/valores_globales/${valoresGlobales.id}/`)
             .pipe(
