@@ -1,22 +1,22 @@
 <p-table [value]="arriendos" [tableStyle]="{ 'min-width': '50rem' }">
     <ng-template pTemplate="caption">
-        <p-button 
-            class="mr-2" 
-            label="Registrar" 
-            icon="pi pi-plus" 
-            styleClass="p-button-success"
-            (click)="registrar()"
-        >
-        </p-button>
+        <!-- Botón Registrar -->
+        <button pButton pRipple
+            icon="pi pi-plus"
+            class="p-button mr-2"
+            style="background-color:#F78E00"
+            label="Registrar"
+            (click)="registrar()">
+        </button>
     </ng-template>
     <ng-template pTemplate="header">
         <tr>
-            <th>Código</th>
-            <th>Nombre arrendatario</th>
-            <th>Dirección propiedad</th>
-            <th>Fecha de pago</th>
-            <th>Monto arriendo</th>
-            <th>Acciones</th>
+            <th><b>Código</b></th>
+            <th><b>Nombre arrendatario</b></th>
+            <th><b>Dirección propiedad</b></th>
+            <th><b>Fecha de pago</b></th>
+            <th><b>Monto arriendo</b></th>
+            <th><b>Acciones</b></th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-arriendo>
