@@ -111,7 +111,7 @@
 
         <div class="col-4">
             <div class="text-sm font-bold text-600 mb-1">Comisión</div>
-            <div class="font-medium">{{arriendo.propiedad?.propietario?.pctje_cobro_honorario}}% + {{(ValidatorsGlobales | async)?.valor}}%</div>
+            <div class="font-medium">{{arriendo.propiedad?.propietario?.pctje_cobro_honorario}}% + {{(ValidatorsGlobales$ | async)?.valor}}%</div>
         </div>
 
         <div class="col-4" *ngFor="let cuenta of arriendo.propiedad?.propietario?.cuentas_bancarias" >
@@ -126,7 +126,7 @@
         </div>
 
         <div class="col-12">
-            <p-table  [value]="arriendo.detalle_arriendos">
+            <p-table *ngIf="detalleArriendos$ | async as detalles"  [value]="detalles">
                 <ng-template pTemplate="header">
                     <tr>
                         <th>Fecha a pagar</th>
@@ -160,7 +160,7 @@
                                 icon="pi pi-plus" 
                                 label="Reajustar"
                                 styleClass="p-button-warning p-button-sm"
-                                (click)="reajustar(detalleArr)"
+                                (click)="abrirModalReajuste(detalleArr)"
                             >
                             </p-button>
                             
@@ -190,4 +190,5 @@
             </div>
         </div>
     </div>
+
 </ng-container>

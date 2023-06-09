@@ -1,0 +1,16 @@
+<div class="grid">
+    <div class="col-12">
+        <div class="text-sm font-bold text-600 mb-1">Ingresar nuevo valor de arriendo</div>
+        <div class="p-inputgroup">
+            <span class="p-inputgroup-addon">$</span>
+            <p-inputNumber [formControl]="valorReajuste" [style]="{width: '100%'}" inputId="valor_reajuste" prefix="$" placeholder="$120.000"> </p-inputNumber>
+        </div>
+    </div>
+
+    <div class="col">
+        <div class="flex justify-content-end w-100">
+            <button [disabled]="valorReajuste.invalid" (click)="guardar()" pButton class="p-button-success mr-3">Guardar</button>
+            <button (click)="cerrarModal()" pButton class="p-button-danger">Cancelar</button>
+        </div>
+    </div>
+</div>
