@@ -1,0 +1,131 @@
+<form [formGroup]="form">
+
+    <div class="grid mb-3">
+        <div class="col-12">
+            <ng-container *ngIf="!propiedad">
+                <app-selector-propiedades (selectedEvent)="handlePropiedadSelectedEvent($event)" />
+            </ng-container>
+        </div>
+    </div>
+
+    <div class="grid mb-3" *ngIf="propiedadSeleccionada">
+        <div class="col-12">
+            <div class="card slide-in-right">
+                <app-detalle-propiedad 
+                    [propiedad]="propiedadSeleccionada"
+                />
+            </div>
+        </div>
+    </div>
+
+    <!-- Campo NOM_SERVICIO -->
+    <div class="grid mb-3">
+        <div class="col-6">
+            <span class="p-float-label">
+                <input
+                    type="text"
+                    pInputText
+                    formControlName="nom_servicio"
+                    placeholder="Nombre servicio"
+                    [style]="{ width: '100%' }"
+                />
+                <label>Nombre servicio *</label>
+            </span>
+        </div>
+    </div>
+
+    <!-- Campo DESCRIPCION -->
+    <div class="grid mb-3">
+        <div class="col-6">
+            <span class="p-float-label">
+                <input
+                    type="text"
+                    pInputText
+                    formControlName="descripcion"
+                    placeholder="Ingrese una descripción"
+                    [style]="{ width: '100%' }"
+                />
+                <label>Descripción *</label>
+            </span>
+        </div>
+    </div>
+
+    <!-- Campo FECHA -->
+    <div class="grid mb-3">
+        <div class="col-6">
+            <span class="p-float-label">
+                <p-calendar
+                    dateFormat="dd/mm/yy"
+                    formControlName="fecha"
+                    [showIcon]="true"
+                    [style]="{ width: '100%' }"
+                    [readonlyInput]="true">
+                </p-calendar>
+                <label>Fecha *</label>
+            </span>
+        </div>
+    </div>
+
+    <!-- Campo MONTO -->
+    <div class="grid mb-3">
+        <div class="col-6">
+            <span class="p-float-label">
+                <p-inputNumber placeholder="$ 50.000 *" formControlName="monto" prefix="$ "
+                    [style]="{ width: '100%' }" inputId="integeronly">
+                </p-inputNumber>
+                <label>Monto *</label>
+            </span>
+        </div>
+    </div>
+
+    <!-- Campo NRO_CUOTAS-->
+    <div class="grid mb-3">
+        <div class="col-6">
+            <span class="p-float-label">
+                <p-inputNumber placeholder="1" formControlName="nro_cuotas"
+                    [style]="{ width: '100%' }" inputId="integeronly">
+                </p-inputNumber>
+                <label>N° de cuotas *</label>
+            </span>
+        </div>
+    </div>
+
+    <!-- Campo MONTO_CUOTAS -->
+    <div class="grid mb-3">
+        <div class="col-6">
+            <span class="p-float-label">
+                <p-inputNumber placeholder="$ 50.000 *" formControlName="monto_cuotas" prefix="$ "
+                    [style]="{ width: '100%' }" inputId="integeronly">
+                </p-inputNumber>
+                <label>Monto de cuota *</label>
+            </span>
+        </div>
+    </div>
+
+    <!-- Campo CONTADOR_CUOTAS-->
+    <div class="grid mb-3">
+        <div class="col-6">
+            <span class="p-float-label">
+                <p-inputNumber placeholder="1" formControlName="contador_cuotas"
+                    [style]="{ width: '100%' }" inputId="integeronly">
+                </p-inputNumber>
+                <label>N° de cuotas pagadas *</label>
+            </span>
+        </div>
+    </div>
+
+    <div class="flex">
+        <p-button
+            styleClass="mr-3"
+            [disabled]="form.invalid"
+            label="Guardar"
+            (click)="submit()"
+        ></p-button>
+        <p-button
+            label="Cancelar"
+            styleClass="p-button-danger"
+            (click)="cancelar()"
+        ></p-button>
+    </div>
+
+</form>

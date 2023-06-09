@@ -1,0 +1,9 @@
+<div class="card">
+    <h4>Servicios Extra</h4>
+    <app-listado-servicios-extra 
+        *ngIf="serviciosExtra$ | async as serviciosExtra"
+        [serviciosExtra]="serviciosExtra"
+        (detalleEvent)="handleDetailEvent($event)"
+        (registrarEvent)="handleRegistrarEvent()"
+    ></app-listado-servicios-extra>
+</div>

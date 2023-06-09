@@ -1,0 +1,43 @@
+<p-table [value]="serviciosExtra" [tableStyle]="{ 'min-width': '50rem' }">
+    <ng-template pTemplate="caption">
+        <!-- Botón REGISTRAR -->
+        <button pButton pRipple
+            icon="pi pi-plus"
+            class="p-button mr-2"
+            style="background-color:#F78E00"
+            label="Registrar"
+            (click)="registrar()">
+        </button>
+    </ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+            <th class="font-bold">Propiedad</th>
+            <th class="font-bold">Nombre servicio</th>
+            <th class="font-bold">Fecha</th>
+            <th class="font-bold">Monto</th>
+            <th class="font-bold">Acciones</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-servicioExtra>
+        <tr>
+            <td>{{servicioExtra.propiedad}}</td>
+            <td>{{servicioExtra.nom_servicio}}</td>
+            <td>{{servicioExtra.fecha | date:'dd/MM/yyyy'}}</td>
+            <td>${{servicioExtra.monto | number}}</td>
+            
+            <td>
+                <!-- Botón VER DETALLE -->
+                <div class="flex">
+                    <button pButton pRipple
+                    icon="pi pi-search"
+                    class="p-button-rounded mr-2"
+                    style="background-color:#006C86; width: 120px;"
+                    label="Ver detalle"
+                    (click)="detalle(serviciosExtra)">
+                </button>
+                </div>
+                
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
