@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ArriendoService } from '../../arriendo.service';
-import {map, switchMap} from 'rxjs'
+import { map, switchMap } from 'rxjs'
 
 
 import { DetalleArriendoComponent } from '../../components/detalle-arriendo/detalle-arriendo.component';

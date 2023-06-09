@@ -2173,19 +2173,19 @@ p-treeselect.p-treeselect-clearable .p-treeselect-clear-icon {
 
 .p-button.p-button-outlined {
     background-color: transparent;
-    color: #3f51b5;
+    color: #006C86;
     border: 0 none
 }
 
 .p-button.p-button-outlined:enabled:hover {
     background: rgba(63, 81, 181, .04);
-    color: #3f51b5;
+    color: #006C86;
     border: 0 none
 }
 
 .p-button.p-button-outlined:enabled:active {
     background: rgba(63, 81, 181, .16);
-    color: #3f51b5;
+    color: #006C86;
     border: 0 none
 }
 

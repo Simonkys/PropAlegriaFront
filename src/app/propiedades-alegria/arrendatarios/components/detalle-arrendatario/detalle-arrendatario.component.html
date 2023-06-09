@@ -33,7 +33,8 @@
         <div class="col-4">
             <div class="flex">
                 <p-button 
-                    icon="pi pi-pencil" 
+                    icon="pi pi-pencil"
+                    label="Editar"
                     styleClass="p-button-warning mr-2"
                     (click)="actualizar()"
                 >
@@ -41,6 +42,7 @@
                 <p-confirmPopup></p-confirmPopup>
                 <p-button 
                     icon="pi pi-trash" 
+                    label="Eliminar"
                     styleClass="p-button-danger"
                     (click)="eliminar($event)"
                 >
