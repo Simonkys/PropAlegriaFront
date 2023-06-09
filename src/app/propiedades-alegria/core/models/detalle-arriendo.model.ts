@@ -6,4 +6,5 @@ export interface DetalleArriendo {
     fecha_pagada: Date | null;
     monto_pagado: number | null;
     valor_multa: number;
+    toca_reajuste: boolean;
 }

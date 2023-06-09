@@ -140,11 +140,11 @@
                     <tr >
                         <td>{{detalleArr.fecha_a_pagar}}</td>
                         <td>
-                            {{ detalleArr.monto_a_pagar ? '$'+(detalleArr.monto_a_pagar | number) : 'Reajustar' }}
+                            {{ detalleArr.monto_a_pagar ? '$'+(detalleArr.monto_a_pagar | number) : '- - - - - -' }}
                         </td>
                         <td>{{(detalleArr.fecha_pagada) ?? '- - - - - -'}}</td>
                         <td >
-                            {{detalleArr.monto_pagado ? '$'+(detalleArr.monto_pagado | number) : '- - - - -'}}
+                            {{detalleArr.monto_pagado ? '$'+(detalleArr.monto_pagado | number) : '- - - - - -'}}
                         </td>
                         <td>
                             <p-button 
@@ -152,11 +152,11 @@
                                 icon="pi pi-plus" 
                                 label="Registrar pago"
                                 styleClass="p-button-success p-button-sm"
-                                (click)="editarPago(detalleArr)"
+                                (click)="registrarPago(detalleArr)"
                             >
                             </p-button>
                             <p-button
-                                *ngIf="primerReajuste?.id === detalleArr.id"
+                                *ngIf="detalleArr.toca_reajuste"
                                 icon="pi pi-plus" 
                                 label="Reajustar"
                                 styleClass="p-button-warning p-button-sm"
@@ -164,13 +164,13 @@
                             >
                             </p-button>
                             
-                                <p-button 
-                                    *ngIf="!detalleArr.monto_a_pagar && primerReajuste?.id !== detalleArr.id"
-                                    [disabled]="true"
-                                    icon="pi pi-plus" 
-                                    label="Registrar pago"
-                                    styleClass="p-button-success p-button-sm"
-                                >
+                            <p-button 
+                                *ngIf="!detalleArr.monto_a_pagar && !detalleArr.toca_reajuste"
+                                [disabled]="true"
+                                icon="pi pi-plus" 
+                                label="Registrar pago"
+                                styleClass="p-button-success p-button-sm"
+                            >
                             </p-button>
                             
                         </td>

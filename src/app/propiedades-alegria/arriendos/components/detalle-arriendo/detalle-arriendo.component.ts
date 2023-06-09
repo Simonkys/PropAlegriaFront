@@ -9,6 +9,7 @@ import { TagModule } from 'primeng/tag';
 import { DetalleArriendo } from 'src/app/propiedades-alegria/core/models/detalle-arriendo.model';
 import { Router } from '@angular/router';
 import { TableModule } from 'primeng/table';
+import { DetalleArriendoService } from 'src/app/propiedades-alegria/core/services/detalle-arriendo.service';
 
 
 @Component({
@@ -28,19 +29,12 @@ export class DetalleArriendoComponent implements OnInit {
   @Output() actualizarEvent = new EventEmitter();
 
   router = inject(Router)
-
+  detalleArriendoService = inject(DetalleArriendoService)
   confimService = inject(ConfirmationService)
   valoresGloablesService = inject(ValoresGlobalesService)
-  ValidatorsGlobales = this.valoresGloablesService.getValorGlobalById(2)
+  ValidatorsGlobales = this.valoresGloablesService.getValorGlobalById(2)  
 
-  pagosArriendo: DetalleArriendo[] = [];
-  primerReajuste?: DetalleArriendo;
-
-  ngOnInit(): void {
-    if(this.arriendo) {
-      this.primerReajuste = this.arriendo.detalle_arriendos.find(d => d.monto_a_pagar === null)
-    }
-  }
+  ngOnInit(): void {}
 
   eliminar(event: Event) {
     this.confimService.confirm({
@@ -58,13 +52,13 @@ export class DetalleArriendoComponent implements OnInit {
     this.actualizarEvent.emit()
   }
 
-  editarPago(detalleArr: DetalleArriendo) {
+  registrarPago(detalleArr: DetalleArriendo) {
     if(detalleArr.monto_a_pagar) {
       this.router.navigate(['arrendatarios', 'registro-pago'], {state: {registroPago: detalleArr}})
     }
   }
 
   reajustar(detalleArr: DetalleArriendo) {
-    
+    this.detalleArriendoService.registrarDetalleArriendo({...detalleArr,monto_a_pagar: 300000 }).subscribe()
   }
 }
