@@ -32,6 +32,8 @@ export class DetalleArriendoService {
         )
     }
 
+    
+
 
     private handleError(error: HttpErrorResponse) {
         const msg = JSON.stringify(error.error);
