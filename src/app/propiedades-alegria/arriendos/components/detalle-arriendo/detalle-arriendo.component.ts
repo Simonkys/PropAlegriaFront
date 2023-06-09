@@ -4,7 +4,9 @@ import { Arriendo } from '../../arriendo.model';
 import { ConfirmationService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
+import { ValoresGlobalesService } from 'src/app/propiedades-alegria/valores-globales/valores-globales.service';
 import { TagModule } from 'primeng/tag';
+
 
 @Component({
   selector: 'app-detalle-arriendo',
@@ -22,8 +24,8 @@ export class DetalleArriendoComponent {
   @Output() actualizarEvent = new EventEmitter();
 
   confimService = inject(ConfirmationService)
-
-
+  valoresGloablesService = inject(ValoresGlobalesService)
+  ValidatorsGlobales = this.valoresGloablesService.getValorGlobalById(2)
   eliminar(event: Event) {
     this.confimService.confirm({
       target: event.target || new EventTarget(),
