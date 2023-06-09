@@ -1,1 +1,9 @@
-<p>actualizar-servicio-extra-page works!</p>
+<div class="card">
+    <ng-container *ngIf="servicioExtra$ | async as servicioExtra">
+        <app-servicios-extra-form
+            [servicioExtra]="servicioExtra"
+            (cancelEvent)="handleCancelEvent()"
+            (submitEvent)="handleSubmitEvent($event)"
+        ></app-servicios-extra-form>
+    </ng-container>
+</div>

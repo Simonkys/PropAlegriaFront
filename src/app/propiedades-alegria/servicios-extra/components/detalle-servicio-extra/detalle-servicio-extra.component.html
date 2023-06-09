@@ -1,1 +1,60 @@
-<p>detalle-servicio-extra works!</p>
+<ng-container *ngIf="servicioExtra">
+    <div class="flex w-100 justify-content-between mb-3">
+        <div><h2>Detalle Servicio Extra</h2></div>
+    </div>
+
+    <div class="grid" [style]="{width: '100%'}">
+
+        <div class="col-12"><hr></div>
+
+        <div class="col-3">
+            <div class="text-sm font-bold text-600 mb-1">Propiedad</div>
+            <div class="font-medium">{{servicioExtra.propiedad ?? '---'}}</div>
+        </div>
+
+        <div class="col-3">
+            <div class="text-sm font-bold text-600 mb-1">Nombre</div>
+            <div class="font-medium">{{servicioExtra.nom_servicio}}</div>
+        </div>
+
+        <div class="col-3">
+            <div class="text-sm font-bold text-600 mb-1">Descripcion</div>
+            <div class="font-medium">{{servicioExtra.descripcion}}</div>
+        </div>
+
+        <div class="col-3">
+            <div class="text-sm font-bold text-600 mb-1">Fecha</div>
+            <div class="font-medium">{{(servicioExtra.fecha | date:'dd/MM/yyyy') ?? '---'}}</div>
+        </div>
+
+        <div class="col-3">
+            <div class="text-sm font-bold text-600 mb-1">Monto</div>
+            <div class="font-medium">{{servicioExtra.monto}}</div>
+        </div>
+
+        <div class="col-3">
+            <div class="text-sm font-bold text-600 mb-1">N° de cuotas</div>
+            <div class="font-medium">{{servicioExtra.nro_cuotas}}</div>
+        </div>
+
+        <div class="col-3">
+            <div class="text-sm font-bold text-600 mb-1">Monto de cuota</div>
+            <div class="font-medium">{{servicioExtra.monto_cuotas}}</div>
+        </div>
+
+        <div class="col-3">
+            <div class="text-sm font-bold text-600 mb-1">Cuotas pagadas</div>
+            <div class="font-medium">{{servicioExtra.contador_cuotas}}</div>
+        </div>
+
+        <div class="col-12">
+            <div class="flex">
+                <p-button icon="pi pi-pencil" styleClass="p-button-warning mr-2" (click)="actualizar()">
+                </p-button>
+                <p-confirmPopup></p-confirmPopup>
+                <p-button icon="pi pi-trash" styleClass="p-button-danger" (click)="eliminar($event)"></p-button>
+            </div>
+        </div>
+
+    </div>
+</ng-container>
