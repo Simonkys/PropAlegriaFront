@@ -6,8 +6,10 @@
     [globalFilterFields]="filterFields"
 >
     <ng-template pTemplate="caption">
-        <div class="caption-table">
+        <div class="caption-table right-100">
             <div class="caption-filter">
+
+                <!-- Campo FILTRO -->
                 <span class="p-input-icon-left ml-auto">
                     <i class="pi pi-search"></i>
                     <input
@@ -16,7 +18,7 @@
                         placeholder="Filtre por código aquí"
                     />
                 </span>
-                <!-- Botón Limpiar -->
+                <!-- Botón LIMPIAR -->
                 <button pButton pRipple
                     icon="pi pi-filter-slash"
                     class="p-button-outlined mr-2"
@@ -24,18 +26,19 @@
                     label="Limpiar"
                     (click)="clear(dt2)">
                 </button>
+
             </div>
         </div>
     </ng-template>
 
     <ng-template pTemplate="header">
         <tr>
-            <th><b>Cod</b></th>
-            <th><b>Tipo</b></th>
-            <th><b>Comuna</b></th>
-            <th><b>Dirección</b></th>
-            <th><b>Propietario</b></th>
-            <th><b>Acciones</b></th>
+            <th class="font-bold">Código</th>
+            <th class="font-bold">Tipo</th>
+            <th class="font-bold">Comuna</th>
+            <th class="font-bold">Dirección</th>
+            <th class="font-bold">Propietario</th>
+            <th class="font-bold">Acciones</th>
         </tr>
     </ng-template>
 
@@ -44,15 +47,16 @@
             <td>{{ propiedadCod.cod }}</td>
             <td>
                 <ng-container *ngIf="propiedad.tipo_propiedad == 1">
-                  <i class="pi pi-building" style="font-size: 1rem"></i>
+                  <i class="pi pi-building" style="font-size: 1.5rem"></i>
                 </ng-container>
                 <ng-container *ngIf="propiedad.tipo_propiedad == 2">
-                  <i class="pi pi-home" style="font-size: 1rem"></i>
+                  <i class="pi pi-home" style="font-size: 1.5rem"></i>
                 </ng-container>
               </td>
             <td>{{ propiedad.comuna }}</td>
             <td>{{ propiedad.direccion }}</td>
             <td>
+                <!-- Botón VER PROPIETARIO -->
                 <button pButton pRipple
                     icon="pi pi-user"
                     class="p-button-text mr-2"
@@ -61,11 +65,11 @@
                     [routerLink]="['/propietarios', propiedad.propietario_id,'detalle']">
                 </button>
                 <a class="underline">
-                    
                 </a>
             </td>
             <td>
                 <div class="flex">
+                    <!-- Botón VER DETALLE -->
                     <button pButton pRipple
                         icon="pi pi-search"
                         class="p-button-rounded mr-2"
@@ -85,6 +89,7 @@
                 <td></td>
                 <td>
                     <div class="flex">
+                        <!-- Botón REGISTRAR -->
                         <button pButton pRipple
                         icon="pi pi-plus"
                         class="p-button-rounded mr-2"

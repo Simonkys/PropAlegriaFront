@@ -1,0 +1,15 @@
+.caption-table {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.caption-filter {
+    display: flex;
+    align-items: right;
+    gap: 20px;
+}
+
+td {
+    padding: 50px
+}

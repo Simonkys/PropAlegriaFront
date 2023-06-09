@@ -1,22 +1,22 @@
 <p-table [value]="arriendos" [tableStyle]="{ 'min-width': '50rem' }">
     <ng-template pTemplate="caption">
-        <p-button 
-            class="mr-2" 
-            label="Registrar" 
-            icon="pi pi-plus" 
-            styleClass="p-button-success"
-            (click)="registrar()"
-        >
-        </p-button>
+        <!-- Botón REGISTRAR -->
+        <button pButton pRipple
+            icon="pi pi-plus"
+            class="p-button mr-2"
+            style="background-color:#F78E00"
+            label="Registrar"
+            (click)="registrar()">
+        </button>
     </ng-template>
     <ng-template pTemplate="header">
         <tr>
-            <th>Código</th>
-            <th>Nombre arrendatario</th>
-            <th>Dirección propiedad</th>
-            <th>Fecha de pago</th>
-            <th>Monto arriendo</th>
-            <th>Acciones</th>
+            <th class="font-bold">Código</th>
+            <th class="font-bold">Nombre arrendatario</th>
+            <th class="font-bold">Dirección propiedad</th>
+            <th class="font-bold">Fecha de pago</th>
+            <th class="font-bold">Monto arriendo</th>
+            <th class="font-bold">Acciones</th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-arriendo>
@@ -28,15 +28,17 @@
             <td>${{arriendo.monto_arriendo | number}}</td>
             
             <td>
+                <!-- Botón VER DETALLE -->
                 <div class="flex">
-                    <button
-                        pButton
-                        pRipple
-                        icon="pi pi-search"
-                        class="p-button-rounded p-button-primary mr-2"
-                        (click)="detalle(arriendo)"
-                    ></button>
+                    <button pButton pRipple
+                    icon="pi pi-search"
+                    class="p-button-rounded mr-2"
+                    style="background-color:#006C86; width: 120px;"
+                    label="Ver detalle"
+                    (click)="detalle(arriendo)">
+                </button>
                 </div>
+                
             </td>
         </tr>
     </ng-template>

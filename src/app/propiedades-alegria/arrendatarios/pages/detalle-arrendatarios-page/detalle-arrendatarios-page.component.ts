@@ -108,5 +108,8 @@ export class DetalleArrendatariosPageComponent implements OnInit {
     this.router.navigate(['arrendatarios', 'registro-pago'], {state: {registroPago: detalleArr}})
   }
   
+  volver() {
+    this.location.back();
+  }
 
 }

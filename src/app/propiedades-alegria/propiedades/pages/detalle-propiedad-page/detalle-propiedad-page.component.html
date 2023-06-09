@@ -14,12 +14,14 @@
                 <div class="flex">
                     <p-button 
                         icon="pi pi-pencil" 
+                        label="Editar"
                         styleClass="p-button-warning mr-2" 
                         (click)="actualizar(propiedad)">
                     </p-button>
                     <p-confirmPopup></p-confirmPopup>
                     <p-button 
                         icon="pi pi-trash" 
+                        label="Eliminar"
                         styleClass="p-button-danger" 
                         (click)="eliminar($event, propiedad)">
                     </p-button>
@@ -31,13 +33,30 @@
     <div class="card">
         <div *ngIf="arriendos.length === 0; else Arriendo">
             <p>Esta propiedad no tiene un arriendo en curso</p>
-            <button (click)="registrarArriendo(propiedad)">Registrar arriendo</button>
+            <!-- Botón VER DETALLE (arriendo) -->
+            <button pButton pRipple
+                icon="pi pi-plus"
+                class="p-button mr-2"
+                style="background-color:#F78E00; width: auto;"
+                label="Registrar arriendo"
+                (click)="registrarArriendo(propiedad)">
+            </button>
         </div>
+
         <ng-template #Arriendo>
             <h4>Arriendo</h4>
+            
             <div *ngFor="let arriendo of arriendos">
-                <button (click)="verDetalleArriendo(arriendo)">Ver detalle</button>
+                <!-- Botón VER DETALLE (arriendo) -->
+                <button pButton pRipple
+                        icon="pi pi-search"
+                        class="p-button mr-2"
+                        style="background-color:#006C86; width: 120px;"
+                        label="Ver detalle"
+                        (click)="verDetalleArriendo(arriendo)">
+                </button>
             </div>
+            
         </ng-template>
     </div>
 </ng-container>

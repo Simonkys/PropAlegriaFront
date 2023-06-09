@@ -2,6 +2,7 @@
     <h4>Propietarios</h4>
     <p-table #propietariosTable [tableStyle]="{ 'min-width': '50rem' }" [paginator]="true" [rows]="7"
         [globalFilterFields]="filterFields" [value]="propietarios">
+
         <ng-template pTemplate="caption">
             <div class="caption-table">
                 <!-- Botón Registrar -->
@@ -30,16 +31,16 @@
                     </button>
                 </div>
             </div>
-
         </ng-template>
+        
         <ng-template pTemplate="header">
             <tr>
-                <th><b>Cod</b></th>
-                <th><b>Nombre</b></th>
-                <th><b>Email</b></th>
-                <th><b>Celular</b></th>
-                <th><b>Rut</b></th>
-                <th><b>Acciones</b></th>
+                <th class="font-bold">Cod</th>
+                <th class="font-bold">Nombre</th>
+                <th class="font-bold">Email</th>
+                <th class="font-bold">Celular</th>
+                <th class="font-bold">Rut</th>
+                <th class="font-bold">Acciones</th>
             </tr>
         </ng-template>
 
@@ -51,10 +52,12 @@
                 <td>{{propietario.contacto_prop}}</td>
                 <td>{{propietario.rut_prop}}</td>
                 <td class="flex">
+                    <!-- Botón VER DETALLE -->
                     <button pButton pRipple
                         icon="pi pi-search"
                         class="p-button-rounded mr-2"
-                        style="background-color:#006C86"
+                        style="background-color:#006C86; width: 120px;"
+                        label="Ver detalle"
                         [routerLink]="['/propietarios', propietario.id, 'detalle']">
                     </button>
                 </td>

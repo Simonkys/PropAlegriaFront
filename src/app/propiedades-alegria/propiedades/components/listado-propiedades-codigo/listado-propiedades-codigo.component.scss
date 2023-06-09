@@ -1,18 +1,18 @@
 .caption-table {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
 }
 
 .caption-filter {
     display: flex;
-    align-items: center;
-    gap: 4px;
+    align-items: right;
+    gap: 20px;
 }
 
 td {
     width: auto;
-    padding-block: 2px !important;
+    padding: 50px;
 }
 
 td:first-child {
@@ -38,7 +38,3 @@ td:nth-child(5) {
 td:last-child {
     width: 10%;
 }
-
-// td {
-//     padding-block: 2px !important;
-// }

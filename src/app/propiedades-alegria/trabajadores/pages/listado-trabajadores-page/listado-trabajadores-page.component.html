@@ -2,29 +2,46 @@
     <h4>Trabajadores</h4>
     <p-table #dt1 *ngIf="trabajadores$ | async as trabajadores" [columns]="cols" [value]="trabajadores"
         [paginator]="true" [rows]="5" [globalFilterFields]="globalFilterFields">
+
         <ng-template pTemplate="caption">
-            <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
-                <p-button class="mr-2" label="Registrar" icon="pi pi-plus" styleClass="p-button-success"
-                    (click)="goToRegistroTrabajador()"></p-button>
-                <span class="flex mt-2 md:mt-0 p-input-icon-left align-items-center justify-content-center">
-                    <i class="pi pi-search"></i>
-                    <input pInputText type="text" placeholder="Juan, Carla ..." class="w-full sm:w-auto mr-2" (input)="
-                            dt1.filterGlobal(
-                                $any($event.target).value,
-                                'contains'
-                            )
-                        " />
-                    <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash"
-                        (click)="clear(dt1)"></button>
-                </span>
+            <div class="caption-table">
+                
+                <!-- Botón REGISTRAR -->
+                <button pButton pRipple
+                    icon="pi pi-plus"
+                    class="p-button mr-2"
+                    style="background-color:#F78E00"
+                    label="Registrar"
+                    (click)="goToRegistroTrabajador()">
+                </button>
+
+                <div class="caption-filter">
+                    <span class="p-input-icon-left ml-auto">
+                        <i class="pi pi-search"></i>
+                        <input pInputText type="text" placeholder="Filtre por nombre aquí" class="w-full sm:w-auto mr-2" (input)="
+                                dt1.filterGlobal(
+                                    $any($event.target).value,
+                                    'contains'
+                                )
+                            "/>
+                    </span>
+                    <!-- Botón LIMPIAR -->
+                    <button pButton pRipple
+                        icon="pi pi-filter-slash"
+                        class="p-button-outlined mr-2"
+                        style="color: #006C86;"
+                        label="Limpiar"
+                        (click)="clear(dt1)">
+                    </button>
+                </div>
             </div>
         </ng-template>
         <ng-template pTemplate="header" let-columns>
             <tr>
                 <th *ngFor="let col of columns">
-                    {{ col.header }}
+                    <b>{{ col.header }}</b>
                 </th>
-                <th>Acciones</th>
+                <th><b>Acciones</b></th>
             </tr>
         </ng-template>
 
@@ -42,13 +59,15 @@
                 <td class="flex">
                     <div>
                         <button pButton pRipple icon="pi pi-search" class="p-button-rounded p-button-primary mr-2"
-                            (click)="detalleTrabajador(rowData)"></button>
+                            label="Ver" style="background-color: #006C86;" (click)="detalleTrabajador(rowData)"></button>
+
                         <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-warning mr-2"
-                            (click)="editarTrabajador(rowData)"></button>
+                            label="Editar" (click)="editarTrabajador(rowData)"></button>
 
                         <p-confirmPopup></p-confirmPopup>
+
                         <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-danger"
-                            (click)="eliminarTrabajador($event, rowData)"></button>
+                            label="Eliminar" (click)="eliminarTrabajador($event, rowData)"></button>
                     </div>
                 </td>
             </tr>
