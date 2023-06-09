@@ -1,32 +1,32 @@
 <ng-container *ngIf="arriendo">
     <div class="flex w-100 justify-content-between mb-3">
         <div><h2>Detalle Arriendo</h2></div>
-        <div><h4>Código 23</h4></div>
+        <div><h4>COD: {{arriendo.propiedad?.cod}}</h4></div>
     </div>
 
-    
+
     <div class="grid" [style]="{width: '100%'}">
-        
+
         <div class="col-12"><hr></div>
 
 
         <div class="ml-3 w-12">
             <h4>Arrendatario</h4>
         </div>
-    
+
         <div class="col-12">
             <div class="text-sm font-bold text-600 mb-1">Nombre</div>
-            <div class="font-bold">Juanito de las Mercedes Andrade</div>
+            <div class="font-bold">{{arriendo.arrendatario.pri_nom_arr}} {{arriendo.arrendatario.pri_ape_arr}}</div>
         </div>
 
         <div class="col-12">
-            <div class="text-sm font-bold text-600 mb-1">Propiedad Arrendada</div>
-            <div class="font-medium">{{arriendo.propiedad?.direccion_ppdd}} (Incluye Estacionamiento)</div>
+            <div class="text-sm font-bold text-600 mb-1">Direccion</div>
+            <div class="font-medium">{{arriendo.propiedad?.direccion_ppdd}}</div>
         </div>
 
         <div class="col-3">
             <div class="text-sm font-bold text-600 mb-1">Día de Pago</div>
-            <div class="font-medium">5 del mes</div>
+            <div class="font-medium">{{arriendo.dia_pago}} del mes</div>
         </div>
 
         <div class="col-3">
@@ -36,49 +36,44 @@
 
         <div class="col-3">
             <div class="text-sm font-bold text-600 mb-1">Fecha Contrato</div>
-            <div class="font-medium">{{(arriendo.fecha_entrega | date:'dd/MM/yyyy' ) ?? '---'}}</div>
+            <div class="font-medium">{{(arriendo.fecha_inicio | date:'dd/MM/yyyy' ) ?? '---'}}</div>
         </div>
 
         <div class="col-3">
             <div class="text-sm font-bold text-600 mb-1">Venc. Contrato</div>
-            <div class="font-medium">{{(arriendo.fecha_entrega | date:'dd/MM/yyyy' ) ?? '---'}}</div>
+            <div class="font-medium">{{(arriendo.fecha_termino | date:'dd/MM/yyyy' ) ?? '---'}}</div>
         </div>
 
 
         <div class="col-3">
             <div class="text-sm font-bold text-600 mb-1">Fono</div>
-            <div class="font-medium">999812319</div>
+            <div class="font-medium">{{arriendo.arrendatario.contacto_arr}}</div>
         </div>
 
         <div class="col-9">
             <div class="text-sm font-bold text-600 mb-1">Email</div>
-            <div class="font-medium">correo@email.cl</div>
+            <div class="font-medium">{{arriendo.arrendatario.correo_arr}}</div>
         </div>
 
-        <div class="col-12">
-            <div class="text-sm font-bold text-600 mb-1">Observaciones</div>
-            <div class="font-medium">Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto, quas atque?
-                Molestias, optio? Fuga commodi quos esse ut sit quae sapiente fugit non nesciunt voluptatibus. Earum
-                quasi officiis quod natus.
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Neque dignissimos dicta veniam suscipit earum,
-                porro praesentium, odio laudantium amet necessitatibus, iusto delectus? Nihil quas fuga vero repellendus
-                magnam exercitationem autem!
+        <div class="col-12" *ngIf="arriendo.propiedad?.observaciones" >
+            <div class="text-sm font-bold text-600 mb-1">Comentarios</div>
+            <div class="font-medium"> {{arriendo.propiedad?.observaciones}}
             </div>
         </div>
 
         <div class="col-4">
             <div class="text-sm font-bold text-600 mb-1">Gas</div>
-            <div class="font-medium">Gassur 710201869</div>
+            <div class="font-medium">{{arriendo.propiedad?.gas != '' ?  '--': arriendo.propiedad?.gas}}</div>
         </div>
 
         <div class="col-4">
             <div class="text-sm font-bold text-600 mb-1">Agua</div>
-            <div class="font-medium">CGE 2015550</div>
+            <div class="font-medium">{{arriendo.propiedad?.agua}}</div>
         </div>
 
         <div class="col-4 mb-3">
             <div class="text-sm font-bold text-600 mb-1">Luz</div>
-            <div class="font-medium">- - -</div>
+            <div class="font-medium">{{arriendo.propiedad?.luz}}</div>
         </div>
 
         <div class="col-12"><hr></div>
@@ -89,126 +84,42 @@
 
         <div class="col-4">
             <div class="text-sm font-bold text-600 mb-1">Nombre</div>
-            <div class="font-medium"></div>
+            <div class="font-medium">{{arriendo.propiedad?.propietario?.pri_nom_prop}} {{arriendo.propiedad?.propietario?.pri_ape_prop}}</div>
         </div>
 
         <div class="col-4">
             <div class="text-sm font-bold text-600 mb-1">Rut</div>
-            <div class="font-medium"></div>
+            <div class="font-medium">{{arriendo.propiedad?.propietario?.rut_prop}}</div>
         </div>
 
         <div class="col-4">
             <div class="text-sm font-bold text-600 mb-1">Fono</div>
-            <div class="font-medium"></div>
+            <div class="font-medium">{{arriendo.propiedad?.propietario?.contacto_prop}}</div>
+        </div>
+
+        <div class="col-4">
+            <div class="text-sm font-bold text-600 mb-1">Email</div>
+            <div class="font-medium">{{arriendo.propiedad?.propietario?.email_prop}}</div>
         </div>
 
         <div class="col-12">
             <div class="text-sm font-bold text-600 mb-1">Dirección</div>
-            <div class="font-medium"></div>
+            <div class="font-medium">{{arriendo.propiedad?.propietario?.direccion_prop}}</div>
         </div>
 
 
-        <div class="col-4">
-            <div class="text-sm font-bold text-600 mb-1">Email</div>
-            <div class="font-medium"></div>
-        </div>
 
         <div class="col-4">
             <div class="text-sm font-bold text-600 mb-1">Comisión</div>
-            <div class="font-medium">8% + Impuesto (8.86%)</div>
+            <div class="font-medium">{{arriendo.propiedad?.propietario?.pctje_cobro_honorario}}% + {{(ValidatorsGlobales | async)?.valor}}%</div>
         </div>
 
-        <div class="col-4">
+        <div class="col-4" *ngFor="let cuenta of arriendo.propiedad?.propietario?.cuentas_bancarias" >
             <div class="text-sm font-bold text-600 mb-1">Cuenta Bancaria</div>
-            <div class="font-medium">73309052 CTA. Corriente Banco BCI</div>
+            <div class="font-medium">{{cuenta.cuenta}} - {{cuenta.tipocuenta.nom_cuenta}} {{cuenta.banco.nombre_banco}}</div>
         </div>
 
-        <div class="col-12">
-            <div class="text-sm font-bold text-600 mb-1">Observaciones</div>
-            <div class="font-medium">Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis necessitatibus qui
-                in distinctio provident error hic, recusandae magni blanditiis veritatis natus minima id esse ex amet
-                aliquam, eos consequuntur enim.</div>
-        </div>
-
-        <div class="col-12">
-            <hr>
-        </div>
-
-        <div class="col-12">
-            <h4>Pagos</h4>
-        </div>
-
-        <div class="col-6">
-            <div class="flex flex-column gap-4">
-                <div class="font-medium flex gap-5">
-                    <div >5 JUL 2021</div>
-                    <div> $490.000</div>
-                </div>
-                <div class="font-medium flex gap-5">
-                    <div>5 AGO 2021</div>
-                    <div> $490.000</div>
-                </div>
-                <div class="font-medium flex gap-5">
-                    <div>5 SEP 2021</div>
-                    <div> $490.000</div>
-                </div>
-                <div class="font-medium flex gap-5">
-                    <div>REAJUSTE: IPC</div>
-                </div>
-                <div class="font-medium flex gap-5">
-                    <div>5 OCT 2021</div>
-                    <div> $</div>
-                </div>
-                <div class="font-medium flex gap-5">
-                    <div>5 NOV 2021</div>
-                    <div> $</div>
-                </div>
-                <div class="font-medium flex gap-5">
-                    <div>5 DIC 2021</div>
-                    <div> $</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-6">
-            <div class="flex flex-column gap-4">
-                <div class="font-medium flex gap-5">
-                    <div>REAJUSTE: IPC</div>
-                </div>
-                <div class="font-medium flex gap-5">
-                    <div>5 ENE 2022</div>
-                    <div>$</div>
-                </div>
-                <div class="font-medium flex gap-5">
-                    <div>5 FEB 2022</div>
-                    <div>$</div>
-                </div>
-                
-                <div class="font-medium flex gap-5">
-                    <div>5 MAR 2022</div>
-                    <div>$</div>
-                </div>
-                <div class="font-medium flex gap-5">
-                    <div>REAJUSTE: IPC</div>
-                </div>
-                <div class="font-medium flex gap-5">
-                    <div>5 ABRIL 2022</div>
-                    <div> $</div>
-                </div>
-                <div class="font-medium flex gap-5">
-                    <div>5 MAYO 2022</div>
-                    <div> $</div>
-                </div>
-                <div class="font-medium flex gap-5">
-                    <div>5 JUNIO 2022</div>
-                    <div> $</div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="col-12">
-            <hr>
-        </div>
+        <div class="col-12"><hr></div>
 
         <div class="col-12">
             <div class="flex">

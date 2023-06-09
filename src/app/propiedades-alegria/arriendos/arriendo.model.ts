@@ -9,7 +9,7 @@ export interface ArriendoForm{
     dia_pago: number;
 
     periodo_reajuste: number;
-    
+
     valor_arriendo: number;
 
     fecha_entrega: Date | null;
@@ -52,10 +52,10 @@ export interface Arriendo{
     estado_arriendo: boolean;
 
     observaciones: string | null;
-    detalle_arriendos: DetalleArriendo[]
+    detalle_arriendos: DetalleArriendo[];
+
 
 }
-
 
 export interface Arrendatario {
     id:           number;
@@ -111,6 +111,7 @@ export interface Propietario {
     pctje_cobro_honorario: number;
     comuna:                number;
     personalidad_juridica: number | null;
+    cuentas_bancarias: Cuentasbancaria[];
 }
 
 export interface Tipopropiedad {
@@ -118,3 +119,23 @@ export interface Tipopropiedad {
     nombre_tipoppdd:      string;
     descripcion_tipoppdd: string;
 }
+
+export interface Cuentasbancaria {
+    id: number;
+    banco: Banco;
+    tipocuenta: Tipocuenta;
+    cuenta: number;
+    estado_cuenta: string;
+    propietario_rut: string;
+    rut_tercero?: any;
+  }
+
+export interface Tipocuenta {
+    id: number;
+    nom_cuenta: string;
+  }
+
+export interface Banco {
+    id: number;
+    nombre_banco: string;
+  }
