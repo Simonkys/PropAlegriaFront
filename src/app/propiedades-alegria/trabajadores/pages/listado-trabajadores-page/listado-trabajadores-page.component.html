@@ -2,8 +2,9 @@
     <h4>Trabajadores</h4>
     <p-table #dt1 *ngIf="trabajadores$ | async as trabajadores" [columns]="cols" [value]="trabajadores"
         [paginator]="true" [rows]="5" [globalFilterFields]="globalFilterFields">
+
         <ng-template pTemplate="caption">
-            <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
+            <div class="caption-table">
                 
                 <!-- Botón REGISTRAR -->
                 <button pButton pRipple
@@ -13,15 +14,17 @@
                     label="Registrar"
                     (click)="goToRegistroTrabajador()">
                 </button>
-                
-                    <span class="flex mt-2 md:mt-0 p-input-icon-left align-items-center justify-content-center">
-                    <i class="pi pi-search"></i>
-                    <input pInputText type="text" placeholder="Filtre por nombre aquí" class="w-full sm:w-auto mr-2" (input)="
-                            dt1.filterGlobal(
-                                $any($event.target).value,
-                                'contains'
-                            )
-                        " />
+
+                <div class="caption-filter">
+                    <span class="p-input-icon-left ml-auto">
+                        <i class="pi pi-search"></i>
+                        <input pInputText type="text" placeholder="Filtre por nombre aquí" class="w-full sm:w-auto mr-2" (input)="
+                                dt1.filterGlobal(
+                                    $any($event.target).value,
+                                    'contains'
+                                )
+                            "/>
+                    </span>
                     <!-- Botón LIMPIAR -->
                     <button pButton pRipple
                         icon="pi pi-filter-slash"
@@ -30,7 +33,7 @@
                         label="Limpiar"
                         (click)="clear(dt1)">
                     </button>
-                </span>
+                </div>
             </div>
         </ng-template>
         <ng-template pTemplate="header" let-columns>

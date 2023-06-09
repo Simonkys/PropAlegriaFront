@@ -1346,7 +1346,7 @@ p-inputswitch.ng-dirty.ng-invalid>.p-inputswitch {
     outline: 0 none;
     outline-offset: 0;
     box-shadow: none;
-    border-color: #3f51b5
+    border-color: #006C86;
 }
 
 .p-inputtext.ng-dirty.ng-invalid {
@@ -8627,7 +8627,7 @@ p-dropdown.ng-dirty.ng-invalid .p-dropdown:not(.p-disabled).p-focus {
 }
 
 .p-inputtext:enabled:focus {
-    box-shadow: inset 0 0 0 1px #3f51b5, inset 0 0 0 1px #3f51b5, inset 0 0 0 1px #3f51b5, inset 0 0 0 1px #3f51b5
+    box-shadow: inset 0 0 0 1px #006C86, inset 0 0 0 1px #006C86, inset 0 0 0 1px #006C86, inset 0 0 0 1px #006C86
 }
 
 .p-inputtext:enabled:focus.ng-invalid.ng-dirty {

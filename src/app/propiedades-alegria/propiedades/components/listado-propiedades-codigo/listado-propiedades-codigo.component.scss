@@ -6,7 +6,7 @@
 
 .caption-filter {
     display: flex;
-    align-items: center;
+    align-items: right;
     gap: 20px;
 }
 
@@ -38,7 +38,3 @@ td:nth-child(5) {
 td:last-child {
     width: 10%;
 }
-
-// td {
-//     padding-block: 2px !important;
-// }
