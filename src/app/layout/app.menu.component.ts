@@ -27,18 +27,12 @@ export class AppMenuComponent {
             icon: 'pi pi-fw pi-home',
             routerLink: ['/dashboard'],
         }
+
         const trabajadores = {
             label: 'Trabajadores',
             icon: 'pi pi-fw pi-user',
             routerLink: ['/trabajadores/listado'],
         }
-
-        const propiedades = {
-            label: 'Propiedades',
-            icon: 'pi pi-fw pi-building',
-            routerLink: ['/propiedades/listado'],
-        }
-
         const propietarios = {
             label: 'Propietarios',
             icon: 'pi pi-fw pi-id-card',
@@ -50,6 +44,13 @@ export class AppMenuComponent {
             icon: 'pi pi-fw pi-users',
             routerLink: ['/arrendatarios/listado'],
         }
+
+        const propiedades = {
+            label: 'Propiedades',
+            icon: 'pi pi-fw pi-building',
+            routerLink: ['/propiedades/listado'],
+        }
+
 
         const arriendos = {
             label: 'Arriendos',
@@ -63,12 +64,11 @@ export class AppMenuComponent {
             routerLink: ['/usuarios/listado'],
         }
 
-
         if(user.usuario.is_superuser) {
             return [
                 {
                     label: 'Administracion',
-                    items: [dashboard, trabajadores, propiedades, propietarios, arrendatarios, arriendos]
+                    items: [dashboard, trabajadores, propietarios, arrendatarios, propiedades, arriendos]
                 },
                 {
                     label: 'Seguridad',
@@ -80,7 +80,7 @@ export class AppMenuComponent {
             return [
                 {
                     label: 'Administracion',
-                    items: [dashboard, trabajadores, propiedades, propietarios, arrendatarios, arriendos]
+                    items: [dashboard, trabajadores, propietarios, arrendatarios, propiedades, arriendos]
                 },
             ]
         } else {
