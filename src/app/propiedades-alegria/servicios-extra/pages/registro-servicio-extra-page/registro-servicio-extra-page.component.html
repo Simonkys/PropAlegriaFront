@@ -1,0 +1,8 @@
+<div class="card">
+    <h2>Registro Servicio Extra</h2>
+    <app-servicios-extra-form
+        [propiedadId]="propiedad!.id"
+        (submitEvent)="handleSubmitEvent($event)"
+        (cancelEvent)="handleCancelEvent()"
+    ></app-servicios-extra-form>
+</div>
