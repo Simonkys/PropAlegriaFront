@@ -5,13 +5,6 @@
 
     <div class="grid" [style]="{width: '100%'}">
 
-        <div class="col-12"><hr></div>
-
-        <div class="col-3">
-            <div class="text-sm font-bold text-600 mb-1">Propiedad</div>
-            <div class="font-medium">{{servicioExtra.propiedad ?? '---'}}</div>
-        </div>
-
         <div class="col-3">
             <div class="text-sm font-bold text-600 mb-1">Nombre</div>
             <div class="font-medium">{{servicioExtra.nom_servicio}}</div>
@@ -24,7 +17,7 @@
 
         <div class="col-3">
             <div class="text-sm font-bold text-600 mb-1">Fecha</div>
-            <div class="font-medium">{{(servicioExtra.fecha | date:'dd/MM/yyyy') ?? '---'}}</div>
+            <div class="font-medium">{{(servicioExtra.fecha) ?? '---'}}</div>
         </div>
 
         <div class="col-3">
@@ -35,16 +28,6 @@
         <div class="col-3">
             <div class="text-sm font-bold text-600 mb-1">N° de cuotas</div>
             <div class="font-medium">{{servicioExtra.nro_cuotas}}</div>
-        </div>
-
-        <div class="col-3">
-            <div class="text-sm font-bold text-600 mb-1">Monto de cuota</div>
-            <div class="font-medium">{{servicioExtra.monto_cuotas}}</div>
-        </div>
-
-        <div class="col-3">
-            <div class="text-sm font-bold text-600 mb-1">Cuotas pagadas</div>
-            <div class="font-medium">{{servicioExtra.contador_cuotas}}</div>
         </div>
 
         <div class="col-12">

@@ -28,20 +28,20 @@ import { MensajeService } from '../core/services/message.service';
         private servicioExtraLoaded = false;
 
     // List
-    getServiciosExtra() {
-        if (this.servicioExtraLoaded) {
-            return this.servicioExtraSubject.asObservable();
-        }
+    getServiciosExtra(query: {} = {}) {
+        // if (this.servicioExtraLoaded) {
+        //     return this.servicioExtraSubject.asObservable();
+        // }
   
         return this.http
-            .get<ServiciosExtra[]>(`${environment.apiUrl}/api/servicios_extras/`)
-            .pipe(
-                switchMap((data) => {
-                    this.servicioExtraSubject.next(data);
-                    this.servicioExtraLoaded = true;
-                    return this.servicioExtraSubject;
-                })
-            );
+            .get<ServiciosExtra[]>(`${environment.apiUrl}/api/servicios_extras/`, {params: query})
+            // .pipe(
+            //     tap((data) => {
+            //         this.servicioExtraSubject.next(data);
+            //         this.servicioExtraLoaded = true;
+            //         return this.servicioExtraSubject;
+            //     })
+            // );
     }
 
     // Retrieve

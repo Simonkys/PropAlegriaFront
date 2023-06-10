@@ -1,9 +1,9 @@
-<ng-container *ngIf="servicioExtra">
+<ng-container *ngIf="servicioExtra$ | async as servicioExtra">
     <div class="grid">
 
         <div class="col-3">
             <div class="text-sm font-bold text-600 mb-1">Propiedad</div>
-            <div class="font-medium">{{servicioExtra.propiedad ?? '- - - -'}}</div>
+            <div class="font-medium">{{servicioExtra.propiedad}}</div>
         </div>
 
         <div class="col-3">
@@ -29,16 +29,6 @@
         <div class="col-3">
             <div class="text-sm font-bold text-600 mb-1">N° de cuotas</div>
             <div class="font-medium">{{servicioExtra.nro_cuotas}}</div>
-        </div>
-
-        <div class="col-3">
-            <div class="text-sm font-bold text-600 mb-1">Monto de cuota</div>
-            <div class="font-medium">{{servicioExtra.monto_cuotas}}</div>
-        </div>
-
-        <div class="col-3">
-            <div class="text-sm font-bold text-600 mb-1">Contador cuota</div>
-            <div class="font-medium">{{servicioExtra.contador_cuotas}}</div>
         </div>
 
     </div>

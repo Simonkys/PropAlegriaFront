@@ -30,6 +30,7 @@
         </div>
     </div>
 
+    <!-- Card ARRIENDO -->
     <div class="card">
         <div *ngIf="arriendos.length === 0; else Arriendo">
             <p>Esta propiedad no tiene un arriendo en curso</p>
@@ -58,5 +59,15 @@
             </div>
             
         </ng-template>
+    </div>
+
+    <!-- Card SERVICIOS EXTRA -->
+    <div class="card">
+        <h4>Servicios Extra</h4>
+        <app-listado-servicios-extra
+            [serviciosExtra]="serviciosExtra"
+            (registrarEvent)="registrarServicioExtra()">
+
+        </app-listado-servicios-extra>
     </div>
 </ng-container>

@@ -3,20 +3,21 @@ import { CommonModule } from '@angular/common';
 
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
+import { TooltipModule } from 'primeng/tooltip';
 
-import { ServiciosExtraTable } from '../../servicios-extra.model';
+import { ServiciosExtra } from '../../servicios-extra.model';
 
 
 @Component({
   selector: 'app-listado-servicios-extra',
   standalone: true,
-  imports: [CommonModule, ButtonModule, TableModule],
+  imports: [CommonModule, ButtonModule, TableModule, TooltipModule],
   templateUrl: './listado-servicios-extra.component.html',
   styleUrls: ['./listado-servicios-extra.component.scss']
 })
 export class ListadoServiciosExtraComponent {
 
-  @Input() serviciosExtra: ServiciosExtraTable[] = [];
+  @Input() serviciosExtra: ServiciosExtra[] = [];
 
   @Output() registrarEvent = new EventEmitter()
   @Output() detalleEvent = new EventEmitter<number>()
@@ -26,7 +27,7 @@ export class ListadoServiciosExtraComponent {
     this.registrarEvent.emit()
   }
 
-  detalle(serviciosExtra: ServiciosExtraTable) {
+  detalle(serviciosExtra: ServiciosExtra) {
     this.detalleEvent.emit(serviciosExtra.id)
   }
 

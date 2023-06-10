@@ -3,7 +3,7 @@ import { CommonModule, Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { map, switchMap } from 'rxjs';
 
-import { ServiciosExtra } from '../../servicios-extra.model';
+import { ServiciosExtraForm } from '../../servicios-extra.model';
 import { ServiciosExtraService } from '../../servicios-extra.service';
 import { ServiciosExtraFormComponent } from '../../components/servicios-extra-form/servicios-extra-form.component';
 
@@ -25,7 +25,7 @@ export class ActualizarServicioExtraPageComponent {
     switchMap(id => this.serviciosExtraService.getServicioExtraById(id))
   )
 
-  handleSubmitEvent(servicioExtra: ServiciosExtra) {
+  handleSubmitEvent(servicioExtra: ServiciosExtraForm) {
     this.location.back();
   }
 

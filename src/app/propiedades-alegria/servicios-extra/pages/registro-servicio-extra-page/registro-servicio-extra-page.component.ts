@@ -22,6 +22,10 @@ export class RegistroServicioExtraPageComponent implements OnInit {
   ngOnInit(): void {
     const state: any = this.location.getState();
     this.propiedad = state['propiedad']
+
+    if (!this.propiedad) {
+      this.location.back()
+    }  
   }
 
   handleSubmitEvent(serviciosExtraForm: ServiciosExtraForm) {

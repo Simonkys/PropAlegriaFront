@@ -10,11 +10,13 @@ import {
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { DropdownModule } from 'primeng/dropdown';
-import { TooltipModule } from 'primeng/tooltip';
 import { KeyFilterModule } from 'primeng/keyfilter';
+import { CalendarModule } from 'primeng/calendar';
+import { InputNumberModule } from 'primeng/inputnumber';
 
 import { ServiciosExtraService } from '../../servicios-extra.service';
 import { ServiciosExtra, ServiciosExtraForm } from '../../servicios-extra.model';
+
 
 @Component({
   selector: 'app-servicios-extra-form',
@@ -22,11 +24,12 @@ import { ServiciosExtra, ServiciosExtraForm } from '../../servicios-extra.model'
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    InputNumberModule,
     InputTextModule,
     DropdownModule,
     ButtonModule,
-    TooltipModule,
     KeyFilterModule,
+    CalendarModule,
   ],
   templateUrl: './servicios-extra-form.component.html',
   styleUrls: ['./servicios-extra-form.component.scss']
@@ -34,6 +37,7 @@ import { ServiciosExtra, ServiciosExtraForm } from '../../servicios-extra.model'
 export class ServiciosExtraFormComponent implements OnInit {
 
   @Input() servicioExtra?: ServiciosExtra
+  @Input() propiedadId?: number
 
   @Output() submitEvent = new EventEmitter<ServiciosExtraForm>()
   @Output() cancelEvent = new EventEmitter()
@@ -42,14 +46,12 @@ export class ServiciosExtraFormComponent implements OnInit {
   serviciosExtraService = inject(ServiciosExtraService);
 
   form = this.fb.group({
-    propiedad: this.fb.control<number | null>(null, [Validators.required]),
+    propiedad: this.fb.nonNullable.control<number | null>(null, [Validators.required]),
     nom_servicio: this.fb.nonNullable.control<string>('', [Validators.required, Validators.maxLength(150)]),
     descripcion: this.fb.nonNullable.control<string>('', [Validators.required, Validators.maxLength(250)]),
     fecha: this.fb.control<Date>(new Date(), [Validators.required]),
-    monto: this.fb.nonNullable.control<number>(0, [Validators.required]),
-    nro_cuotas: this.fb.nonNullable.control<number>(1, [Validators.required]),
-    monto_cuotas: this.fb.nonNullable.control<number>(0, [Validators.required]),
-    contador_cuotas: this.fb.nonNullable.control<number>(0, [Validators.required]),
+    monto: this.fb.nonNullable.control<number>(0, [Validators.required, Validators.min(0), Validators.max(999999999)]),
+    nro_cuotas: this.fb.nonNullable.control<number>(1, [Validators.required, Validators.min(1), Validators.max(99)]),
   });
 
   ngOnInit(): void {
@@ -61,8 +63,10 @@ export class ServiciosExtraFormComponent implements OnInit {
         fecha: this.servicioExtra.fecha,
         monto: this.servicioExtra.monto,
         nro_cuotas: this.servicioExtra.nro_cuotas,
-        monto_cuotas: this.servicioExtra.monto_cuotas,
-        contador_cuotas: this.servicioExtra.contador_cuotas,
+      })
+    } else {
+      this.form.patchValue({
+        propiedad: this.propiedadId,
       })
     }
   }
@@ -73,14 +77,12 @@ export class ServiciosExtraFormComponent implements OnInit {
     const values = this.form.getRawValue();
     const serviciosExtraForm: ServiciosExtraForm = {
       id: this.servicioExtra?.id,
-      propiedad: values.propiedad,
+      propiedad: values.propiedad!,
       nom_servicio: values.nom_servicio,
       descripcion: values.descripcion,
       fecha: values.fecha,
       monto: values.monto,
       nro_cuotas: values.nro_cuotas,
-      monto_cuotas: values.monto_cuotas,
-      contador_cuotas: values.contador_cuotas,
     }
     this.submitEvent.emit(serviciosExtraForm)
   }
