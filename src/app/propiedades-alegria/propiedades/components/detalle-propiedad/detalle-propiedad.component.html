@@ -11,14 +11,13 @@
 
         <div class="col 3">
             <div class="text-sm font-bold text-600 mb-1">Propietario</div>
-            <div class="font-medium ">
-                <p-button
-                    [label]="propiedad.propietario.pri_ape_prop + ' ' + propiedad.propietario.pri_nom_prop"
-                    styleClass="p-button-link text-left p-0" 
-                    routerLink='/propietarios/{{propiedad.propietario.id}}/detalle'>
-                </p-button>
-
-            </div>
+            <button pButton pRipple
+                icon="pi pi-user"
+                class="p-button-text mr-2"
+                style="color:#006C86; width: 200px;"
+                label="{{ propiedad.propietario.pri_nom_prop + ' ' + propiedad.propietario.pri_ape_prop}}"
+                [routerLink]="['/propietarios', propiedad.propietario.id,'detalle']">
+            </button>
         </div>
 
         <div class="col-6">
