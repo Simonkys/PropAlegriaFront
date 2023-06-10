@@ -64,9 +64,8 @@
     <div class="card">
         <h4>Servicios Extra</h4>
         <app-listado-servicios-extra
-            [serviciosExtra]="serviciosExtra"
-            (registrarEvent)="registrarServicioExtra()">
-
+            [propiedadId]="propiedad.id"
+            (registrarEvent)="registrarServicioExtra(propiedad)">
         </app-listado-servicios-extra>
     </div>
 </ng-container>

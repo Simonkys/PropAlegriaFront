@@ -10,7 +10,6 @@ import { environment } from 'src/environments/environment';
 import {
     BehaviorSubject,
     catchError,
-    switchMap,
     tap,
     throwError,
 } from 'rxjs';
@@ -75,7 +74,7 @@ import { MensajeService } from '../core/services/message.service';
     }
 
     // Update
-    actualizarServicioExtra(servicioExtra: ServiciosExtraForm) {
+    actualizarServicioExtra(servicioExtra: ServiciosExtra) {
         return this.http
             .put<ServiciosExtra>(
                 `${environment.apiUrl}/api/servicios_extras/${servicioExtra.id}/`,
@@ -88,7 +87,7 @@ import { MensajeService } from '../core/services/message.service';
                     });
                     this.servicioExtraSubject.next([...filterData]);
                     this.messageService.addMessage({
-                        details: ['Servicio Extra actualizado'],
+                        details: ['Registro actualizado'],
                         role: 'success'
                     })
                     return data;
@@ -98,9 +97,9 @@ import { MensajeService } from '../core/services/message.service';
     }
 
     // Partial Update
-    patchValue(servicioExtra: Partial<ServiciosExtraForm>) {
+    patchValue(servicioExtra: Partial<ServiciosExtraForm>, servicioExtraId: number) {
         return this.http.patch<ServiciosExtra>(
-            `${environment.apiUrl}/api/servicios_extras/${servicioExtra.id}/`,
+            `${environment.apiUrl}/api/servicios_extras/${servicioExtraId}/`,
             servicioExtra
         ).pipe(
             tap((data) => {
@@ -130,6 +129,7 @@ import { MensajeService } from '../core/services/message.service';
                 })
             );
       }
+
 
     // Manejo de errores
     private handleError(error: HttpErrorResponse) {

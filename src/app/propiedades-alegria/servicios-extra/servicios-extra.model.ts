@@ -3,7 +3,7 @@ export interface ServiciosExtra {
     propiedad: number;
     nom_servicio: string;
     descripcion: string;
-    fecha: Date | null;
+    fecha: Date;
     monto: number;
     nro_cuotas: number;
     monto_cuotas: number;

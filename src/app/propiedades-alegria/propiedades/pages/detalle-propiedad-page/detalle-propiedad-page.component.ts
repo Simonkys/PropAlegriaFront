@@ -39,7 +39,7 @@ export class DetallePropiedadPageComponent implements OnDestroy, OnInit {
   confimService = inject(ConfirmationService);
   propiedadService = inject(PropiedadesService);
   arriendoService = inject(ArriendoService);
-  servicioExtraService = inject(ServiciosExtraService);
+  
 
   route = inject(ActivatedRoute);
   router = inject(Router);
@@ -47,7 +47,6 @@ export class DetallePropiedadPageComponent implements OnDestroy, OnInit {
 
   propiedad?: Propiedad
   arriendos: TablaArriendo[] = []
-  serviciosExtra: ServiciosExtra[] = []
 
   sub?: Subscription
 
@@ -57,13 +56,12 @@ export class DetallePropiedadPageComponent implements OnDestroy, OnInit {
       switchMap(id => {
         const propiedad$ = this.propiedadService.getPropiedad(id)
         const arriendos$ = this.arriendoService.getArriendos({propiedad: id, estado_arriendo: true})
-        const servicioExtra$ = this.servicioExtraService.getServiciosExtra({propiedad: id})
-        return forkJoin([propiedad$, arriendos$, servicioExtra$])
+        
+        return forkJoin([propiedad$, arriendos$])
       })
-    ).subscribe(([propiedad, arriendos, serviciosExtra]) => {
+    ).subscribe(([propiedad, arriendos]) => {
       this.propiedad = propiedad
       this.arriendos = arriendos
-      this.serviciosExtra = serviciosExtra
     })
   }
 
@@ -102,8 +100,8 @@ export class DetallePropiedadPageComponent implements OnDestroy, OnInit {
     this.router.navigate(['arriendos', 'registro'], {state: {propiedad}})
   }
 
-  registrarServicioExtra() {
-    this.router.navigate(['servicios-extra', 'registro'], {state: {propiedad: this.propiedad}})
+  registrarServicioExtra(propiedad: Propiedad) {
+    this.router.navigate(['servicios-extra', 'registro'], {state: {propiedadId: propiedad.id}})
   }
 
 }

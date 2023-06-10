@@ -3,7 +3,6 @@ import { CommonModule, Location } from '@angular/common';
 import { ServiciosExtraFormComponent } from '../../components/servicios-extra-form/servicios-extra-form.component';
 import { ServiciosExtraForm } from '../../servicios-extra.model';
 import { ServiciosExtraService } from '../../servicios-extra.service';
-import { Propiedad } from 'src/app/propiedades-alegria/propiedades/propiedad.model';
 
 
 @Component({
@@ -17,13 +16,13 @@ export class RegistroServicioExtraPageComponent implements OnInit {
 
   location = inject(Location)
   servicioExtraService = inject(ServiciosExtraService)
-  propiedad?: Propiedad
+  propiedadId?: number
 
   ngOnInit(): void {
     const state: any = this.location.getState();
-    this.propiedad = state['propiedad']
+    this.propiedadId = state['propiedadId']
 
-    if (!this.propiedad) {
+    if (!this.propiedadId) {
       this.location.back()
     }  
   }

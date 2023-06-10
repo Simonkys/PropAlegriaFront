@@ -1,5 +1,7 @@
-<p-table [value]="serviciosExtra" [tableStyle]="{'min-width': '50rem'}">
-    
+<p-table 
+    *ngIf="serviciosExtra$ | async as sextra"
+    [value]="sextra" [tableStyle]="{'min-width': '50rem'}"
+>
     <ng-template pTemplate="caption">
         <div class="caption-table right-100">
             <!-- Botón REGISTRAR -->
@@ -20,6 +22,7 @@
             <th class="font-bold">Total</th>
             <th class="font-bold">Cuotas</th>
             <th class="font-bold">Valor cuota</th>
+            <th></th>
         </tr>
     </ng-template>
     
@@ -33,6 +36,21 @@
             <td>$ {{servicioExtra.monto | number}}</td>
             <td>{{servicioExtra.contador_cuotas}}/{{servicioExtra.nro_cuotas}}</td>
             <td>$ {{servicioExtra.monto_cuotas | number}}</td>
+            <td *ngIf="tieneCuotasPorPagar(servicioExtra); else CuotasPagadas">
+                <p-confirmPopup></p-confirmPopup>
+                <p-button 
+                    (click)="marcarCuotaPagada(servicioExtra, $event)"
+                    styleClass="p-button-warning" 
+                    icon="pi pi-plus" 
+                    tooltipPosition="left" 
+                    [pTooltip]="'Marcar cuota n°' + (servicioExtra.contador_cuotas+1) + ' pagada.'">
+                </p-button>
+            </td>
+            <ng-template #CuotasPagadas>
+                <td>
+                    <p-tag value="Pagado" severity="success"></p-tag>
+                </td>
+            </ng-template>
         </tr>
     </ng-template>
 
