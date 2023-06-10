@@ -8,7 +8,6 @@ import {
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import {
-    BehaviorSubject,
     catchError,
     map,
     tap,
@@ -24,34 +23,13 @@ import { MensajeService } from '../core/services/message.service';
         private http = inject(HttpClient);
         private messageService = inject(MensajeService);
     
-        private servicioExtraSubject = new BehaviorSubject<ServiciosExtra[]>([]);
-        private servicioExtraLoaded = false;
-
     // List
     getServiciosExtra(query: {} = {}) {
-        // if (this.servicioExtraLoaded) {
-        //     return this.servicioExtraSubject.asObservable();
-        // }
-  
+
         return this.http
             .get<ServiciosExtra[]>(`${environment.apiUrl}/api/servicios_extras/`, {params: query}).pipe(
-                map((servicios) => servicios.map(s => {
-                    return {
-                        ...s, 
-                        fecha: new Date(s.fecha),
-                        pagado: s.contador_cuotas >= s.nro_cuotas,
-                        monto_cuotas: s.monto / s.nro_cuotas
-                    }
-                }))
+                map((servicios) => servicios.map(s => this._mapper(s)))
             )
-            
-            // .pipe(
-            //     tap((data) => {
-            //         this.servicioExtraSubject.next(data);
-            //         this.servicioExtraLoaded = true;
-            //         return this.servicioExtraSubject;
-            //     })
-            // );
     }
 
     // Retrieve
@@ -69,16 +47,12 @@ import { MensajeService } from '../core/services/message.service';
                 servicioExtra
             )
             .pipe(
+                map(s => this._mapper(s)),
                 tap((data) => {
-                    this.servicioExtraSubject.next([
-                        data,
-                        ...this.servicioExtraSubject.value,
-                    ]);
                     this.messageService.addMessage({
-                        details: ['Servicio Extra registrado'],
+                        details: ['Servicio registrado'],
                         role: 'success'
                     })
-                    return data;
                 }),
                 catchError((error: HttpErrorResponse) => this.handleError(error))
             );
@@ -92,16 +66,12 @@ import { MensajeService } from '../core/services/message.service';
                 servicioExtra
             )
             .pipe(
+                map(s => this._mapper(s)),
                 tap((data) => {
-                    const filterData = this.servicioExtraSubject.value.map((d) => {
-                        return d.id === data.id ? data : d;
-                    });
-                    this.servicioExtraSubject.next([...filterData]);
                     this.messageService.addMessage({
-                        details: ['Registro actualizado'],
+                        details: ['Servicio actualizado'],
                         role: 'success'
                     })
-                    return data;
                 }),
                 catchError((error: HttpErrorResponse) => this.handleError(error))
             );
@@ -113,12 +83,7 @@ import { MensajeService } from '../core/services/message.service';
             `${environment.apiUrl}/api/servicios_extras/${servicioExtraId}/`,
             servicioExtra
         ).pipe(
-            tap((data) => {
-                const filterData = this.servicioExtraSubject.value.map((d) => {
-                    return d.id === data.id ? data : d;
-                });
-                this.servicioExtraSubject.next([...filterData]);
-            }),
+            tap((data) => {}),
             catchError((error: HttpErrorResponse) => this.handleError(error))
         );
     }
@@ -129,17 +94,23 @@ import { MensajeService } from '../core/services/message.service';
             .delete(`${environment.apiUrl}/api/servicios_extras/${servicioExtra.id}/`)
             .pipe(
                 tap((_) => {
-                    const filterData = this.servicioExtraSubject.value.filter(
-                        (d) => d.id !== servicioExtra.id
-                    );
-                    this.servicioExtraSubject.next([...filterData]);
                     this.messageService.addMessage({
-                        details: ['Servicio Extra eliminado'],
+                        details: ['Servicio eliminado'],
                         role: 'info'
                     })
                 })
             );
       }
+
+    
+    private _mapper(s: ServiciosExtra): ServiciosExtra {
+        return {
+            ...s, 
+            fecha: new Date(s.fecha),
+            pagado: s.contador_cuotas >= s.nro_cuotas,
+            monto_cuotas: s.monto / s.nro_cuotas
+        }
+    }
 
 
     // Manejo de errores
@@ -154,13 +125,5 @@ import { MensajeService } from '../core/services/message.service';
         return throwError(() => error);
     }
 
-    // Recarga
-    reload() {
-        this.servicioExtraLoaded = false
-    }
-  
-    constructor() { 
-  
-    }
 
 }

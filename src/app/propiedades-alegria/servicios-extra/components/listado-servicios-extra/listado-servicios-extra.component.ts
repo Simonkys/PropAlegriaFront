@@ -74,7 +74,7 @@ export class ListadoServiciosExtraComponent implements OnInit, OnDestroy {
     this.ref.onClose.subscribe((servicioExtraForm) => {
       if(servicioExtraForm) {
         this.servicioExtraService.actualizarServicioExtra(servicioExtraForm, servicioExtra.id).subscribe((servicioActualizado) => {
-          this.serviciosExtra = this.serviciosExtra.map(s => s.id === servicioExtra.id ? servicioActualizado : s)
+          this.serviciosExtra = this.serviciosExtra.map(s => s.id === servicioActualizado.id ? servicioActualizado : s)
         })
       }
     })
@@ -83,7 +83,7 @@ export class ListadoServiciosExtraComponent implements OnInit, OnDestroy {
 
   registrar(propiedadId: number) {
     this.ref = this.dialogService.open(ServiciosExtraFormComponent ,{
-      header: "Registrar servicioo",
+      header: "Registrar servicio",
       draggable: true,
       data: { propiedadId: propiedadId }
     })
@@ -98,9 +98,9 @@ export class ListadoServiciosExtraComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if(this.ref){
-      this.ref?.destroy()
-    }
+    if(this.ref){ this.ref?.destroy() }
+
+    if(this.sub){ this.sub.unsubscribe() }
   }
   
 
