@@ -111,12 +111,72 @@
 
         <div class="col-4">
             <div class="text-sm font-bold text-600 mb-1">Comisión</div>
-            <div class="font-medium">{{arriendo.propiedad?.propietario?.pctje_cobro_honorario}}% + {{(ValidatorsGlobales | async)?.valor}}%</div>
+            <div class="font-medium">{{arriendo.propiedad?.propietario?.pctje_cobro_honorario}}% + {{(ValidatorsGlobales$ | async)?.valor}}%</div>
         </div>
 
         <div class="col-4" *ngFor="let cuenta of arriendo.propiedad?.propietario?.cuentas_bancarias" >
             <div class="text-sm font-bold text-600 mb-1">Cuenta Bancaria</div>
             <div class="font-medium">{{cuenta.cuenta}} - {{cuenta.tipocuenta.nom_cuenta}} {{cuenta.banco.nombre_banco}}</div>
+        </div>
+
+        <div class="col-12"><hr></div>
+
+        <div class="ml-3 w-12">
+            <h4>Pagos arriendo</h4>
+        </div>
+
+        <div class="col-12">
+            <p-table *ngIf="detalleArriendos$ | async as detalles"  [value]="detalles">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Fecha a pagar</th>
+                        <th>Monto a pagar</th>
+                        <th>Fecha pagada</th>
+                        <th>Monto pagado</th>
+                        <th>Accion</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-detalleArr let-i="rowIndex">
+                    <tr >
+                        <td>{{detalleArr.fecha_a_pagar}}</td>
+                        <td>
+                            {{ detalleArr.monto_a_pagar ? '$'+(detalleArr.monto_a_pagar | number) : '- - - - - -' }}
+                        </td>
+                        <td>{{(detalleArr.fecha_pagada) ?? '- - - - - -'}}</td>
+                        <td >
+                            {{detalleArr.monto_pagado ? '$'+(detalleArr.monto_pagado | number) : '- - - - - -'}}
+                        </td>
+                        <td>
+                            <p-button 
+                                *ngIf="detalleArr.monto_a_pagar"
+                                icon="pi pi-plus" 
+                                label="Registrar pago"
+                                styleClass="p-button-success p-button-sm"
+                                (click)="registrarPago(detalleArr)"
+                            >
+                            </p-button>
+                            <p-button
+                                *ngIf="detalleArr.toca_reajuste"
+                                icon="pi pi-plus" 
+                                label="Reajustar"
+                                styleClass="p-button-warning p-button-sm"
+                                (click)="abrirModalReajuste(detalleArr)"
+                            >
+                            </p-button>
+                            
+                            <p-button 
+                                *ngIf="!detalleArr.monto_a_pagar && !detalleArr.toca_reajuste"
+                                [disabled]="true"
+                                icon="pi pi-plus" 
+                                label="Registrar pago"
+                                styleClass="p-button-success p-button-sm"
+                            >
+                            </p-button>
+                            
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
         </div>
 
         <div class="col-12"><hr></div>
@@ -130,4 +190,5 @@
             </div>
         </div>
     </div>
+
 </ng-container>

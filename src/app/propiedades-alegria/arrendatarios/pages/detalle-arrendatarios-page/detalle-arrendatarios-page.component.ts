@@ -1,19 +1,17 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
-import { forkJoin, map, switchMap } from 'rxjs';
+import {  map, switchMap } from 'rxjs';
 
 import { ArrendatarioService } from '../../arrendatario.service';
-import { Arrendatario, ArriendoArrendatario } from '../../arrendatario.model';
+import { Arrendatario } from '../../arrendatario.model';
 import { DetalleArrendatarioComponent } from '../../components/detalle-arrendatario/detalle-arrendatario.component';
 import { FormularioCuentaBancariaComponent } from '../../../cuentas-bancarias/components/formulario-cuenta-bancaria/formulario-cuenta-bancaria.component';
 import { ListadoCuentaBancariaComponent } from '../../../cuentas-bancarias/components/listado-cuenta-bancaria/listado-cuenta-bancaria.component';
 import { CuentaBancaria } from '../../../cuentas-bancarias/cuenta-bancaria.models';
 import { CuentaBancariaService } from '../../../cuentas-bancarias/cuenta-bancaria.service';
-import { TableModule } from 'primeng/table';
+
 import { ButtonModule } from 'primeng/button';
-import { DetalleArriendo } from 'src/app/propiedades-alegria/core/models/detalle-arriendo.model';
-import { DetalleArriendoService } from 'src/app/propiedades-alegria/core/services/detalle-arriendo.service';
 
 
 @Component({
@@ -24,7 +22,6 @@ import { DetalleArriendoService } from 'src/app/propiedades-alegria/core/service
     DetalleArrendatarioComponent, 
     FormularioCuentaBancariaComponent, 
     ListadoCuentaBancariaComponent,
-    TableModule,
     ButtonModule
   ],
   templateUrl: './detalle-arrendatarios-page.component.html',
@@ -34,14 +31,12 @@ export class DetalleArrendatariosPageComponent implements OnInit {
 
   cuentaBancariaService = inject(CuentaBancariaService);
   arrendatarioService = inject(ArrendatarioService)
-  detalleArriendoService = inject(DetalleArriendoService)
 
   router = inject(Router)
   route = inject(ActivatedRoute)
   location = inject(Location)
 
   arrendatario?: Arrendatario;
-  arriendo: ArriendoArrendatario | null = null;
   
   creacionCuentaActiva: boolean = false;
   cuentaBancaria?: CuentaBancaria
@@ -50,23 +45,12 @@ export class DetalleArrendatariosPageComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.pipe(
       map(params => Number(params.get('id'))),
-
-      switchMap(id => this.arrendatarioService.getArrendatarioArriendo(id)),
-
-      switchMap(arrendatarioArriendo => {
-        const {arriendo, ...arrendatario} = arrendatarioArriendo
-
-        const cuentasBancarias$ = this.cuentaBancariaService.getCuentasBancariasByRut(arrendatario.rut_arr)
-
-        return forkJoin([cuentasBancarias$]).pipe(
-          map(([cuentasBancarias]) => {
-            return {cuentasBancarias, arrendatario, arriendo}
-          })
-        )
-      })
-    ).subscribe(({ arrendatario, arriendo}) => {
+      switchMap(id => this.arrendatarioService.getArrendatario(id)),
+      switchMap(arrendatario => this.cuentaBancariaService.getCuentasBancariasByRut(arrendatario.rut_arr).pipe(
+        map((cuentasBancarias) => arrendatario)
+      ))  
+    ).subscribe((arrendatario) => {
       this.arrendatario = arrendatario;
-      this.arriendo = arriendo;
     })
   }
 
@@ -103,11 +87,6 @@ export class DetalleArrendatariosPageComponent implements OnInit {
     this.creacionCuentaActiva = true;
   }
 
-  
-  editarPago(detalleArr: DetalleArriendo) {
-    this.router.navigate(['arrendatarios', 'registro-pago'], {state: {registroPago: detalleArr}})
-  }
-  
   volver() {
     this.location.back();
   }

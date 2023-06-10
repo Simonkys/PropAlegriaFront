@@ -16,8 +16,8 @@ export class DetalleArriendoService {
     private apiUrl = `${environment.apiUrl}/api/detalle_arriendo`
 
 
-    getDetallesArriendo() {
-        return this.http.get<DetalleArriendo[]>(`${this.apiUrl}/`);
+    getDetallesArriendo(params: {} = {}) {
+        return this.http.get<DetalleArriendo[]>(`${this.apiUrl}/`, { params });
     }
 
     registrarDetalleArriendo(detalleArriendo: DetalleArriendo) {
@@ -31,6 +31,8 @@ export class DetalleArriendoService {
             catchError((error: HttpErrorResponse) => this.handleError(error))
         )
     }
+
+    
 
 
     private handleError(error: HttpErrorResponse) {
