@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 
@@ -13,6 +13,11 @@ import { TokenInterceptor } from './propiedades-alegria/core/interceptors/token.
 import { ProductService } from './propiedades-alegria/dashboard/service/product.service';
 import { AuthService } from './propiedades-alegria/core/services/auth.service';
 
+import { registerLocaleData } from '@angular/common';
+import localeEsCl from '@angular/common/locales/es-CL';
+
+registerLocaleData(localeEsCl);
+
 
 @NgModule({
     declarations: [AppComponent],
@@ -22,6 +27,7 @@ import { AuthService } from './propiedades-alegria/core/services/auth.service';
         AuthService,
         MessageService,
         provideHttpClient(withInterceptors([TokenInterceptor])),
+        { provide: LOCALE_ID, useValue: "es-CL" }
     ],
     bootstrap: [AppComponent],
 })
