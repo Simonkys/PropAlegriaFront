@@ -39,7 +39,8 @@ import { MensajeService } from '../core/services/message.service';
                     return {
                         ...s, 
                         fecha: new Date(s.fecha),
-                        pagado: s.contador_cuotas >= s.nro_cuotas
+                        pagado: s.contador_cuotas >= s.nro_cuotas,
+                        monto_cuotas: s.monto / s.nro_cuotas
                     }
                 }))
             )
@@ -84,10 +85,10 @@ import { MensajeService } from '../core/services/message.service';
     }
 
     // Update
-    actualizarServicioExtra(servicioExtra: ServiciosExtra) {
+    actualizarServicioExtra(servicioExtra: ServiciosExtra, id: number) {
         return this.http
             .put<ServiciosExtra>(
-                `${environment.apiUrl}/api/servicios_extras/${servicioExtra.id}/`,
+                `${environment.apiUrl}/api/servicios_extras/${id}/`,
                 servicioExtra
             )
             .pipe(

@@ -6,8 +6,9 @@ export interface ServiciosExtra {
     fecha: Date;
     monto: number;
     nro_cuotas: number;
-    monto_cuotas: number;
     contador_cuotas: number;
+
+    monto_cuotas: number;
     pagado: boolean;
 }
 
@@ -19,4 +20,6 @@ export interface ServiciosExtraForm {
     fecha: Date | null;
     monto: number;
     nro_cuotas: number;
+    contador_cuotas: number;
+
 }

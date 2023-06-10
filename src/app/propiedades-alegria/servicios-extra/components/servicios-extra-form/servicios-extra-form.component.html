@@ -1,7 +1,6 @@
-<form [formGroup]="form">
-
-    <!-- Campo NOM_SERVICIO -->
-    <div class="grid mb-3">
+<form [formGroup]="form" style="width: 100%;">
+    <div class="grid my-3">
+        <!-- Campo NOM_SERVICIO -->
         <div class="col-6">
             <span class="p-float-label">
                 <input
@@ -14,11 +13,9 @@
                 <label>Nombre servicio *</label>
             </span>
         </div>
-    </div>
-
-    <!-- Campo DESCRIPCION -->
-    <div class="grid mb-3">
-        <div class="col-6">
+        
+        <!-- Campo DESCRIPCION -->
+        <div class="col-12">
             <span class="p-float-label">
                 <input
                     type="text"
@@ -30,13 +27,12 @@
                 <label>Descripción *</label>
             </span>
         </div>
-    </div>
-
-    <!-- Campo FECHA -->
-    <div class="grid mb-3">
+        
+        <!-- Campo FECHA -->
         <div class="col-6">
             <span class="p-float-label">
                 <p-calendar
+                    appendTo="body"
                     dateFormat="dd/mm/yy"
                     formControlName="fecha"
                     [showIcon]="true"
@@ -46,11 +42,9 @@
                 <label>Fecha *</label>
             </span>
         </div>
-    </div>
 
-    <!-- Campo MONTO -->
-    <div class="grid mb-3">
-        <div class="col-3">
+        <!-- Campo MONTO -->
+        <div class="col-6">
             <span class="p-float-label">
                 <p-inputNumber placeholder="$ 50.000 *" formControlName="monto" prefix="$ "
                     [style]="{ width: '100% !important;' }" inputId="integeronly" >
@@ -58,7 +52,8 @@
                 <label>Monto *</label>
             </span>
         </div>
-        <!-- Campo NRO_CUOTAS-->
+
+         <!-- Campo NRO_CUOTAS-->
         <div class="col-3">
             <span class="p-float-label">
                 <input pInputText pKeyFilter="int" placeholder="1" formControlName="nro_cuotas"
@@ -66,7 +61,21 @@
                 <label>N° de cuotas *</label>
             </span>
         </div>
+
+        <div class="col-3" *ngIf="servicioExtra">
+            <span class="p-float-label">
+                <p-inputNumber 
+                    mode="decimal" 
+                    formControlName="contador_cuotas" 
+                    [showButtons]="true" 
+                    inputId="minmax-buttons"
+                    [step]="1">
+                </p-inputNumber>
+                <label>Cuotas pagadas</label>
+            </span>
+        </div>
     </div>
+
 
     <div class="flex">
         <p-button

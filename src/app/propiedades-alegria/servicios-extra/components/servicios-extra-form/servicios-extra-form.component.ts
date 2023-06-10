@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import {
@@ -16,6 +16,7 @@ import { InputNumberModule } from 'primeng/inputnumber';
 
 import { ServiciosExtraService } from '../../servicios-extra.service';
 import { ServiciosExtra, ServiciosExtraForm } from '../../servicios-extra.model';
+import { DynamicDialogConfig, DynamicDialogModule, DynamicDialogRef } from 'primeng/dynamicdialog';
 
 
 @Component({
@@ -30,20 +31,23 @@ import { ServiciosExtra, ServiciosExtraForm } from '../../servicios-extra.model'
     ButtonModule,
     KeyFilterModule,
     CalendarModule,
+    DynamicDialogModule
   ],
   templateUrl: './servicios-extra-form.component.html',
   styleUrls: ['./servicios-extra-form.component.scss']
 })
 export class ServiciosExtraFormComponent implements OnInit {
 
-  @Input() servicioExtra?: ServiciosExtra
-  @Input() propiedadId?: number
-
-  @Output() submitEvent = new EventEmitter<ServiciosExtraForm>()
-  @Output() cancelEvent = new EventEmitter()
-  
   fb = inject(FormBuilder);
   serviciosExtraService = inject(ServiciosExtraService);
+
+  servicioExtra?: ServiciosExtra
+  propiedadId?: number
+
+
+  constructor(public ref: DynamicDialogRef, private conf: DynamicDialogConfig<any>) {}
+  
+  
 
   form = this.fb.group({
     propiedad: this.fb.nonNullable.control<number | null>(null, [Validators.required]),
@@ -52,9 +56,13 @@ export class ServiciosExtraFormComponent implements OnInit {
     fecha: this.fb.control<Date>(new Date(), [Validators.required]),
     monto: this.fb.nonNullable.control<number>(0, [Validators.required, Validators.min(0), Validators.max(999999999)]),
     nro_cuotas: this.fb.nonNullable.control<number>(1, [Validators.required, Validators.min(1), Validators.max(99)]),
+    contador_cuotas: this.fb.nonNullable.control<number>(0, [Validators.required, Validators.min(0)])
   });
 
   ngOnInit(): void {
+    this.servicioExtra = this.conf.data.servicioExtra;
+    this.propiedadId = this.conf.data.propiedadId;
+    
     if (this.servicioExtra) {
       this.form.patchValue({
         propiedad: this.servicioExtra.propiedad,
@@ -63,12 +71,27 @@ export class ServiciosExtraFormComponent implements OnInit {
         fecha: this.servicioExtra.fecha,
         monto: this.servicioExtra.monto,
         nro_cuotas: this.servicioExtra.nro_cuotas,
+        contador_cuotas: this.servicioExtra.contador_cuotas
       })
+
+      this.setcontadorCuotasMaxValue(this.servicioExtra.nro_cuotas)
+
     } else {
-      this.form.patchValue({
-        propiedad: this.propiedadId,
-      })
+      this.form.patchValue({ propiedad: this.propiedadId })
     }
+
+    this.form.get('nro_cuotas')?.valueChanges.subscribe((value) => {
+      if(value) {
+        console.log(value)
+        this.setcontadorCuotasMaxValue(value)
+      }
+    })
+  }
+
+  setcontadorCuotasMaxValue(value: number) {
+    const control = this.form.get('contador_cuotas')
+    control?.setValidators([Validators.required, Validators.min(0), Validators.max(value)])
+    control?.updateValueAndValidity()
   }
 
   submit() {
@@ -76,19 +99,19 @@ export class ServiciosExtraFormComponent implements OnInit {
 
     const values = this.form.getRawValue();
     const serviciosExtraForm: ServiciosExtraForm = {
-      id: this.servicioExtra?.id,
       propiedad: values.propiedad!,
+      contador_cuotas: values.contador_cuotas,
       nom_servicio: values.nom_servicio,
       descripcion: values.descripcion,
       fecha: values.fecha,
       monto: values.monto,
       nro_cuotas: values.nro_cuotas,
     }
-    this.submitEvent.emit(serviciosExtraForm)
+    this.ref.close(serviciosExtraForm)
   }
 
   cancelar() {
-    this.cancelEvent.emit()
+    this.ref.close()
   }
 
 }

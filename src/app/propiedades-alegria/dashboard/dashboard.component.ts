@@ -14,7 +14,6 @@ import { ArriendoService } from '../arriendos/arriendo.service';
 import { CuentaBancariaService } from '../cuentas-bancarias/cuenta-bancaria.service';
 import { DetalleArriendoService } from '../core/services/detalle-arriendo.service';
 import { GastoComunService } from '../core/services/gasto-comun.service';
-import { ServicioExtraService } from '../core/services/servicio-extra.service';
 import { DashboardService } from './dashboard.service';
 import { DashboardMetrics } from './dashboard.model';
 
@@ -49,7 +48,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
         private cuentasBancariasService: CuentaBancariaService,
         private detalleArriendoService: DetalleArriendoService,
         private gastoComunService: GastoComunService,
-        private servicioExtraService: ServicioExtraService,
         private dashboardService: DashboardService,
     ) {
         this.subscription = this.layoutService.configUpdate$.subscribe(() => {
@@ -71,7 +69,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.cuentasBancariasService.getCuentasBancarias().subscribe(res => console.log('CuentaBancaria',res))
         this.detalleArriendoService.getDetallesArriendo().subscribe(res => console.log('DetalleArriendo',res))
         this.gastoComunService.getGastosComunes().subscribe(res => console.log('GastosComunes',res))
-        this.servicioExtraService.getServiciosExtras().subscribe(res => console.log('ServiciosExtras',res))
 
         this.dashboardMetrics$ = this.dashboardService.getDashboardMetrics()
 

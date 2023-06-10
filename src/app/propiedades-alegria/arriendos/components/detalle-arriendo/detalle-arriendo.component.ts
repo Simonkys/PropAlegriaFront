@@ -84,7 +84,7 @@ export class DetalleArriendoComponent implements OnInit, OnDestroy {
   abrirModalReajuste(detalleArr: DetalleArriendo) {
     this.ref = this.dialogService.open(ReajustarValorArriendoModalComponent, {
         header: 'Reajustar',
-        width: '70%',
+        width: '50%',
         contentStyle: { overflow: 'auto' },
         baseZIndex: 10000,
         draggable: true

@@ -1,37 +1,40 @@
-import { Component, EventEmitter, Input, OnInit, Output, inject } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { TooltipModule } from 'primeng/tooltip';
-import { ConfirmPopupModule } from 'primeng/confirmpopup';
 
 import { ServiciosExtra } from '../../servicios-extra.model';
 import { ServiciosExtraService } from '../../servicios-extra.service';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { ConfirmationService } from 'primeng/api';
 import { TagModule } from 'primeng/tag';
 import { CalendarModule } from 'primeng/calendar';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { ServiciosExtraFormComponent } from '../servicios-extra-form/servicios-extra-form.component';
 
 
 @Component({
   selector: 'app-listado-servicios-extra',
   standalone: true,
-  imports: [CommonModule, ButtonModule, TableModule, TooltipModule, ConfirmPopupModule, TagModule, CalendarModule],
+  imports: [CommonModule, ButtonModule, TableModule, TooltipModule, TagModule, CalendarModule, ConfirmDialogModule],
   templateUrl: './listado-servicios-extra.component.html',
   styleUrls: ['./listado-servicios-extra.component.scss'],
-  providers: [ConfirmationService]
+  providers: [ConfirmationService, DialogService]
 })
-export class ListadoServiciosExtraComponent implements OnInit {
-
+export class ListadoServiciosExtraComponent implements OnInit, OnDestroy {
 
   @Input() propiedadId?: number;
-  @Output() registrarEvent = new EventEmitter()
 
-  servicioExtraService = inject(ServiciosExtraService);
+  servicioExtraService = inject(ServiciosExtraService)
   confirmationService = inject(ConfirmationService)
+  dialogService = inject(DialogService)
 
-  serviciosExtra$?: Observable<ServiciosExtra[]>;
+  ref?: DynamicDialogRef
+  serviciosExtra: ServiciosExtra[] = []
+  sub?: Subscription
 
   ngOnInit(): void {
     this.getServiciosExtras()
@@ -39,37 +42,67 @@ export class ListadoServiciosExtraComponent implements OnInit {
 
   getServiciosExtras() {
     if (this.propiedadId) {
-      this.serviciosExtra$ = this.servicioExtraService.getServiciosExtra({ propiedadId: this.propiedadId })
-      
+      this.sub = this.servicioExtraService.getServiciosExtra({ propiedadId: this.propiedadId }).subscribe(data => {
+        this.serviciosExtra = data
+      })
     }
   }
 
-  marcarCuotaPagada(servicioExtra: ServiciosExtra, event: Event) {
+
+  eliminarServicioExtra(servicioExtra: ServiciosExtra) {
+    this.confirmationService.confirm({
+      message: `¿Segur@ de eliminar el registro?`,
+      header: 'Confirmar',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.servicioExtraService.eliminarServicioExtra(servicioExtra)
+          .subscribe(() => {
+            this.serviciosExtra = this.serviciosExtra.filter(s => s.id !== servicioExtra.id)
+          })
+      },
+      key: 'eliminarServicioExtra'
+    });
+  }
+
+  editarServicioExtra(servicioExtra: ServiciosExtra) {
+    this.ref = this.dialogService.open(ServiciosExtraFormComponent ,{
+      header: "Actualizar servicio",
+      draggable: true,
+      data: { servicioExtra: servicioExtra}
+    })
+
+    this.ref.onClose.subscribe((servicioExtraForm) => {
+      if(servicioExtraForm) {
+        this.servicioExtraService.actualizarServicioExtra(servicioExtraForm, servicioExtra.id).subscribe((servicioActualizado) => {
+          this.serviciosExtra = this.serviciosExtra.map(s => s.id === servicioExtra.id ? servicioActualizado : s)
+        })
+      }
+    })
+  }
+
+
+  registrar(propiedadId: number) {
+    this.ref = this.dialogService.open(ServiciosExtraFormComponent ,{
+      header: "Registrar servicioo",
+      draggable: true,
+      data: { propiedadId: propiedadId }
+    })
+
+    this.ref.onClose.subscribe((servicioExtraForm) => {
+      if(servicioExtraForm) {
+        this.servicioExtraService.crearServicioExtra(servicioExtraForm).subscribe((nuevoServicio) => {
+          this.serviciosExtra = [nuevoServicio, ...this.serviciosExtra]
+        })
+      }
+    })
+  }
+
+  ngOnDestroy(): void {
+    if(this.ref){
+      this.ref?.destroy()
+    }
+  }
   
-    if (!servicioExtra.pagado) {
-      
-      this.confirmationService.confirm({
-        target:  event.target || new EventTarget(),
-        message: '¿Desea confirmar la operación?',
-        icon: 'pi pi-exclamation-triangle',
-        accept: () => {
-          this.servicioExtraService.actualizarServicioExtra({...servicioExtra, contador_cuotas: servicioExtra.contador_cuotas + 1})
-            .subscribe(() => {
-              this.getServiciosExtras()
-            })
-        },
-      });
-    }
-  }
-
-
-  registrar() {
-    this.registrarEvent.emit()
-  }
-
-  filterDate(event: any) {
-    console.log(event)
-  }
 
 
 }

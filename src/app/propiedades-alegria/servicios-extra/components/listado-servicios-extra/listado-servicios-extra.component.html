@@ -1,8 +1,8 @@
 <p-table 
-    *ngIf="serviciosExtra$ | async as sextra"
-    [value]="sextra" [tableStyle]="{'min-width': '50rem'}"
+    [value]="serviciosExtra" 
+    [tableStyle]="{'min-width': '50rem'}"
 >
-    <ng-template pTemplate="caption">
+    <ng-template pTemplate="caption" *ngIf="propiedadId">
         <div class="caption-table right-100">
             <!-- Botón REGISTRAR -->
             <button pButton pRipple
@@ -10,7 +10,7 @@
                 class="p-button mr-2"
                 style="background-color:#F78E00"
                 label="Registrar"
-                (click)="registrar()">
+                (click)="registrar(propiedadId)">
             </button>
         </div>
     </ng-template>
@@ -25,7 +25,8 @@
             <th class="font-bold">Total</th>
             <th class="font-bold">Cuotas</th>
             <th class="font-bold">Valor cuota</th>
-            <th></th>
+            <th class="font-bold">Pago</th>
+            <th class="font-bold">Acciones</th>
         </tr>
     </ng-template>
     
@@ -39,22 +40,25 @@
             <td>$ {{servicioExtra.monto | number}}</td>
             <td>{{servicioExtra.contador_cuotas}}/{{servicioExtra.nro_cuotas}}</td>
             <td>$ {{servicioExtra.monto_cuotas | number}}</td>
-            <td *ngIf="!servicioExtra.pagado; else CuotasPagadas">
-                <p-confirmPopup></p-confirmPopup>
-                <p-button 
-                    (click)="marcarCuotaPagada(servicioExtra, $event)"
-                    styleClass="p-button-warning p-button-sm" 
-                    icon="pi pi-plus" 
-                    tooltipPosition="left" 
-                    [pTooltip]="'Marcar cuota n°' + (servicioExtra.contador_cuotas+1) + ' pagada.'">
-                </p-button>
+            
+            <td >
+                <ng-container *ngIf="!servicioExtra.pagado; else CuotasPagadas">
+                    <p-tag value="Incompleto" severity="warning"></p-tag>
+                </ng-container>
+                <ng-template #CuotasPagadas>
+                    <p-tag value="Completado" severity="success"></p-tag>
+                </ng-template>
             </td>
-            <ng-template #CuotasPagadas>
-                <td>
-                    <p-tag value="Pagado" severity="success"></p-tag>
-                </td>
-            </ng-template>
-        </tr>
-    </ng-template>
+
+            <td>
+                <button pButton pRipple icon="pi pi-pencil" class="p-button p-button-warning p-button-sm mr-2" (click)="editarServicioExtra(servicioExtra)"></button>
+                <button pButton pRipple icon="pi pi-trash" class="p-button p-button-danger p-button-sm" (click)="eliminarServicioExtra(servicioExtra)"></button>
+            </td>
+        
+        
+    </tr>
+</ng-template>
 
 </p-table>
+
+<p-confirmDialog [style]="{width: '400px'}" rejectButtonStyleClass="p-button-danger" key="eliminarServicioExtra"></p-confirmDialog>
