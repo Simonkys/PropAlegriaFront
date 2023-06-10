@@ -8,6 +8,7 @@ export interface ServiciosExtra {
     nro_cuotas: number;
     monto_cuotas: number;
     contador_cuotas: number;
+    pagado: boolean;
 }
 
 export interface ServiciosExtraForm {

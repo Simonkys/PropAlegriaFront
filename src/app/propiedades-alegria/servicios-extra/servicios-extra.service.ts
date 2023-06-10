@@ -10,6 +10,7 @@ import { environment } from 'src/environments/environment';
 import {
     BehaviorSubject,
     catchError,
+    map,
     tap,
     throwError,
 } from 'rxjs';
@@ -33,7 +34,16 @@ import { MensajeService } from '../core/services/message.service';
         // }
   
         return this.http
-            .get<ServiciosExtra[]>(`${environment.apiUrl}/api/servicios_extras/`, {params: query})
+            .get<ServiciosExtra[]>(`${environment.apiUrl}/api/servicios_extras/`, {params: query}).pipe(
+                map((servicios) => servicios.map(s => {
+                    return {
+                        ...s, 
+                        fecha: new Date(s.fecha),
+                        pagado: s.contador_cuotas >= s.nro_cuotas
+                    }
+                }))
+            )
+            
             // .pipe(
             //     tap((data) => {
             //         this.servicioExtraSubject.next(data);

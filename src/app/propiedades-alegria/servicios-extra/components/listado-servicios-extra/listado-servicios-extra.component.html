@@ -18,7 +18,10 @@
     <ng-template pTemplate="header">
         <tr>
             <th class="font-bold">Servicio</th>
-            <th class="font-bold">Fecha</th>
+            <th class="font-bold">
+                Fecha
+                <p-columnFilter type="date" field="fecha" display="menu"></p-columnFilter>
+            </th>
             <th class="font-bold">Total</th>
             <th class="font-bold">Cuotas</th>
             <th class="font-bold">Valor cuota</th>
@@ -32,15 +35,15 @@
                 <div class="text-lg font-bold p-0" style="color: #006C86">{{servicioExtra.nom_servicio}}</div>
                 <br><b>Descripción:</b> {{servicioExtra.descripcion}}
             </td>
-            <td>{{servicioExtra.fecha | date:'dd/MM/yyyy'}}</td>
+            <td>{{servicioExtra.fecha | date: 'dd/MM/yyyy'}}</td>
             <td>$ {{servicioExtra.monto | number}}</td>
             <td>{{servicioExtra.contador_cuotas}}/{{servicioExtra.nro_cuotas}}</td>
             <td>$ {{servicioExtra.monto_cuotas | number}}</td>
-            <td *ngIf="tieneCuotasPorPagar(servicioExtra); else CuotasPagadas">
+            <td *ngIf="!servicioExtra.pagado; else CuotasPagadas">
                 <p-confirmPopup></p-confirmPopup>
                 <p-button 
                     (click)="marcarCuotaPagada(servicioExtra, $event)"
-                    styleClass="p-button-warning" 
+                    styleClass="p-button-warning p-button-sm" 
                     icon="pi pi-plus" 
                     tooltipPosition="left" 
                     [pTooltip]="'Marcar cuota n°' + (servicioExtra.contador_cuotas+1) + ' pagada.'">
