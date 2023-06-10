@@ -5,15 +5,6 @@ import { ProductService } from './service/product.service';
 import { Observable, Subscription } from 'rxjs';
 import { LayoutService } from 'src/app/layout/service/app.layout.service';
 
-import { PropiedadesService } from '../propiedades/propiedades.service';
-import { TipoPropiedadesService } from '../core/services/tipo-propiedades.service';
-import { PropietarioService } from '../propietarios/propietario.service';
-import { PersonalidadJuridicaService } from '../core/services/personalidad-juridica.service';
-import { ArrendatarioService } from '../arrendatarios/arrendatario.service';
-import { ArriendoService } from '../arriendos/arriendo.service';
-import { CuentaBancariaService } from '../cuentas-bancarias/cuenta-bancaria.service';
-import { DetalleArriendoService } from '../core/services/detalle-arriendo.service';
-import { GastoComunService } from '../core/services/gasto-comun.service';
 import { DashboardService } from './dashboard.service';
 import { DashboardMetrics } from './dashboard.model';
 
@@ -38,16 +29,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
     constructor(
         private productService: ProductService, 
         public layoutService: LayoutService, 
-
-        private propiedadService: PropiedadesService,
-        private tipoPropiedadService: TipoPropiedadesService,
-        private propietarioService: PropietarioService,
-        private personalidadJuridicaService: PersonalidadJuridicaService,
-        private arrendatarioService: ArrendatarioService,
-        private arriendoService: ArriendoService,
-        private cuentasBancariasService: CuentaBancariaService,
-        private detalleArriendoService: DetalleArriendoService,
-        private gastoComunService: GastoComunService,
         private dashboardService: DashboardService,
     ) {
         this.subscription = this.layoutService.configUpdate$.subscribe(() => {
@@ -59,16 +40,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.initChart();
 
         this.productService.getProductsSmall().then(data => this.products = data);
-        
-        this.propiedadService.getPropiedades().subscribe(res => console.log('Propiedades', res))
-        this.tipoPropiedadService.getTipoPropiedades().subscribe(res => console.log('TipoPropiedades',res))
-        this.propietarioService.getPropietarios().subscribe(res => console.log('Propietarios',res))
-        this.personalidadJuridicaService.getPersonalidadJuridica().subscribe(res => console.log('PersonalidadJuridica',res))
-        this.arrendatarioService.getArrendatarios().subscribe(res => console.log('Arrendatarios',res))
-        this.arriendoService.getArriendos().subscribe(res => console.log('Arriendos',res))
-        this.cuentasBancariasService.getCuentasBancarias().subscribe(res => console.log('CuentaBancaria',res))
-        this.detalleArriendoService.getDetallesArriendo().subscribe(res => console.log('DetalleArriendo',res))
-        this.gastoComunService.getGastosComunes().subscribe(res => console.log('GastosComunes',res))
 
         this.dashboardMetrics$ = this.dashboardService.getDashboardMetrics()
 
