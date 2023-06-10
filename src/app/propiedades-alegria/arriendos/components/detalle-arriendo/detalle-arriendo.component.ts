@@ -9,6 +9,8 @@ import { TagModule } from 'primeng/tag';
 import { DetalleArriendo } from 'src/app/propiedades-alegria/core/models/detalle-arriendo.model';
 import { Router } from '@angular/router';
 import { TableModule } from 'primeng/table';
+import { AccordionModule } from 'primeng/accordion';
+
 
 import { DetalleArriendoService } from 'src/app/propiedades-alegria/core/services/detalle-arriendo.service';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
@@ -25,7 +27,8 @@ import { Observable } from 'rxjs';
     ButtonModule, 
     ConfirmPopupModule, 
     TagModule, 
-    TableModule, 
+    TableModule,
+    AccordionModule
 ],
   templateUrl: './detalle-arriendo.component.html',
   styleUrls: ['./detalle-arriendo.component.scss']
@@ -33,7 +36,7 @@ import { Observable } from 'rxjs';
 export class DetalleArriendoComponent implements OnInit, OnDestroy {
   
 
-  @Input() arriendo?: Arriendo
+  @Input() arriendo!: Arriendo
   
   @Output() eliminarEvent = new EventEmitter();
   @Output() actualizarEvent = new EventEmitter();

@@ -1,194 +1,200 @@
-<ng-container *ngIf="arriendo">
-    <div class="flex w-100 justify-content-between mb-3">
-        <div><h2>Detalle Arriendo</h2></div>
-        <div><h4>COD: {{arriendo.propiedad?.cod}}</h4></div>
-    </div>
-
-
-    <div class="grid" [style]="{width: '100%'}">
-
-        <div class="col-12"><hr></div>
-
-
-        <div class="ml-3 w-12">
-            <h4>Arrendatario</h4>
-        </div>
-
-        <div class="col-12">
-            <div class="text-sm font-bold text-600 mb-1">Nombre</div>
-            <div class="font-bold">{{arriendo.arrendatario.pri_nom_arr}} {{arriendo.arrendatario.pri_ape_arr}}</div>
-        </div>
-
-        <div class="col-12">
-            <div class="text-sm font-bold text-600 mb-1">Direccion</div>
-            <div class="font-medium">{{arriendo.propiedad?.direccion_ppdd}}</div>
-        </div>
-
-        <div class="col-3">
-            <div class="text-sm font-bold text-600 mb-1">Día de Pago</div>
-            <div class="font-medium">{{arriendo.dia_pago}} del mes</div>
-        </div>
-
-        <div class="col-3">
-            <div class="text-sm font-bold text-600 mb-1">Reajustabilidad</div>
-            <div class="font-medium">IPC C/{{arriendo.periodo_reajuste}} mes(es).</div>
-        </div>
-
-        <div class="col-3">
-            <div class="text-sm font-bold text-600 mb-1">Fecha Contrato</div>
-            <div class="font-medium">{{(arriendo.fecha_inicio | date:'dd/MM/yyyy' ) ?? '---'}}</div>
-        </div>
-
-        <div class="col-3">
-            <div class="text-sm font-bold text-600 mb-1">Venc. Contrato</div>
-            <div class="font-medium">{{(arriendo.fecha_termino | date:'dd/MM/yyyy' ) ?? '---'}}</div>
-        </div>
-
-
-        <div class="col-3">
-            <div class="text-sm font-bold text-600 mb-1">Fono</div>
-            <div class="font-medium">{{arriendo.arrendatario.contacto_arr}}</div>
-        </div>
-
-        <div class="col-9">
-            <div class="text-sm font-bold text-600 mb-1">Email</div>
-            <div class="font-medium">{{arriendo.arrendatario.correo_arr}}</div>
-        </div>
-
-        <div class="col-12" *ngIf="arriendo.propiedad?.observaciones" >
-            <div class="text-sm font-bold text-600 mb-1">Comentarios</div>
-            <div class="font-medium"> {{arriendo.propiedad?.observaciones}}
+<p-accordion [activeIndex]="2">
+    <p-accordionTab>
+        <ng-template pTemplate="header">
+            <div class="flex align-items-center">
+                <i class="pi pi-user mr-2"></i>
+                <span class="vertical-align-middle font-bold">Arrendatario</span>
             </div>
-        </div>
-
-        <div class="col-4">
-            <div class="text-sm font-bold text-600 mb-1">Gas</div>
-            <div class="font-medium">{{arriendo.propiedad?.gas != '' ?  '--': arriendo.propiedad?.gas}}</div>
-        </div>
-
-        <div class="col-4">
-            <div class="text-sm font-bold text-600 mb-1">Agua</div>
-            <div class="font-medium">{{arriendo.propiedad?.agua}}</div>
-        </div>
-
-        <div class="col-4 mb-3">
-            <div class="text-sm font-bold text-600 mb-1">Luz</div>
-            <div class="font-medium">{{arriendo.propiedad?.luz}}</div>
-        </div>
-
-        <div class="col-12"><hr></div>
-
-        <div class="ml-3 w-12">
-            <h4>Propietario</h4>
-        </div>
-
-        <div class="col-4">
-            <div class="text-sm font-bold text-600 mb-1">Nombre</div>
-            <div class="font-medium">{{arriendo.propiedad?.propietario?.pri_nom_prop}} {{arriendo.propiedad?.propietario?.pri_ape_prop}}</div>
-        </div>
-
-        <div class="col-4">
-            <div class="text-sm font-bold text-600 mb-1">Rut</div>
-            <div class="font-medium">{{arriendo.propiedad?.propietario?.rut_prop}}</div>
-        </div>
-
-        <div class="col-4">
-            <div class="text-sm font-bold text-600 mb-1">Fono</div>
-            <div class="font-medium">{{arriendo.propiedad?.propietario?.contacto_prop}}</div>
-        </div>
-
-        <div class="col-4">
-            <div class="text-sm font-bold text-600 mb-1">Email</div>
-            <div class="font-medium">{{arriendo.propiedad?.propietario?.email_prop}}</div>
-        </div>
-
-        <div class="col-12">
-            <div class="text-sm font-bold text-600 mb-1">Dirección</div>
-            <div class="font-medium">{{arriendo.propiedad?.propietario?.direccion_prop}}</div>
-        </div>
-
-
-
-        <div class="col-4">
-            <div class="text-sm font-bold text-600 mb-1">Comisión</div>
-            <div class="font-medium">{{arriendo.propiedad?.propietario?.pctje_cobro_honorario}}% + {{(ValidatorsGlobales$ | async)?.valor}}%</div>
-        </div>
-
-        <div class="col-4" *ngFor="let cuenta of arriendo.propiedad?.propietario?.cuentas_bancarias" >
-            <div class="text-sm font-bold text-600 mb-1">Cuenta Bancaria</div>
-            <div class="font-medium">{{cuenta.cuenta}} - {{cuenta.tipocuenta.nom_cuenta}} {{cuenta.banco.nombre_banco}}</div>
-        </div>
-
-        <div class="col-12"><hr></div>
-
-        <div class="ml-3 w-12">
-            <h4>Pagos arriendo</h4>
-        </div>
-
-        <div class="col-12">
-            <p-table *ngIf="detalleArriendos$ | async as detalles"  [value]="detalles">
-                <ng-template pTemplate="header">
-                    <tr>
-                        <th>Fecha a pagar</th>
-                        <th>Monto a pagar</th>
-                        <th>Fecha pagada</th>
-                        <th>Monto pagado</th>
-                        <th>Accion</th>
-                    </tr>
-                </ng-template>
-                <ng-template pTemplate="body" let-detalleArr let-i="rowIndex">
-                    <tr >
-                        <td>{{detalleArr.fecha_a_pagar}}</td>
-                        <td>
-                            {{ detalleArr.monto_a_pagar ? '$'+(detalleArr.monto_a_pagar | number) : '- - - - - -' }}
-                        </td>
-                        <td>{{(detalleArr.fecha_pagada) ?? '- - - - - -'}}</td>
-                        <td >
-                            {{detalleArr.monto_pagado ? '$'+(detalleArr.monto_pagado | number) : '- - - - - -'}}
-                        </td>
-                        <td>
-                            <p-button 
-                                *ngIf="detalleArr.monto_a_pagar"
-                                icon="pi pi-plus" 
-                                label="Registrar pago"
-                                styleClass="p-button-success p-button-sm"
-                                (click)="registrarPago(detalleArr)"
-                            >
-                            </p-button>
-                            <p-button
-                                *ngIf="detalleArr.toca_reajuste"
-                                icon="pi pi-plus" 
-                                label="Reajustar"
-                                styleClass="p-button-warning p-button-sm"
-                                (click)="abrirModalReajuste(detalleArr)"
-                            >
-                            </p-button>
-                            
-                            <p-button 
-                                *ngIf="!detalleArr.monto_a_pagar && !detalleArr.toca_reajuste"
-                                [disabled]="true"
-                                icon="pi pi-plus" 
-                                label="Registrar pago"
-                                styleClass="p-button-success p-button-sm"
-                            >
-                            </p-button>
-                            
-                        </td>
-                    </tr>
-                </ng-template>
-            </p-table>
-        </div>
-
-        <div class="col-12"><hr></div>
-
-        <div class="col-12">
-            <div class="flex">
-                <p-button icon="pi pi-pencil" styleClass="p-button-warning mr-2" (click)="actualizar()">
-                </p-button>
-                <p-confirmPopup></p-confirmPopup>
-                <p-button icon="pi pi-trash" styleClass="p-button-danger" (click)="eliminar($event)"></p-button>
+        </ng-template>
+        <ng-template pTemplate="content">
+            <div class="grid">
+            
+                <div class="col-12">
+                    <div class="text-sm font-bold text-600 mb-1">Nombre</div>
+                    <div class="font-bold">{{arriendo.arrendatario.pri_nom_arr}} {{arriendo.arrendatario.pri_ape_arr}}</div>
+                </div>
+                
+                <div class="col-12">
+                    <div class="text-sm font-bold text-600 mb-1">Direccion</div>
+                    <div class="font-medium">{{arriendo.propiedad?.direccion_ppdd}}</div>
+                </div>
+                
+                <div class="col-3">
+                    <div class="text-sm font-bold text-600 mb-1">Día de Pago</div>
+                    <div class="font-medium">{{arriendo.dia_pago}} del mes</div>
+                </div>
+    
+                <div class="col-3">
+                    <div class="text-sm font-bold text-600 mb-1">Reajustabilidad</div>
+                    <div class="font-medium">IPC C/{{arriendo.periodo_reajuste}} mes(es).</div>
+                </div>
+                
+                <div class="col-3">
+                    <div class="text-sm font-bold text-600 mb-1">Fecha Contrato</div>
+                    <div class="font-medium">{{(arriendo.fecha_inicio | date:'dd/MM/yyyy' ) ?? '---'}}</div>
+                </div>
+                
+                <div class="col-3">
+                    <div class="text-sm font-bold text-600 mb-1">Venc. Contrato</div>
+                    <div class="font-medium">{{(arriendo.fecha_termino | date:'dd/MM/yyyy' ) ?? '---'}}</div>
+                </div>
+                
+                
+                <div class="col-3">
+                    <div class="text-sm font-bold text-600 mb-1">Fono</div>
+                    <div class="font-medium">{{arriendo.arrendatario.contacto_arr}}</div>
+                </div>
+                
+                <div class="col-9">
+                    <div class="text-sm font-bold text-600 mb-1">Email</div>
+                    <div class="font-medium">{{arriendo.arrendatario.correo_arr}}</div>
+                </div>
+                
+                <div class="col-12" *ngIf="arriendo.propiedad?.observaciones" >
+                    <div class="text-sm font-bold text-600 mb-1">Comentarios</div>
+                    <div class="font-medium"> {{arriendo.propiedad?.observaciones}}
+                    </div>
+                </div>
+                
+                <div class="col-4">
+                    <div class="text-sm font-bold text-600 mb-1">Gas</div>
+                    <div class="font-medium">{{arriendo.propiedad?.gas != '' ?  '--': arriendo.propiedad?.gas}}</div>
+                </div>
+                
+                <div class="col-4">
+                    <div class="text-sm font-bold text-600 mb-1">Agua</div>
+                    <div class="font-medium">{{arriendo.propiedad?.agua}}</div>
+                </div>
+                
+                <div class="col-4 mb-3">
+                    <div class="text-sm font-bold text-600 mb-1">Luz</div>
+                    <div class="font-medium">{{arriendo.propiedad?.luz}}</div>
+                </div>
             </div>
+        </ng-template>
+        
+    </p-accordionTab>
+    <p-accordionTab >
+        <ng-template pTemplate="header">
+            <div class="flex align-items-center">
+                <i class="pi pi-user mr-2"></i>
+                <span class="vertical-align-middle font-bold">Propietario</span>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="content">
+            <div class="grid">
+
+                <div class="col-4">
+                    <div class="text-sm font-bold text-600 mb-1">Nombre</div>
+                    <div class="font-medium">{{arriendo.propiedad?.propietario?.pri_nom_prop}} {{arriendo.propiedad?.propietario?.pri_ape_prop}}</div>
+                </div>
+                
+                <div class="col-4">
+                    <div class="text-sm font-bold text-600 mb-1">Rut</div>
+                    <div class="font-medium">{{arriendo.propiedad?.propietario?.rut_prop}}</div>
+                </div>
+                
+                <div class="col-4">
+                    <div class="text-sm font-bold text-600 mb-1">Fono</div>
+                    <div class="font-medium">{{arriendo.propiedad?.propietario?.contacto_prop}}</div>
+                </div>
+                
+                <div class="col-4">
+                    <div class="text-sm font-bold text-600 mb-1">Email</div>
+                    <div class="font-medium">{{arriendo.propiedad?.propietario?.email_prop}}</div>
+                </div>
+                
+                <div class="col-12">
+                    <div class="text-sm font-bold text-600 mb-1">Dirección</div>
+                    <div class="font-medium">{{arriendo.propiedad?.propietario?.direccion_prop}}</div>
+                </div>
+                
+                
+                
+                <div class="col-4">
+                    <div class="text-sm font-bold text-600 mb-1">Comisión</div>
+                    <div class="font-medium">{{arriendo.propiedad?.propietario?.pctje_cobro_honorario}}% + {{(ValidatorsGlobales$ | async)?.valor}}%</div>
+                </div>
+        
+                <div class="col-4" *ngFor="let cuenta of arriendo.propiedad?.propietario?.cuentas_bancarias" >
+                    <div class="text-sm font-bold text-600 mb-1">Cuenta Bancaria</div>
+                    <div class="font-medium">{{cuenta.cuenta}} - {{cuenta.tipocuenta.nom_cuenta}} {{cuenta.banco.nombre_banco}}</div>
+                </div>
+            </div>
+        </ng-template>
+    </p-accordionTab>
+    <p-accordionTab >
+        <ng-template pTemplate="header">
+            <div class="flex align-items-center">
+                <i class="pi pi-fw pi-money-bill mr-2"></i>
+                <span class="vertical-align-middle font-bold">Pagos arriendo</span>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="content">
+            <div class="grid">
+                <div class="col-12">
+                    <p-table *ngIf="detalleArriendos$ | async as detalles"  [value]="detalles">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th class="font-bold">Fecha a pagar</th>
+                                <th class="font-bold">Monto a pagar</th>
+                                <th class="font-bold">Fecha pagada</th>
+                                <th class="font-bold">Monto pagado</th>
+                                <th class="font-bold">Accion</th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-detalleArr let-i="rowIndex">
+                            <tr >
+                                <td>{{detalleArr.fecha_a_pagar | date:'dd/MM/yyyy'}}</td>
+                                <td>
+                                    {{ detalleArr.monto_a_pagar ? '$'+(detalleArr.monto_a_pagar | number) : '- - - - - -' }}
+                                </td>
+                                <td>{{(detalleArr.fecha_pagada | date:'dd/MM/yyyy') ?? '- - - - - -'}}</td>
+                                <td >
+                                    {{detalleArr.monto_pagado ? '$'+(detalleArr.monto_pagado | number) : '- - - - - -'}}
+                                </td>
+                                <td>
+                                    <p-button 
+                                        *ngIf="detalleArr.monto_a_pagar"
+                                        icon="pi pi-plus" 
+                                        label="Registrar pago"
+                                        styleClass="p-button-success p-button-sm"
+                                        (click)="registrarPago(detalleArr)"
+                                    >
+                                    </p-button>
+                                    <p-button
+                                        *ngIf="detalleArr.toca_reajuste"
+                                        icon="pi pi-plus" 
+                                        label="Reajustar"
+                                        styleClass="p-button-warning p-button-sm"
+                                        (click)="abrirModalReajuste(detalleArr)"
+                                    >
+                                    </p-button>
+                                    
+                                    <p-button 
+                                        *ngIf="!detalleArr.monto_a_pagar && !detalleArr.toca_reajuste"
+                                        [disabled]="true"
+                                        icon="pi pi-plus" 
+                                        label="Registrar pago"
+                                        styleClass="p-button-success p-button-sm"
+                                    >
+                                    </p-button>
+                                    
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>    
+            </div>
+        </ng-template>
+    </p-accordionTab>
+
+    <div class="col-12">
+        <div class="flex">
+            <p-button icon="pi pi-pencil" styleClass="p-button-warning mr-2 p-button-sm" (click)="actualizar()">
+            </p-button>
+            <p-confirmPopup></p-confirmPopup>
+            <p-button icon="pi pi-trash" styleClass="p-button-danger p-button-sm" (click)="eliminar($event)"></p-button>
         </div>
     </div>
-
-</ng-container>
+</p-accordion>
