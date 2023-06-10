@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { Product } from './api/product';
 import { ProductService } from './service/product.service';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { LayoutService } from 'src/app/layout/service/app.layout.service';
 
 import { PropiedadesService } from '../propiedades/propiedades.service';
@@ -15,6 +15,8 @@ import { CuentaBancariaService } from '../cuentas-bancarias/cuenta-bancaria.serv
 import { DetalleArriendoService } from '../core/services/detalle-arriendo.service';
 import { GastoComunService } from '../core/services/gasto-comun.service';
 import { ServicioExtraService } from '../core/services/servicio-extra.service';
+import { DashboardService } from './dashboard.service';
+import { DashboardMetrics } from './dashboard.model';
 
 @Component({
     templateUrl: './dashboard.component.html',
@@ -31,6 +33,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
     subscription!: Subscription;
 
+    dashboardMetrics$?: Observable<DashboardMetrics>
+
+
     constructor(
         private productService: ProductService, 
         public layoutService: LayoutService, 
@@ -45,6 +50,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         private detalleArriendoService: DetalleArriendoService,
         private gastoComunService: GastoComunService,
         private servicioExtraService: ServicioExtraService,
+        private dashboardService: DashboardService,
     ) {
         this.subscription = this.layoutService.configUpdate$.subscribe(() => {
             this.initChart();
@@ -66,6 +72,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.detalleArriendoService.getDetallesArriendo().subscribe(res => console.log('DetalleArriendo',res))
         this.gastoComunService.getGastosComunes().subscribe(res => console.log('GastosComunes',res))
         this.servicioExtraService.getServiciosExtras().subscribe(res => console.log('ServiciosExtras',res))
+
+        this.dashboardMetrics$ = this.dashboardService.getDashboardMetrics()
 
 
         this.items = [
