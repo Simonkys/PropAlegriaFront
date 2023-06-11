@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DashboardComponent } from './dashboard.component';
 import { ChartModule } from 'primeng/chart';
 import { MenuModule } from 'primeng/menu';
@@ -10,6 +10,7 @@ import { StyleClassModule } from 'primeng/styleclass';
 import { PanelMenuModule } from 'primeng/panelmenu';
 import { DashboardsRoutingModule } from './dashboard-routing.module';
 import { DetalleValorGlobalComponent } from '../valores-globales/components/detalle-valor-global/detalle-valor-global.component';
+import { InputSwitchModule } from 'primeng/inputswitch';
 
 @NgModule({
     imports: [
@@ -23,6 +24,8 @@ import { DetalleValorGlobalComponent } from '../valores-globales/components/deta
         ButtonModule,
         DashboardsRoutingModule,
         DetalleValorGlobalComponent,
+        InputSwitchModule,
+        ReactiveFormsModule
     ],
     declarations: [DashboardComponent]
 })

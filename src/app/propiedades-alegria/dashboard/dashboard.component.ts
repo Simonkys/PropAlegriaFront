@@ -7,6 +7,7 @@ import { LayoutService } from 'src/app/layout/service/app.layout.service';
 
 import { DashboardService } from './dashboard.service';
 import { DashboardMetrics } from './dashboard.model';
+import { FormControl } from '@angular/forms';
 
 @Component({
     templateUrl: './dashboard.component.html',
@@ -24,25 +25,49 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
     subscription!: Subscription;
 
-    dashboardMetrics$?: Observable<DashboardMetrics>
+    dashboardMetrics?: DashboardMetrics;
+
+    data:any;
+
+    infoSwith = new FormControl(false);
+
+    options: any;
+    typechart:string = 'pie';
+    fechaActual = new Date();
+
 
 
     constructor(
-        private productService: ProductService, 
-        public layoutService: LayoutService, 
+        private productService: ProductService,
+        public layoutService: LayoutService,
         private dashboardService: DashboardService,
     ) {
         this.subscription = this.layoutService.configUpdate$.subscribe(() => {
             this.initChart();
         });
+
     }
 
     ngOnInit() {
-        this.initChart();
+        this.dashboardService.getDashboardMetrics().subscribe(data => {
+            this.dashboardMetrics = data
+            this.initChartPie()
+        })
 
+        this.infoSwith.valueChanges.subscribe(data => {
+            if (data) {
+                this.initChart();
+
+            }else{
+
+                this.initChartPie();
+            }
+        }
+
+            )
         this.productService.getProductsSmall().then(data => this.products = data);
 
-        this.dashboardMetrics$ = this.dashboardService.getDashboardMetrics()
+
 
 
         this.items = [
@@ -50,27 +75,38 @@ export class DashboardComponent implements OnInit, OnDestroy {
             { label: 'Remove', icon: 'pi pi-fw pi-minus' }
         ];
     }
+    obtnerDiasMes=(fechaActual:Date)=>{
+        let mesActual = fechaActual.getMonth();
+        let fecha = new Date(fechaActual.getFullYear(), mesActual, 1)
+        let diasMes = [];
+
+        while(fecha.getMonth() === mesActual){
+            diasMes.push(fecha.getDate().toString());
+            fecha.setDate(fecha.getDate()+1);
+        }
+        return  diasMes
+    }
 
     initChart() {
         const documentStyle = getComputedStyle(document.documentElement);
         const textColor = documentStyle.getPropertyValue('--text-color');
         const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
         const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
-
+        this.typechart = 'line'
         this.chartData = {
-            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+            labels: this.obtnerDiasMes(this.fechaActual),
             datasets: [
                 {
-                    label: 'First Dataset',
-                    data: [65, 59, 80, 81, 56, 55, 40],
+                    label: 'Arriendos Por pagar',
+                    data: [113, 95, 80, 70, 25, 23, 10, 8, 5, 3, 2, 2],
                     fill: false,
                     backgroundColor: documentStyle.getPropertyValue('--bluegray-700'),
                     borderColor: documentStyle.getPropertyValue('--bluegray-700'),
                     tension: .4
                 },
                 {
-                    label: 'Second Dataset',
-                    data: [28, 48, 40, 19, 86, 27, 90],
+                    label: 'Arriendos Pagados',
+                    data: [3, 21, 36, 46, 91, 93, 106, 108, 111, 113, 114, 114],
                     fill: false,
                     backgroundColor: documentStyle.getPropertyValue('--green-600'),
                     borderColor: documentStyle.getPropertyValue('--green-600'),
@@ -78,7 +114,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
                 }
             ]
         };
-
         this.chartOptions = {
             plugins: {
                 legend: {
@@ -104,6 +139,36 @@ export class DashboardComponent implements OnInit, OnDestroy {
                     grid: {
                         color: surfaceBorder,
                         drawBorder: false
+                    }
+                }
+            }
+        };
+    }
+    initChartPie() {
+        const documentStyle = getComputedStyle(document.documentElement);
+        const textColor = documentStyle.getPropertyValue('--text-color');
+        const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
+        const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
+        this.typechart = 'pie'
+        this.chartData = {
+            labels: ['PENDIENTES','PAGADOS'],
+            datasets: [
+                {
+                    label: 'First Dataset',
+                    data: [this.dashboardMetrics?.total_arriendos_por_pagar, this.dashboardMetrics?.total_arriendos_pagados],
+                    backgroundColor: ['#006C86','#8B0000'],
+                    hoverBackgroundColor: ['#3E867C','#DC143C'  ]
+
+                }
+
+            ]
+        };
+        this.chartOptions = {
+            plugins: {
+                legend: {
+                    labels: {
+                        usePointStyle: true,
+                        color: textColor
                     }
                 }
             }
