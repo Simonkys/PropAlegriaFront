@@ -10,6 +10,7 @@ import { DashboardMetrics } from './dashboard.model';
 
 @Component({
     templateUrl: './dashboard.component.html',
+    styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit, OnDestroy {
 
