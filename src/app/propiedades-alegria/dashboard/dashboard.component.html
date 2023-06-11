@@ -175,7 +175,13 @@
                 <ng-template pTemplate="body" let-atrasado>
                     <tr>
                         <td>
-                            {{atrasado.propiedad_cod}}
+                            <button pButton pRipple
+                                icon="pi pi-building"
+                                class="p-button-text"
+                                style="color:#006C86;"
+                                label="{{ atrasado.propiedad_cod }}"
+                                [routerLink]="['/propiedades', atrasado.propiedad_id,'detalle']">
+                            </button>
                         </td>
                         <td>
                             {{ atrasado.arrendatarios_nom }}

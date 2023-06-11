@@ -11,6 +11,7 @@ import { PanelMenuModule } from 'primeng/panelmenu';
 import { DashboardsRoutingModule } from './dashboard-routing.module';
 import { DetalleValorGlobalComponent } from '../valores-globales/components/detalle-valor-global/detalle-valor-global.component';
 import { InputSwitchModule } from 'primeng/inputswitch';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
     imports: [
@@ -25,7 +26,8 @@ import { InputSwitchModule } from 'primeng/inputswitch';
         DashboardsRoutingModule,
         DetalleValorGlobalComponent,
         InputSwitchModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        RouterModule
     ],
     declarations: [DashboardComponent]
 })

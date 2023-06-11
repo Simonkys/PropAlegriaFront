@@ -1,5 +1,6 @@
 export interface DashboardAtrasados{
     propiedad_cod: number;
+    propiedad_id: number;
     arrendatarios_nom: string;
     fecha_pago: Date;
     dias_atraso: number;
