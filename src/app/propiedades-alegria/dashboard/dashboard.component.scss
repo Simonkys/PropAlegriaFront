@@ -1,0 +1,23 @@
+h4 {
+    font-weight: bold !important;
+    color: #006C86 !important;
+}
+
+h5 {
+    font-weight: bold !important;
+    color: #006C86 !important;
+}
+
+  
+.col-12 {
+    display: flex;
+    flex-direction: column;
+  
+    .card.mb-0 {
+      flex-grow: 1;
+    }
+  }
+
+  
+  
+  

@@ -11,6 +11,7 @@ import { FormControl } from '@angular/forms';
 
 @Component({
     templateUrl: './dashboard.component.html',
+    styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit, OnDestroy {
 
@@ -31,7 +32,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     infoSwith = new FormControl(false);
 
     options: any;
-    typechart:string = 'pie';
+    typechart: string = 'doughnut';
     fechaActual = new Date();
 
 
@@ -148,7 +149,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         const textColor = documentStyle.getPropertyValue('--text-color');
         const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
         const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
-        this.typechart = 'pie'
+        this.typechart = 'doughnut'
         this.chartData = {
             labels: ['PENDIENTES','PAGADOS'],
             datasets: [

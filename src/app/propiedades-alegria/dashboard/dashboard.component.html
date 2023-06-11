@@ -1,181 +1,160 @@
 <div class="grid">
+
     <!-- Card VALORES GLOBALES -->
     <div class="col-12 lg:col-6 xl:col-3">
         <app-detalle-valor-global></app-detalle-valor-global>
     </div>
 
-    <!-- <div class="col-12 lg:col-6 xl:col-3">
-        <div class="card mb-0">
-            <div class="flex justify-content-between mb-3">
-                <div>
-                    <span class="block text-500 font-medium mb-3">Orders</span>
-                    <div class="text-900 font-medium text-xl">152</div>
-                </div>
-                <div class="flex align-items-center justify-content-center bg-blue-100 border-round"
-                    [ngStyle]="{width: '2.5rem', height: '2.5rem'}">
-                    <i class="pi pi-shopping-cart text-blue-500 text-xl"></i>
-                </div>
-            </div>
-            <span class="text-green-500 font-medium">24 new </span>
-            <span class="text-500">since last visit</span>
-        </div>
-    </div> -->
     <ng-container *ngIf="dashboardMetrics">
+
+        <!-- Card TOTAL ARRIENDOS MES -->
         <div class="col-12 lg:col-6 xl:col-3">
             <div class="card mb-0">
                 <div class="flex justify-content-between mb-3">
-                    <div>
-                        <span class="block text-500 font-medium mb-3"
-                            >total_arriendos_mes</span
-                        >
-                        <div class="text-900 font-medium text-xl">
-                            {{ dashboardMetrics.total_arriendos_mes }}
-                        </div>
+
+                    <div class="col-9 top-0 left-0 p-0">
+                        <h4>Total Arriendos Mes</h4>
                     </div>
-                    <div
-                        class="flex align-items-center justify-content-center bg-orange-100 border-round"
-                        [ngStyle]="{ width: '2.5rem', height: '2.5rem' }"
-                    >
-                        <i class="pi pi-map-marker text-orange-500 text-xl"></i>
+
+                    <div class="col-3 flex align-items-center justify-content-center bg-orange-100 border-round"
+                        [ngStyle]="{width: '2.5rem', height: '2.5rem'}">
+                        <i class="pi pi-chart-line text-orange-500 text-xl"></i>
                     </div>
                 </div>
-                <span class="text-green-500 font-medium">%52+ </span>
-                <span class="text-500">since last week</span>
+                <hr>
+                <div>
+                    <span class="block text-900 font-medium text-xl mb-3">{{ dashboardMetrics.total_arriendos_mes }} arriendos</span>
+                </div>
             </div>
         </div>
+
+        <!-- Card TOTAL ARRIENDOS PAGADOS -->
         <div class="col-12 lg:col-6 xl:col-3">
             <div class="card mb-0">
                 <div class="flex justify-content-between mb-3">
-                    <div>
-                        <span class="block text-500 font-medium mb-3"
-                            >total_arriendos_pagados</span
-                        >
-                        <div class="text-900 font-medium text-xl">
-                            {{ dashboardMetrics.total_arriendos_pagados }}
-                        </div>
+
+                    <div class="col-9 top-0 left-0 p-0">
+                        <h4>Total Arriendos Pagados</h4>
                     </div>
-                    <div
-                        class="flex align-items-center justify-content-center bg-cyan-100 border-round"
-                        [ngStyle]="{ width: '2.5rem', height: '2.5rem' }"
-                    >
-                        <i class="pi pi-inbox text-cyan-500 text-xl"></i>
+
+                    <div class="col-3 flex align-items-center justify-content-center bg-orange-100 border-round"
+                        [ngStyle]="{width: '2.5rem', height: '2.5rem'}">
+                        <i class="pi pi-chart-line text-orange-500 text-xl"></i>
                     </div>
                 </div>
-                <span class="text-green-500 font-medium">520 </span>
-                <span class="text-500">newly registered</span>
+                <hr>
+                <div>
+                    <span class="block text-900 font-medium text-xl mb-3">{{ dashboardMetrics.total_arriendos_pagados }} arriendos</span>
+                </div>
             </div>
         </div>
+
+        <!-- Card TOTAL ARRIENDOS POR PAGAR -->
         <div class="col-12 lg:col-6 xl:col-3">
             <div class="card mb-0">
                 <div class="flex justify-content-between mb-3">
-                    <div>
-                        <span class="block text-500 font-medium mb-3"
-                            >total_arriendos_por_pagar</span
-                        >
-                        <div class="text-900 font-medium text-xl">
-                            {{ dashboardMetrics.total_arriendos_por_pagar }}
-                        </div>
+
+                    <div class="col-9 top-0 left-0 p-0">
+                        <h4>Total Arriendos por Pagar</h4>
                     </div>
-                    <div
-                        class="flex align-items-center justify-content-center bg-purple-100 border-round"
-                        [ngStyle]="{ width: '2.5rem', height: '2.5rem' }"
-                    >
-                        <i class="pi pi-comment text-purple-500 text-xl"></i>
+
+                    <div class="col-3 flex align-items-center justify-content-center bg-orange-100 border-round"
+                        [ngStyle]="{width: '2.5rem', height: '2.5rem'}">
+                        <i class="pi pi-chart-line text-orange-500 text-xl"></i>
                     </div>
                 </div>
-                <span class="text-green-500 font-medium">85 </span>
-                <span class="text-500">responded</span>
+                <hr>
+                <div>
+                    <span class="block text-900 font-medium text-xl mb-3">{{ dashboardMetrics.total_arriendos_por_pagar }} arriendos</span>
+                </div>
             </div>
         </div>
+
+        <!-- Card PROPIEDADES CON REAJUSTE -->
         <div class="col-12 lg:col-6 xl:col-3">
             <div class="card mb-0">
                 <div class="flex justify-content-between mb-3">
-                    <div>
-                        <span class="block text-500 font-medium mb-3"
-                            >propiedades_con_reajuste</span
-                        >
-                        <div class="text-900 font-medium text-xl">
-                            {{ dashboardMetrics.propiedades_con_reajuste }}
-                        </div>
+
+                    <div class="col-9 top-0 left-0 p-0">
+                        <h4>Propiedades con Reajuste</h4>
                     </div>
-                    <div
-                        class="flex align-items-center justify-content-center bg-purple-100 border-round"
-                        [ngStyle]="{ width: '2.5rem', height: '2.5rem' }"
-                    >
-                        <i class="pi pi-comment text-purple-500 text-xl"></i>
+
+                    <div class="col-3 flex align-items-center justify-content-center bg-orange-100 border-round"
+                        [ngStyle]="{width: '2.5rem', height: '2.5rem'}">
+                        <i class="pi pi-chart-line text-orange-500 text-xl"></i>
                     </div>
                 </div>
-                <span class="text-green-500 font-medium">85 </span>
-                <span class="text-500">responded</span>
+                <hr>
+                <div>
+                    <span class="block text-900 font-medium text-xl mb-3">{{ dashboardMetrics.propiedades_con_reajuste }} arriendos</span>
+                </div>
             </div>
         </div>
+
+        <!-- Card TOTAL ARRIENDOS -->
         <div class="col-12 lg:col-6 xl:col-3">
             <div class="card mb-0">
                 <div class="flex justify-content-between mb-3">
-                    <div>
-                        <span class="block text-500 font-medium mb-3"
-                            >total_arriendos</span
-                        >
-                        <div class="text-900 font-medium text-xl">
-                            {{ dashboardMetrics.total_arriendos }}
-                        </div>
+
+                    <div class="col-9 top-0 left-0 p-0">
+                        <h4>Total Arriendos</h4>
                     </div>
-                    <div
-                        class="flex align-items-center justify-content-center bg-purple-100 border-round"
-                        [ngStyle]="{ width: '2.5rem', height: '2.5rem' }"
-                    >
-                        <i class="pi pi-comment text-purple-500 text-xl"></i>
+
+                    <div class="col-3 flex align-items-center justify-content-center bg-orange-100 border-round"
+                        [ngStyle]="{width: '2.5rem', height: '2.5rem'}">
+                        <i class="pi pi-chart-line text-orange-500 text-xl"></i>
                     </div>
                 </div>
-                <span class="text-green-500 font-medium">85 </span>
-                <span class="text-500">responded</span>
+                <hr>
+                <div>
+                    <span class="block text-900 font-medium text-xl mb-3">{{ dashboardMetrics.total_arriendos }} arriendos</span>
+                </div>
             </div>
         </div>
+
+        <!-- Card TOTAL PROPIEDADES -->
         <div class="col-12 lg:col-6 xl:col-3">
             <div class="card mb-0">
                 <div class="flex justify-content-between mb-3">
-                    <div>
-                        <span class="block text-500 font-medium mb-3"
-                            >total_propiedades</span
-                        >
-                        <div class="text-900 font-medium text-xl">
-                            {{ dashboardMetrics.total_propiedades }}
-                        </div>
+
+                    <div class="col-9 top-0 left-0 p-0">
+                        <h4>Total Propiedades</h4>
                     </div>
-                    <div
-                        class="flex align-items-center justify-content-center bg-purple-100 border-round"
-                        [ngStyle]="{ width: '2.5rem', height: '2.5rem' }"
-                    >
-                        <i class="pi pi-comment text-purple-500 text-xl"></i>
+
+                    <div class="col-3 flex align-items-center justify-content-center bg-orange-100 border-round"
+                        [ngStyle]="{width: '2.5rem', height: '2.5rem'}">
+                        <i class="pi pi-chart-line text-orange-500 text-xl"></i>
                     </div>
                 </div>
-                <span class="text-green-500 font-medium">85 </span>
-                <span class="text-500">responded</span>
+                <hr>
+                <div>
+                    <span class="block text-900 font-medium text-xl mb-3">{{ dashboardMetrics.total_propiedades }} propiedades</span>
+                </div>
             </div>
         </div>
+
+        <!-- Card PROPIEDADES SIN ARRENDAR -->
         <div class="col-12 lg:col-6 xl:col-3">
             <div class="card mb-0">
                 <div class="flex justify-content-between mb-3">
-                    <div>
-                        <span class="block text-500 font-medium mb-3"
-                            >sin_arrendar</span
-                        >
-                        <div class="text-900 font-medium text-xl">
-                            {{ dashboardMetrics.sin_arrendar }}
-                        </div>
+
+                    <div class="col-9 top-0 left-0 p-0">
+                        <h4>Propiedades Sin Arrendar</h4>
                     </div>
-                    <div
-                        class="flex align-items-center justify-content-center bg-purple-100 border-round"
-                        [ngStyle]="{ width: '2.5rem', height: '2.5rem' }"
-                    >
-                        <i class="pi pi-comment text-purple-500 text-xl"></i>
+
+                    <div class="col-3 flex align-items-center justify-content-center bg-orange-100 border-round"
+                        [ngStyle]="{width: '2.5rem', height: '2.5rem'}">
+                        <i class="pi pi-chart-line text-orange-500 text-xl"></i>
                     </div>
                 </div>
-                <span class="text-green-500 font-medium">85 </span>
-                <span class="text-500">responded</span>
+                <hr>
+                <div>
+                    <span class="block text-900 font-medium text-xl mb-3">{{ dashboardMetrics.sin_arrendar }} propiedades</span>
+                </div>
             </div>
         </div>
     </ng-container>
+
     <div class="col-12 xl:col-6" *ngIf="dashboardMetrics">
         <div class="card">
             <h5>Atrasados</h5>
@@ -215,7 +194,8 @@
 
     <div class="col-12 xl:col-6">
         <div class="card">
-            <h5>Informe Arriendos</h5>
+            <h4>Informe Arriendos</h4>
+            <hr>
             <p-inputSwitch [formControl]="infoSwith" />
             <p-chart
                 [type]="typechart"
