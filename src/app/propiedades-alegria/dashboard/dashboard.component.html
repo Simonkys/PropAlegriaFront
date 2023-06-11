@@ -12,11 +12,11 @@
         <div class="card mb-0">
             <div class="flex justify-content-between mb-3">
 
-                <div class="col-10 top-0 left-0 p-0">
-                    <h5>Total arriendos mes</h5>
+                <div class="col-9 top-0 left-0 p-0">
+                    <h5>Total Arriendos Mes</h5>
                 </div>
 
-                <div class="col-2 flex align-items-center justify-content-center bg-orange-100 border-round"
+                <div class="col-3 flex align-items-center justify-content-center bg-orange-100 border-round"
                     [ngStyle]="{width: '2.5rem', height: '2.5rem'}">
                     <i class="pi pi-chart-line text-orange-500 text-xl"></i>
                 </div>
@@ -24,42 +24,54 @@
             </div>
             <div class="grid">
                 <div class="col-12">
-                    <div class="text-900 font-medium text-xl">{{dashboardMetrics.total_arriendos_mes}} arriendos.</div>
+                    <div class="text-900 font-medium text-l">{{dashboardMetrics.total_arriendos_mes}} arriendos</div>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Card TOTAL ARRIENDOS PAGADOS -->
     <div class="col-12 lg:col-6 xl:col-3">
         <div class="card mb-0">
             <div class="flex justify-content-between mb-3">
-                <div>
-                    <span class="block text-500 font-medium mb-3">total_arriendos_pagados</span>
-                    <div class="text-900 font-medium text-xl">{{dashboardMetrics.total_arriendos_pagados}}</div>
+
+                <div class="col-10 top-0 left-0 p-0">
+                    <h5>Total Arriendos Pagados</h5>
                 </div>
-                <div class="flex align-items-center justify-content-center bg-cyan-100 border-round"
+
+                <div class="col-2 flex align-items-center justify-content-center bg-orange-100 border-round"
                     [ngStyle]="{width: '2.5rem', height: '2.5rem'}">
-                    <i class="pi pi-inbox text-cyan-500 text-xl"></i>
+                    <i class="pi pi-chart-line text-orange-500 text-xl"></i>
+                </div>
+
+            </div>
+            <div class="grid">
+                <div class="col-12">
+                    <div class="text-900 font-medium text-l">{{dashboardMetrics.total_arriendos_pagados}} arriendos</div>
                 </div>
             </div>
-            <span class="text-green-500 font-medium">520 </span>
-            <span class="text-500">newly registered</span>
         </div>
     </div>
+
+    <!-- Card TOTAL ARRIENDOS POR PAGAR -->
     <div class="col-12 lg:col-6 xl:col-3">
         <div class="card mb-0">
             <div class="flex justify-content-between mb-3">
-                <div>
-                    <span class="block text-500 font-medium mb-3">total_arriendos_por_pagar</span>
-                    <div class="text-900 font-medium text-xl">{{dashboardMetrics.total_arriendos_por_pagar}}</div>
+
+                <div class="col-10 top-0 left-0 p-0">
+                    <h5>Total Arriendos por Pagar</h5>
                 </div>
-                <div class="flex align-items-center justify-content-center bg-purple-100 border-round"
+
+                <div class="flex align-items-center justify-content-center bg-orange-100 border-round"
                     [ngStyle]="{width: '2.5rem', height: '2.5rem'}">
-                    <i class="pi pi-comment text-purple-500 text-xl"></i>
+                    <i class="pi pi-chart-line text-orange-500 text-xl"></i>
                 </div>
+
             </div>
-            <span class="text-green-500 font-medium">85 </span>
-            <span class="text-500">responded</span>
+            <div>
+                <span class="block text-500 font-medium mb-3">total_arriendos_por_pagar</span>
+                <div class="text-900 font-medium text-xl">{{dashboardMetrics.total_arriendos_por_pagar}}</div>
+            </div>
         </div>
     </div>
     <div class="col-12 lg:col-6 xl:col-3">
