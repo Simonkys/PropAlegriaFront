@@ -42,7 +42,7 @@ export class ListadoServiciosExtraComponent implements OnInit, OnDestroy {
 
   getServiciosExtras() {
     if (this.propiedadId) {
-      this.sub = this.servicioExtraService.getServiciosExtra({ propiedadId: this.propiedadId }).subscribe(data => {
+      this.sub = this.servicioExtraService.getServiciosExtra({ propiedad: this.propiedadId }).subscribe(data => {
         this.serviciosExtra = data
       })
     }
