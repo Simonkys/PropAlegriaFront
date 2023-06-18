@@ -15,9 +15,8 @@ import { DetallePropiedadComponent } from '../../components/detalle-propiedad/de
 import { ArriendoService } from 'src/app/propiedades-alegria/arriendos/arriendo.service';
 import { TablaArriendo } from 'src/app/propiedades-alegria/arriendos/arriendo.model';
 
-import { ServiciosExtraService } from 'src/app/propiedades-alegria/servicios-extra/servicios-extra.service'
-import { ServiciosExtra } from 'src/app/propiedades-alegria/servicios-extra/servicios-extra.model'
 import { ListadoServiciosExtraComponent } from 'src/app/propiedades-alegria/servicios-extra/components/listado-servicios-extra/listado-servicios-extra.component';
+import { BackButtonComponent } from 'src/app/propiedades-alegria/componentes/back-button/back-button.component';
 
 @Component({
   selector: 'app-detalle-propiedad-page',
@@ -29,7 +28,8 @@ import { ListadoServiciosExtraComponent } from 'src/app/propiedades-alegria/serv
     ButtonModule, 
     ConfirmPopupModule, 
     TooltipModule, 
-    ListadoServiciosExtraComponent
+    ListadoServiciosExtraComponent,
+    BackButtonComponent
   ],
   templateUrl: './detalle-propiedad-page.component.html',
   styleUrls: ['./detalle-propiedad-page.component.scss']

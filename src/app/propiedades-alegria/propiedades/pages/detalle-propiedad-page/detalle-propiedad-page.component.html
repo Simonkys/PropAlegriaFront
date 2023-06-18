@@ -1,9 +1,4 @@
-<p-button 
-    (click)="volver()"
-    label="Volver" 
-    icon="pi pi-arrow-left" 
-    styleClass="p-button-sm p-button-outlined mb-3">
-</p-button>
+<app-back-button />
 <ng-container *ngIf="propiedad">
     <div class="card" >
         <app-detalle-propiedad [propiedad]="propiedad"/>
@@ -13,15 +8,13 @@
             <div class="col-12" >
                 <div class="flex">
                     <p-button 
-                        icon="pi pi-pencil" 
-                        label="Editar"
+                        icon="pi pi-pencil"
                         styleClass="p-button-warning mr-2" 
                         (click)="actualizar(propiedad)">
                     </p-button>
                     <p-confirmPopup></p-confirmPopup>
                     <p-button 
                         icon="pi pi-trash" 
-                        label="Eliminar"
                         styleClass="p-button-danger" 
                         (click)="eliminar($event, propiedad)">
                     </p-button>

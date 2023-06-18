@@ -1,7 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { CommonModule, Location } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
-import {  map, switchMap } from 'rxjs';
+import { map, switchMap } from 'rxjs';
 
 import { ArrendatarioService } from '../../arrendatario.service';
 import { Arrendatario } from '../../arrendatario.model';
@@ -10,8 +10,7 @@ import { FormularioCuentaBancariaComponent } from '../../../cuentas-bancarias/co
 import { ListadoCuentaBancariaComponent } from '../../../cuentas-bancarias/components/listado-cuenta-bancaria/listado-cuenta-bancaria.component';
 import { CuentaBancaria } from '../../../cuentas-bancarias/cuenta-bancaria.models';
 import { CuentaBancariaService } from '../../../cuentas-bancarias/cuenta-bancaria.service';
-
-import { ButtonModule } from 'primeng/button';
+import { BackButtonComponent } from 'src/app/propiedades-alegria/componentes/back-button/back-button.component';
 
 
 @Component({
@@ -22,7 +21,7 @@ import { ButtonModule } from 'primeng/button';
     DetalleArrendatarioComponent, 
     FormularioCuentaBancariaComponent, 
     ListadoCuentaBancariaComponent,
-    ButtonModule
+    BackButtonComponent
   ],
   templateUrl: './detalle-arrendatarios-page.component.html',
   styleUrls: ['./detalle-arrendatarios-page.component.scss']
@@ -34,7 +33,7 @@ export class DetalleArrendatariosPageComponent implements OnInit {
 
   router = inject(Router)
   route = inject(ActivatedRoute)
-  location = inject(Location)
+  
 
   arrendatario?: Arrendatario;
   
@@ -87,8 +86,5 @@ export class DetalleArrendatariosPageComponent implements OnInit {
     this.creacionCuentaActiva = true;
   }
 
-  volver() {
-    this.location.back();
-  }
 
 }

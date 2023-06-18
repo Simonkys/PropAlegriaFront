@@ -35,18 +35,16 @@
                 <td>{{ usuario.username }}</td>
                 <td>{{ usuario.email }}</td>
                 <td>{{ usuario.permName }}</td>
-                <td class="flex">
-                    <div>
-                        <p-confirmPopup></p-confirmPopup>
-                        <button
-                            [disabled]="usuarioActual?.id === usuario.id"
-                            pButton
-                            pRipple
-                            icon="pi pi-trash"
-                            class="p-button-danger"
-                            (click)="eliminarUsuario($event, usuario)"
-                        ></button>
-                    </div>
+                <td>
+                    <p-confirmPopup></p-confirmPopup>
+                    <button
+                        [disabled]="usuarioActual?.id === usuario.id"
+                        pButton
+                        pRipple
+                        icon="pi pi-trash"
+                        class="p-button-danger"
+                        (click)="eliminarUsuario($event, usuario)"
+                    ></button>
                 </td>
             </tr>
         </ng-template>

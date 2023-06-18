@@ -11,11 +11,12 @@ import { ListadoCuentaBancariaComponent } from 'src/app/propiedades-alegria/cuen
 import { CuentaBancariaService } from 'src/app/propiedades-alegria/cuentas-bancarias/cuenta-bancaria.service';
 import { FormularioCuentaBancariaComponent } from 'src/app/propiedades-alegria/cuentas-bancarias/components/formulario-cuenta-bancaria/formulario-cuenta-bancaria.component';
 import { CuentaBancaria } from 'src/app/propiedades-alegria/cuentas-bancarias/cuenta-bancaria.models';
+import { BackButtonComponent } from 'src/app/propiedades-alegria/componentes/back-button/back-button.component';
 
 @Component({
   selector: 'app-detalle-trabajador-page',
   standalone: true,
-  imports: [CommonModule, DetalleTrabajadorComponent, ListadoCuentaBancariaComponent, FormularioCuentaBancariaComponent],
+  imports: [CommonModule, DetalleTrabajadorComponent, ListadoCuentaBancariaComponent, FormularioCuentaBancariaComponent, BackButtonComponent],
   templateUrl: './detalle-trabajador-page.component.html',
   styleUrls: ['./detalle-trabajador-page.component.scss']
 })

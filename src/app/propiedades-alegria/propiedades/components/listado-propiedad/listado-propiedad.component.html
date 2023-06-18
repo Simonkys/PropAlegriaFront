@@ -61,12 +61,12 @@
             <td>
                 <div class="flex">
                     <button *ngIf="detalle" pButton pRipple icon="pi pi-search"
-                        class="p-button-rounded p-button-primary mr-2"
+                        class="p-button-primary mr-2"
                         [routerLink]="['/propiedades', propiedad.id, 'detalle']"></button>
                     <button *ngIf="editar" pButton pRipple icon="pi pi-pencil"
-                        class="p-button-rounded p-button-warning mr-2" (click)="editarAction(propiedad)"></button>
+                        class="p-button-warning mr-2" (click)="editarAction(propiedad)"></button>
                     <button *ngIf="eliminar" pButton pRipple icon="pi pi-trash"
-                        class="p-button-rounded p-button-danger mr-2" (click)="eliminarAction(propiedad)"></button>
+                        class="p-button-danger mr-2" (click)="eliminarAction(propiedad)"></button>
                 </div>
             </td>
         </tr>
