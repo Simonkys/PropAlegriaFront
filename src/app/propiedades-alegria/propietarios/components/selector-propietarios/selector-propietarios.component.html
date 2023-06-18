@@ -1,0 +1,25 @@
+<ng-container *ngIf="propietarios$ | async as propietarios">
+
+    <span class="p-float-label">
+        <p-dropdown
+            [options]="propietarios"
+            optionLabel="pri_nom_prop"
+            [style]="{ width: '100%' }"
+            placeholder="Propietario"
+            [filter]="true"
+            [filterBy]="'pri_nom_prop,pri_ape_prop,rut_prop'"
+            filterPlaceholder="Rut, nombre, apellido"
+            inputId="float-label"
+            (onChange)="selected($event.value)"
+            >
+            <ng-template pTemplate="selectedItem" let-propietario>
+                <div>{{propietario.rut_prop}} ({{propietario.pri_nom_prop}} {{propietario.pri_ape_prop}})  </div>
+            </ng-template>
+            <ng-template pTemplate="item" let-propietario>
+                <div>{{propietario.rut_prop}} ({{propietario.pri_nom_prop}} {{propietario.pri_ape_prop}})  </div>
+            </ng-template>
+        </p-dropdown>
+        <label for="float-label">Propietario *</label>
+    </span>
+
+</ng-container>

@@ -7,7 +7,7 @@ import { TooltipModule } from 'primeng/tooltip';
 
 import { ServiciosExtra } from '../../servicios-extra.model';
 import { ServiciosExtraService } from '../../servicios-extra.service';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { ConfirmationService } from 'primeng/api';
 import { TagModule } from 'primeng/tag';
 import { CalendarModule } from 'primeng/calendar';

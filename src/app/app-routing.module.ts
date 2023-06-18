@@ -66,6 +66,13 @@ import { AuthService } from './propiedades-alegria/core/services/auth.service';
                             loadChildren: () => import('./propiedades-alegria/arriendos/arriendo.route').then(m => m.ARRIENDO_ROUTES)
                         },
                         {
+                            path: 'reportes',
+                            canActivate: [
+                                () => inject(AuthService).isStaff()
+                            ],
+                            loadComponent: ()  => import("./propiedades-alegria/reportes/reporte.component").then(m => m.ReporteComponent)                            
+                        },
+                        {
                             path: 'servicios-extra',
                             canActivate: [  
                                 () => inject(AuthService).isStaff()

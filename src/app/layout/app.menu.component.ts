@@ -58,6 +58,12 @@ export class AppMenuComponent {
             routerLink: ['/arriendos/listado'],
         }
 
+        const reportes = {
+            label: 'Reportes',
+            icon: 'pi pi-fw pi-file',
+            routerLink: ['/reportes'],
+        }
+
         const usuarios = {
             label: 'Usuarios',
             icon: 'pi pi-fw pi-lock',
@@ -68,7 +74,7 @@ export class AppMenuComponent {
             return [
                 {
                     label: 'Administracion',
-                    items: [dashboard, trabajadores, propietarios, arrendatarios, propiedades, arriendos]
+                    items: [dashboard, trabajadores, propietarios, arrendatarios, propiedades, arriendos, reportes]
                 },
                 {
                     label: 'Seguridad',
@@ -80,7 +86,7 @@ export class AppMenuComponent {
             return [
                 {
                     label: 'Administracion',
-                    items: [dashboard, trabajadores, propietarios, arrendatarios, propiedades, arriendos]
+                    items: [dashboard, trabajadores, propietarios, arrendatarios, propiedades, arriendos, reportes]
                 },
             ]
         } else {
