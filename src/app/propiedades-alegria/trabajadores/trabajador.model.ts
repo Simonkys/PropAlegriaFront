@@ -50,7 +50,6 @@ export interface TrabajadorForm {
 
     comuna_id: number;
     tipo_trab_id: number;
-    usuario?: number;
 
     email: string | null;
 }
