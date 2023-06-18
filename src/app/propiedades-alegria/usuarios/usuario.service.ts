@@ -1,9 +1,9 @@
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable, inject } from "@angular/core";
-import { CreateUserForm, Usuario } from "../models/usuario.model";
+import { CreateUserForm, Usuario } from "./usuario.model";
 import { environment } from "src/environments/environment";
 import { BehaviorSubject, catchError, switchMap, tap, throwError } from "rxjs";
-import { MensajeService } from "./message.service";
+import { MensajeService } from "../core/services/message.service";
 
 @Injectable({
     providedIn: 'root'

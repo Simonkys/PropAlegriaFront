@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, Location } from '@angular/common';
 import {
     FormControl,
     FormGroup,
@@ -11,17 +11,14 @@ import { Router } from '@angular/router';
 import { KeyFilterModule } from 'primeng/keyfilter';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
-import { DropdownModule } from 'primeng/dropdown';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { ConfirmationService } from 'primeng/api';
 import { ConfirmPopupModule } from 'primeng/confirmpopup';
 
-import { TrabajadorService } from '../../trabajadores/trabajador.service';
-import { map, startWith, switchMap } from 'rxjs';
+import { map, startWith } from 'rxjs';
 
-import { TipoTrabajador, TipoTrabajadorEnum, Trabajador} from '../../trabajadores/trabajador.model';
-import { UsuarioService } from '../../core/services/usuario.service';
-import { PermisoEnum } from '../../core/models/usuario.model';
+import { UsuarioService } from '../usuario.service';
+import { PermisoEnum } from '../usuario.model';
 import { PermisoService } from '../../core/services/permiso.service';
 
 @Component({
@@ -33,7 +30,6 @@ import { PermisoService } from '../../core/services/permiso.service';
         ButtonModule,
         InputTextModule,
         KeyFilterModule,
-        DropdownModule,
         SelectButtonModule,
         ConfirmPopupModule
        ],
@@ -42,32 +38,18 @@ import { PermisoService } from '../../core/services/permiso.service';
     styleUrls: ['./registro-usuario.component.scss'],
 })
 export class RegistroUsuarioComponent {
-    trabajadorService = inject(TrabajadorService);
+
     usuarioService = inject(UsuarioService);
-    router = inject(Router);
+    location = inject(Location);
     confimService = inject(ConfirmationService);
     permisoService = inject(PermisoService)
 
-    trabajadores$ = this.trabajadorService
-        .getTrabajadores()
-        .pipe(
-            map((trabajadores) =>
-                trabajadores.filter(
-                    (t) =>
-                        ( t.tipo_trab.id === TipoTrabajadorEnum.EJECUTIVO_VENTAS ||
-                        t.tipo_trab.id === TipoTrabajadorEnum.GERENTE ||
-                        t.tipo_trab.id === TipoTrabajadorEnum.SECRETARIA_ADMIN ) && !t.usuario_id
-                )
-            )
-        );
-
-    trabajadorSeleccionado: Trabajador | null = null;
-    tipoTrabajador?: TipoTrabajador;
 
     permisos = this.permisoService.permisiosOption
 
 
     form = new FormGroup({
+        email: new FormControl<string>("", [Validators.required, Validators.email]),
         username: new FormControl<string>('', {
             nonNullable: true,
             validators: [
@@ -93,40 +75,8 @@ export class RegistroUsuarioComponent {
     }))
     
 
-    seleccionTrabajador(trabajador: Trabajador) {
-        this.trabajadorSeleccionado = trabajador;
-        this.trabajadorService.getTipoDeTrabajadores().subscribe((tipos) => {
-            this.tipoTrabajador = tipos.find(
-                (t) => t.id === trabajador.tipo_trab.id
-            );
-        });
-        this.setDefaultFormValues(trabajador);
-    }
-
-    setDefaultFormValues(trabajador: Trabajador) {
-        const emailPart = trabajador.email
-            ? trabajador.email.split('@')
-            : ['propalegria'];
-
-        const rut = trabajador.rut_trab.replace(/[.-]/g, '');
-        this.form.patchValue({
-            username: emailPart[0],
-            password:
-                rut.split('').reverse().join('').substring(4) +
-                '#' +
-                trabajador.pri_ape_trab.charAt(0).toUpperCase() +
-                trabajador.pri_ape_trab.substring(1, 4),
-        });
-    }
-
     crearCuenta(event: Event) {
-        if (
-            this.form.invalid ||
-            !this.trabajadorSeleccionado ||
-            !this.tipoTrabajador
-        ) {
-          return;
-        }
+        if ( this.form.invalid ) { return; }
 
         this.confimService.confirm({
             target: event.target || new EventTarget(),
@@ -134,28 +84,23 @@ export class RegistroUsuarioComponent {
             icon: 'pi pi-exclamation-triangle',
             accept: () => {
 
-                const { email } = this.trabajadorSeleccionado!;
-                const { username, password, permisos } = this.form.getRawValue()!;
+                const { email, username, password, permisos } = this.form.getRawValue()!;
 
                 this.usuarioService
-                .crearUsuario({ email: email!, password: password!, username: username!, ...this.permisoService.mapToDjango(permisos)}).pipe(
-                    switchMap((user) => {
-                        return this.trabajadorService.pathValue({
-                            id: this.trabajadorSeleccionado?.id,
-                            usuario: user.id
-                        })
-                    })
+                .crearUsuario(
+                    { 
+                        email: email!, 
+                        password: password!, 
+                        username: username!, 
+                        ...this.permisoService.mapToDjango(permisos)
+                    }
                 )
-                .subscribe({
-                  next: (trabajador) => {
-                    this.router.navigate(['usuarios/listado']);
-                  },
-                  error: () => {}
-                });
+                .subscribe(() => this.volver());
             },
         });
     }
-    cancelar() {
-        this.router.navigate(['usuarios/listado']);
+
+    volver() {
+        this.location.back();
     }
 }

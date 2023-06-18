@@ -3,8 +3,9 @@
     <p-toolbar styleClass="mb-4">
         <div class="p-toolbar-group-start">
 
-            <!-- Botón REGISTRAR -->
-            <button pButton pRipple
+            <button 
+                pButton 
+                pRipple
                 icon="pi pi-plus"
                 class="p-button mr-2"
                 style="background-color:#F78E00"
@@ -42,8 +43,7 @@
                             pButton
                             pRipple
                             icon="pi pi-trash"
-                            class="p-button-rounded p-button-danger"
-                            label="Eliminar"
+                            class="p-button-danger"
                             (click)="eliminarUsuario($event, usuario)"
                         ></button>
                     </div>

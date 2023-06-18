@@ -1,5 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
+import { finalize, map } from 'rxjs';
 
 import { TableModule } from 'primeng/table';
 import { TagModule } from 'primeng/tag';
@@ -10,19 +12,23 @@ import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { ConfirmationService } from 'primeng/api';
 
 
-import { UsuarioService } from '../../core/services/usuario.service';
-import { Router } from '@angular/router';
+import { UsuarioService } from '../usuario.service';
 import { AuthService } from '../../core/services/auth.service';
-import { UsuarioConPermiso } from '../../core/models/usuario.model';
-import { finalize, map } from 'rxjs';
-import { TrabajadorService } from '../../trabajadores/trabajador.service';
+import { UsuarioConPermiso } from '../usuario.model';
 import { PermisoService } from '../../core/services/permiso.service';
 
 @Component({
   selector: 'app-listado-usuarios',
   standalone: true,
   providers: [ConfirmationService],
-  imports: [CommonModule, TableModule, TagModule, ToolbarModule, ButtonModule, InputTextModule, ConfirmPopupModule],
+  imports: [
+    CommonModule, 
+    TableModule,
+    ToolbarModule, 
+    ButtonModule, 
+    InputTextModule, 
+    ConfirmPopupModule
+  ],
   templateUrl: './listado-usuarios.component.html',
   styleUrls: ['./listado-usuarios.component.scss']
 })
@@ -33,7 +39,7 @@ export class ListadoUsuariosComponent {
   router = inject(Router)
   confimService = inject(ConfirmationService);
   permisoService = inject(PermisoService)
-  trabajadorService = inject(TrabajadorService)
+  
 
   usuarios$ = this.usuarioService.getUsuarios().pipe(
     map(users => users.map<UsuarioConPermiso>(user => {
@@ -54,7 +60,7 @@ export class ListadoUsuariosComponent {
       message: `¿Estas segur@ de eliminar a ${usuario.username}`,
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.usuarioService.eliminarUsuario(usuario).pipe(finalize(() => {})).subscribe(() => this.trabajadorService.reload());
+        this.usuarioService.eliminarUsuario(usuario).subscribe();
       },
   });
     

@@ -4,12 +4,6 @@ export interface TipoTrabajador {
     descripcion: string;
 }
 
-export enum TipoTrabajadorEnum {
-    GERENTE = 1,
-    SECRETARIA_ADMIN = 2,
-    EJECUTIVO_VENTAS = 3
-}
-
 
 export interface TrabajadorTipoTrabajador {
     id: number;
@@ -21,10 +15,6 @@ export interface TrabajadorComuna {
     nom_com: string;
 }
 
-export interface TrabajadorUsuario {
-    id: number;
-    username: string;
-}
 
 export interface Trabajador {
     id?: number;
@@ -42,7 +32,6 @@ export interface Trabajador {
     comuna: TrabajadorComuna;
     tipo_trab: TrabajadorTipoTrabajador;
 
-    usuario_id: TrabajadorUsuario | null;
     email: string | null;
 }
 
