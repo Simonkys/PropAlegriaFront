@@ -49,6 +49,7 @@ export class PropiedadesService {
                     role: 'success'
                 })
                 this.propiedades.next([nuevaPropiedad, ...this.propiedades.value])
+                this.propiedadesConCodigosLoaded = false;
             }),
             catchError((error: HttpErrorResponse) => this.handleError(error))
         )
@@ -69,6 +70,7 @@ export class PropiedadesService {
                     }
                 })
                 this.propiedades.next(propiedadesActualizadas)
+                this.propiedadesConCodigosLoaded = false;
             }),
             catchError((error: HttpErrorResponse) => this.handleError(error))
         )
@@ -83,16 +85,15 @@ export class PropiedadesService {
             })
 
             const propiedadesFiltradas = this.propiedades.value.filter(prop => prop.id !== propiedad.id)
-            const propiedadesConCodigosFiltradas = this.propiedadesConCodigos.value.filter(prop => prop.propiedad?.propiedad_id !== propiedad.id)
-
             this.propiedades.next(propiedadesFiltradas)
-            this.propiedadesConCodigos.next(propiedadesConCodigosFiltradas)
+
+            this.propiedadesConCodigosLoaded = false;
         }),
        )
     }
 
     getPropiedadesConCodigos() {
-        if (this.propiedadesConCodigosLoaded)  {
+        if (this.propiedadesConCodigosLoaded) {  
             return this.propiedadesConCodigos.asObservable()
         }
         return this.http.get<PropiedadConCodigos[]>(`${this.apiUrl}/con_codigo/`).pipe(
